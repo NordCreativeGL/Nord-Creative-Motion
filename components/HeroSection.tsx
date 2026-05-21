@@ -4,42 +4,10 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const WORDMARK_WIDTH = "clamp(600px, 80vw, 1100px)";
-
-// Black mask div for each letter region (as % of the 1321px text span).
-// preRevealed=true → opacity:0 from the start (O and needle visible immediately).
-const MASKS: { id: string; left: string; width: string; preRevealed: boolean }[] = [
-  { id: "N",  left: "0%",    width: "11.5%", preRevealed: false },
-  { id: "O",  left: "11.5%", width: "12%",   preRevealed: true  }, // O ring visible from start
-  { id: "R1", left: "23.5%", width: "12.5%", preRevealed: false },
-  { id: "D",  left: "36%",   width: "12%",   preRevealed: false },
-  // 48–59% = word gap (transparent in PNG, no mask needed)
-  { id: "C",  left: "59%",   width: "11%",   preRevealed: false },
-  { id: "R2", left: "70%",   width: "8%",    preRevealed: false },
-  { id: "E1", left: "78%",   width: "6%",    preRevealed: false },
-  { id: "A",  left: "84%",   width: "6.5%",  preRevealed: false },
-  { id: "T",  left: "90.5%", width: "4.5%",  preRevealed: false },
-  { id: "I",  left: "95%",   width: "2%",    preRevealed: true  }, // needle visible from start
-  { id: "V",  left: "97%",   width: "3%",    preRevealed: false }, // covers V + final E
-];
-
-// Stagger reveal order and offsets (seconds from t=3.2)
-const REVEAL_ORDER: { id: string; offset: number }[] = [
-  { id: "N",  offset: 0.00 },
-  { id: "R1", offset: 0.06 },
-  { id: "D",  offset: 0.12 },
-  { id: "C",  offset: 0.24 },
-  { id: "R2", offset: 0.30 },
-  { id: "E1", offset: 0.36 },
-  { id: "A",  offset: 0.42 },
-  { id: "T",  offset: 0.48 },
-  { id: "V",  offset: 0.54 },
-];
-
 export default function HeroSection() {
   const sectionRef  = useRef<HTMLElement>(null);
   const compassRef  = useRef<SVGSVGElement>(null);
-  const wordmarkRef = useRef<HTMLDivElement>(null);
+  const wordmarkRef = useRef<HTMLImageElement>(null);
   const videoRef    = useRef<HTMLVideoElement>(null);
   const contentRef  = useRef<HTMLDivElement>(null);
   const taglineRef  = useRef<HTMLParagraphElement>(null);
@@ -60,42 +28,27 @@ export default function HeroSection() {
     if (!compass || !wm) return;
 
     const ctx = gsap.context(() => {
-      // Wordmark starts hidden and scaled down to tiny (morph from compass)
-      gsap.set(wm, { opacity: 0, scale: 0.15, transformOrigin: "center center" });
-
       const tl = gsap.timeline();
 
       // ── Phase 1: Compass (t=0 → 2.0) ──────────────────────────────────
-      // CSS needleSpin in globals.css: 0.3s delay + 1.5s → done at t=1.8
-      // 0.2s natural rest before morph at t=2.0
+      // CSS #compass-needle in globals.css spins: 0.3s delay + 1.5s = done at t=1.8
       tl.to(compass, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
 
-      // ── Phase 2: Morph compass → wordmark (t=2.0 → 3.2) ───────────────
-      // Compass fades out; wordmark scales up from 0.15→1 and fades in.
-      // O mask and I mask are already opacity:0, so those letters appear
-      // first — creating visual continuity from the compass ring + needle.
+      // ── Phase 2: Wordmark reveal (t=2.0) ───────────────────────────────
+      // Compass fades out, PNG wordmark blurs in simultaneously
       tl.to(compass, { opacity: 0, duration: 0.4, ease: "power2.out" }, 2.0);
       tl.to(wm, {
         opacity: 1,
-        scale: 1,
-        width: WORDMARK_WIDTH,
+        filter: "blur(0px)",
         duration: 1.2,
-        ease: "power2.inOut",
+        ease: "power2.out",
       }, 2.0);
 
-      // ── Phase 3: Letter reveal — unmask by fading each black div to 0 ──
-      REVEAL_ORDER.forEach(({ id, offset }) => {
-        const el = wm.querySelector(`[data-mask="${id}"]`);
-        if (el) {
-          tl.to(el, { opacity: 0, duration: 0.5, ease: "power2.out" }, 3.2 + offset);
-        }
-      });
-
-      // ── Phase 4: Video, tagline, scroll indicator, navbar ──────────────
-      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 4.5);
-      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 5.5);
-      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 6.0);
-      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.9, ease: "power2.out" }, 6.5);
+      // ── Phase 3: Video + tagline + navbar + scroll indicator ────────────
+      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 3.5);
+      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 4.5);
+      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: "power2.out" }, 5.5);
+      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 5.5);
 
       // ── Scroll parallax ────────────────────────────────────────────────
       if (content) {
@@ -142,15 +95,13 @@ export default function HeroSection() {
       {/* ── Content (fades/scales on scroll) ───────────────────────────── */}
       <div
         ref={contentRef}
-        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6"
+        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5"
         style={{ willChange: "transform, opacity" }}
       >
-        {/* Compass + wordmark share the same flex anchor */}
-        <div
-          className="relative flex items-center justify-center"
-          style={{ width: WORDMARK_WIDTH }}
-        >
-          {/* ── Standalone compass SVG — Phase 1 only ──────────────────── */}
+        {/* Compass and wordmark are both absolutely centred in this slot */}
+        <div className="relative flex items-center justify-center">
+
+          {/* ── Compass SVG — Phase 1 only ─────────────────────────────── */}
           <svg
             ref={compassRef}
             viewBox="0 0 100 100"
@@ -174,50 +125,27 @@ export default function HeroSection() {
                 strokeLinecap="round"
               />
             </g>
-            {/* Needle — globals.css #compass-needle drives the CSS spin */}
+            {/* Needle — #compass-needle in globals.css drives the spin */}
             <g id="compass-needle">
               <polygon points="50,8 56,50 50,92 44,50" fill="white" />
             </g>
           </svg>
 
-          {/* ── Wordmark: PNG + black mask divs ────────────────────────── */}
-          <div
+          {/* ── PNG wordmark — Phase 2+ ─────────────────────────────────── */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             ref={wordmarkRef}
+            src="/logo-wordmark-transparent.png"
+            alt="NordCreative"
+            draggable={false}
             style={{
-              position: "relative",
-              width: WORDMARK_WIDTH,
+              display: "block",
+              width: "clamp(700px, 80vw, 1050px)",
+              height: "auto",
               opacity: 0,
+              filter: "blur(12px)",
             }}
-          >
-            {/* Full-quality PNG wordmark — white text on transparent background */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo-wordmark-transparent.png"
-              alt="NordCreative"
-              draggable={false}
-              style={{ width: "100%", height: "auto", display: "block" }}
-            />
-
-            {/* Black mask divs — cover each letter region.
-                GSAP fades each to opacity:0 to reveal the PNG beneath.
-                O and I masks start at opacity:0 (pre-revealed from the start). */}
-            {MASKS.map(({ id, left, width, preRevealed }) => (
-              <div
-                key={id}
-                data-mask={id}
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  bottom: 0,
-                  left,
-                  width,
-                  backgroundColor: "black",
-                  opacity: preRevealed ? 0 : 1,
-                }}
-              />
-            ))}
-          </div>
+          />
         </div>
 
         {/* Tagline */}
