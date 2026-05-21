@@ -83,7 +83,7 @@ export default function HeroSection() {
           tl.to(compass, { opacity: 0, duration: 0.4, ease: "power2.out" }, 2.0);
           tl.to(
             container,
-            { opacity: 1, scale: 1, width: "clamp(800px, 95vw, 1300px)", duration: 1.2, ease: "power2.inOut" },
+            { opacity: 1, scale: 1, width: "100vw", maxWidth: "100vw", duration: 1.2, ease: "power2.inOut" },
             2.0
           );
 
@@ -190,7 +190,7 @@ export default function HeroSection() {
         {/* Compass + wordmark share the same anchor */}
         <div
           className="relative flex items-center justify-center"
-          style={{ width: "clamp(800px, 95vw, 1300px)" }}
+          style={{ width: "100vw" }}
         >
           {/* ── Standalone compass SVG (Phase 1 only) ──────────────────── */}
           <svg
@@ -226,8 +226,10 @@ export default function HeroSection() {
           <div
             ref={wordmarkRef}
             style={{
-              width: "clamp(800px, 95vw, 1300px)",
+              width: "100vw",
+              maxWidth: "100vw",
               aspectRatio: "3000 / 788",
+              padding: "0 40px",
               opacity: 0,
             }}
           />
