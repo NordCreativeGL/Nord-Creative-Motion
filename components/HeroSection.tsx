@@ -40,7 +40,7 @@ export default function HeroSection() {
       tl.to(wm, {
         opacity: 1,
         filter: "blur(0px)",
-        width: "clamp(900px, 92vw, 1280px)",
+        width: "clamp(900px, 92vw, 1600px)",
         duration: 1.2,
         ease: "power2.out",
       }, 2.0);
@@ -141,7 +141,7 @@ export default function HeroSection() {
             draggable={false}
             style={{
               display: "block",
-              width: "clamp(900px, 92vw, 1280px)",
+              width: "clamp(900px, 92vw, 1600px)",
               height: "auto",
               opacity: 0,
               filter: "blur(12px)",
