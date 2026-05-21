@@ -20,6 +20,6 @@ body {
 
 #compass-needle {
   transform-origin: 50px 50px;
-  animation: needleSpin 3s linear forwards;
+  animation: needleSpin 1.5s linear forwards;
   animation-delay: 0.3s;
 }

@@ -30,14 +30,14 @@ export default function HeroSection() {
         ease: "power2.out",
       });
 
-      // 2–3. Wait for needle spin (delay 0.3s + 3s spin = ends at t=3.3)
-      tl.to({}, { duration: 2.7 }); // t=0.3→3.0
+      // 2–3. Wait for needle spin (delay 0.3s + 1.5s spin = ends at t=1.8)
+      tl.to({}, { duration: 1.2 }); // t=0.3→1.5
 
       // Explicit 0.5s hold — needle rests before transition starts
-      tl.to({}, { duration: 0.5 }); // t=3.0→3.5
+      tl.to({}, { duration: 0.5 }); // t=1.5→2.0
 
-      // 4. Compass fades out at exactly t=3.5 (default position = end of previous tween)
-      console.log("compass fade out starts at:", 3.5);
+      // 4. Compass fades out at exactly t=2.0 (default position = end of previous tween)
+      console.log("compass fade out starts at:", 2.0);
       tl.to(iconRef.current, {
         opacity: 0,
         duration: 0.6,
