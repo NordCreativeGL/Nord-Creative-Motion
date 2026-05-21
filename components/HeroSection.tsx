@@ -30,10 +30,21 @@ export default function HeroSection() {
         ease: "power2.out",
       });
 
-      // 2–3. Needle: 0.3s delay + 3s spin = done at 3.3s. GSAP waits to t=3.5
-      tl.to({}, { duration: 3.2 });
+      // 2–3. Wait for needle spin (delay 0.3s + 3s spin = ends at t=3.3)
+      tl.to({}, { duration: 2.7 }); // t=0.3→3.0
 
-      // 4. Wordmark blurs in + compass fades out simultaneously
+      // Explicit 0.5s hold — needle rests before transition starts
+      tl.to({}, { duration: 0.5 }); // t=3.0→3.5
+
+      // 4. Compass fades out at exactly t=3.5 (default position = end of previous tween)
+      console.log("compass fade out starts at:", 3.5);
+      tl.to(iconRef.current, {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+
+      // Wordmark blurs in at t=3.5 simultaneously ("<" = start of compass tween above)
       tl.to(
         wordmarkRef.current,
         {
@@ -41,15 +52,6 @@ export default function HeroSection() {
           filter: "blur(0px)",
           width: "clamp(320px, 78vw, 860px)",
           duration: 1.4,
-          ease: "power2.out",
-        },
-        "<"
-      );
-      tl.to(
-        iconRef.current,
-        {
-          opacity: 0,
-          duration: 0.6,
           ease: "power2.out",
         },
         "<"
