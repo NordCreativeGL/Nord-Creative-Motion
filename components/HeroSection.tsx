@@ -4,6 +4,38 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+const WORDMARK_WIDTH = "clamp(600px, 80vw, 1100px)";
+
+// Black mask div for each letter region (as % of the 1321px text span).
+// preRevealed=true → opacity:0 from the start (O and needle visible immediately).
+const MASKS: { id: string; left: string; width: string; preRevealed: boolean }[] = [
+  { id: "N",  left: "0%",    width: "11.5%", preRevealed: false },
+  { id: "O",  left: "11.5%", width: "12%",   preRevealed: true  }, // O ring visible from start
+  { id: "R1", left: "23.5%", width: "12.5%", preRevealed: false },
+  { id: "D",  left: "36%",   width: "12%",   preRevealed: false },
+  // 48–59% = word gap (transparent in PNG, no mask needed)
+  { id: "C",  left: "59%",   width: "11%",   preRevealed: false },
+  { id: "R2", left: "70%",   width: "8%",    preRevealed: false },
+  { id: "E1", left: "78%",   width: "6%",    preRevealed: false },
+  { id: "A",  left: "84%",   width: "6.5%",  preRevealed: false },
+  { id: "T",  left: "90.5%", width: "4.5%",  preRevealed: false },
+  { id: "I",  left: "95%",   width: "2%",    preRevealed: true  }, // needle visible from start
+  { id: "V",  left: "97%",   width: "3%",    preRevealed: false }, // covers V + final E
+];
+
+// Stagger reveal order and offsets (seconds from t=3.2)
+const REVEAL_ORDER: { id: string; offset: number }[] = [
+  { id: "N",  offset: 0.00 },
+  { id: "R1", offset: 0.06 },
+  { id: "D",  offset: 0.12 },
+  { id: "C",  offset: 0.24 },
+  { id: "R2", offset: 0.30 },
+  { id: "E1", offset: 0.36 },
+  { id: "A",  offset: 0.42 },
+  { id: "T",  offset: 0.48 },
+  { id: "V",  offset: 0.54 },
+];
+
 export default function HeroSection() {
   const sectionRef  = useRef<HTMLElement>(null);
   const compassRef  = useRef<SVGSVGElement>(null);
@@ -12,153 +44,79 @@ export default function HeroSection() {
   const contentRef  = useRef<HTMLDivElement>(null);
   const taglineRef  = useRef<HTMLParagraphElement>(null);
   const scrollRef   = useRef<HTMLDivElement>(null);
-  const ctxRef      = useRef<gsap.Context | null>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    let cancelled = false;
-    const navbar = document.getElementById("site-nav");
+    const navbar  = document.getElementById("site-nav");
+    const compass = compassRef.current;
+    const wm      = wordmarkRef.current;
+    const video   = videoRef.current;
+    const content = contentRef.current;
+    const tagline = taglineRef.current;
+    const scroll  = scrollRef.current;
+    const section = sectionRef.current;
 
-    fetch("/logo-wordmark.svg")
-      .then((r) => r.text())
-      .then((svgText) => {
-        if (cancelled) return;
+    if (!compass || !wm) return;
 
-        // Capture refs at resolve time (guaranteed non-null for static elements)
-        const container = wordmarkRef.current;
-        const compass   = compassRef.current;
-        const video     = videoRef.current;
-        const content   = contentRef.current;
-        const tagline   = taglineRef.current;
-        const scroll    = scrollRef.current;
-        const section   = sectionRef.current;
+    const ctx = gsap.context(() => {
+      // Wordmark starts hidden and scaled down to tiny (morph from compass)
+      gsap.set(wm, { opacity: 0, scale: 0.15, transformOrigin: "center center" });
 
-        if (!container || !compass) return;
+      const tl = gsap.timeline();
 
-        // ── Inject wordmark SVG ─────────────────────────────────────────
-        container.innerHTML = svgText;
+      // ── Phase 1: Compass (t=0 → 2.0) ──────────────────────────────────
+      // CSS needleSpin in globals.css: 0.3s delay + 1.5s → done at t=1.8
+      // 0.2s natural rest before morph at t=2.0
+      tl.to(compass, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
 
-        const svgEl = container.querySelector("svg");
-        if (svgEl) {
-          svgEl.removeAttribute("width");
-          svgEl.removeAttribute("height");
-          svgEl.style.width   = "100%";
-          svgEl.style.height  = "auto";
-          svgEl.style.display = "block";
+      // ── Phase 2: Morph compass → wordmark (t=2.0 → 3.2) ───────────────
+      // Compass fades out; wordmark scales up from 0.15→1 and fades in.
+      // O mask and I mask are already opacity:0, so those letters appear
+      // first — creating visual continuity from the compass ring + needle.
+      tl.to(compass, { opacity: 0, duration: 0.4, ease: "power2.out" }, 2.0);
+      tl.to(wm, {
+        opacity: 1,
+        scale: 1,
+        width: WORDMARK_WIDTH,
+        duration: 1.2,
+        ease: "power2.inOut",
+      }, 2.0);
+
+      // ── Phase 3: Letter reveal — unmask by fading each black div to 0 ──
+      REVEAL_ORDER.forEach(({ id, offset }) => {
+        const el = wm.querySelector(`[data-mask="${id}"]`);
+        if (el) {
+          tl.to(el, { opacity: 0, duration: 0.5, ease: "power2.out" }, 3.2 + offset);
         }
+      });
 
-        // ── Build animation inside a tracked context ────────────────────
-        ctxRef.current = gsap.context(() => {
-          // Initial states: hide all letters except O and needle
-          const hiddenIds = ["N", "R1", "D", "C", "R2", "E1", "A", "T", "V", "E2"];
-          hiddenIds.forEach((id) => {
-            const el = container.querySelector(`#${id}`);
-            if (el) gsap.set(el, { opacity: 0, filter: "blur(6px)" });
-          });
-          // O_left, O_right, I_needle keep their default opacity:1
+      // ── Phase 4: Video, tagline, scroll indicator, navbar ──────────────
+      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 4.5);
+      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 5.5);
+      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 6.0);
+      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.9, ease: "power2.out" }, 6.5);
 
-          // Wordmark container starts hidden and scaled down
-          gsap.set(container, {
-            opacity: 0,
-            scale: 0.15,
-            transformOrigin: "center center",
-          });
-
-          const tl = gsap.timeline();
-
-          // ─────────────────────────────────────────────────────────────
-          // Phase 1 — Compass (t=0 → 2.0)
-          // CSS needleSpin: 0.3s delay + 1.5s spin = done at t=1.8
-          // GSAP picks up after a 0.2s natural rest at t=2.0
-          // ─────────────────────────────────────────────────────────────
-          tl.to(compass, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
-
-          // ─────────────────────────────────────────────────────────────
-          // Phase 2 — Morph compass → wordmark (t=2.0 → 3.2)
-          // Compass fades out, wordmark scales in simultaneously.
-          // O_left, O_right, I_needle are already opacity:1 inside the
-          // container, so they become visible as the container fades in.
-          // ─────────────────────────────────────────────────────────────
-          tl.to(compass, { opacity: 0, duration: 0.4, ease: "power2.out" }, 2.0);
-          tl.to(
-            container,
-            { opacity: 1, scale: 1, width: "clamp(600px, 80vw, 1100px)", maxWidth: "clamp(600px, 80vw, 1100px)", aspectRatio: "1321 / 79", duration: 1.2, ease: "power2.inOut" },
-            2.0
-          );
-
-          // ─────────────────────────────────────────────────────────────
-          // Phase 3 — Staggered letter reveal (t=3.2 → ~4.5)
-          // Letters animate in with blur dissolve, 0.5s each.
-          // Offsets match the spec exactly; O + needle stay visible.
-          // ─────────────────────────────────────────────────────────────
-          const reveals = [
-            { id: "N",  o: 0.00 },
-            { id: "R1", o: 0.06 },
-            { id: "D",  o: 0.12 },
-            { id: "C",  o: 0.24 },
-            { id: "R2", o: 0.30 },
-            { id: "E1", o: 0.36 },
-            { id: "A",  o: 0.42 },
-            { id: "T",  o: 0.48 },
-            { id: "V",  o: 0.54 },
-            { id: "E2", o: 0.60 },
-          ];
-          reveals.forEach(({ id, o }) => {
-            const el = container.querySelector(`#${id}`);
-            if (el) {
-              tl.to(
-                el,
-                { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" },
-                3.2 + o
-              );
-            }
-          });
-
-          // ─────────────────────────────────────────────────────────────
-          // Phase 4 — Video, tagline, scroll indicator, navbar
-          // ─────────────────────────────────────────────────────────────
-          if (video)  tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 4.5);
-          if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 5.5);
-          if (scroll) tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 6.0);
-          if (navbar) tl.to(navbar,  { opacity: 1, duration: 0.9, ease: "power2.out" }, 6.5);
-
-          // ─────────────────────────────────────────────────────────────
-          // Scroll parallax
-          // ─────────────────────────────────────────────────────────────
-          if (content) {
-            gsap.to(content, {
-              opacity: 0,
-              scale: 0.95,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                end: "45% top",
-                scrub: 1,
-              },
-            });
-          }
-          if (video) {
-            gsap.to(video, {
-              scale: 1.08,
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                end: "bottom top",
-                scrub: 1.5,
-              },
-            });
-          }
+      // ── Scroll parallax ────────────────────────────────────────────────
+      if (content) {
+        gsap.to(content, {
+          opacity: 0, scale: 0.95, ease: "none",
+          scrollTrigger: {
+            trigger: section, start: "top top", end: "45% top", scrub: 1,
+          },
         });
-      })
-      .catch((err) => console.error("HeroSection: failed to load wordmark SVG", err));
+      }
+      if (video) {
+        gsap.to(video, {
+          scale: 1.08, ease: "none",
+          scrollTrigger: {
+            trigger: section, start: "top top", end: "bottom top", scrub: 1.5,
+          },
+        });
+      }
+    });
 
-    return () => {
-      cancelled = true;
-      ctxRef.current?.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -181,18 +139,18 @@ export default function HeroSection() {
       {/* ── Dark overlay ───────────────────────────────────────────────── */}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* ── Content (fades on scroll) ──────────────────────────────────── */}
+      {/* ── Content (fades/scales on scroll) ───────────────────────────── */}
       <div
         ref={contentRef}
         className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6"
         style={{ willChange: "transform, opacity" }}
       >
-        {/* Compass + wordmark share the same anchor */}
+        {/* Compass + wordmark share the same flex anchor */}
         <div
           className="relative flex items-center justify-center"
-          style={{ width: "clamp(600px, 80vw, 1100px)" }}
+          style={{ width: WORDMARK_WIDTH }}
         >
-          {/* ── Standalone compass SVG (Phase 1 only) ──────────────────── */}
+          {/* ── Standalone compass SVG — Phase 1 only ──────────────────── */}
           <svg
             ref={compassRef}
             viewBox="0 0 100 100"
@@ -206,7 +164,7 @@ export default function HeroSection() {
               zIndex: 2,
             }}
           >
-            {/* Ring: two 170° arcs with ~10° gap at north and south */}
+            {/* Ring: two 170° arcs, ~10° gap at north and south */}
             <g>
               <path
                 d="M 53.9 5.2 A 45 45 0 0 1 53.9 94.8 M 46.1 94.8 A 45 45 0 0 1 46.1 5.2"
@@ -216,23 +174,50 @@ export default function HeroSection() {
                 strokeLinecap="round"
               />
             </g>
-            {/* Needle — #compass-needle CSS rule in globals.css drives the spin */}
+            {/* Needle — globals.css #compass-needle drives the CSS spin */}
             <g id="compass-needle">
               <polygon points="50,8 56,50 50,92 44,50" fill="white" />
             </g>
           </svg>
 
-          {/* ── Wordmark container — SVG from /public/logo-wordmark.svg injected here ── */}
+          {/* ── Wordmark: PNG + black mask divs ────────────────────────── */}
           <div
             ref={wordmarkRef}
             style={{
-              width: "clamp(600px, 80vw, 1100px)",
-              maxWidth: "clamp(600px, 80vw, 1100px)",
-              aspectRatio: "1321 / 79",
-              padding: "0 40px",
+              position: "relative",
+              width: WORDMARK_WIDTH,
               opacity: 0,
             }}
-          />
+          >
+            {/* Full-quality PNG wordmark — white text on transparent background */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo-wordmark-transparent.png"
+              alt="NordCreative"
+              draggable={false}
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+
+            {/* Black mask divs — cover each letter region.
+                GSAP fades each to opacity:0 to reveal the PNG beneath.
+                O and I masks start at opacity:0 (pre-revealed from the start). */}
+            {MASKS.map(({ id, left, width, preRevealed }) => (
+              <div
+                key={id}
+                data-mask={id}
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  bottom: 0,
+                  left,
+                  width,
+                  backgroundColor: "black",
+                  opacity: preRevealed ? 0 : 1,
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Tagline */}
