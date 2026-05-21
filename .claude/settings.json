@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"/Users/ov/Motion site NC\" && git status --porcelain | grep -q . && git add -A && git commit -m \"auto: claude changes\" && npx vercel --prod 2>&1 || true",
+            "timeout": 120,
+            "statusMessage": "Deploying to Vercel..."
+          }
+        ]
+      }
+    ]
+  }
+}

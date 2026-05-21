@@ -23,9 +23,8 @@ export default function Navbar() {
 
   return (
     <motion.nav
+      id="site-nav"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-500 ${
         scrolled ? "border-b border-white/10" : ""
       }`}
