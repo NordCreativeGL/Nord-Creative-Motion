@@ -30,16 +30,8 @@ export default function HeroSection() {
         ease: "power2.out",
       });
 
-      // 2. Smooth spin — 3 full rotations in 1.5s, controlled and cinematic
-      tl.to(iconRef.current, {
-        rotation: "+=1080",
-        duration: 1.5,
-        ease: "power1.inOut",
-        transformOrigin: "50% 50%",
-      });
-
-      // 3. Pause — icon rests
-      tl.to({}, { duration: 0.4 });
+      // 2–3. CSS animation handles the 3s spin — GSAP waits for it to complete
+      tl.to({}, { duration: 2.7 }); // 0.3s fade-in + 2.7s = 3.0s total when CSS anim ends
 
       // 4. Wordmark blurs in + compass fades out simultaneously
       tl.to(
@@ -47,7 +39,7 @@ export default function HeroSection() {
         {
           opacity: 1,
           filter: "blur(0px)",
-          width: "clamp(320px, 90vw, 680px)",
+          width: "clamp(320px, 80vw, 900px)",
           duration: 1.4,
           ease: "power2.out",
         },
@@ -168,9 +160,9 @@ export default function HeroSection() {
         {/* Logo slot — compass and wordmark are both absolutely centred here */}
         <div
           className="relative flex items-center justify-center"
-          style={{ width: "clamp(320px, 90vw, 680px)", height: "220px" }}
+          style={{ width: "clamp(320px, 80vw, 900px)", height: "320px" }}
         >
-          {/* Compass icon */}
+          {/* Compass icon — CSS animation handles the spin to avoid GSAP jitter */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             ref={iconRef}
@@ -179,14 +171,14 @@ export default function HeroSection() {
             aria-hidden="true"
             style={{
               position: "absolute",
-              width: "200px",
+              width: "300px",
               height: "auto",
               opacity: 0,
               willChange: "transform, opacity",
               transformOrigin: "center center",
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
-              transform: "translateZ(0)",
+              animation: "compassSpin 3s cubic-bezier(0.4, 0, 0.2, 1) forwards",
             }}
           />
 
@@ -198,7 +190,7 @@ export default function HeroSection() {
             alt="NordCreative"
             style={{
               position: "absolute",
-              width: "clamp(320px, 90vw, 680px)",
+              width: "clamp(320px, 80vw, 900px)",
               height: "auto",
               opacity: 0,
               filter: "blur(20px)",
