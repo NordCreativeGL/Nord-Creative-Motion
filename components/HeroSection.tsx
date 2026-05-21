@@ -30,19 +30,11 @@ export default function HeroSection() {
         ease: "power2.out",
       });
 
-      // 2a. Fast spin — 6 full rotations in 0.8s (ease in, building speed)
+      // 2. Smooth spin — 3 full rotations in 1.5s, controlled and cinematic
       tl.to(iconRef.current, {
-        rotation: "+=2160",
-        duration: 0.8,
-        ease: "power2.in",
-        transformOrigin: "50% 50%",
-      });
-
-      // 2b. Decelerate — 2 more full rotations in 1.2s (ease out, coming to rest)
-      tl.to(iconRef.current, {
-        rotation: "+=720",
-        duration: 1.2,
-        ease: "power2.out",
+        rotation: "+=1080",
+        duration: 1.5,
+        ease: "power1.inOut",
         transformOrigin: "50% 50%",
       });
 
@@ -55,6 +47,7 @@ export default function HeroSection() {
         {
           opacity: 1,
           filter: "blur(0px)",
+          width: "clamp(320px, 90vw, 680px)",
           duration: 1.4,
           ease: "power2.out",
         },
@@ -175,7 +168,7 @@ export default function HeroSection() {
         {/* Logo slot — compass and wordmark are both absolutely centred here */}
         <div
           className="relative flex items-center justify-center"
-          style={{ width: "clamp(280px, 90vw, 480px)", height: "160px" }}
+          style={{ width: "clamp(320px, 90vw, 680px)", height: "220px" }}
         >
           {/* Compass icon */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -186,7 +179,7 @@ export default function HeroSection() {
             aria-hidden="true"
             style={{
               position: "absolute",
-              width: "140px",
+              width: "200px",
               height: "auto",
               opacity: 0,
               willChange: "transform, opacity",
@@ -205,7 +198,7 @@ export default function HeroSection() {
             alt="NordCreative"
             style={{
               position: "absolute",
-              width: "clamp(280px, 90vw, 480px)",
+              width: "clamp(320px, 90vw, 680px)",
               height: "auto",
               opacity: 0,
               filter: "blur(20px)",
