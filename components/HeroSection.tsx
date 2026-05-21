@@ -40,7 +40,7 @@ export default function HeroSection() {
       tl.to(wm, {
         opacity: 1,
         filter: "blur(0px)",
-        width: "clamp(900px, 92vw, 1900px)",
+        width: "min(90vw, 1900px)",
         duration: 1.2,
         ease: "power2.out",
       }, 2.0);
@@ -100,7 +100,7 @@ export default function HeroSection() {
         style={{ willChange: "transform, opacity" }}
       >
         {/* Compass and wordmark are both absolutely centred in this slot */}
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center" style={{ width: "min(90vw, 1900px)" }}>
 
           {/* ── Compass SVG — Phase 1 only ─────────────────────────────── */}
           <svg
@@ -141,7 +141,7 @@ export default function HeroSection() {
             draggable={false}
             style={{
               display: "block",
-              width: "clamp(900px, 92vw, 1900px)",
+              width: "min(90vw, 1900px)",
               height: "auto",
               opacity: 0,
               filter: "blur(12px)",
