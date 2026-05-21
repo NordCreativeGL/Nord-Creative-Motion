@@ -30,8 +30,8 @@ export default function HeroSection() {
         ease: "power2.out",
       });
 
-      // 2–3. Needle CSS animation: 0.3s delay + 2.5s spin = done at 2.8s. GSAP waits to t=3.1
-      tl.to({}, { duration: 2.8 });
+      // 2–3. Needle: 0.3s delay + 3s spin = done at 3.3s. GSAP waits to t=3.5
+      tl.to({}, { duration: 3.2 });
 
       // 4. Wordmark blurs in + compass fades out simultaneously
       tl.to(
@@ -55,8 +55,8 @@ export default function HeroSection() {
         "<"
       );
 
-      // 5. Wordmark sits sharp — 0.8s pause
-      tl.to({}, { duration: 0.8 });
+      // 5. Wordmark sits sharp — pause until video at t=5.8
+      tl.to({}, { duration: 0.9 });
 
       // 6. Hero video fades in behind wordmark
       tl.to(videoRef.current, {
@@ -73,7 +73,7 @@ export default function HeroSection() {
           duration: 0.8,
           ease: "power2.out",
         },
-        "-=0.6"
+        "-=0.5"
       );
 
       // 8. Scroll indicator appears
