@@ -175,7 +175,7 @@ export default function HeroSection() {
         {/* Logo slot — compass and wordmark are both absolutely centred here */}
         <div
           className="relative flex items-center justify-center"
-          style={{ width: "clamp(260px, 60vw, 380px)", height: "110px" }}
+          style={{ width: "clamp(280px, 90vw, 480px)", height: "160px" }}
         >
           {/* Compass icon */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -186,10 +186,14 @@ export default function HeroSection() {
             aria-hidden="true"
             style={{
               position: "absolute",
-              width: "80px",
+              width: "140px",
               height: "auto",
               opacity: 0,
               willChange: "transform, opacity",
+              transformOrigin: "center center",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "translateZ(0)",
             }}
           />
 
@@ -201,7 +205,7 @@ export default function HeroSection() {
             alt="NordCreative"
             style={{
               position: "absolute",
-              width: "clamp(260px, 60vw, 380px)",
+              width: "clamp(280px, 90vw, 480px)",
               height: "auto",
               opacity: 0,
               filter: "blur(20px)",
