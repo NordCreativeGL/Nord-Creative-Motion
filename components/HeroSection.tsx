@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const iconRef = useRef<HTMLImageElement>(null);
+  const iconRef = useRef<SVGSVGElement>(null);
   const wordmarkRef = useRef<HTMLImageElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -30,8 +30,8 @@ export default function HeroSection() {
         ease: "power2.out",
       });
 
-      // 2–3. CSS animation handles the 3s spin — GSAP waits for it to complete
-      tl.to({}, { duration: 2.7 }); // 0.3s fade-in + 2.7s = 3.0s total when CSS anim ends
+      // 2–3. Needle CSS animation: 0.3s delay + 2.5s spin = done at 2.8s. GSAP waits to t=3.1
+      tl.to({}, { duration: 2.8 });
 
       // 4. Wordmark blurs in + compass fades out simultaneously
       tl.to(
@@ -39,7 +39,7 @@ export default function HeroSection() {
         {
           opacity: 1,
           filter: "blur(0px)",
-          width: "clamp(320px, 80vw, 900px)",
+          width: "clamp(320px, 78vw, 860px)",
           duration: 1.4,
           ease: "power2.out",
         },
@@ -157,30 +157,40 @@ export default function HeroSection() {
         className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6"
         style={{ willChange: "transform, opacity" }}
       >
-        {/* Logo slot — compass and wordmark are both absolutely centred here */}
+        {/* Logo slot — compass SVG and wordmark are both absolutely centred here */}
         <div
           className="relative flex items-center justify-center"
-          style={{ width: "clamp(320px, 80vw, 900px)", height: "320px" }}
+          style={{ width: "clamp(320px, 78vw, 860px)", height: "300px" }}
         >
-          {/* Compass icon — CSS animation handles the spin to avoid GSAP jitter */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* SVG compass — ring stays still, only needle rotates via CSS */}
+          <svg
             ref={iconRef}
-            src="/logo-icon-transparent.png"
-            alt=""
+            viewBox="0 0 100 100"
             aria-hidden="true"
             style={{
               position: "absolute",
-              width: "300px",
-              height: "auto",
+              width: "280px",
+              height: "280px",
               opacity: 0,
-              willChange: "transform, opacity",
-              transformOrigin: "center center",
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-              animation: "compassSpin 3s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+              willChange: "opacity",
+              overflow: "visible",
             }}
-          />
+          >
+            {/* Ring: two 170° arcs with ~10° gaps at top and bottom */}
+            <g id="compass-ring">
+              <path
+                d="M 53.9 5.2 A 45 45 0 0 1 53.9 94.8 M 46.1 94.8 A 45 45 0 0 1 46.1 5.2"
+                stroke="white"
+                strokeWidth="3"
+                fill="none"
+                strokeLinecap="round"
+              />
+            </g>
+            {/* Needle: diamond centred at (50,50) — CSS needleSpin rotates only this */}
+            <g id="compass-needle">
+              <polygon points="50,8 56,50 50,92 44,50" fill="white" />
+            </g>
+          </svg>
 
           {/* Wordmark */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -190,7 +200,7 @@ export default function HeroSection() {
             alt="NordCreative"
             style={{
               position: "absolute",
-              width: "clamp(320px, 80vw, 900px)",
+              width: "clamp(320px, 78vw, 860px)",
               height: "auto",
               opacity: 0,
               filter: "blur(20px)",

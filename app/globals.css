@@ -13,7 +13,14 @@ body {
   font-family: var(--font-geist-sans, Arial, Helvetica, sans-serif);
 }
 
-@keyframes compassSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(1080deg); }
+@keyframes needleSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(1080deg); }
+}
+
+#compass-needle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: needleSpin 2.5s cubic-bezier(0.4, 0, 0.1, 1) forwards;
+  animation-delay: 0.3s;
 }
