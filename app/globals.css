@@ -15,11 +15,11 @@ body {
 
 @keyframes needleSpin {
   0%   { transform: rotate(0deg); }
-  100% { transform: rotate(1440deg); }
+  100% { transform: rotate(1080deg); }
 }
 
 #compass-needle {
   transform-origin: 50px 50px;
-  animation: needleSpin 1.5s cubic-bezier(0.4, 0, 0.1, 1) forwards;
+  animation: needleSpin 5s linear forwards;
   animation-delay: 0.3s;
 }
