@@ -30,67 +30,48 @@ export default function HeroSection() {
 
         const svgEl = oGroupRef.current.ownerSVGElement!;
         const svgRect = svgEl.getBoundingClientRect();
-        const scaleX = svgRect.width / 2520.80;
-        const scaleY = svgRect.height / 200;
-        const oLandX = svgRect.left + 310.6 * scaleX;
-        const oLandY = svgRect.top + 80 * scaleY;
-        const needleLandX = svgRect.left + 2093.8 * scaleX;
-        const needleLandY = svgRect.top + 82 * scaleY;
+        const pxPerSvgUnit = svgRect.width / 2520.80;
+
+        const oLandX = svgRect.left + 310.6 * pxPerSvgUnit;
+        const oLandY = svgRect.top + (80 / 200) * svgRect.height;
+        const needleLandX = svgRect.left + 2093.8 * pxPerSvgUnit;
+        const needleLandY = svgRect.top + (82 / 200) * svgRect.height;
 
         const vpCX = window.innerWidth / 2;
         const vpCY = window.innerHeight / 2;
 
-        const pxPerSvgUnit = svgRect.width / 2520.80;
+        const oRadiusPx = 72.3 * pxPerSvgUnit;
+        const S = 140 / oRadiusPx;
+
         const oTx = (vpCX - oLandX) / pxPerSvgUnit;
         const oTy = (vpCY - oLandY) / pxPerSvgUnit;
-        const needleTx = (vpCX - needleLandX) / pxPerSvgUnit;
-        const needleTy = (vpCY - needleLandY) / pxPerSvgUnit;
+        const nTx = (vpCX - needleLandX) / pxPerSvgUnit;
+        const nTy = (vpCY - needleLandY) / pxPerSvgUnit;
 
-        const oRadiusPx = 72.3 * pxPerSvgUnit;
-        const startScale = 140 / oRadiusPx;
-
-        console.log('pxPerSvgUnit:', pxPerSvgUnit, 'oLandX:', oLandX, 'oLandY:', oLandY, 'vpCX:', vpCX, 'vpCY:', vpCY, 'oTx:', oTx, 'oTy:', oTy, 'startScale:', startScale);
-
-        gsap.set(oGroupRef.current, {
-          transformOrigin: '310.6px 80px',
-          x: oTx,
-          y: oTy,
-          scale: startScale,
-          opacity: 1,
-        });
-
-        gsap.set(needleGroupRef.current, {
-          transformOrigin: '2093.8px 82px',
-          x: needleTx,
-          y: needleTy,
-          scale: startScale,
-          opacity: 1,
-        });
+        oGroupRef.current.setAttribute('transform', `translate(${310.6 + oTx} ${80 + oTy}) scale(${S}) translate(${-310.6} ${-80})`);
+        needleGroupRef.current.setAttribute('transform', `translate(${2093.8 + nTx} ${82 + nTy}) scale(${S}) translate(${-2093.8} ${-82})`);
 
         gsap.set('.wm-letter', { opacity: 0 });
+        gsap.set([oGroupRef.current, needleGroupRef.current], { opacity: 1 });
 
         const tl = gsap.timeline({ delay: 0.3 });
 
         tl.to(needleGroupRef.current, {
           rotation: 720,
-          transformOrigin: '2093.8px 82px',
+          svgOrigin: '2093.8 82',
           duration: 1.5,
           ease: 'none',
         })
-        .add([
-          gsap.to(oGroupRef.current, {
-            x: 0, y: 0, scale: 1,
-            transformOrigin: '310.6px 80px',
-            duration: 1.2,
-            ease: 'power2.inOut',
-          }),
-          gsap.to(needleGroupRef.current, {
-            x: 0, y: 0, scale: 1,
-            transformOrigin: '2093.8px 82px',
-            duration: 1.2,
-            ease: 'power2.inOut',
-          }),
-        ])
+        .to(oGroupRef.current, {
+          attr: { transform: 'translate(0 0) scale(1) translate(0 0)' },
+          duration: 1.2,
+          ease: 'power2.inOut',
+        }, '+=0')
+        .to(needleGroupRef.current, {
+          attr: { transform: 'translate(0 0) scale(1) translate(0 0)' },
+          duration: 1.2,
+          ease: 'power2.inOut',
+        }, '<')
         .to('.wm-letter', {
           opacity: 1,
           duration: 0.8,
