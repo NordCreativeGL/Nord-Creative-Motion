@@ -38,7 +38,7 @@ export default function HeroSection() {
       opacity: 0,
       duration: 1.2,
       ease: 'power1.inOut',
-    }, '+=0.3')
+    }, '>')
     tl.to(ringDiv, {
       x: 440.54 - centerX,
       y: 466.27 - centerY,
