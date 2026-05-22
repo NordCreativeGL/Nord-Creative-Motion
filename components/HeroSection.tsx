@@ -74,6 +74,8 @@ export default function HeroSection() {
         const needleInRing = ringClone.querySelector('#compass-needle') as SVGElement;
         if (needleInRing) needleInRing.style.opacity = '0';
         document.body.appendChild(ringClone);
+        const needleInRingClone = ringClone.querySelector('#compass-needle') as SVGElement;
+        if (needleInRingClone) needleInRingClone.style.animation = 'none';
 
         // Clone 2: needle clone moves to I position
         const needleClone = compassEl.cloneNode(true) as HTMLElement;
@@ -90,6 +92,8 @@ export default function HeroSection() {
         const ringInNeedle = needleClone.querySelector('#compass-ring') as SVGElement;
         if (ringInNeedle) ringInNeedle.style.opacity = '0';
         document.body.appendChild(needleClone);
+        const needleInNeedleClone = needleClone.querySelector('#compass-needle') as SVGElement;
+        if (needleInNeedleClone) needleInNeedleClone.style.animation = 'none';
 
         // Hide original compass immediately
         gsap.set(compassEl, { opacity: 0 });
