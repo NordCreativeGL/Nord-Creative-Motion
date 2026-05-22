@@ -11,43 +11,49 @@ export default function HeroSection() {
   const contentRef      = useRef<HTMLDivElement>(null);
   const taglineRef      = useRef<HTMLParagraphElement>(null);
   const scrollRef       = useRef<HTMLDivElement>(null);
-  const compassRef = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<SVGGElement>(null)
-  const needleRef = useRef<SVGPolygonElement>(null)
+  const ringDivRef = useRef<HTMLDivElement>(null)
+  const needleDivRef = useRef<HTMLDivElement>(null)
+  const wordmarkLettersRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
-    setTimeout(() => {
-      const imgEl = wordmarkImgRef.current
-      if (!imgEl) return
+    const ringDiv = ringDivRef.current
+    const needleDiv = needleDivRef.current
+    if (!ringDiv || !needleDiv) return
 
-      const rect = imgEl.getBoundingClientRect()
-      const viewBoxW = 2520.80
-      const scale = rect.width / viewBoxW
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
+    const ringScale = 61.79 / 231.6
+    const needleScale = 64.58 / 223.2
 
-      const oX = rect.left + 310.6 * scale
-      const oY = rect.top + 80 * scale
-      const oDiameter = 141.6 * scale
+    const tl = gsap.timeline({ delay: 0.1 })
 
-      const iX = rect.left + 2093.8 * scale
-      const iY = rect.top + 82 * scale
-      const iHeight = 148 * scale
-
-      console.log('trin-2-o:', { x: oX, y: oY, diameter: oDiameter, scale })
-      console.log('trin-2-i:', { x: iX, y: iY, height: iHeight, scale })
-    }, 500)
-  }, [])
-
-  useEffect(() => {
-    if (!compassRef.current) return
-    setTimeout(() => {
-      gsap.to(compassRef.current, {
-        rotation: 720,
-        duration: 1.5,
-        ease: 'none',
-        transformOrigin: '50% 50%',
-        onComplete: () => console.log('trin-1-complete'),
-      })
-    }, 100)
+    tl.to([ringDiv, needleDiv], {
+      rotation: 720,
+      duration: 1.5,
+      ease: 'none',
+      transformOrigin: '50% 50%',
+    })
+    tl.to(ringDiv, {
+      x: 440.54 - centerX,
+      y: 466.27 - centerY,
+      scale: ringScale,
+      duration: 1.0,
+      ease: 'power2.inOut',
+      transformOrigin: '50% 50%',
+    }, '+=0.3')
+    tl.to(needleDiv, {
+      x: 1218.67 - centerX,
+      y: 467.14 - centerY,
+      scale: needleScale,
+      duration: 1.0,
+      ease: 'power2.inOut',
+      transformOrigin: '50% 50%',
+    }, '<')
+    tl.to(wordmarkLettersRef.current, {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power1.inOut',
+    }, '<')
   }, [])
 
   useEffect(() => {
@@ -99,20 +105,18 @@ export default function HeroSection() {
       className="relative h-screen w-full overflow-hidden bg-black"
     >
       <div style={{ position: 'fixed', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
-        <div
-          ref={compassRef}
-          style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}
-        >
+        <div ref={ringDivRef} style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="240" height="240">
-            <g ref={ringRef}>
-              <path d="M 44.956 2.015 A 48.25 48.25 0 0 0 44.956 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
-              <path d="M 55.044 2.015 A 48.25 48.25 0 0 1 55.044 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
-            </g>
-            <polygon
-              ref={needleRef}
-              points="50,3.5 61.5,50 50,96.5 38.5,50"
-              fill="#ffffff"
-            />
+            <path d="M 44.956 2.015 A 48.25 48.25 0 0 0 44.956 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
+            <path d="M 55.044 2.015 A 48.25 48.25 0 0 1 55.044 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
+          </svg>
+        </div>
+      </div>
+
+      <div style={{ position: 'fixed', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
+        <div ref={needleDivRef} style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}>
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="240" height="240">
+            <polygon points="50,3.5 61.5,50 50,96.5 38.5,50" fill="#ffffff" />
           </svg>
         </div>
       </div>
@@ -139,8 +143,8 @@ export default function HeroSection() {
         style={{ willChange: "transform, opacity" }}
       >
         <img
-          ref={wordmarkImgRef}
-          src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+          ref={wordmarkLettersRef}
+          src="/logos/final/svg/nord-creative-wordmark-letters-only-white.svg"
           style={{ width: 'clamp(320px, 72vw, 1100px)', height: 'auto', opacity: 0 }}
           alt="Nord Creative"
         />
