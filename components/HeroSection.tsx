@@ -35,18 +35,38 @@ export default function HeroSection() {
       const NEEDLE_CY = 82;
       const S         = 8;
 
+      const svgEl = oGroupRef.current!.ownerSVGElement!;
+      const svgRect = svgEl.getBoundingClientRect();
+      const scaleX = svgRect.width / 2520.80;
+      const scaleY = svgRect.height / 200;
+
+      const oScreenX = svgRect.left + 310.6 * scaleX;
+      const oScreenY = svgRect.top + 80 * scaleY;
+      const needleScreenX = svgRect.left + 2093.8 * scaleX;
+      const needleScreenY = svgRect.top + 82 * scaleY;
+
+      const vpCX = window.innerWidth / 2;
+      const vpCY = window.innerHeight / 2;
+
+      const svgUnitsPerPx = 2520.80 / svgRect.width;
+
+      const oTx = (vpCX - oScreenX) * svgUnitsPerPx;
+      const oTy = (vpCY - oScreenY) * svgUnitsPerPx;
+      const needleTx = (vpCX - needleScreenX) * svgUnitsPerPx;
+      const needleTy = (vpCY - needleScreenY) * svgUnitsPerPx;
+
       gsap.set(oGroupRef.current, {
         transformOrigin: '310.6px 80px',
-        x: SVG_CX - O_CX,
-        y: SVG_CY - O_CY,
+        x: oTx,
+        y: oTy,
         scale: S,
         opacity: 1,
       });
 
       gsap.set(needleGroupRef.current, {
         transformOrigin: '2093.8px 82px',
-        x: SVG_CX - NEEDLE_CX,
-        y: SVG_CY - NEEDLE_CY,
+        x: needleTx,
+        y: needleTy,
         scale: S,
         opacity: 1,
       });
