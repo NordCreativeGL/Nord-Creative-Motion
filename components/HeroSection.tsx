@@ -34,11 +34,15 @@ export default function HeroSection() {
       ease: 'none',
       transformOrigin: '50% 50%',
     })
+
+    tl.addLabel('spinEnd')
+
     tl.to(overlayRef.current, {
       opacity: 0,
       duration: 1.2,
       ease: 'power1.inOut',
-    }, '>')
+    }, 'spinEnd')
+
     tl.to(ringDiv, {
       x: 440.54 - centerX,
       y: 466.27 - centerY,
@@ -46,7 +50,8 @@ export default function HeroSection() {
       duration: 1.5,
       ease: 'power2.inOut',
       transformOrigin: '50% 50%',
-    }, '<')
+    }, 'spinEnd+=0.3')
+
     tl.to(needleDiv, {
       x: 1218.67 - centerX,
       y: 467.14 - centerY,
@@ -54,12 +59,13 @@ export default function HeroSection() {
       duration: 1.5,
       ease: 'power2.inOut',
       transformOrigin: '50% 50%',
-    }, '<')
+    }, 'spinEnd+=0.3')
+
     tl.to(wordmarkLettersRef.current, {
       opacity: 1,
       duration: 0.8,
       ease: 'power1.inOut',
-    }, '<')
+    }, 'spinEnd+=0.3')
   }, [])
 
   useEffect(() => {
