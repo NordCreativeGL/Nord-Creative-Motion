@@ -49,6 +49,8 @@ export default function HeroSection() {
         const oRadiusPx = 72.3 * pxPerSvgUnit;
         const startScale = 140 / oRadiusPx;
 
+        console.log('pxPerSvgUnit:', pxPerSvgUnit, 'oLandX:', oLandX, 'oLandY:', oLandY, 'vpCX:', vpCX, 'vpCY:', vpCY, 'oTx:', oTx, 'oTy:', oTy, 'startScale:', startScale);
+
         gsap.set(oGroupRef.current, {
           transformOrigin: '310.6px 80px',
           x: oTx,
@@ -83,7 +85,7 @@ export default function HeroSection() {
             ease: 'power2.inOut',
           }),
           gsap.to(needleGroupRef.current, {
-            x: 0, y: 0, scale: 1, rotation: 0,
+            x: 0, y: 0, scale: 1,
             transformOrigin: '2093.8px 82px',
             duration: 1.2,
             ease: 'power2.inOut',
