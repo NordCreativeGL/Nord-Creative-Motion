@@ -25,6 +25,7 @@ export default function HeroSection() {
     const section = sectionRef.current;
 
     if (!wordmarkRef.current || !oRef.current || !needleRef.current) return;
+    console.log('refs ok, wordmarkRef width:', wordmarkRef.current.getBoundingClientRect().width)
 
     let ctx: gsap.Context | undefined;
 
