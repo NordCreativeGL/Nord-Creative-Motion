@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function HeroSection() {
   const sectionRef  = useRef<HTMLElement>(null);
   const compassRef  = useRef<SVGSVGElement>(null);
-  const wordmarkRef = useRef<HTMLImageElement>(null);
+  const wordmarkRef = useRef<SVGSVGElement>(null);
   const videoRef    = useRef<HTMLVideoElement>(null);
   const contentRef  = useRef<HTMLDivElement>(null);
   const taglineRef  = useRef<HTMLParagraphElement>(null);
@@ -35,12 +35,11 @@ export default function HeroSection() {
       tl.to(compass, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
 
       // ── Phase 2: Wordmark reveal (t=2.0) ───────────────────────────────
-      // Compass fades out, PNG wordmark blurs in simultaneously
+      // Compass fades out, SVG wordmark blurs in simultaneously
       tl.to(compass, { opacity: 0, duration: 0.4, ease: "power2.out" }, 2.0);
       tl.to(wm, {
         opacity: 1,
         filter: "blur(0px)",
-        width: "130vw",
         duration: 1.2,
         ease: "power2.out",
       }, 2.0);
@@ -132,22 +131,46 @@ export default function HeroSection() {
             </g>
           </svg>
 
-          {/* ── PNG wordmark — Phase 2+ ─────────────────────────────────── */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* ── Inline SVG wordmark — Phase 2+ ─────────────────────────── */}
+          <svg
             ref={wordmarkRef}
-            src="/logo-wordmark-transparent.png"
-            alt="NordCreative"
-            draggable={false}
-            style={{
-              display: "block",
-              width: "130vw",
-              maxWidth: "130vw",
-              height: "auto",
-              opacity: 0,
-              filter: "blur(12px)",
-            }}
-          />
+            viewBox="0 0 1321 160"
+            style={{ width: "clamp(320px, 72vw, 1100px)", opacity: 0, filter: "blur(12px)" }}
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="NordCreative"
+          >
+            <defs>
+              <style>{`@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');`}</style>
+            </defs>
+
+            {/* NORD */}
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
+              <tspan x="0" y="125">N</tspan>
+            </text>
+            {/* O as split circle — center x=248, y=80 */}
+            <g id="wordmark-o">
+              <path d="M 248,22 A 58,58 0 1 1 247.9,22" stroke="white" strokeWidth="5" fill="none" strokeLinecap="round" />
+              {/* Gap top */}
+              <rect x="234" y="14" width="28" height="14" fill="black" />
+              {/* Gap bottom */}
+              <rect x="234" y="132" width="28" height="14" fill="black" />
+            </g>
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
+              <tspan x="310" y="125">RD</tspan>
+            </text>
+
+            {/* CREATIVE */}
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
+              <tspan x="570" y="125">CREAT</tspan>
+            </text>
+            {/* I as compass needle diamond — center x=1057, y=80 */}
+            <g id="wordmark-needle">
+              <polygon points="1057,28 1066,80 1057,132 1048,80" fill="white" />
+            </g>
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
+              <tspan x="1075" y="125">VE</tspan>
+            </text>
+          </svg>
         </div>
 
         {/* Tagline */}
