@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+<style>
+  body { background: black; margin: 40px; }
+  #wordmark { font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 100px; color: white; white-space: nowrap; letter-spacing: 14px; display: inline-block; }
+  span { position: relative; }
+  #result { color: lime; font-family: monospace; font-size: 14px; margin-top: 20px; white-space: pre; }
+</style>
+</head>
+<body>
+<div id="wordmark"><span id="N">N</span><span id="O">O</span><span id="R1">R</span><span id="D">D</span>&nbsp;&nbsp;&nbsp;<span id="C">C</span><span id="R2">R</span><span id="E1">E</span><span id="A">A</span><span id="T">T</span><span id="I">I</span><span id="V">V</span><span id="E2">E</span></div>
+<div id="result"></div>
+<script>
+document.fonts.ready.then(() => {
+  const wm = document.getElementById('wordmark');
+  const wmRect = wm.getBoundingClientRect();
+  const ids = ['N','O','R1','D','C','R2','E1','A','T','I','V','E2'];
+  let out = 'Parent left: ' + wmRect.left + '\n';
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    const r = el.getBoundingClientRect();
+    const cx = Math.round(r.left - wmRect.left + r.width/2);
+    const x = Math.round(r.left - wmRect.left);
+    const w = Math.round(r.width);
+    out += id + ': x=' + x + ' w=' + w + ' cx=' + cx + '\n';
+  });
+  document.getElementById('result').textContent = out;
+});
+</script>
+</body>
+</html>
