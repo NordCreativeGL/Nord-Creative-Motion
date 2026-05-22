@@ -79,9 +79,9 @@ export default function HeroSection() {
       <div style={{ position: 'fixed', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
         <div
           ref={compassRef}
-          style={{ width: '100px', height: '100px', marginLeft: '-50px', marginTop: '-50px' }}
+          style={{ width: '160px', height: '160px', marginLeft: '-80px', marginTop: '-80px' }}
         >
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="160" height="160">
             <g ref={ringRef}>
               <path d="M 44.956 2.015 A 48.25 48.25 0 0 0 44.956 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
               <path d="M 55.044 2.015 A 48.25 48.25 0 0 1 55.044 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
