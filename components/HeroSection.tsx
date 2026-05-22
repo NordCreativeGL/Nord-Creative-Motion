@@ -24,86 +24,89 @@ export default function HeroSection() {
     const scroll  = scrollRef.current;
     const section = sectionRef.current;
 
-    if (!oGroupRef.current || !needleGroupRef.current) return;
-
     const ctx = gsap.context(() => {
-      const SVG_CX    = 1260.4;
-      const SVG_CY    = 100;
-      const O_CX      = 310.6;
-      const O_CY      = 80;
-      const NEEDLE_CX = 2093.8;
-      const NEEDLE_CY = 82;
-      const S         = 8;
+      const runAnimation = () => {
+        if (!oGroupRef.current || !needleGroupRef.current) return;
 
-      const svgEl = oGroupRef.current!.ownerSVGElement!;
-      const svgRect = svgEl.getBoundingClientRect();
-      const oRenderedX = svgRect.left + (310.6 / 2520.80) * svgRect.width;
-      const oRenderedY = svgRect.top + (80 / 200) * svgRect.height;
-      const vpCX = window.innerWidth / 2;
-      const vpCY = window.innerHeight / 2;
-      const pxToSvgX = 2520.80 / svgRect.width;
-      const pxToSvgY = 200 / svgRect.height;
-      const oTx = (vpCX - oRenderedX) * pxToSvgX;
-      const oTy = (vpCY - oRenderedY) * pxToSvgY;
+        const svgEl = oGroupRef.current.ownerSVGElement!;
+        const svgRect = svgEl.getBoundingClientRect();
 
-      console.log('oRenderedX:', oRenderedX, 'oRenderedY:', oRenderedY, 'vpCX:', vpCX, 'vpCY:', vpCY, 'oTx:', oTx, 'oTy:', oTy);
+        const scaleX = svgRect.width / 2520.80;
+        const scaleY = svgRect.height / 200;
 
-      gsap.set(oGroupRef.current, {
-        transformOrigin: '310.6px 80px',
-        x: oTx,
-        y: oTy,
-        scale: 8,
-        opacity: 1,
-      });
+        const oScreenX = svgRect.left + 310.6 * scaleX;
+        const oScreenY = svgRect.top + 80 * scaleY;
+        const needleScreenX = svgRect.left + 2093.8 * scaleX;
+        const needleScreenY = svgRect.top + 82 * scaleY;
 
-      const needleScreenX = svgRect.left + (2093.8 / 2520.80) * svgRect.width;
-      const needleScreenY = svgRect.top + (82 / 200) * svgRect.height;
-      const svgUnitsPerPx = 2520.80 / svgRect.width;
-      const needleTx = (vpCX - needleScreenX) * svgUnitsPerPx;
-      const needleTy = (vpCY - needleScreenY) * svgUnitsPerPx;
+        const vpCX = window.innerWidth / 2;
+        const vpCY = window.innerHeight / 2;
 
-      gsap.set(needleGroupRef.current, {
-        transformOrigin: '2093.8px 82px',
-        x: needleTx,
-        y: needleTy,
-        scale: S,
-        opacity: 1,
-      });
+        const pxPerSvgUnit = svgRect.width / 2520.80;
 
-      gsap.set('.wm-letter', { opacity: 0 });
+        const oTx = (vpCX - oScreenX) / pxPerSvgUnit;
+        const oTy = (vpCY - oScreenY) / pxPerSvgUnit;
+        const needleTx = (vpCX - needleScreenX) / pxPerSvgUnit;
+        const needleTy = (vpCY - needleScreenY) / pxPerSvgUnit;
 
-      const tl = gsap.timeline({ delay: 0.2 });
+        console.log('svgRect:', svgRect.left, svgRect.top, svgRect.width);
+        console.log('oScreen:', oScreenX, oScreenY);
+        console.log('vp center:', vpCX, vpCY);
+        console.log('oTx oTy:', oTx, oTy);
 
-      tl.to(needleGroupRef.current, {
-        rotation: 720,
-        transformOrigin: '2093.8px 82px',
-        duration: 1.5,
-        ease: 'none',
-      })
-      .add([
-        gsap.to(oGroupRef.current, {
-          x: 0, y: 0, scale: 1,
+        gsap.set(oGroupRef.current, {
           transformOrigin: '310.6px 80px',
-          duration: 1.2,
-          ease: 'power2.inOut',
-        }),
-        gsap.to(needleGroupRef.current, {
-          x: 0, y: 0, scale: 1, rotation: 0,
-          transformOrigin: '2093.8px 82px',
-          duration: 1.2,
-          ease: 'power2.inOut',
-        }),
-      ])
-      .to('.wm-letter', {
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.03,
-      }, '<0.2');
+          x: oTx,
+          y: oTy,
+          scale: 8,
+          opacity: 1,
+        });
 
-      tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, '>0.4');
-      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '>0.8');
-      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<0.2');
-      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '<0.2');
+        gsap.set(needleGroupRef.current, {
+          transformOrigin: '2093.8px 82px',
+          x: needleTx,
+          y: needleTy,
+          scale: 8,
+          opacity: 1,
+        });
+
+        gsap.set('.wm-letter', { opacity: 0 });
+
+        const tl = gsap.timeline({ delay: 0.3 });
+
+        tl.to(needleGroupRef.current, {
+          rotation: 720,
+          transformOrigin: '2093.8px 82px',
+          duration: 1.5,
+          ease: 'none',
+        })
+        .add([
+          gsap.to(oGroupRef.current, {
+            x: 0, y: 0, scale: 1,
+            transformOrigin: '310.6px 80px',
+            duration: 1.2,
+            ease: 'power2.inOut',
+          }),
+          gsap.to(needleGroupRef.current, {
+            x: 0, y: 0, scale: 1, rotation: 0,
+            transformOrigin: '2093.8px 82px',
+            duration: 1.2,
+            ease: 'power2.inOut',
+          }),
+        ])
+        .to('.wm-letter', {
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.03,
+        }, '<0.2');
+
+        tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, '>0.4');
+        if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '>0.8');
+        if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<0.2');
+        if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '<0.2');
+      };
+
+      window.addEventListener('load', runAnimation, { once: true });
 
       if (content) {
         gsap.to(content, {
