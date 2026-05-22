@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8" />
+<title>SVG previews — white + black</title>
+<style>
+  body { margin:0; font-family: monospace; }
+  .stack { display:flex; flex-direction:column; }
+  .row { padding:36px 40px; }
+  .row.dark { background:#000; color:#fff; }
+  .row.light { background:#fff; color:#000; }
+  .label { font-size:10px; opacity:.5; letter-spacing:.2em; text-transform:uppercase; margin-bottom:14px; }
+  object { display:block; height: 90px; max-width: 100%; }
+  object.icon { height: 200px; width: 200px; }
+</style>
+</head><body>
+<div class="stack">
+  <div class="row dark">
+    <div class="label">white · wordmark-needle</div>
+    <object type="image/svg+xml" data="svg/nord-creative-wordmark-needle-white.svg"></object>
+  </div>
+  <div class="row dark">
+    <div class="label">white · wordmark-plain</div>
+    <object type="image/svg+xml" data="svg/nord-creative-wordmark-plain-white.svg"></object>
+  </div>
+  <div class="row dark">
+    <div class="label">white · icon</div>
+    <object type="image/svg+xml" data="svg/nord-creative-icon-white.svg" class="icon"></object>
+  </div>
+  <div class="row light">
+    <div class="label">black · wordmark-needle</div>
+    <object type="image/svg+xml" data="svg/nord-creative-wordmark-needle-black.svg"></object>
+  </div>
+  <div class="row light">
+    <div class="label">black · wordmark-plain</div>
+    <object type="image/svg+xml" data="svg/nord-creative-wordmark-plain-black.svg"></object>
+  </div>
+  <div class="row light">
+    <div class="label">black · icon</div>
+    <object type="image/svg+xml" data="svg/nord-creative-icon-black.svg" class="icon"></object>
+  </div>
+</div>
+</body></html>

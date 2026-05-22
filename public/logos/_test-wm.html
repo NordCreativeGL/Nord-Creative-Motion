@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8" />
+<title>v3 wordmark close-up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet" />
+<style>
+  body { margin:0; background:#000; color:#fff; font-family:'Montserrat',sans-serif; padding:60px; display:flex; flex-direction:column; gap:40px; }
+  .label { font-size:11px; letter-spacing:0.2em; opacity:.5; text-transform:uppercase; font-family:monospace; }
+  .light { background:#fff; color:#000; padding:40px; margin: 0 -60px; }
+</style>
+</head><body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="v3-wordmark.jsx"></script>
+<script type="text/babel">
+// Wait for fonts to load before rendering
+document.fonts.ready.then(() => {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <>
+      <div className="label">28px · weight 200 · 0.42em</div>
+      <V3Wordmark size={28} weight={200} bg="#000" />
+      <div className="label">56px · weight 200 · 0.42em</div>
+      <V3Wordmark size={56} weight={200} bg="#000" />
+      <div className="label">100px · weight 200 · 0.42em</div>
+      <V3Wordmark size={100} weight={200} bg="#000" />
+      <div className="label">100px · weight 300 · 0.42em</div>
+      <V3Wordmark size={100} weight={300} bg="#000" />
+      <div className="light">
+        <div className="label">on white · 100px · 200</div>
+        <div style={{height:20}}/>
+        <V3Wordmark size={100} weight={200} bg="#fff" />
+      </div>
+    </>
+  );
+});
+</script>
+</body></html>
