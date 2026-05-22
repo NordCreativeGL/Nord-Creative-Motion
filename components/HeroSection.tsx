@@ -20,8 +20,7 @@ export default function HeroSection() {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const ctx = canvas.getContext("2d")!;
 
     // Set canvas to full screen
     canvas.width = window.innerWidth;
