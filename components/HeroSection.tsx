@@ -27,27 +27,27 @@ export default function HeroSection() {
     if (!oGroupRef.current || !needleGroupRef.current) return;
 
     const ctx = gsap.context(() => {
-      const SVG_CX      = 1260.4;
-      const SVG_CY      = 100;
-      const O_CX        = 310.6;
-      const O_CY        = 80;
-      const NEEDLE_CX   = 2093.8;
-      const NEEDLE_CY   = 82;
-      const START_SCALE = 8;
+      const SVG_CX    = 1260.4;
+      const SVG_CY    = 100;
+      const O_CX      = 310.6;
+      const O_CY      = 80;
+      const NEEDLE_CX = 2093.8;
+      const NEEDLE_CY = 82;
+      const S         = 8;
 
       gsap.set(oGroupRef.current, {
-        svgOrigin: '310.6 80',
-        x: 1260.4 - 310.6,
-        y: 100 - 80,
-        scale: START_SCALE,
+        transformOrigin: '310.6px 80px',
+        x: SVG_CX - O_CX,
+        y: SVG_CY - O_CY,
+        scale: S,
         opacity: 1,
       });
 
       gsap.set(needleGroupRef.current, {
-        svgOrigin: '2093.8 82',
-        x: 1260.4 - 2093.8,
-        y: 100 - 82,
-        scale: START_SCALE,
+        transformOrigin: '2093.8px 82px',
+        x: SVG_CX - NEEDLE_CX,
+        y: SVG_CY - NEEDLE_CY,
+        scale: S,
         opacity: 1,
       });
 
@@ -57,20 +57,20 @@ export default function HeroSection() {
 
       tl.to(needleGroupRef.current, {
         rotation: 720,
-        svgOrigin: '2093.8 82',
+        transformOrigin: '2093.8px 82px',
         duration: 1.5,
         ease: 'none',
       })
       .add([
         gsap.to(oGroupRef.current, {
           x: 0, y: 0, scale: 1,
-          svgOrigin: '310.6 80',
+          transformOrigin: '310.6px 80px',
           duration: 1.2,
           ease: 'power2.inOut',
         }),
         gsap.to(needleGroupRef.current, {
-          x: 0, y: 0, scale: 1,
-          svgOrigin: '2093.8 82',
+          x: 0, y: 0, scale: 1, rotation: 0,
+          transformOrigin: '2093.8px 82px',
           duration: 1.2,
           ease: 'power2.inOut',
         }),
