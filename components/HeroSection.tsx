@@ -104,7 +104,7 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-black"
     >
-      <div style={{ position: 'fixed', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
         <div ref={ringDivRef} style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="240" height="240">
             <path d="M 44.956 2.015 A 48.25 48.25 0 0 0 44.956 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
@@ -113,7 +113,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div style={{ position: 'fixed', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
         <div ref={needleDivRef} style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="240" height="240">
             <polygon points="50,3.5 61.5,50 50,96.5 38.5,50" fill="#ffffff" />
