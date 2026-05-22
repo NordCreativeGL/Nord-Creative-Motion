@@ -8,6 +8,7 @@ export default function HeroSection() {
   const sectionRef         = useRef<HTMLElement>(null);
   const compassRef         = useRef<SVGSVGElement>(null);
   const wordmarkLettersRef = useRef<HTMLImageElement>(null);
+  const wordmarkFullRef    = useRef<HTMLImageElement>(null);
   const videoRef           = useRef<HTMLVideoElement>(null);
   const contentRef         = useRef<HTMLDivElement>(null);
   const taglineRef         = useRef<HTMLParagraphElement>(null);
@@ -132,6 +133,7 @@ export default function HeroSection() {
           delay: 0.7,
           ease: 'power2.out',
         });
+        gsap.to(wordmarkFullRef.current, { opacity: 1, duration: 0.5, delay: 1.3, ease: 'power1.in' });
       }, 1.9);
 
       // ── Phase 3: Clean up compass container, fade in rest of page ──────
@@ -226,10 +228,18 @@ export default function HeroSection() {
           <div style={{ position: "relative", width: "clamp(320px, 72vw, 1100px)", opacity: 1 }}>
             <img
               ref={wordmarkLettersRef}
-              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+              src="/logos/final/svg/nord-creative-wordmark-plain-white.svg"
               alt="Nord Creative"
               draggable={false}
               style={{ width: "100%", height: "auto", opacity: 0, filter: "blur(12px)", display: "block" }}
+            />
+            <img
+              ref={wordmarkFullRef}
+              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+              alt=""
+              draggable={false}
+              aria-hidden="true"
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "auto", opacity: 0 }}
             />
           </div>
         </div>
