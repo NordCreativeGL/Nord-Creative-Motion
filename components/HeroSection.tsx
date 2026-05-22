@@ -16,6 +16,28 @@ export default function HeroSection() {
   const needleRef = useRef<SVGPolygonElement>(null)
 
   useEffect(() => {
+    setTimeout(() => {
+      const imgEl = wordmarkImgRef.current
+      if (!imgEl) return
+
+      const rect = imgEl.getBoundingClientRect()
+      const viewBoxW = 2520.80
+      const scale = rect.width / viewBoxW
+
+      const oX = rect.left + 310.6 * scale
+      const oY = rect.top + 80 * scale
+      const oDiameter = 141.6 * scale
+
+      const iX = rect.left + 2093.8 * scale
+      const iY = rect.top + 82 * scale
+      const iHeight = 148 * scale
+
+      console.log('trin-2-o:', { x: oX, y: oY, diameter: oDiameter, scale })
+      console.log('trin-2-i:', { x: iX, y: iY, height: iHeight, scale })
+    }, 500)
+  }, [])
+
+  useEffect(() => {
     if (!compassRef.current) return
     setTimeout(() => {
       gsap.to(compassRef.current, {
