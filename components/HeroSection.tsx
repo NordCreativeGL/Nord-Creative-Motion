@@ -26,86 +26,93 @@ export default function HeroSection() {
 
     if (!wordmarkRef.current || !oRef.current || !needleRef.current) return;
 
-    const ctx = gsap.context(() => {
-      const svgEl   = wordmarkRef.current!;
-      const svgRect = svgEl.getBoundingClientRect();
-      const svgScale = svgRect.width / 2520.80;
+    let ctx: gsap.Context | undefined;
 
-      const oScreenX = svgRect.left + 310.6 * svgScale;
-      const oScreenY = svgRect.top  + 80   * svgScale;
+    ;(async () => {
+      await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
 
-      const needleScreenX = svgRect.left + 2093.8 * svgScale;
-      const needleScreenY = svgRect.top  + 82     * svgScale;
+      ctx = gsap.context(() => {
+        const svgEl   = wordmarkRef.current!;
+        const svgRect = svgEl.getBoundingClientRect();
+        console.log('svgRect.width:', svgRect.width, 'svgScale:', svgRect.width / 2520.80, 'startScale:', 280 / (72.3 * 2 * (svgRect.width / 2520.80)));
+        const svgScale = svgRect.width / 2520.80;
 
-      const vpCX = window.innerWidth  / 2;
-      const vpCY = window.innerHeight / 2;
+        const oScreenX = svgRect.left + 310.6 * svgScale;
+        const oScreenY = svgRect.top  + 80   * svgScale;
 
-      const startScale = 280 / (72.3 * 2 * svgScale);
+        const needleScreenX = svgRect.left + 2093.8 * svgScale;
+        const needleScreenY = svgRect.top  + 82     * svgScale;
 
-      gsap.set(oRef.current, {
-        x: vpCX - oScreenX,
-        y: vpCY - oScreenY,
-        scale: startScale,
-        opacity: 1,
-        transformOrigin: '310.6px 80px',
-      });
+        const vpCX = window.innerWidth  / 2;
+        const vpCY = window.innerHeight / 2;
 
-      gsap.set(needleRef.current, {
-        x: vpCX - needleScreenX,
-        y: vpCY - needleScreenY,
-        scale: startScale,
-        opacity: 1,
-        transformOrigin: '2093.8px 82px',
-      });
+        const startScale = 280 / (72.3 * 2 * svgScale);
 
-      gsap.set('.letter-path', { opacity: 0 });
-
-      const tl = gsap.timeline({ delay: 0.3 });
-
-      tl.to(needleRef.current, {
-        rotation: 720,
-        duration: 1.5,
-        ease: 'none',
-        transformOrigin: '2093.8px 82px',
-      })
-      .to([oRef.current, needleRef.current], {
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: 'power2.inOut',
-        transformOrigin: (i: number) => i === 0 ? '310.6px 80px' : '2093.8px 82px',
-      })
-      .to('.letter-path', {
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.03,
-      }, '<0.2');
-
-      tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, '>0.4');
-      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '>0.8');
-      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<0.2');
-      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '<0.2');
-
-      if (content) {
-        gsap.to(content, {
-          opacity: 0, scale: 0.95, ease: "none",
-          scrollTrigger: {
-            trigger: section, start: "top top", end: "45% top", scrub: 1,
-          },
+        gsap.set(oRef.current, {
+          x: vpCX - oScreenX,
+          y: vpCY - oScreenY,
+          scale: startScale,
+          opacity: 1,
+          transformOrigin: '310.6px 80px',
         });
-      }
-      if (video) {
-        gsap.to(video, {
-          scale: 1.08, ease: "none",
-          scrollTrigger: {
-            trigger: section, start: "top top", end: "bottom top", scrub: 1.5,
-          },
-        });
-      }
-    });
 
-    return () => ctx.revert();
+        gsap.set(needleRef.current, {
+          x: vpCX - needleScreenX,
+          y: vpCY - needleScreenY,
+          scale: startScale,
+          opacity: 1,
+          transformOrigin: '2093.8px 82px',
+        });
+
+        gsap.set('.letter-path', { opacity: 0 });
+
+        const tl = gsap.timeline({ delay: 0.3 });
+
+        tl.to(needleRef.current, {
+          rotation: 720,
+          duration: 1.5,
+          ease: 'none',
+          transformOrigin: '2093.8px 82px',
+        })
+        .to([oRef.current, needleRef.current], {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power2.inOut',
+          transformOrigin: (i: number) => i === 0 ? '310.6px 80px' : '2093.8px 82px',
+        })
+        .to('.letter-path', {
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.03,
+        }, '<0.2');
+
+        tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, '>0.4');
+        if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '>0.8');
+        if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<0.2');
+        if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '<0.2');
+
+        if (content) {
+          gsap.to(content, {
+            opacity: 0, scale: 0.95, ease: "none",
+            scrollTrigger: {
+              trigger: section, start: "top top", end: "45% top", scrub: 1,
+            },
+          });
+        }
+        if (video) {
+          gsap.to(video, {
+            scale: 1.08, ease: "none",
+            scrollTrigger: {
+              trigger: section, start: "top top", end: "bottom top", scrub: 1.5,
+            },
+          });
+        }
+      });
+    })();
+
+    return () => ctx?.revert();
   }, []);
 
   return (
