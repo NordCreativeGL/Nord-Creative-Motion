@@ -37,31 +37,30 @@ export default function HeroSection() {
 
       const svgEl = oGroupRef.current!.ownerSVGElement!;
       const svgRect = svgEl.getBoundingClientRect();
-      const scaleX = svgRect.width / 2520.80;
-      const scaleY = svgRect.height / 200;
-
-      const oScreenX = svgRect.left + 310.6 * scaleX;
-      const oScreenY = svgRect.top + 80 * scaleY;
-      const needleScreenX = svgRect.left + 2093.8 * scaleX;
-      const needleScreenY = svgRect.top + 82 * scaleY;
-
+      const oRenderedX = svgRect.left + (310.6 / 2520.80) * svgRect.width;
+      const oRenderedY = svgRect.top + (80 / 200) * svgRect.height;
       const vpCX = window.innerWidth / 2;
       const vpCY = window.innerHeight / 2;
+      const pxToSvgX = 2520.80 / svgRect.width;
+      const pxToSvgY = 200 / svgRect.height;
+      const oTx = (vpCX - oRenderedX) * pxToSvgX;
+      const oTy = (vpCY - oRenderedY) * pxToSvgY;
 
-      const svgUnitsPerPx = 2520.80 / svgRect.width;
-
-      const oTx = (vpCX - oScreenX) * svgUnitsPerPx;
-      const oTy = (vpCY - oScreenY) * svgUnitsPerPx;
-      const needleTx = (vpCX - needleScreenX) * svgUnitsPerPx;
-      const needleTy = (vpCY - needleScreenY) * svgUnitsPerPx;
+      console.log('oRenderedX:', oRenderedX, 'oRenderedY:', oRenderedY, 'vpCX:', vpCX, 'vpCY:', vpCY, 'oTx:', oTx, 'oTy:', oTy);
 
       gsap.set(oGroupRef.current, {
         transformOrigin: '310.6px 80px',
         x: oTx,
         y: oTy,
-        scale: S,
+        scale: 8,
         opacity: 1,
       });
+
+      const needleScreenX = svgRect.left + (2093.8 / 2520.80) * svgRect.width;
+      const needleScreenY = svgRect.top + (82 / 200) * svgRect.height;
+      const svgUnitsPerPx = 2520.80 / svgRect.width;
+      const needleTx = (vpCX - needleScreenX) * svgUnitsPerPx;
+      const needleTy = (vpCY - needleScreenY) * svgUnitsPerPx;
 
       gsap.set(needleGroupRef.current, {
         transformOrigin: '2093.8px 82px',
