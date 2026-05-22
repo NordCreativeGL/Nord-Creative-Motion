@@ -49,10 +49,10 @@ export default function HeroSection() {
         const ringScale = (wmRect.width * (71 / 2520.80)) / (compassRect.width / 2);
 
         const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80);
-        const oTargetY = wmRect.top + wmRect.height * 0.5;
+        const oTargetY = wmRect.top + wmRect.height * 0.35;
 
         const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
-        const needleTargetY = wmRect.top + wmRect.height * 0.5;
+        const needleTargetY = wmRect.top + wmRect.height * 0.35;
 
         // Clone 1: ring only — moves to O position
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
