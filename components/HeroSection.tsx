@@ -133,7 +133,7 @@ export default function HeroSection() {
           delay: 0.7,
           ease: 'power2.out',
         });
-        gsap.to(wordmarkFullRef.current, { opacity: 1, duration: 0.5, delay: 1.3, ease: 'power1.in' });
+        gsap.to(wordmarkFullRef.current, { opacity: 1, duration: 0.8, delay: 0.7, ease: 'power1.in' });
       }, 1.9);
 
       // ── Phase 3: Clean up compass container, fade in rest of page ──────
