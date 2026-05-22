@@ -5,50 +5,98 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
-  const sectionRef  = useRef<HTMLElement>(null);
-  const compassRef  = useRef<SVGSVGElement>(null);
-  const wordmarkRef = useRef<HTMLImageElement>(null);
-  const videoRef    = useRef<HTMLVideoElement>(null);
-  const contentRef  = useRef<HTMLDivElement>(null);
-  const taglineRef  = useRef<HTMLParagraphElement>(null);
-  const scrollRef   = useRef<HTMLDivElement>(null);
+  const sectionRef         = useRef<HTMLElement>(null);
+  const compassRef         = useRef<SVGSVGElement>(null);
+  const wordmarkLettersRef = useRef<HTMLImageElement>(null);
+  const videoRef           = useRef<HTMLVideoElement>(null);
+  const contentRef         = useRef<HTMLDivElement>(null);
+  const taglineRef         = useRef<HTMLParagraphElement>(null);
+  const scrollRef          = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const navbar  = document.getElementById("site-nav");
     const compass = compassRef.current;
-    const wm      = wordmarkRef.current;
     const video   = videoRef.current;
     const content = contentRef.current;
     const tagline = taglineRef.current;
     const scroll  = scrollRef.current;
     const section = sectionRef.current;
 
-    if (!compass || !wm) return;
+    if (!compass) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      // ── Phase 1: Compass (t=0 → 2.0) ──────────────────────────────────
+      // ── Phase 1: Compass (t=0 → 1.9) ──────────────────────────────────
       // CSS #compass-needle in globals.css spins: 0.3s delay + 1.5s = done at t=1.8
       tl.to(compass, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
 
-      // ── Phase 2: Wordmark reveal (t=2.0) ───────────────────────────────
-      // Compass fades out, SVG wordmark blurs in simultaneously
-      tl.to(compass, { opacity: 0, duration: 0.4, ease: "power2.out" }, 2.0);
-      tl.to(wm, {
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.2,
-        ease: "power2.out",
-      }, 2.0);
+      // ── Phase 2: Compass splits — ring → O position, needle → I position ─
+      tl.add(() => {
+        const wmEl = wordmarkLettersRef.current?.parentElement;
+        if (!wmEl) return;
+        const wmRect      = wmEl.getBoundingClientRect();
+        const compassEl   = compassRef.current;
+        if (!compassEl) return;
+        const compassRect = compassEl.getBoundingClientRect();
 
-      // ── Phase 3: Video + tagline + navbar + scroll indicator ────────────
-      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 3.5);
-      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 4.5);
-      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: "power2.out" }, 5.5);
-      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 5.5);
+        const oTargetX      = wmRect.left + wmRect.width * 0.1233;
+        const oTargetY      = wmRect.top  + wmRect.height * 0.40;
+        const needleTargetX = wmRect.left + wmRect.width * 0.8306;
+        const needleTargetY = wmRect.top  + wmRect.height * 0.41;
+
+        const compassCX = compassRect.left + compassRect.width  / 2;
+        const compassCY = compassRect.top  + compassRect.height / 2;
+
+        // Scale compass ring to match O radius in rendered wordmark
+        const oRadiusPx       = wmRect.width * (71 / 2520.80);
+        const compassRadiusPx = compassRect.width / 2;
+        const ringScale       = oRadiusPx / compassRadiusPx;
+
+        gsap.to("#compass-ring", {
+          x: oTargetX - compassCX,
+          y: oTargetY - compassCY,
+          scale: ringScale,
+          duration: 1.0,
+          ease: "power2.inOut",
+          transformOrigin: "50% 50%",
+        });
+
+        gsap.to("#compass-needle", {
+          x: needleTargetX - compassCX,
+          y: needleTargetY - compassCY,
+          scale: ringScale * 0.85,
+          duration: 1.0,
+          ease: "power2.inOut",
+          transformOrigin: "50% 50%",
+        });
+
+        // Fade out ring and needle after they reach position
+        gsap.to(["#compass-ring", "#compass-needle"], {
+          opacity: 0,
+          duration: 0.4,
+          delay: 0.8,
+          ease: "power1.in",
+        });
+
+        // Wordmark letters blur in once compass elements are in place
+        gsap.to(wordmarkLettersRef.current, {
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 1.2,
+          delay: 0.6,
+          ease: "power2.out",
+        });
+      }, 1.9);
+
+      // ── Phase 3: Clean up compass container, fade in rest of page ──────
+      tl.to(compass,  { opacity: 0, duration: 0.3 }, 3.2);
+      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 3.0);
+      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 4.2);
+      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: "power2.out" }, 4.4);
+      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 4.6);
 
       // ── Scroll parallax ────────────────────────────────────────────────
       if (content) {
@@ -116,7 +164,7 @@ export default function HeroSection() {
             }}
           >
             {/* Ring: two 170° arcs, ~10° gap at north and south */}
-            <g>
+            <g id="compass-ring">
               <path
                 d="M 53.9 5.2 A 45 45 0 0 1 53.9 94.8 M 46.1 94.8 A 45 45 0 0 1 46.1 5.2"
                 stroke="white"
@@ -131,19 +179,16 @@ export default function HeroSection() {
             </g>
           </svg>
 
-          {/* ── SVG wordmark — Phase 2+ ────────────────────────────────── */}
-          <img
-            ref={wordmarkRef}
-            src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
-            alt="Nord Creative"
-            draggable={false}
-            style={{
-              width: "clamp(320px, 72vw, 1100px)",
-              height: "auto",
-              opacity: 0,
-              filter: "blur(12px)",
-            }}
-          />
+          {/* ── Wordmark — Phase 2+ ────────────────────────────────────── */}
+          <div style={{ position: "relative", width: "clamp(320px, 72vw, 1100px)", opacity: 1 }}>
+            <img
+              ref={wordmarkLettersRef}
+              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+              alt="Nord Creative"
+              draggable={false}
+              style={{ width: "100%", height: "auto", opacity: 0, filter: "blur(12px)", display: "block" }}
+            />
+          </div>
         </div>
 
         {/* Tagline */}
