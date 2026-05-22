@@ -39,24 +39,21 @@ export default function HeroSection() {
         const compassEl = compassRef.current;
         if (!compassEl) return;
 
-        const vw = window.innerWidth / 100;
+        const wmImg = wordmarkFullRef.current;
+        if (!wmImg) return;
+        const wmRect = wmImg.getBoundingClientRect();
+
         const compassRect = compassEl.getBoundingClientRect();
         const compassCX = compassRect.left + compassRect.width / 2;
         const compassCY = compassRect.top + compassRect.height / 2;
         const compassRadius = compassRect.width / 2;
 
-        const wmWidthPx = Math.min(72 * vw, 1100);
-        const wmHeightPx = wmWidthPx * (200 / 2520.80);
-        const wmLeftPx = (window.innerWidth - wmWidthPx) / 2;
-        const wmTopPx = (window.innerHeight - wmHeightPx) / 2;
+        const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80);
+        const oTargetY = wmRect.top + wmRect.height * (80 / 200);
+        const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
+        const needleTargetY = wmRect.top + wmRect.height * (82 / 200);
 
-        const oTargetX = wmLeftPx + wmWidthPx * (310.6 / 2520.80);
-        const oTargetY = wmTopPx + wmHeightPx * (80 / 200);
-        const needleTargetX = wmLeftPx + wmWidthPx * (2093.8 / 2520.80);
-        const needleTargetY = wmTopPx + wmHeightPx * (82 / 200);
-
-        const oRadiusPx = wmWidthPx * (71 / 2520.80);
-        const ringScale = (wmWidthPx * (71 / 2520.80)) / compassRadius;
+        const ringScale = (wmRect.width * (71 / 2520.80)) / compassRadius;
 
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
         ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
