@@ -83,7 +83,6 @@ export default function HeroSection() {
           duration: 1.1,
           ease: 'power2.inOut',
           transformOrigin: '50% 50%',
-          onComplete: () => ringClone.remove(),
         });
 
         // Needle clone moves to I position and scales down
@@ -94,7 +93,6 @@ export default function HeroSection() {
           duration: 1.1,
           ease: 'power2.inOut',
           transformOrigin: '50% 50%',
-          onComplete: () => needleClone.remove(),
         });
 
         // Letters blur in as clones arrive — starts slightly before they land
@@ -104,14 +102,6 @@ export default function HeroSection() {
           duration: 0.9,
           delay: 0.8,
           ease: 'power2.out',
-        });
-
-        // Full needle wordmark crossfades in on top as clones finish
-        gsap.to(wordmarkFullRef.current, {
-          opacity: 1,
-          duration: 0.4,
-          delay: 1.0,
-          ease: 'power1.in',
         });
       }, 1.9);
 
