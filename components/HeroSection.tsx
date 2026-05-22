@@ -40,6 +40,10 @@ export default function HeroSection() {
         if (!wmEl || !compassRef.current) return;
 
         const wmRect = wmEl.getBoundingClientRect();
+        console.log('wmRect top:', wmRect.top, 'height:', wmRect.height, 'width:', wmRect.width);
+        console.log('O target X:', wmRect.left + wmRect.width * (310.6 / 2520.80));
+        console.log('wordmark img natural size:', wordmarkLettersRef.current?.naturalWidth, wordmarkLettersRef.current?.naturalHeight);
+        console.log('wordmark rendered:', wordmarkLettersRef.current?.getBoundingClientRect());
         const compassEl = compassRef.current;
         const compassRect = compassEl.getBoundingClientRect();
 
