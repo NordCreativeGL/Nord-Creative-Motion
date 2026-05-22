@@ -34,17 +34,92 @@ export default function HeroSection() {
       // CSS #compass-needle in globals.css spins: 0.3s delay + 1.5s = done at t=1.8
       tl.to(compass, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
 
-      // ── Phase 2: compass fades out, wordmark blurs in ──────────────────
-      tl.to(compassRef.current, { opacity: 0, duration: 0.6, ease: 'power2.in' }, 1.9);
-      tl.to(wordmarkLettersRef.current, { opacity: 1, filter: 'blur(0px)', duration: 1.0, ease: 'power2.out' }, 2.1);
-      tl.to(wordmarkFullRef.current, { opacity: 1, duration: 0.5, ease: 'power1.in' }, 3.0);
+      // ── Phase 2: compass splits and scales down to logo positions ─────
+      tl.add(() => {
+        const wmEl = wordmarkLettersRef.current?.parentElement;
+        if (!wmEl || !compassRef.current) return;
 
-      // ── Phase 3: Clean up compass container, fade in rest of page ──────
-      tl.to(compass,  { opacity: 0, duration: 0.3 }, 3.2);
-      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: "power2.out" }, 3.0);
-      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: "power2.out" }, 4.2);
-      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: "power2.out" }, 4.4);
-      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: "power2.out" }, 4.6);
+        const wmRect = wmEl.getBoundingClientRect();
+        const compassEl = compassRef.current;
+        const compassRect = compassEl.getBoundingClientRect();
+
+        const compassCX = compassRect.left + compassRect.width / 2;
+        const compassCY = compassRect.top + compassRect.height / 2;
+
+        const ringScale = (wmRect.width * (71 / 2520.80)) / (compassRect.width / 2);
+
+        const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80);
+        const oTargetY = wmRect.top + wmRect.height * 0.5;
+
+        const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
+        const needleTargetY = wmRect.top + wmRect.height * 0.5;
+
+        // Clone 1: ring only — moves to O position
+        const ringClone = compassEl.cloneNode(true) as HTMLElement;
+        ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
+        const needleInRing = ringClone.querySelector('#compass-needle') as SVGElement;
+        if (needleInRing) { needleInRing.style.opacity = '0'; needleInRing.style.animation = 'none'; }
+        const ringInRing = ringClone.querySelector('#compass-ring') as SVGElement;
+        if (ringInRing) ringInRing.style.animation = 'none';
+        document.body.appendChild(ringClone);
+
+        // Clone 2: needle only — moves to I position
+        const needleClone = compassEl.cloneNode(true) as HTMLElement;
+        needleClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
+        const ringInNeedle = needleClone.querySelector('#compass-ring') as SVGElement;
+        if (ringInNeedle) { ringInNeedle.style.opacity = '0'; ringInNeedle.style.animation = 'none'; }
+        const needleInNeedle = needleClone.querySelector('#compass-needle') as SVGElement;
+        if (needleInNeedle) needleInNeedle.style.animation = 'none';
+        document.body.appendChild(needleClone);
+
+        // Hide original compass immediately
+        gsap.set(compassEl, { opacity: 0 });
+
+        // Ring clone moves to O position and scales down
+        gsap.to(ringClone, {
+          x: oTargetX - compassCX,
+          y: oTargetY - compassCY,
+          scale: ringScale,
+          duration: 1.1,
+          ease: 'power2.inOut',
+          transformOrigin: '50% 50%',
+          onComplete: () => ringClone.remove(),
+        });
+
+        // Needle clone moves to I position and scales down
+        gsap.to(needleClone, {
+          x: needleTargetX - compassCX,
+          y: needleTargetY - compassCY,
+          scale: ringScale,
+          duration: 1.1,
+          ease: 'power2.inOut',
+          transformOrigin: '50% 50%',
+          onComplete: () => needleClone.remove(),
+        });
+
+        // Letters blur in as clones arrive — starts slightly before they land
+        gsap.to(wordmarkLettersRef.current, {
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 0.9,
+          delay: 0.8,
+          ease: 'power2.out',
+        });
+
+        // Full needle wordmark crossfades in on top as clones finish
+        gsap.to(wordmarkFullRef.current, {
+          opacity: 1,
+          duration: 0.4,
+          delay: 1.0,
+          ease: 'power1.in',
+        });
+      }, 1.9);
+
+      tl.to(compassRef.current, { opacity: 0, duration: 0.01 }, 1.9);
+      if (video)   tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, 3.2);
+      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, 4.4);
+      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, 4.6);
+      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, 4.8);
 
       // ── Scroll parallax ────────────────────────────────────────────────
       if (content) {
