@@ -11,6 +11,22 @@ export default function HeroSection() {
   const contentRef      = useRef<HTMLDivElement>(null);
   const taglineRef      = useRef<HTMLParagraphElement>(null);
   const scrollRef       = useRef<HTMLDivElement>(null);
+  const compassRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<SVGGElement>(null)
+  const needleRef = useRef<SVGPolygonElement>(null)
+
+  useEffect(() => {
+    if (!compassRef.current) return
+    setTimeout(() => {
+      gsap.to(compassRef.current, {
+        rotation: 720,
+        duration: 1.5,
+        ease: 'none',
+        transformOrigin: '50% 50%',
+        onComplete: () => console.log('trin-1-complete'),
+      })
+    }, 100)
+  }, [])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -60,6 +76,25 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-black"
     >
+      <div style={{ position: 'fixed', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
+        <div
+          ref={compassRef}
+          style={{ width: '100px', height: '100px', marginLeft: '-50px', marginTop: '-50px' }}
+        >
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+            <g ref={ringRef}>
+              <path d="M 44.956 2.015 A 48.25 48.25 0 0 0 44.956 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
+              <path d="M 55.044 2.015 A 48.25 48.25 0 0 1 55.044 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5" />
+            </g>
+            <polygon
+              ref={needleRef}
+              points="50,3.5 61.5,50 50,96.5 38.5,50"
+              fill="#ffffff"
+            />
+          </svg>
+        </div>
+      </div>
+
       {/* ── Video ──────────────────────────────────────────────────────── */}
       <video
         ref={videoRef}
