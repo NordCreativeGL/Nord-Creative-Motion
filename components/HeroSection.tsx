@@ -78,14 +78,6 @@ export default function HeroSection() {
       if (navbar)  gsap.to(navbar,  { opacity: 1, duration: 0.8, delay: 2.0, ease: 'power2.out' });
       if (scroll)  gsap.to(scroll,  { opacity: 1, duration: 0.6, delay: 2.2, ease: 'power2.out' });
 
-if (video) {
-        gsap.to(video, {
-          scale: 1.08, ease: "none",
-          scrollTrigger: {
-            trigger: section, start: "top top", end: "bottom top", scrub: 1.5,
-          },
-        });
-      }
     });
 
     return () => ctx.revert();
