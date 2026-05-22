@@ -197,7 +197,7 @@ export default function HeroSection() {
             />
             <img
               ref={wordmarkFullRef}
-              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+              src="/logos/final/svg/nord-creative-wordmark-letters-only-white.svg"
               alt=""
               draggable={false}
               aria-hidden="true"
