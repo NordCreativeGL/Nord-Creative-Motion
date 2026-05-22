@@ -40,10 +40,6 @@ export default function HeroSection() {
         if (!wmEl || !compassRef.current) return;
 
         const wmRect = wmEl.getBoundingClientRect();
-        console.log('wmRect top:', wmRect.top, 'height:', wmRect.height, 'width:', wmRect.width);
-        console.log('O target X:', wmRect.left + wmRect.width * (310.6 / 2520.80));
-        console.log('wordmark img natural size:', wordmarkLettersRef.current?.naturalWidth, wordmarkLettersRef.current?.naturalHeight);
-        console.log('wordmark rendered:', wordmarkLettersRef.current?.getBoundingClientRect());
         const compassEl = compassRef.current;
         const compassRect = compassEl.getBoundingClientRect();
 
@@ -53,10 +49,10 @@ export default function HeroSection() {
         const ringScale = (wmRect.width * (71 / 2520.80)) / (compassRect.width / 2);
 
         const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80);
-        const oTargetY = wmRect.top + wmRect.height * 0.35;
+        const oTargetY = wmRect.top + wmRect.height * 0.40;
 
         const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
-        const needleTargetY = wmRect.top + wmRect.height * 0.35;
+        const needleTargetY = wmRect.top + wmRect.height * 0.40;
 
         // Clone 1: ring only — moves to O position
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
