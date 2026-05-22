@@ -27,7 +27,7 @@ export default function HeroSection() {
 
     const tl = gsap.timeline({ delay: 0.1 })
 
-    tl.to([ringDiv, needleDiv], {
+    tl.to(needleDiv, {
       rotation: 720,
       duration: 1.5,
       ease: 'none',
@@ -78,15 +78,7 @@ export default function HeroSection() {
       if (navbar)  gsap.to(navbar,  { opacity: 1, duration: 0.8, delay: 2.0, ease: 'power2.out' });
       if (scroll)  gsap.to(scroll,  { opacity: 1, duration: 0.6, delay: 2.2, ease: 'power2.out' });
 
-      if (content) {
-        gsap.to(content, {
-          scale: 0.95, ease: "none",
-          scrollTrigger: {
-            trigger: section, start: "top top", end: "45% top", scrub: 1,
-          },
-        });
-      }
-      if (video) {
+if (video) {
         gsap.to(video, {
           scale: 1.08, ease: "none",
           scrollTrigger: {
