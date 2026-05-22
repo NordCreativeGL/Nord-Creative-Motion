@@ -140,7 +140,9 @@ export default function HeroSection() {
         style={{ opacity: 0, willChange: "transform, opacity" }}
       />
 
-{/* ── Content (fades/scales on scroll) ───────────────────────────── */}
+      <div className="absolute inset-0 bg-black/30" />
+
+      {/* ── Content (fades/scales on scroll) ───────────────────────────── */}
       <div
         ref={contentRef}
         className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5"
