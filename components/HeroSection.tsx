@@ -94,12 +94,11 @@ export default function HeroSection() {
           transformOrigin: '50% 50%',
         });
 
-        gsap.to(wordmarkLettersRef.current, {
+        gsap.to(wordmarkFullRef.current, {
           opacity: 1,
-          filter: 'blur(0px)',
-          duration: 0.9,
-          delay: 0.8,
-          ease: 'power2.out',
+          duration: 1.1,
+          delay: 0,
+          ease: 'power2.inOut',
         });
       }, 1.9);
 
