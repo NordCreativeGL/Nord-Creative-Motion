@@ -53,7 +53,7 @@ export default function HeroSection() {
         const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
         const needleTargetY = wmRect.top + wmRect.height * (82 / 200);
 
-        const ringScale = (wmRect.width * (71 / 2520.80)) / compassRadius;
+        const ringScale = (wmRect.width * (71 / 2520.80)) / compassRadius * 2.2;
 
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
         ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
