@@ -14,6 +14,7 @@ export default function HeroSection() {
   const ringDivRef = useRef<HTMLDivElement>(null)
   const needleDivRef = useRef<HTMLDivElement>(null)
   const wordmarkLettersRef = useRef<HTMLImageElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ringDiv = ringDivRef.current
@@ -33,6 +34,11 @@ export default function HeroSection() {
       ease: 'none',
       transformOrigin: '50% 50%',
     })
+    tl.to(overlayRef.current, {
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power1.inOut',
+    }, '+=0.3')
     tl.to(ringDiv, {
       x: 440.54 - centerX,
       y: 466.27 - centerY,
@@ -40,7 +46,7 @@ export default function HeroSection() {
       duration: 1.0,
       ease: 'power2.inOut',
       transformOrigin: '50% 50%',
-    }, '+=0.3')
+    }, '<')
     tl.to(needleDiv, {
       x: 1218.67 - centerX,
       y: 467.14 - centerY,
@@ -104,6 +110,17 @@ export default function HeroSection() {
           </svg>
         </div>
       </div>
+
+      <div
+        ref={overlayRef}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: 'black',
+          zIndex: 50,
+          pointerEvents: 'none',
+        }}
+      />
 
       {/* ── Video ──────────────────────────────────────────────────────── */}
       <video
