@@ -48,7 +48,7 @@ export default function HeroSection() {
         const wmWidthPx = Math.min(72 * vw, 1100);
         const wmHeightPx = wmWidthPx * (200 / 2520.80);
         const wmLeftPx = (window.innerWidth - wmWidthPx) / 2;
-        const wmTopPx = (window.innerHeight - wmHeightPx) / 2;
+        const wmTopPx = (window.innerHeight - wmHeightPx) / 2 - wmHeightPx * 0.15;
 
         const oTargetX = wmLeftPx + wmWidthPx * (310.6 / 2520.80);
         const oTargetY = wmTopPx + wmHeightPx * (80 / 200);
@@ -56,7 +56,7 @@ export default function HeroSection() {
         const needleTargetY = wmTopPx + wmHeightPx * (82 / 200);
 
         const oRadiusPx = wmWidthPx * (71 / 2520.80);
-        const ringScale = oRadiusPx / compassRadius;
+        const ringScale = (wmWidthPx * (71 / 2520.80)) / compassRadius * 3.5;
 
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
         ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
