@@ -134,7 +134,7 @@ export default function HeroSection() {
           {/* ── Inline SVG wordmark — Phase 2+ ─────────────────────────── */}
           <svg
             ref={wordmarkRef}
-            viewBox="0 0 1321 160"
+            viewBox="0 0 1200 140"
             style={{ width: "clamp(320px, 72vw, 1100px)", opacity: 0, filter: "blur(12px)" }}
             xmlns="http://www.w3.org/2000/svg"
             aria-label="NordCreative"
@@ -144,31 +144,31 @@ export default function HeroSection() {
             </defs>
 
             {/* NORD */}
-            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
-              <tspan x="0" y="125">N</tspan>
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="100" fill="white" letterSpacing="14">
+              <tspan x="0" y="112">N</tspan>
             </text>
-            {/* O as split circle — center x=248, y=80 */}
+            {/* O as split circle — center cx=220, cy=68, r=46 */}
             <g id="wordmark-o">
-              <path d="M 248,22 A 58,58 0 1 1 247.9,22" stroke="white" strokeWidth="5" fill="none" strokeLinecap="round" />
+              <circle cx="220" cy="68" r="46" stroke="white" strokeWidth="4" fill="none" />
               {/* Gap top */}
-              <rect x="234" y="14" width="28" height="14" fill="black" />
+              <rect x="208" y="12" width="24" height="12" fill="black" />
               {/* Gap bottom */}
-              <rect x="234" y="132" width="28" height="14" fill="black" />
+              <rect x="208" y="112" width="24" height="12" fill="black" />
             </g>
-            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
-              <tspan x="310" y="125">RD</tspan>
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="100" fill="white" letterSpacing="14">
+              <tspan x="276" y="112">RD</tspan>
             </text>
 
             {/* CREATIVE */}
-            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
-              <tspan x="570" y="125">CREAT</tspan>
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="100" fill="white" letterSpacing="14">
+              <tspan x="510" y="112">CREAT</tspan>
             </text>
-            {/* I as compass needle diamond — center x=1057, y=80 */}
+            {/* I as compass needle diamond — center x=955, y=68 */}
             <g id="wordmark-needle">
-              <polygon points="1057,28 1066,80 1057,132 1048,80" fill="white" />
+              <polygon points="955,22 963,68 955,114 947,68" fill="white" />
             </g>
-            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="120" fill="white" letterSpacing="18">
-              <tspan x="1075" y="125">VE</tspan>
+            <text fontFamily="Montserrat, sans-serif" fontWeight="200" fontSize="100" fill="white" letterSpacing="14">
+              <tspan x="972" y="112">VE</tspan>
             </text>
           </svg>
         </div>
