@@ -36,25 +36,28 @@ export default function HeroSection() {
 
       // ── Phase 2: compass splits and scales down to logo positions ─────
       tl.add(() => {
-        const wmEl = wordmarkLettersRef.current?.parentElement;
-        if (!wmEl || !compassRef.current) return;
-
-        const wmRect = wmEl.getBoundingClientRect();
         const compassEl = compassRef.current;
-        const compassRect = compassEl.getBoundingClientRect();
+        if (!compassEl) return;
 
+        const vw = window.innerWidth / 100;
+        const compassRect = compassEl.getBoundingClientRect();
         const compassCX = compassRect.left + compassRect.width / 2;
         const compassCY = compassRect.top + compassRect.height / 2;
+        const compassRadius = compassRect.width / 2;
 
-        const ringScale = (wmRect.width * (71 / 2520.80)) / (compassRect.width / 2);
+        const wmWidthPx = Math.min(72 * vw, 1100);
+        const wmHeightPx = wmWidthPx * (200 / 2520.80);
+        const wmLeftPx = (window.innerWidth - wmWidthPx) / 2;
+        const wmTopPx = (window.innerHeight - wmHeightPx) / 2;
 
-        const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80);
-        const oTargetY = wmRect.top + wmRect.height * 0.40;
+        const oTargetX = wmLeftPx + wmWidthPx * (310.6 / 2520.80);
+        const oTargetY = wmTopPx + wmHeightPx * (80 / 200);
+        const needleTargetX = wmLeftPx + wmWidthPx * (2093.8 / 2520.80);
+        const needleTargetY = wmTopPx + wmHeightPx * (82 / 200);
 
-        const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
-        const needleTargetY = wmRect.top + wmRect.height * 0.40;
+        const oRadiusPx = wmWidthPx * (71 / 2520.80);
+        const ringScale = oRadiusPx / compassRadius;
 
-        // Clone 1: ring only — moves to O position
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
         ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
         const needleInRing = ringClone.querySelector('#compass-needle') as SVGElement;
@@ -63,7 +66,6 @@ export default function HeroSection() {
         if (ringInRing) ringInRing.style.animation = 'none';
         document.body.appendChild(ringClone);
 
-        // Clone 2: needle only — moves to I position
         const needleClone = compassEl.cloneNode(true) as HTMLElement;
         needleClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
         const ringInNeedle = needleClone.querySelector('#compass-ring') as SVGElement;
@@ -72,10 +74,8 @@ export default function HeroSection() {
         if (needleInNeedle) needleInNeedle.style.animation = 'none';
         document.body.appendChild(needleClone);
 
-        // Hide original compass immediately
         gsap.set(compassEl, { opacity: 0 });
 
-        // Ring clone moves to O position and scales down
         gsap.to(ringClone, {
           x: oTargetX - compassCX,
           y: oTargetY - compassCY,
@@ -85,7 +85,6 @@ export default function HeroSection() {
           transformOrigin: '50% 50%',
         });
 
-        // Needle clone moves to I position and scales down
         gsap.to(needleClone, {
           x: needleTargetX - compassCX,
           y: needleTargetY - compassCY,
@@ -95,7 +94,6 @@ export default function HeroSection() {
           transformOrigin: '50% 50%',
         });
 
-        // Letters blur in as clones arrive — starts slightly before they land
         gsap.to(wordmarkLettersRef.current, {
           opacity: 1,
           filter: 'blur(0px)',
