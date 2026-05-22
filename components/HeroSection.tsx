@@ -228,7 +228,7 @@ export default function HeroSection() {
           <div style={{ position: "relative", width: "clamp(320px, 72vw, 1100px)", opacity: 1 }}>
             <img
               ref={wordmarkLettersRef}
-              src="/logos/final/svg/nord-creative-wordmark-plain-white.svg"
+              src="/logos/final/svg/nord-creative-wordmark-letters-only-white.svg"
               alt="Nord Creative"
               draggable={false}
               style={{ width: "100%", height: "auto", opacity: 0, filter: "blur(12px)", display: "block" }}
