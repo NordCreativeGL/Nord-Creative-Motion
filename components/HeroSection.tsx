@@ -44,57 +44,52 @@ export default function HeroSection() {
         const wmRect = wmImg.getBoundingClientRect();
 
         const compassRect = compassEl.getBoundingClientRect();
-        const compassCX = compassRect.left + compassRect.width / 2;
-        const compassCY = compassRect.top + compassRect.height / 2;
-        const compassRadius = compassRect.width / 2;
+        const compassRadius = 140;
 
-        const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80);
-        const oTargetY = wmRect.top + wmRect.height * (80 / 200);
-        const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80);
-        const needleTargetY = wmRect.top + wmRect.height * (82 / 200);
+        const svgScale = wmRect.width / 2520.80;
 
-        const ringScale = 26 / compassRadius;
+        const oScreenX = wmRect.left + (310.6 * svgScale);
+        const oScreenY = wmRect.top + (80 * svgScale);
+        const oRadiusScreen = 72.3 * svgScale;
+
+        const needleScreenX = wmRect.left + (2093.8 * svgScale);
+        const needleScreenY = wmRect.top + (82 * svgScale);
+
+        const ringScale = oRadiusScreen / compassRadius;
+
+        const needleHeightScreen = 148 * svgScale;
+        const needleScale = needleHeightScreen / compassRect.height;
 
         const ringClone = compassEl.cloneNode(true) as HTMLElement;
-        ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
-        const needleInRing = ringClone.querySelector('#compass-needle') as SVGElement;
-        if (needleInRing) { needleInRing.style.opacity = '0'; needleInRing.style.animation = 'none'; }
-        const ringInRing = ringClone.querySelector('#compass-ring') as SVGElement;
-        if (ringInRing) ringInRing.style.animation = 'none';
+        ringClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform-origin:50% 50%;pointer-events:none;z-index:50;`;
+        const needleInRing = ringClone.querySelector('polygon') as SVGElement;
+        if (needleInRing) needleInRing.style.display = 'none';
         document.body.appendChild(ringClone);
 
         const needleClone = compassEl.cloneNode(true) as HTMLElement;
-        needleClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform:none;pointer-events:none;z-index:50;`;
-        const ringInNeedle = needleClone.querySelector('#compass-ring') as SVGElement;
-        if (ringInNeedle) { ringInNeedle.style.opacity = '0'; ringInNeedle.style.animation = 'none'; }
-        const needleInNeedle = needleClone.querySelector('#compass-needle') as SVGElement;
-        if (needleInNeedle) needleInNeedle.style.animation = 'none';
+        needleClone.style.cssText = `position:fixed;left:${compassRect.left}px;top:${compassRect.top}px;width:${compassRect.width}px;height:${compassRect.height}px;margin:0;padding:0;transform-origin:50% 50%;pointer-events:none;z-index:50;`;
+        needleClone.style.animation = 'none';
+        needleClone.querySelectorAll('path').forEach((p) => (p as SVGElement).style.display = 'none');
+        needleClone.querySelectorAll('*').forEach((el) => (el as HTMLElement).style.animation = 'none');
         document.body.appendChild(needleClone);
 
         gsap.set(compassEl, { opacity: 0 });
 
         gsap.to(ringClone, {
-          x: oTargetX - compassCX,
-          y: oTargetY - compassCY,
+          x: oScreenX - (compassRect.left + compassRadius),
+          y: oScreenY - (compassRect.top + compassRadius),
           scale: ringScale,
-          duration: 1.1,
+          duration: 1.2,
           ease: 'power2.inOut',
-          transformOrigin: '50% 50%',
         });
 
         gsap.to(needleClone, {
-          x: needleTargetX - compassCX,
-          y: needleTargetY - compassCY,
-          scale: ringScale,
-          duration: 1.1,
+          x: needleScreenX - (compassRect.left + compassRadius),
+          y: needleScreenY - (compassRect.top + compassRadius),
+          scale: needleScale,
+          duration: 1.2,
           ease: 'power2.inOut',
-          transformOrigin: '50% 50%',
         });
-
-        setTimeout(() => {
-          if (ringClone.parentNode) ringClone.remove();
-          if (needleClone.parentNode) needleClone.remove();
-        }, 2000);
 
         gsap.to(wordmarkFullRef.current, {
           opacity: 1,
