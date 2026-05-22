@@ -30,35 +30,30 @@ export default function HeroSection() {
 
         const svgEl = oGroupRef.current.ownerSVGElement!;
         const svgRect = svgEl.getBoundingClientRect();
-
         const scaleX = svgRect.width / 2520.80;
         const scaleY = svgRect.height / 200;
-
-        const oScreenX = svgRect.left + 310.6 * scaleX;
-        const oScreenY = svgRect.top + 80 * scaleY;
-        const needleScreenX = svgRect.left + 2093.8 * scaleX;
-        const needleScreenY = svgRect.top + 82 * scaleY;
+        const oLandX = svgRect.left + 310.6 * scaleX;
+        const oLandY = svgRect.top + 80 * scaleY;
+        const needleLandX = svgRect.left + 2093.8 * scaleX;
+        const needleLandY = svgRect.top + 82 * scaleY;
 
         const vpCX = window.innerWidth / 2;
         const vpCY = window.innerHeight / 2;
 
         const pxPerSvgUnit = svgRect.width / 2520.80;
+        const oTx = (vpCX - oLandX) / pxPerSvgUnit;
+        const oTy = (vpCY - oLandY) / pxPerSvgUnit;
+        const needleTx = (vpCX - needleLandX) / pxPerSvgUnit;
+        const needleTy = (vpCY - needleLandY) / pxPerSvgUnit;
 
-        const oTx = (vpCX - oScreenX) / pxPerSvgUnit;
-        const oTy = (vpCY - oScreenY) / pxPerSvgUnit;
-        const needleTx = (vpCX - needleScreenX) / pxPerSvgUnit;
-        const needleTy = (vpCY - needleScreenY) / pxPerSvgUnit;
-
-        console.log('svgRect:', svgRect.left, svgRect.top, svgRect.width);
-        console.log('oScreen:', oScreenX, oScreenY);
-        console.log('vp center:', vpCX, vpCY);
-        console.log('oTx oTy:', oTx, oTy);
+        const oRadiusPx = 72.3 * pxPerSvgUnit;
+        const startScale = 140 / oRadiusPx;
 
         gsap.set(oGroupRef.current, {
           transformOrigin: '310.6px 80px',
           x: oTx,
           y: oTy,
-          scale: 8,
+          scale: startScale,
           opacity: 1,
         });
 
@@ -66,7 +61,7 @@ export default function HeroSection() {
           transformOrigin: '2093.8px 82px',
           x: needleTx,
           y: needleTy,
-          scale: 8,
+          scale: startScale,
           opacity: 1,
         });
 
