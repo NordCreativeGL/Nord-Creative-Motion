@@ -80,7 +80,7 @@ export default function HeroSection() {
 
       if (content) {
         gsap.to(content, {
-          opacity: 0, scale: 0.95, ease: "none",
+          scale: 0.95, ease: "none",
           scrollTrigger: {
             trigger: section, start: "top top", end: "45% top", scrub: 1,
           },
