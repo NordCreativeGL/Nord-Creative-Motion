@@ -189,7 +189,7 @@ export default function HeroSection() {
       if (t < 5.0) {
         animFrame = requestAnimationFrame(animate);
       } else {
-        canvas.style.display = "none";
+        if (canvasRef.current) canvasRef.current.style.display = "none";
       }
     }
 
