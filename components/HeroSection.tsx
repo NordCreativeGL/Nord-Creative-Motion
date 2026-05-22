@@ -43,7 +43,7 @@ export default function HeroSection() {
       x: 440.54 - centerX,
       y: 466.27 - centerY,
       scale: ringScale,
-      duration: 1.0,
+      duration: 1.5,
       ease: 'power2.inOut',
       transformOrigin: '50% 50%',
     }, '<')
@@ -51,7 +51,7 @@ export default function HeroSection() {
       x: 1218.67 - centerX,
       y: 467.14 - centerY,
       scale: needleScale,
-      duration: 1.0,
+      duration: 1.5,
       ease: 'power2.inOut',
       transformOrigin: '50% 50%',
     }, '<')
