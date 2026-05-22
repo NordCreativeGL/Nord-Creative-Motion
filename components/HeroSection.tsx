@@ -159,7 +159,7 @@ export default function HeroSection() {
         {/* Tagline */}
         <p
           ref={taglineRef}
-          className="text-sm tracking-[0.3em] uppercase text-white/60"
+          className="text-base tracking-[0.3em] uppercase text-white/60"
           style={{ opacity: 0 }}
         >
           Video Production · Photography · Arctic Storytelling
