@@ -45,7 +45,7 @@ export default function HeroSection() {
 
     tl.to(ringDiv, {
       x: 440.54 - centerX,
-      y: 458.27 - centerY,
+      y: 462.27 - centerY,
       scale: ringScale,
       duration: 1.5,
       ease: 'power2.inOut',
@@ -54,7 +54,7 @@ export default function HeroSection() {
 
     tl.to(needleDiv, {
       x: 1218.67 - centerX,
-      y: 459.14 - centerY,
+      y: 463.14 - centerY,
       scale: needleScale,
       duration: 1.5,
       ease: 'power2.inOut',
