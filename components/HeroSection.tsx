@@ -5,14 +5,14 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
-  const sectionRef      = useRef<HTMLElement>(null);
-  const wordmarkRef     = useRef<SVGSVGElement>(null);
-  const oGroupRef       = useRef<SVGGElement>(null);
-  const needleGroupRef  = useRef<SVGGElement>(null);
-  const videoRef        = useRef<HTMLVideoElement>(null);
-  const contentRef      = useRef<HTMLDivElement>(null);
-  const taglineRef      = useRef<HTMLParagraphElement>(null);
-  const scrollRef       = useRef<HTMLDivElement>(null);
+  const sectionRef        = useRef<HTMLElement>(null);
+  const wordmarkRef       = useRef<SVGSVGElement>(null);
+  const compassRef        = useRef<HTMLDivElement>(null);
+  const compassNeedleRef  = useRef<SVGPolygonElement>(null);
+  const videoRef          = useRef<HTMLVideoElement>(null);
+  const contentRef        = useRef<HTMLDivElement>(null);
+  const taglineRef        = useRef<HTMLParagraphElement>(null);
+  const scrollRef         = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -25,68 +25,38 @@ export default function HeroSection() {
     const section = sectionRef.current;
 
     const ctx = gsap.context(() => {
-      gsap.set([oGroupRef.current, needleGroupRef.current], { opacity: 0 });
-      gsap.set('.wm-letter', { opacity: 0 });
+      gsap.set('.wm-letter',   { opacity: 0 });
+      gsap.set('.wm-animated', { opacity: 0 });
+      gsap.set(compassRef.current, { opacity: 1 });
 
-      const runAnimation = () => {
-        if (!oGroupRef.current || !needleGroupRef.current) return;
+      const tl = gsap.timeline({ delay: 0.3 });
 
-        const svgEl = oGroupRef.current.ownerSVGElement!;
-        const rect = svgEl.getBoundingClientRect();
+      tl.to(compassNeedleRef.current, {
+        rotation: 720,
+        transformOrigin: '50px 50px',
+        duration: 1.5,
+        ease: 'none',
+      })
+      .to(compassRef.current, {
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.inOut',
+      })
+      .to('.wm-animated', {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.inOut',
+      }, '<')
+      .to('.wm-letter', {
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.03,
+      }, '<0.1');
 
-        const oScreenX  = rect.left + (310.6  / 2520.80) * rect.width;
-        const oScreenY  = rect.top  + (80     / 200)     * rect.height;
-
-        const svgUPX = 2520.80 / rect.width;
-        const svgUPY = 200     / rect.height;
-
-        const tx = (window.innerWidth  / 2 - oScreenX) * svgUPX;
-        const ty = (window.innerHeight / 2 - oScreenY) * svgUPY;
-
-        const S = (140 * svgUPX) / 72.3;
-
-        oGroupRef.current.setAttribute(
-          'transform',
-          `translate(${310.6 + tx} ${80 + ty}) scale(${S}) translate(${-310.6} ${-80})`
-        );
-        needleGroupRef.current.setAttribute(
-          'transform',
-          `translate(${2093.8 + tx} ${82 + ty}) scale(${S}) translate(${-2093.8} ${-82})`
-        );
-
-        gsap.set([oGroupRef.current, needleGroupRef.current], { opacity: 1 });
-
-        const tl = gsap.timeline();
-
-        tl.to(needleGroupRef.current, {
-          rotation: 720,
-          svgOrigin: '2093.8 82',
-          duration: 1.5,
-          ease: 'none',
-        })
-        .to(oGroupRef.current, {
-          attr: { transform: '' },
-          duration: 1.2,
-          ease: 'power2.inOut',
-        }, '+=0')
-        .to(needleGroupRef.current, {
-          attr: { transform: '' },
-          duration: 1.2,
-          ease: 'power2.inOut',
-        }, '<')
-        .to('.wm-letter', {
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.03,
-        }, '<0.2');
-
-        tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, '>0.4');
-        if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '>0.8');
-        if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<0.2');
-        if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '<0.2');
-      };
-
-      setTimeout(runAnimation, 100);
+      tl.to(video,   { opacity: 1, duration: 1.5, ease: 'power2.out' }, '>0.4');
+      if (tagline) tl.to(tagline, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '>0.8');
+      if (navbar)  tl.to(navbar,  { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<0.2');
+      if (scroll)  tl.to(scroll,  { opacity: 1, duration: 0.6, ease: 'power2.out' }, '<0.2');
 
       if (content) {
         gsap.to(content, {
@@ -129,6 +99,34 @@ export default function HeroSection() {
       {/* ── Dark overlay ───────────────────────────────────────────────── */}
       <div className="absolute inset-0 bg-black/50" />
 
+      {/* ── Fixed compass (spins, then fades out) ──────────────────────── */}
+      <div
+        ref={compassRef}
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          width: '240px',
+          height: '240px',
+          marginTop: '-120px',
+          marginLeft: '-120px',
+          pointerEvents: 'none',
+          zIndex: 50,
+          opacity: 1,
+        }}
+      >
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+          <path d="M 44.956 2.015 A 48.25 48.25 0 0 0 44.956 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5"/>
+          <path d="M 55.044 2.015 A 48.25 48.25 0 0 1 55.044 97.985" fill="none" stroke="#ffffff" strokeWidth="3.5"/>
+          <polygon
+            ref={compassNeedleRef}
+            points="50,3.5 61.5,50 50,96.5 38.5,50"
+            fill="#ffffff"
+            style={{ transformOrigin: '50px 50px' }}
+          />
+        </svg>
+      </div>
+
       {/* ── Content (fades/scales on scroll) ───────────────────────────── */}
       <div
         ref={contentRef}
@@ -155,23 +153,17 @@ export default function HeroSection() {
             <path className="wm-letter" d="M2258.800 150L2252.200 150L2189.400 10L2197 10L2255.800 141.200L2314.400 10L2321.600 10L2258.800 150Z" fill="#ffffff"/>
             <path className="wm-letter" d="M2419.600 82L2419.600 143.800L2507.400 143.800L2507.400 150L2412.800 150L2412.800 10L2504.600 10L2504.600 16.200L2419.600 16.200L2419.600 75.800L2495.600 75.800L2495.600 82L2419.600 82Z" fill="#ffffff"/>
 
-            <g ref={oGroupRef} style={{ transformOrigin: '310.6px 80px' }}>
-              <defs>
-                <mask id="o-split" maskUnits="userSpaceOnUse">
-                  <rect x="0" y="0" width="2520.80" height="200" fill="white"/>
-                  <rect x="301" y="0" width="20" height="200" fill="black"/>
-                </mask>
-              </defs>
-              <path
-                mask="url(#o-split)"
-                d="M310.600 150.800L310.600 150.800Q295.200 150.800 282 145.500Q268.800 140.200 259 130.600Q249.200 121 243.800 108.100Q238.400 95.200 238.400 80L238.400 80Q238.400 64.800 243.800 51.900Q249.200 39 259 29.400Q268.800 19.800 282 14.500Q295.200 9.200 310.600 9.200L310.600 9.200Q326.200 9.200 339.400 14.500Q352.600 19.800 362.300 29.400Q372 39 377.500 51.900Q383 64.800 383 80L383 80Q383 95.200 377.500 108.100Q372 121 362.300 130.600Q352.600 140.200 339.400 145.500Q326.200 150.800 310.600 150.800ZM310.600 144.600L310.600 144.600Q324.600 144.600 336.600 139.800Q348.600 135 357.500 126.200Q366.400 117.400 371.300 105.700Q376.200 94 376.200 80L376.200 80Q376.200 66 371.300 54.300Q366.400 42.600 357.500 33.800Q348.600 25 336.600 20.200Q324.600 15.400 310.600 15.400L310.600 15.400Q296.800 15.400 284.800 20.200Q272.800 25 263.900 33.800Q255 42.600 250.100 54.300Q245.200 66 245.200 80L245.200 80Q245.200 94 250.100 105.700Q255 117.400 263.900 126.200Q272.800 135 284.800 139.800Q296.800 144.600 310.600 144.600Z"
-                fill="#ffffff"
-              />
-            </g>
+            <path
+              className="wm-animated"
+              d="M310.600 150.800L310.600 150.800Q295.200 150.800 282 145.500Q268.800 140.200 259 130.600Q249.200 121 243.800 108.100Q238.400 95.200 238.400 80L238.400 80Q238.400 64.800 243.800 51.900Q249.200 39 259 29.400Q268.800 19.800 282 14.500Q295.200 9.200 310.600 9.200L310.600 9.200Q326.200 9.200 339.400 14.500Q352.600 19.800 362.300 29.400Q372 39 377.500 51.900Q383 64.800 383 80L383 80Q383 95.200 377.500 108.100Q372 121 362.300 130.600Q352.600 140.200 339.400 145.500Q326.200 150.800 310.600 150.800ZM310.600 144.600L310.600 144.600Q324.600 144.600 336.600 139.800Q348.600 135 357.500 126.200Q366.400 117.400 371.300 105.700Q376.200 94 376.200 80L376.200 80Q376.200 66 371.300 54.300Q366.400 42.600 357.500 33.800Q348.600 25 336.600 20.200Q324.600 15.400 310.600 15.400L310.600 15.400Q296.800 15.400 284.800 20.200Q272.800 25 263.900 33.800Q255 42.600 250.100 54.300Q245.200 66 245.200 80L245.200 80Q245.200 94 250.100 105.700Q255 117.400 263.900 126.200Q272.800 135 284.800 139.800Q296.800 144.600 310.600 144.600Z"
+              fill="#ffffff"
+            />
 
-            <g ref={needleGroupRef} style={{ transformOrigin: '2093.8px 82px' }}>
-              <polygon points="2093.8,8 2111.8,82 2093.8,156 2075.8,82" fill="#ffffff"/>
-            </g>
+            <polygon
+              className="wm-animated"
+              points="2093.8,8 2111.8,82 2093.8,156 2075.8,82"
+              fill="#ffffff"
+            />
           </svg>
         </div>
 
