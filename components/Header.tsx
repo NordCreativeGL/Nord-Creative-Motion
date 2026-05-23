@@ -41,8 +41,8 @@ export default function Header() {
           <Image
             src="/logo-icon.png"
             alt="Nord Creative"
-            height={100}
-            width={100}
+            height={50}
+            width={50}
             className="object-contain"
             priority
           />
