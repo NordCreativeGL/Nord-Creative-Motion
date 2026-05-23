@@ -99,6 +99,8 @@ export default function HeroSection() {
     const handleWheel = (e: WheelEvent) => {
       if (window.scrollY < 50 && e.deltaY > 0) {
         e.preventDefault();
+        (window as any).__snapLock = true;
+        setTimeout(() => { (window as any).__snapLock = false; }, 1000);
         document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
       }
     };

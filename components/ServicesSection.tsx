@@ -92,7 +92,7 @@ export default function ServicesSection() {
       if (!inSection) return;
 
       e.preventDefault();
-      if (isSnapping) return;
+      if (isSnapping || (window as any).__snapLock) return;
 
       let currentIdx = 0;
       for (let i = 0; i < snapPoints.length; i++) {
