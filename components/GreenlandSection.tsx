@@ -115,7 +115,7 @@ export default function GreenlandSection() {
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
-          padding: '1rem 2rem 1rem 1rem',
+          padding: '2.5rem 3rem 2.5rem 1rem',
           gap: '0.75rem',
         }}>
           <div ref={video1Ref} style={{
@@ -131,7 +131,6 @@ export default function GreenlandSection() {
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }} />
-            <span style={{ position: 'absolute', bottom: 10, left: 12, fontSize: 8, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Photography</span>
           </div>
 
           <div ref={video2Ref} style={{
@@ -147,7 +146,6 @@ export default function GreenlandSection() {
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }} />
-            <span style={{ position: 'absolute', bottom: 10, left: 12, fontSize: 8, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Drone & Aerial</span>
           </div>
         </div>
     </div>
