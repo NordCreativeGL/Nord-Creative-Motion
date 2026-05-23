@@ -46,7 +46,7 @@ export default function ServicesSection() {
     const ctx = gsap.context(() => {
       const cardHeightPx = window.innerHeight * 0.84;
       gsap.set(card2, { y: cardHeightPx });
-      gsap.set(card3, { y: cardHeightPx + 30 });
+      gsap.set(card3, { y: cardHeightPx + 22 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -181,7 +181,7 @@ export default function ServicesSection() {
 
           {/* Right: 9:16 card stack */}
           <div className="flex justify-center items-center h-full">
-            <div style={{ position: "relative", width: CARD_W, height: `calc(${CARD_H} + 60px)` }}>
+            <div style={{ position: "relative", width: CARD_W, height: `calc(${CARD_H} + 44px)`, marginTop: "48px" }}>
 
               {/* Card 1 */}
               <div
