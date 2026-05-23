@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import BackToTop from "@/components/BackToTop";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geist.variable} antialiased`}>
-      <body className="bg-black text-white"><Header />{children}</body>
+      <body className="bg-black text-white"><Header />{children}<BackToTop /></body>
     </html>
   );
 }
