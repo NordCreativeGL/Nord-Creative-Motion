@@ -66,7 +66,7 @@ export default function CTABanner() {
         <video
           autoPlay muted loop playsInline
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
+          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P60%20HEADER.mp4"
         />
         <svg
           viewBox="0 0 18 12"
@@ -74,7 +74,7 @@ export default function CTABanner() {
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         >
           <path
-            fill="rgba(0,0,0,0.90)"
+            fill="rgba(0,0,0,0.85)"
             d="m0,6h18v6H0zm3,0a4,4 0 0,0 8,0a4,4 0 0,0-8,0"
           />
         </svg>
