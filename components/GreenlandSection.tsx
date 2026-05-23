@@ -22,7 +22,6 @@ const itemVariants: Variants = {
 const videos = [
   "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P10.mp4",
   "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P21.mp4",
-  "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P69%20N.mp4",
 ];
 
 export default function GreenlandSection() {
