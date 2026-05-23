@@ -65,6 +65,20 @@ export default function ServicesSection() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const sectionTop = section.offsetTop;
+      if (window.scrollY <= sectionTop + 50 && e.deltaY < 0) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, []);
+
   return (
     <div id="services" ref={sectionRef} style={{ height: "400vh" }}>
       <div
