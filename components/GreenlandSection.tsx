@@ -42,7 +42,7 @@ export default function GreenlandSection() {
       const onScroll = () => {
         if (hasAnimated.current) return;
         const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
-        if (window.scrollY >= sectionTop - 20) {
+        if (window.scrollY >= sectionTop - window.innerHeight * 0.5) {
           hasAnimated.current = true;
           tl.play();
           window.removeEventListener('scroll', onScroll);
@@ -61,22 +61,21 @@ export default function GreenlandSection() {
       data-snap="true"
       ref={sectionRef}
       style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
         minHeight: '100vh',
         position: 'relative',
         background: 'black',
         overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
       }}
     >
-      <div style={{ display: 'flex', width: '100%', height: '100vh', alignItems: 'center' }}>
-
         {/* Left: text column */}
         <div
           style={{
-            width: 320,
-            flexShrink: 0,
-            paddingLeft: '2.5rem',
+            flex: '0 0 auto',
+            width: 380,
+            paddingLeft: '4rem',
             perspective: '900px',
             display: 'flex',
             flexDirection: 'column',
@@ -113,7 +112,7 @@ export default function GreenlandSection() {
         </div>
 
         {/* Right: two 16:9 video cards */}
-        <div style={{ flex: 1, position: 'relative', height: '100%', paddingRight: '2.5rem' }}>
+        <div style={{ flex: 1, position: 'relative', height: '100vh' }}>
 
           {/* Top card */}
           <div
@@ -121,7 +120,7 @@ export default function GreenlandSection() {
             style={{
               position: 'absolute',
               top: '2.5rem',
-              right: 0,
+              right: '2.5rem',
               width: 310,
               height: 174,
               borderRadius: 10,
@@ -148,7 +147,7 @@ export default function GreenlandSection() {
             style={{
               position: 'absolute',
               bottom: '2.5rem',
-              right: 0,
+              right: '2.5rem',
               width: 310,
               height: 174,
               borderRadius: 10,
@@ -170,7 +169,6 @@ export default function GreenlandSection() {
           </div>
 
         </div>
-      </div>
     </div>
   );
 }
