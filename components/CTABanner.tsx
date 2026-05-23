@@ -6,6 +6,7 @@ import gsap from "gsap";
 export default function CTABanner() {
   const sectionRef  = useRef<HTMLElement>(null);
   const cardRef     = useRef<HTMLDivElement>(null);
+  const shadowRef   = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
@@ -15,8 +16,9 @@ export default function CTABanner() {
         rotateY: -55,
         scale: 0.72,
         transformPerspective: 900,
-        boxShadow: '0 0 0 0.5px rgba(255,255,255,0.04), 40px 60px 180px rgba(0,0,0,1), -20px 0px 120px rgba(0,0,0,0.95)',
       });
+
+      gsap.set(shadowRef.current, { opacity: 0, scale: 0.72 });
 
       const onScroll = () => {
         if (hasAnimated.current) return;
@@ -29,7 +31,12 @@ export default function CTABanner() {
             scale: 1,
             duration: 2.6,
             ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
-            boxShadow: '0 0 0 0.5px rgba(255,255,255,0.10), 0 20px 120px rgba(0,0,0,0.95), 0 0 140px rgba(0,0,0,0.8)',
+          });
+          gsap.to(shadowRef.current, {
+            opacity: 1,
+            scale: 1,
+            duration: 2.6,
+            ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
           });
           window.removeEventListener('scroll', onScroll);
         }
@@ -53,8 +60,23 @@ export default function CTABanner() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        position: 'relative',
       }}
     >
+      <div
+        ref={shadowRef}
+        style={{
+          position: 'absolute',
+          width: '70vw',
+          aspectRatio: '3/2',
+          borderRadius: 22,
+          background: 'transparent',
+          filter: 'blur(40px)',
+          boxShadow: '0 0 120px 60px rgba(0,0,0,1)',
+          opacity: 0,
+          zIndex: 0,
+        }}
+      />
       <div
         ref={cardRef}
         style={{
@@ -63,7 +85,7 @@ export default function CTABanner() {
           borderRadius: 22,
           overflow: 'hidden',
           position: 'relative',
-          boxShadow: '0 0 0 0.5px rgba(255,255,255,0.10), 0 20px 120px rgba(0,0,0,0.95), 0 0 140px rgba(0,0,0,0.8)',
+          zIndex: 1,
         }}
       >
         <video
