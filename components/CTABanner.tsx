@@ -6,7 +6,6 @@ import gsap from "gsap";
 export default function CTABanner() {
   const sectionRef  = useRef<HTMLElement>(null);
   const cardRef     = useRef<HTMLDivElement>(null);
-  const shadowRef   = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
@@ -18,8 +17,6 @@ export default function CTABanner() {
         transformPerspective: 900,
       });
 
-      gsap.set(shadowRef.current, { opacity: 0, scale: 0.72 });
-
       const onScroll = () => {
         if (hasAnimated.current) return;
         const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
@@ -28,12 +25,6 @@ export default function CTABanner() {
           gsap.to(cardRef.current, {
             opacity: 1,
             rotateY: 0,
-            scale: 1,
-            duration: 2.6,
-            ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
-          });
-          gsap.to(shadowRef.current, {
-            opacity: 1,
             scale: 1,
             duration: 2.6,
             ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
@@ -64,20 +55,6 @@ export default function CTABanner() {
       }}
     >
       <div
-        ref={shadowRef}
-        style={{
-          position: 'absolute',
-          width: '70vw',
-          aspectRatio: '3/2',
-          borderRadius: 22,
-          background: 'transparent',
-          filter: 'blur(40px)',
-          boxShadow: '0 0 120px 60px rgba(0,0,0,1)',
-          opacity: 0,
-          zIndex: 0,
-        }}
-      />
-      <div
         ref={cardRef}
         style={{
           width: '70vw',
@@ -86,6 +63,7 @@ export default function CTABanner() {
           overflow: 'hidden',
           position: 'relative',
           zIndex: 1,
+          boxShadow: '0 0 0 0.5px rgba(255,255,255,0.10), 0 20px 120px rgba(0,0,0,0.95), 0 0 140px rgba(0,0,0,0.8)',
         }}
       >
         <video
