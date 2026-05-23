@@ -121,8 +121,8 @@ export default function GreenlandSection() {
               position: 'absolute',
               top: '2.5rem',
               right: '2.5rem',
-              width: 310,
-              height: 174,
+              width: '310px',
+              height: '174px',
               borderRadius: 10,
               overflow: 'hidden',
             }}
@@ -148,8 +148,8 @@ export default function GreenlandSection() {
               position: 'absolute',
               bottom: '2.5rem',
               right: '2.5rem',
-              width: 310,
-              height: 174,
+              width: '310px',
+              height: '174px',
               borderRadius: 10,
               overflow: 'hidden',
             }}
