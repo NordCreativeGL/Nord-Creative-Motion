@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function CTABanner() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const cardRef    = useRef<HTMLDivElement>(null);
+  const sectionRef  = useRef<HTMLElement>(null);
+  const cardRef     = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -16,24 +17,18 @@ export default function CTABanner() {
         transformPerspective: 900,
       });
 
-      const tl = gsap.timeline({ paused: true });
-
-      tl.to(cardRef.current, {
-        opacity: 1,
-        rotateY: 0,
-        scale: 1,
-        duration: 1.6,
-        ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
-      });
-
-      const hasAnimated = { current: false };
-
       const onScroll = () => {
         if (hasAnimated.current) return;
         const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
         if (window.scrollY >= sectionTop - window.innerHeight * 0.5) {
           hasAnimated.current = true;
-          tl.play();
+          gsap.to(cardRef.current, {
+            opacity: 1,
+            rotateY: 0,
+            scale: 1,
+            duration: 1.6,
+            ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
+          });
           window.removeEventListener('scroll', onScroll);
         }
       };
@@ -45,7 +40,7 @@ export default function CTABanner() {
   }, []);
 
   return (
-    <div
+    <section
       id="cta"
       data-snap="true"
       ref={sectionRef}
@@ -70,8 +65,8 @@ export default function CTABanner() {
       >
         <video
           autoPlay muted loop playsInline
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
         />
         <svg
           viewBox="0 0 18 12"
@@ -79,16 +74,11 @@ export default function CTABanner() {
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         >
           <path
-            fill="#2e2e2e"
+            fill="rgba(0,0,0,0.70)"
             d="m0,6h18v6H0zm3,0a4,4 0 0,0 8,0a4,4 0 0,0-8,0"
-          />
-          <rect
-            x="0.06" y="0.06" width="17.88" height="11.88"
-            rx="0.72" ry="0.72" fill="none"
-            stroke="#2e2e2e" strokeWidth="0.12"
           />
         </svg>
       </div>
-    </div>
+    </section>
   );
 }
