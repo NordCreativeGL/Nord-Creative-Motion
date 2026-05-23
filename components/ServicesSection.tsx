@@ -129,7 +129,8 @@ export default function ServicesSection() {
           if (next) {
             isSnapping = true;
             (window as any).__snapLock = true;
-            smoothScrollTo(next.getBoundingClientRect().top + window.scrollY).then(() => {
+            smoothScrollTo(next.getBoundingClientRect().top + window.scrollY).then(async () => {
+              await new Promise(r => setTimeout(r, 600));
               isSnapping = false;
               (window as any).__snapLock = false;
             });
@@ -141,7 +142,8 @@ export default function ServicesSection() {
         } else {
           isSnapping = true;
           (window as any).__snapLock = true;
-          smoothScrollTo(0).then(() => {
+          smoothScrollTo(0).then(async () => {
+            await new Promise(r => setTimeout(r, 600));
             isSnapping = false;
             (window as any).__snapLock = false;
           });
