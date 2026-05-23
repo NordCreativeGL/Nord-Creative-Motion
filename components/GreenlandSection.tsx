@@ -104,7 +104,20 @@ export default function GreenlandSection() {
           <Link
             ref={linkRef}
             href="/greenland"
-            style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', textDecoration: 'underline', textUnderlineOffset: 4 }}
+            style={{
+              display: 'inline-block',
+              marginTop: '1.5rem',
+              padding: '14px 36px',
+              borderRadius: '999px',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              background: 'transparent',
+              color: 'rgba(255, 255, 255, 0.85)',
+              fontSize: '15px',
+              fontWeight: 400,
+              letterSpacing: '0.01em',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
           >
             Explore our work in Greenland
           </Link>
