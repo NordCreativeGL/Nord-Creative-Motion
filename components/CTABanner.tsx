@@ -12,9 +12,10 @@ export default function CTABanner() {
     const ctx = gsap.context(() => {
       gsap.set(cardRef.current, {
         opacity: 0,
-        rotateY: -35,
-        scale: 0.88,
+        rotateY: -55,
+        scale: 0.72,
         transformPerspective: 900,
+        boxShadow: '0 0 0 0.5px rgba(255,255,255,0.04), 40px 60px 180px rgba(0,0,0,1), -20px 0px 120px rgba(0,0,0,0.95)',
       });
 
       const onScroll = () => {
@@ -26,8 +27,9 @@ export default function CTABanner() {
             opacity: 1,
             rotateY: 0,
             scale: 1,
-            duration: 1.6,
+            duration: 2.6,
             ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
+            boxShadow: '0 0 0 0.5px rgba(255,255,255,0.10), 0 20px 120px rgba(0,0,0,0.95), 0 0 140px rgba(0,0,0,0.8)',
           });
           window.removeEventListener('scroll', onScroll);
         }
@@ -61,7 +63,7 @@ export default function CTABanner() {
           borderRadius: 22,
           overflow: 'hidden',
           position: 'relative',
-          boxShadow: '0 0 0 0.5px rgba(255,255,255,0.08), 0 8px 60px rgba(0,0,0,0.9), 0 0 80px rgba(0,0,0,0.6)',
+          boxShadow: '0 0 0 0.5px rgba(255,255,255,0.10), 0 20px 120px rgba(0,0,0,0.95), 0 0 140px rgba(0,0,0,0.8)',
         }}
       >
         <video
