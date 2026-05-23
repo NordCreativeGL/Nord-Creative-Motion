@@ -23,8 +23,8 @@ export default function GreenlandSection() {
       gsap.set(line3Ref.current,  { opacity: 0, rotateY: -360, x: -40 });
       gsap.set(bodyRef.current,   { opacity: 0, y: 14 });
       gsap.set(linkRef.current,   { opacity: 0 });
-      gsap.set(video1Ref.current, { opacity: 0, rotateY: -360, x: 80  });
-      gsap.set(video2Ref.current, { opacity: 0, rotateY: 360,  x: -60 });
+      gsap.set(video1Ref.current, { opacity: 0, rotateY: -90, x: 0, transformOrigin: 'center center' });
+      gsap.set(video2Ref.current, { opacity: 0, rotateY:  90, x: 0, transformOrigin: 'center center' });
 
       const tl = gsap.timeline({ paused: true });
 
@@ -34,8 +34,8 @@ export default function GreenlandSection() {
         .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 1.00)
         .to(bodyRef.current,   { opacity: 1, y: 0,       duration: 0.9, ease: 'power2.inOut' }, 1.50)
         .to(linkRef.current,   { opacity: 1,             duration: 0.8, ease: 'power2.inOut' }, 1.80)
-        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 2.2, ease: 'power2.inOut' }, 0.80)
-        .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 2.2, ease: 'power2.inOut' }, 1.60);
+        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0.80)
+        .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.60);
 
       const hasAnimated = { current: false };
 
