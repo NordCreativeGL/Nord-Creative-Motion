@@ -73,13 +73,13 @@ export default function GreenlandSection() {
         {/* Left: text column */}
         <div
           style={{
-            flex: '0 0 auto',
-            width: 380,
-            paddingLeft: '4rem',
-            perspective: '900px',
+            width: '45%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
+            paddingLeft: '4rem',
+            paddingTop: '5rem',
+            perspective: '900px',
           }}
         >
           <div ref={labelRef} style={{ fontSize: 9, letterSpacing: '0.22em', color: 'rgba(255,255,255,0.28)', textTransform: 'uppercase', marginBottom: 20 }}>
@@ -112,16 +112,20 @@ export default function GreenlandSection() {
         </div>
 
         <div style={{
-          flex: 1,
-          position: 'relative',
-          height: '100vh',
+          width: '55%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          paddingRight: '3rem',
+          paddingTop: '4rem',
+          paddingBottom: '4rem',
+          gap: '1.5rem',
         }}>
           <div ref={video1Ref} style={{
-            position: 'absolute',
-            top: '12%',
-            right: '2.5rem',
-            width: 420,
-            height: 236,
+            position: 'relative',
+            width: 500,
+            height: 281,
             borderRadius: 12,
             overflow: 'hidden',
             flexShrink: 0,
@@ -136,11 +140,9 @@ export default function GreenlandSection() {
           </div>
 
           <div ref={video2Ref} style={{
-            position: 'absolute',
-            bottom: '12%',
-            right: '2.5rem',
-            width: 420,
-            height: 236,
+            position: 'relative',
+            width: 500,
+            height: 281,
             borderRadius: 12,
             overflow: 'hidden',
             flexShrink: 0,
