@@ -66,11 +66,31 @@ export default function ServicesSection() {
   }, []);
 
   useEffect(() => {
-    let lastSnapTime = 0;
+    let isSnapping = false;
 
-    const snapTo = (y: number) => {
-      lastSnapTime = Date.now();
-      window.scrollTo({ top: y, behavior: 'smooth' });
+    const smoothScrollTo = (targetY: number): Promise<void> => {
+      return new Promise((resolve) => {
+        const startY = window.scrollY;
+        const diff = targetY - startY;
+        const duration = 700;
+        const startTime = performance.now();
+        const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        const step = (now: number) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          window.scrollTo(0, startY + diff * ease(progress));
+          if (progress < 1) requestAnimationFrame(step);
+          else resolve();
+        };
+        requestAnimationFrame(step);
+      });
+    };
+
+    const snapTo = async (y: number) => {
+      isSnapping = true;
+      (window as any).__snapLock = true;
+      await smoothScrollTo(y);
+      isSnapping = false;
+      (window as any).__snapLock = false;
     };
 
     const handleWheel = (e: WheelEvent) => {
@@ -91,7 +111,7 @@ export default function ServicesSection() {
       if (!inSection) return;
 
       e.preventDefault();
-      if (Date.now() - lastSnapTime < 900 || (window as any).__snapLock) return;
+      if (isSnapping || (window as any).__snapLock) return;
 
       let currentIdx = 0;
       for (let i = 0; i < snapPoints.length; i++) {
