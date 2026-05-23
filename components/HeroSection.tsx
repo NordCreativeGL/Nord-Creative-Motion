@@ -100,7 +100,7 @@ export default function HeroSection() {
       if (window.scrollY < 50 && e.deltaY > 0) {
         e.preventDefault();
         (window as any).__snapLock = true;
-        setTimeout(() => { (window as any).__snapLock = false; }, 1500);
+        setTimeout(() => { (window as any).__snapLock = false; }, 2000);
         document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
       }
     };

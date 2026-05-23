@@ -73,7 +73,7 @@ export default function ServicesSection() {
       return new Promise((resolve) => {
         const startY = window.scrollY;
         const diff = targetY - startY;
-        const duration = 700;
+        const duration = 900;
         const startTime = performance.now();
         const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
         const step = (now: number) => {
@@ -91,6 +91,7 @@ export default function ServicesSection() {
       (window as any).__snapLock = true;
       currentCard = cardIdx;
       await smoothScrollTo(y);
+      await new Promise(r => setTimeout(r, 600));
       isSnapping = false;
       (window as any).__snapLock = false;
     };
