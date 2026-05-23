@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 
 export default function GreenlandSection() {
+  const [btnHover, setBtnHover] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const labelRef   = useRef<HTMLDivElement>(null);
   const line1Ref   = useRef<HTMLDivElement>(null);
@@ -104,23 +105,26 @@ export default function GreenlandSection() {
           <Link
             ref={linkRef}
             href="/greenland"
+            onMouseEnter={() => setBtnHover(true)}
+            onMouseLeave={() => setBtnHover(false)}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              alignSelf: 'flex-start',
+              alignSelf: 'center',
               width: 'fit-content',
               marginTop: '1.2rem',
               padding: '14px 36px',
               borderRadius: '999px',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
-              background: 'transparent',
-              color: 'rgba(255, 255, 255, 0.85)',
+              border: '1px solid rgba(255,255,255,0.18)',
+              background: btnHover ? '#ffffff' : 'transparent',
+              color: btnHover ? '#000000' : 'rgba(255,255,255,0.85)',
               fontSize: '15px',
               fontWeight: 400,
               letterSpacing: '0.01em',
               textDecoration: 'none',
               cursor: 'pointer',
+              transition: 'background 0.25s ease, color 0.25s ease',
             }}
           >
             Explore our work in Greenland
