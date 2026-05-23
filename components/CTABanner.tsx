@@ -1,33 +1,94 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 export default function CTABanner() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRef    = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(cardRef.current, {
+        opacity: 0,
+        rotateY: -35,
+        scale: 0.88,
+        transformPerspective: 900,
+      });
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(cardRef.current, {
+        opacity: 1,
+        rotateY: 0,
+        scale: 1,
+        duration: 1.6,
+        ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
+      });
+
+      const hasAnimated = { current: false };
+
+      const onScroll = () => {
+        if (hasAnimated.current) return;
+        const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
+        if (window.scrollY >= sectionTop - window.innerHeight * 0.5) {
+          hasAnimated.current = true;
+          tl.play();
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="cta" data-snap="true" className="py-32 bg-black min-h-screen flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center text-center"
+    <div
+      id="cta"
+      data-snap="true"
+      ref={sectionRef}
+      style={{
+        minHeight: '100vh',
+        background: '#060606',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        ref={cardRef}
+        style={{
+          width: 640,
+          height: 427,
+          borderRadius: 22,
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        <video
+          autoPlay muted loop playsInline
+          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
+        <svg
+          viewBox="0 0 18 12"
+          preserveAspectRatio="none"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         >
-          <h2 className="text-4xl md:text-5xl font-light text-white">
-            Planning a project in Greenland?
-          </h2>
-          <p className="text-white/60 text-lg leading-relaxed max-w-lg mt-4">
-            Tell us about your project — we'll help define what's possible and
-            how to approach it.
-          </p>
-          <a
-            href="mailto:contact@nordcreative.dk"
-            className="border border-white/30 px-8 py-3 text-sm tracking-widest uppercase hover:bg-white hover:text-black transition duration-300 mt-8 block w-fit"
-          >
-            Work with us
-          </a>
-        </motion.div>
+          <path
+            fill="#2e2e2e"
+            d="m0,6h18v6H0zm3,0a4,4 0 0,0 8,0a4,4 0 0,0-8,0"
+          />
+          <rect
+            x="0.06" y="0.06" width="17.88" height="11.88"
+            rx="0.72" ry="0.72" fill="none"
+            stroke="#2e2e2e" strokeWidth="0.12"
+          />
+        </svg>
       </div>
-    </section>
+    </div>
   );
 }
