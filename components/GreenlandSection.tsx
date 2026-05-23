@@ -77,27 +77,27 @@ export default function GreenlandSection() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            paddingLeft: '4rem',
+            paddingLeft: 'clamp(180px, 18vw, 260px)',
             perspective: '900px',
           }}
         >
-          <div ref={labelRef} style={{ fontSize: 9, letterSpacing: '0.22em', color: 'rgba(255,255,255,0.28)', textTransform: 'uppercase', marginBottom: 20 }}>
+          <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             Greenland
           </div>
 
           <div style={{ marginBottom: 24 }}>
-            <div ref={line1Ref} style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.28 }}>
+            <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 4vw, 3rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
               Visual work made
             </div>
-            <div ref={line2Ref} style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.28 }}>
+            <div ref={line2Ref} style={{ fontSize: 'clamp(2.25rem, 4vw, 3rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
               for atmosphere,
             </div>
-            <div ref={line3Ref} style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', fontWeight: 300, color: 'rgba(255,255,255,0.92)', lineHeight: 1.28 }}>
+            <div ref={line3Ref} style={{ fontSize: 'clamp(2.25rem, 4vw, 3rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
               trust and attention
             </div>
           </div>
 
-          <div ref={bodyRef} style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: 28, maxWidth: 260 }}>
+          <div ref={bodyRef} style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.625, marginBottom: 28 }}>
             Commercial visuals and Arctic environments, created for companies and brands in Greenland.
           </div>
 
