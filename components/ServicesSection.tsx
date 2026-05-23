@@ -59,7 +59,6 @@ export default function ServicesSection() {
 
       tl.to(card1, { scale: 0.94, duration: 1 }, 0)
         .to(card2, { y: 0, duration: 1 }, 0)
-        .to(card3, { y: 30, duration: 1 }, 0)
         .to(card2, { scale: 0.94, duration: 1 }, 1)
         .to(card3, { y: 0, duration: 1 }, 1);
     }, sectionRef);
