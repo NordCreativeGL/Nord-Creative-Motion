@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function CTABanner() {
+  const [btnHover, setBtnHover] = useState(false);
   const sectionRef  = useRef<HTMLElement>(null);
   const cardRef     = useRef<HTMLDivElement>(null);
-  const labelRef    = useRef<HTMLDivElement>(null);
   const headingRef  = useRef<HTMLDivElement>(null);
   const bodyRef     = useRef<HTMLDivElement>(null);
   const btnRef      = useRef<HTMLDivElement>(null);
@@ -21,7 +21,7 @@ export default function CTABanner() {
         transformPerspective: 900,
       });
 
-      gsap.set([labelRef.current, headingRef.current, bodyRef.current, btnRef.current], {
+      gsap.set([headingRef.current, bodyRef.current, btnRef.current], {
         opacity: 0,
         y: 10,
       });
@@ -40,8 +40,8 @@ export default function CTABanner() {
           });
 
           const textEase = 'cubic-bezier(0.25, 0.1, 0.15, 1)';
-          const textDelays = [1.3, 1.5, 1.7, 1.9];
-          const textRefs = [labelRef, headingRef, bodyRef, btnRef];
+          const textDelays = [0.8, 1.0, 1.2];
+          const textRefs = [headingRef, bodyRef, btnRef];
           textRefs.forEach((ref, i) => {
             gsap.to(ref.current, {
               opacity: 1,
@@ -115,16 +115,30 @@ export default function CTABanner() {
           justifyContent: 'center',
           padding: '0 2rem 1.5rem 1rem',
         }}>
-          <div ref={labelRef} style={{ fontSize: '9px', letterSpacing: '0.22em', color: 'rgba(255,255,255,0.28)', marginBottom: '0.6rem', textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
-            NÆSTE SKRIDT
-          </div>
-          <div ref={headingRef} style={{ fontSize: 'clamp(14px,1.8vw,22px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
+          <div ref={headingRef} style={{ fontSize: 'clamp(18px,2.2vw,28px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
             Planning a project<br />in Greenland?
           </div>
-          <div ref={bodyRef} style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
-            Tell us about your project — we'll help<br />define what's possible.
+          <div ref={bodyRef} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
+            Tell us about your project — we'll help define what's possible and how to approach it.
           </div>
-          <div ref={btnRef} style={{ display: 'inline-flex', width: 'fit-content', padding: '9px 22px', borderRadius: '999px', border: '1px solid rgba(255,255,255,0.22)', color: 'rgba(255,255,255,0.88)', fontSize: '11px', cursor: 'pointer', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))' }}>
+          <div
+            ref={btnRef}
+            onMouseEnter={() => setBtnHover(true)}
+            onMouseLeave={() => setBtnHover(false)}
+            style={{
+              display: 'inline-flex',
+              width: 'fit-content',
+              padding: '9px 22px',
+              borderRadius: '999px',
+              border: '1px solid rgba(255,255,255,0.22)',
+              background: btnHover ? '#ffffff' : 'transparent',
+              color: btnHover ? '#000000' : 'rgba(255,255,255,0.88)',
+              fontSize: '11px',
+              cursor: 'pointer',
+              filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
+              transition: 'background 0.25s ease, color 0.25s ease',
+            }}
+          >
             Work with us
           </div>
         </div>
