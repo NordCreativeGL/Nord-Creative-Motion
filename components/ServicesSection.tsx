@@ -67,6 +67,7 @@ export default function ServicesSection() {
 
   useEffect(() => {
     let isSnapping = false;
+    let currentCard = 0;
 
     const smoothScrollTo = (targetY: number): Promise<void> => {
       return new Promise((resolve) => {
@@ -85,9 +86,10 @@ export default function ServicesSection() {
       });
     };
 
-    const snapTo = async (y: number) => {
+    const snapTo = async (cardIdx: number, y: number) => {
       isSnapping = true;
       (window as any).__snapLock = true;
+      currentCard = cardIdx;
       await smoothScrollTo(y);
       isSnapping = false;
       (window as any).__snapLock = false;
@@ -98,7 +100,7 @@ export default function ServicesSection() {
       if (!section) return;
 
       const vh = window.innerHeight;
-      const sectionTop = section.offsetTop;
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
       const scrollY = window.scrollY;
 
       const snapPoints = [
@@ -113,23 +115,34 @@ export default function ServicesSection() {
       e.preventDefault();
       if (isSnapping || (window as any).__snapLock) return;
 
-      let currentIdx = 0;
       for (let i = 0; i < snapPoints.length; i++) {
-        if (scrollY >= snapPoints[i] - 50) currentIdx = i;
+        if (Math.abs(scrollY - snapPoints[i]) < 40) currentCard = i;
       }
 
       if (e.deltaY > 0) {
-        if (currentIdx < snapPoints.length - 1) {
-          snapTo(snapPoints[currentIdx + 1]);
+        if (currentCard < 2) {
+          snapTo(currentCard + 1, snapPoints[currentCard + 1]);
         } else {
-          const nextSection = section.nextElementSibling as HTMLElement;
-          if (nextSection) snapTo(nextSection.offsetTop);
+          const next = section.nextElementSibling as HTMLElement;
+          if (next) {
+            isSnapping = true;
+            (window as any).__snapLock = true;
+            smoothScrollTo(next.getBoundingClientRect().top + window.scrollY).then(() => {
+              isSnapping = false;
+              (window as any).__snapLock = false;
+            });
+          }
         }
       } else {
-        if (currentIdx > 0) {
-          snapTo(snapPoints[currentIdx - 1]);
+        if (currentCard > 0) {
+          snapTo(currentCard - 1, snapPoints[currentCard - 1]);
         } else {
-          snapTo(0);
+          isSnapping = true;
+          (window as any).__snapLock = true;
+          smoothScrollTo(0).then(() => {
+            isSnapping = false;
+            (window as any).__snapLock = false;
+          });
         }
       }
     };
