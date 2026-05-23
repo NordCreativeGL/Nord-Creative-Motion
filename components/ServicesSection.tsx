@@ -27,8 +27,8 @@ const services = [
   },
 ];
 
-const CARD_H = "70vh";
-const CARD_W = "calc(70vh * 9 / 16)";
+const CARD_H = "84vh";
+const CARD_W = "calc(84vh * 9 / 16)";
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
