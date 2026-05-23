@@ -95,11 +95,21 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (window.scrollY < 50 && e.deltaY > 0) {
+        e.preventDefault();
+        document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, []);
+
   return (
     <section
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-black"
-      style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
     >
       <div style={{ position: 'absolute', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
         <div ref={ringDivRef} style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}>

@@ -66,7 +66,7 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} style={{ height: "400vh", scrollSnapAlign: "start", scrollSnapStop: "always" }}>
+    <div id="services" ref={sectionRef} style={{ height: "400vh" }}>
       <div
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
         className="bg-black flex items-center"
