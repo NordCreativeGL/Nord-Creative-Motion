@@ -4,8 +4,6 @@ import { useEffect } from "react";
 
 export default function ScrollManager() {
   useEffect(() => {
-    let isSnapping = false;
-
     const smoothScrollTo = (targetY: number): Promise<void> => {
       return new Promise((resolve) => {
         const startY = window.scrollY;
@@ -23,66 +21,54 @@ export default function ScrollManager() {
       });
     };
 
-    const snapTo = async (y: number) => {
-      isSnapping = true;
+    const handleSnap = (direction: 'up' | 'down') => {
+      const vh = window.innerHeight;
+      const servicesEl = document.getElementById('services');
+      const servicesTop = servicesEl ? servicesEl.getBoundingClientRect().top + window.scrollY : vh;
+
+      const snapElements = Array.from(document.querySelectorAll('[data-snap="true"]'));
+      const dataSnapPoints = snapElements.map(el => el.getBoundingClientRect().top + window.scrollY);
+
+      const allSnapPoints = [
+        0,
+        servicesTop,
+        servicesTop + vh * 1.5,
+        servicesTop + vh * 3,
+        ...dataSnapPoints,
+      ].sort((a, b) => a - b);
+
+      const currentY = window.scrollY;
+      const threshold = 50;
+
+      let targetY: number | null = null;
+
+      if (direction === 'down') {
+        targetY = allSnapPoints.find(p => p > currentY + threshold) ?? null;
+      } else {
+        const prev = [...allSnapPoints].reverse().find(p => p < currentY - threshold);
+        targetY = prev ?? null;
+      }
+
+      if (targetY === null) return;
+
       (window as any).__snapLock = true;
-      await smoothScrollTo(y);
-      await new Promise((r) => setTimeout(r, 600));
-      isSnapping = false;
-      (window as any).__snapLock = false;
+      smoothScrollTo(targetY).then(() => {
+        setTimeout(() => {
+          (window as any).__snapLock = false;
+        }, 500);
+      });
     };
 
     const handleWheel = (e: WheelEvent) => {
-      if (isSnapping || (window as any).__snapLock) return;
-
-      const scrollY = window.scrollY;
-      const vh = window.innerHeight;
-
-      const servicesEl = document.getElementById("services");
-      if (!servicesEl) return;
-
-      const servicesTop = servicesEl.getBoundingClientRect().top + scrollY;
-      const servicesEnd = servicesTop + vh * 3;
-
-      if (scrollY <= servicesEnd + 50) return;
-
-      const snapEls = Array.from(
-        document.querySelectorAll("[data-snap]")
-      ) as HTMLElement[];
-      if (!snapEls.length) return;
-
-      const snapPoints = snapEls.map(
-        (el) => Math.round(el.getBoundingClientRect().top + scrollY)
-      );
-
-      let currentIdx = -1;
-      for (let i = 0; i < snapPoints.length; i++) {
-        const next = snapPoints[i + 1] ?? Infinity;
-        if (scrollY >= snapPoints[i] - 50 && scrollY < next - 50) {
-          currentIdx = i;
-          break;
-        }
-      }
-
-      if (currentIdx === -1) return;
-
       e.preventDefault();
-
-      if (e.deltaY > 0) {
-        if (currentIdx < snapPoints.length - 1) {
-          snapTo(snapPoints[currentIdx + 1]);
-        }
-      } else {
-        if (currentIdx > 0) {
-          snapTo(snapPoints[currentIdx - 1]);
-        } else {
-          snapTo(servicesEnd);
-        }
-      }
+      if ((window as any).__snapLock) return;
+      if (Math.abs(e.deltaY) < 10) return;
+      const direction = e.deltaY > 0 ? 'down' : 'up';
+      handleSnap(direction);
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
   }, []);
 
   return null;

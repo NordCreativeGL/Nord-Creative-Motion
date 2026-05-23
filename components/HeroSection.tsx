@@ -95,19 +95,6 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (window.scrollY < 50 && e.deltaY > 0) {
-        e.preventDefault();
-        (window as any).__snapLock = true;
-        setTimeout(() => { (window as any).__snapLock = false; }, 2000);
-        document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, []);
-
   return (
     <section
       ref={sectionRef}
