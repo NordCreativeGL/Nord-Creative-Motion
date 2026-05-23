@@ -66,12 +66,11 @@ export default function ServicesSection() {
   }, []);
 
   useEffect(() => {
-    let isSnapping = false;
+    let lastSnapTime = 0;
 
     const snapTo = (y: number) => {
-      isSnapping = true;
+      lastSnapTime = Date.now();
       window.scrollTo({ top: y, behavior: 'smooth' });
-      setTimeout(() => { isSnapping = false; }, 900);
     };
 
     const handleWheel = (e: WheelEvent) => {
@@ -92,7 +91,7 @@ export default function ServicesSection() {
       if (!inSection) return;
 
       e.preventDefault();
-      if (isSnapping || (window as any).__snapLock) return;
+      if (Date.now() - lastSnapTime < 900 || (window as any).__snapLock) return;
 
       let currentIdx = 0;
       for (let i = 0; i < snapPoints.length; i++) {
