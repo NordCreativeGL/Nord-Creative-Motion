@@ -44,8 +44,8 @@ export default function ServicesSection() {
     if (!section || !card1 || !card2 || !card3) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(card2, { yPercent: 105 });
-      gsap.set(card3, { yPercent: 105 });
+      gsap.set(card2, { y: 20 });
+      gsap.set(card3, { y: 40 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -57,9 +57,10 @@ export default function ServicesSection() {
       });
 
       tl.to(card1, { scale: 0.94, duration: 1 }, 0)
-        .to(card2, { yPercent: 0, duration: 1 }, 0)
+        .to(card2, { y: 0, duration: 1 }, 0)
+        .to(card3, { y: 20, duration: 1 }, 0)
         .to(card2, { scale: 0.94, duration: 1 }, 1)
-        .to(card3, { yPercent: 0, duration: 1 }, 1);
+        .to(card3, { y: 0, zIndex: 4, duration: 1 }, 1);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -180,13 +181,13 @@ export default function ServicesSection() {
 
           {/* Right: 9:16 card stack */}
           <div className="flex justify-center items-center h-full">
-            <div style={{ position: "relative", width: CARD_W, height: CARD_H }}>
+            <div style={{ position: "relative", width: CARD_W, height: `calc(${CARD_H} + 44px)` }}>
 
               {/* Card 1 */}
               <div
                 ref={card1Ref}
                 style={{
-                  position: "absolute", inset: 0, zIndex: 1,
+                  position: "absolute", inset: 0, zIndex: 3,
                   borderRadius: 16, overflow: "hidden",
                   transformOrigin: "bottom center",
                 }}
@@ -234,7 +235,7 @@ export default function ServicesSection() {
               <div
                 ref={card3Ref}
                 style={{
-                  position: "absolute", inset: 0, zIndex: 3,
+                  position: "absolute", inset: 0, zIndex: 1,
                   borderRadius: 16, overflow: "hidden",
                   transformOrigin: "bottom center",
                 }}
