@@ -73,13 +73,7 @@ export default function ServicesSection() {
         x: -10,
       });
 
-      const entranceTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          once: true,
-        },
-      });
+      const entranceTl = gsap.timeline({ paused: true });
 
       entranceTl
         .to(labelRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0)
@@ -97,6 +91,20 @@ export default function ServicesSection() {
         }, 0.30)
         .to(accentRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.85)
         .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
+
+      const hasAnimated = { current: false };
+
+      const onScroll = () => {
+        if (hasAnimated.current) return;
+        const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
+        if (window.scrollY >= sectionTop - 20) {
+          hasAnimated.current = true;
+          entranceTl.play();
+          window.removeEventListener('scroll', onScroll);
+        }
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
     }, sectionRef);
 
     return () => ctx.revert();
