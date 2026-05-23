@@ -73,12 +73,11 @@ export default function GreenlandSection() {
         {/* Left: text column */}
         <div
           style={{
-            width: '45%',
+            width: '42%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             paddingLeft: '4rem',
-            paddingTop: '5rem',
             perspective: '900px',
           }}
         >
@@ -112,23 +111,19 @@ export default function GreenlandSection() {
         </div>
 
         <div style={{
-          width: '55%',
+          width: '58%',
+          height: '100vh',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-          paddingRight: '3rem',
-          paddingTop: '4rem',
-          paddingBottom: '4rem',
-          gap: '1.5rem',
+          padding: '1rem 2rem 1rem 1rem',
+          gap: '0.75rem',
         }}>
           <div ref={video1Ref} style={{
             position: 'relative',
-            width: 500,
-            height: 281,
-            borderRadius: 12,
+            flex: 1,
+            width: '100%',
+            borderRadius: 14,
             overflow: 'hidden',
-            flexShrink: 0,
           }}>
             <video
               src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P10.mp4"
@@ -141,11 +136,10 @@ export default function GreenlandSection() {
 
           <div ref={video2Ref} style={{
             position: 'relative',
-            width: 500,
-            height: 281,
-            borderRadius: 12,
+            flex: 1,
+            width: '100%',
+            borderRadius: 14,
             overflow: 'hidden',
-            flexShrink: 0,
           }}>
             <video
               src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P21.mp4"
