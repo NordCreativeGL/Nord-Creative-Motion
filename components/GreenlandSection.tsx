@@ -23,8 +23,8 @@ export default function GreenlandSection() {
       gsap.set(line3Ref.current,  { opacity: 0, rotateY: -360, x: -40 });
       gsap.set(bodyRef.current,   { opacity: 0, y: 14 });
       gsap.set(linkRef.current,   { opacity: 0 });
-      gsap.set(video1Ref.current, { opacity: 0, rotateY: -360, x: 80,  transformOrigin: 'right center' });
-      gsap.set(video2Ref.current, { opacity: 0, rotateY: 360,  x: -60, transformOrigin: 'left center'  });
+      gsap.set(video1Ref.current, { opacity: 0, rotateY: -360, x: 80  });
+      gsap.set(video2Ref.current, { opacity: 0, rotateY: 360,  x: -60 });
 
       const tl = gsap.timeline({ paused: true });
 
@@ -111,63 +111,48 @@ export default function GreenlandSection() {
           </Link>
         </div>
 
-        {/* Right: two 16:9 video cards */}
-        <div style={{ flex: 1, position: 'relative', height: '100vh' }}>
-
-          {/* Top card */}
-          <div
-            ref={video1Ref}
-            style={{
-              position: 'absolute',
-              top: '2.5rem',
-              right: '2.5rem',
-              width: '310px',
-              height: '174px',
-              borderRadius: 10,
-              overflow: 'hidden',
-            }}
-          >
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          paddingRight: '2.5rem',
+          gap: '1rem',
+        }}>
+          <div ref={video1Ref} style={{
+            width: 310,
+            height: 174,
+            borderRadius: 10,
+            overflow: 'hidden',
+            flexShrink: 0,
+            position: 'relative',
+          }}>
             <video
               src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P10.mp4"
               autoPlay muted loop playsInline
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0, height: 70,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
-              display: 'flex', alignItems: 'flex-end', padding: '0 12px 10px',
-            }}>
-              <span style={{ fontSize: 8, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase' }}>Photography</span>
-            </div>
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }} />
+            <span style={{ position: 'absolute', bottom: 10, left: 12, fontSize: 8, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Photography</span>
           </div>
 
-          {/* Bottom card */}
-          <div
-            ref={video2Ref}
-            style={{
-              position: 'absolute',
-              bottom: '2.5rem',
-              right: '2.5rem',
-              width: '310px',
-              height: '174px',
-              borderRadius: 10,
-              overflow: 'hidden',
-            }}
-          >
+          <div ref={video2Ref} style={{
+            width: 310,
+            height: 174,
+            borderRadius: 10,
+            overflow: 'hidden',
+            flexShrink: 0,
+            position: 'relative',
+          }}>
             <video
               src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P21.mp4"
               autoPlay muted loop playsInline
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0, height: 70,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
-              display: 'flex', alignItems: 'flex-end', padding: '0 12px 10px',
-            }}>
-              <span style={{ fontSize: 8, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase' }}>Drone & Aerial</span>
-            </div>
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }} />
+            <span style={{ position: 'absolute', bottom: 10, left: 12, fontSize: 8, letterSpacing: '0.16em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>Drone & Aerial</span>
           </div>
-
         </div>
     </div>
   );
