@@ -162,13 +162,13 @@ export default function ServicesSection() {
 
           {/* Left: text */}
           <div>
-            <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-5">
+            <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
               What we offer
             </p>
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
-              Visual work for brands, companies and projects with a story to tell
+            <h2 className="text-5xl md:text-6xl font-light text-white mb-8 leading-tight">
+              Visual work for brands, companies and projects with a story to tell or a product to sell
             </h2>
-            <p className="text-base text-white/60 leading-relaxed">
+            <p className="text-lg text-white/60 leading-relaxed">
               We create visual content for companies working in environments where
               access, logistics, and conditions require planning and flexibility —
               helping businesses stand out and gain visibility with customers and investors.
