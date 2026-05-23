@@ -115,10 +115,10 @@ export default function CTABanner() {
           justifyContent: 'center',
           padding: '0 2rem 1.5rem 1rem',
         }}>
-          <div ref={headingRef} style={{ fontSize: 'clamp(18px,2.2vw,28px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
+          <div ref={headingRef} style={{ fontSize: 'clamp(23px,2.9vw,36px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
             Planning a project<br />in Greenland?
           </div>
-          <div ref={bodyRef} style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
+          <div ref={bodyRef} style={{ fontSize: '16px', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
             Tell us about your project — we'll help define what's possible and how to approach it.
           </div>
           <div
@@ -128,12 +128,12 @@ export default function CTABanner() {
             style={{
               display: 'inline-flex',
               width: 'fit-content',
-              padding: '9px 22px',
+              padding: '11px 26px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.22)',
               background: btnHover ? '#ffffff' : 'transparent',
               color: btnHover ? '#000000' : 'rgba(255,255,255,0.88)',
-              fontSize: '11px',
+              fontSize: '14px',
               cursor: 'pointer',
               filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
               transition: 'background 0.25s ease, color 0.25s ease',
