@@ -73,10 +73,7 @@ export default function ServicesSection() {
         x: -10,
       });
 
-      const RISE_OFFSET = 90;
-      gsap.set(card1Ref.current, { opacity: 0, y: RISE_OFFSET });
-      gsap.set(card2Ref.current, { opacity: 0, y: cardHeightPx + RISE_OFFSET });
-      gsap.set(card3Ref.current, { opacity: 0, y: cardHeightPx + 22 + RISE_OFFSET });
+      gsap.set(card1Ref.current, { y: cardHeightPx });
 
       const entranceTl = gsap.timeline({ paused: true });
 
@@ -96,24 +93,11 @@ export default function ServicesSection() {
         }, 0.30)
         .to(accentRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.85)
         .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0)
-        .to(card3Ref.current, {
-          opacity: 1,
-          y: cardHeightPx + 22,
-          duration: 0.75,
-          ease: 'power4.out',
-        }, 0.15)
-        .to(card2Ref.current, {
-          opacity: 1,
-          y: cardHeightPx,
-          duration: 0.75,
-          ease: 'power4.out',
-        }, 0.27)
         .to(card1Ref.current, {
-          opacity: 1,
           y: 0,
-          duration: 0.75,
-          ease: 'power4.out',
-        }, 0.39);
+          duration: 1.0,
+          ease: 'power3.out',
+        }, 0.2);
 
       const hasAnimated = { current: false };
 
