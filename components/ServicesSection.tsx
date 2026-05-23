@@ -66,15 +66,55 @@ export default function ServicesSection() {
   }, []);
 
   useEffect(() => {
+    let isSnapping = false;
+
+    const snapTo = (y: number) => {
+      isSnapping = true;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setTimeout(() => { isSnapping = false; }, 900);
+    };
+
     const handleWheel = (e: WheelEvent) => {
       const section = sectionRef.current;
       if (!section) return;
+
+      const vh = window.innerHeight;
       const sectionTop = section.offsetTop;
-      if (window.scrollY <= sectionTop + 50 && e.deltaY < 0) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      const scrollY = window.scrollY;
+
+      const snapPoints = [
+        sectionTop,
+        sectionTop + vh * 1.5,
+        sectionTop + vh * 3,
+      ];
+
+      const inSection = scrollY >= sectionTop - 10 && scrollY <= sectionTop + vh * 3 + 10;
+      if (!inSection) return;
+
+      e.preventDefault();
+      if (isSnapping) return;
+
+      let currentIdx = 0;
+      for (let i = 0; i < snapPoints.length; i++) {
+        if (scrollY >= snapPoints[i] - 50) currentIdx = i;
+      }
+
+      if (e.deltaY > 0) {
+        if (currentIdx < snapPoints.length - 1) {
+          snapTo(snapPoints[currentIdx + 1]);
+        } else {
+          const nextSection = section.nextElementSibling as HTMLElement;
+          if (nextSection) snapTo(nextSection.offsetTop);
+        }
+      } else {
+        if (currentIdx > 0) {
+          snapTo(snapPoints[currentIdx - 1]);
+        } else {
+          snapTo(0);
+        }
       }
     };
+
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
   }, []);
