@@ -1,116 +1,173 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
+gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
     type: "image" as const,
     src: "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/IMG_5200.jpg",
     title: "Photography",
-    description:
-      "Professional photography that showcases your product, project, or business through strong visual storytelling.",
+    description: "Professional photography that showcases your product, project, or business through strong visual storytelling.",
   },
   {
     type: "video" as const,
     src: "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P46%20%C3%98ST%20KYSTEN%20.mp4",
     title: "Drone & Aerial",
-    description:
-      "Aerial imagery that reveals landscapes, projects, and locations from powerful new perspectives.",
+    description: "Aerial imagery that reveals landscapes, projects, and locations from powerful new perspectives.",
   },
   {
     type: "video" as const,
     src: "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P37.mp4",
     title: "Video production",
-    description:
-      "Cinematic shots that communicate your story and present your business, product, or project in a compelling way.",
+    description: "Cinematic shots that communicate your story and present your business, product, or project in a compelling way.",
   },
 ];
 
+const CARD_H = "70vh";
+const CARD_W = "calc(70vh * 9 / 16)";
+
 export default function ServicesSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const card1 = card1Ref.current;
+    const card2 = card2Ref.current;
+    const card3 = card3Ref.current;
+    if (!section || !card1 || !card2 || !card3) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(card2, { yPercent: 105 });
+      gsap.set(card3, { yPercent: 105 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.2,
+        },
+      });
+
+      tl.to(card1, { scale: 0.94, duration: 1 }, 0)
+        .to(card2, { yPercent: 0, duration: 1 }, 0)
+        .to(card2, { scale: 0.94, duration: 1 }, 1)
+        .to(card3, { yPercent: 0, duration: 1 }, 1);
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-24 bg-black">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-16"
-        >
-          <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-5">
-            What we offer
-          </p>
-          <h2 className="text-4xl md:text-6xl font-light text-white max-w-3xl mb-6">
-            Visual work for brands, companies and projects with a story to tell
-          </h2>
-          <p className="text-lg text-white/70 leading-relaxed max-w-2xl">
-            We create visual content for companies working in environments where
-            access, logistics, and conditions require planning and flexibility —
-            helping businesses stand out and gain visibility with customers and
-            investors.
-          </p>
-        </motion.div>
+    <div ref={sectionRef} style={{ height: "400vh" }}>
+      <div
+        style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
+        className="bg-black flex items-center"
+      >
+        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-2 gap-16 items-center h-full">
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              variants={itemVariants}
-              className="rounded-2xl overflow-hidden border border-white/10 bg-zinc-900"
-            >
-              <div className="aspect-video">
-                {service.type === "image" ? (
-                  <img
-                    src={service.src}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <video
-                    src={service.src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                )}
+          {/* Left: text */}
+          <div>
+            <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-5">
+              What we offer
+            </p>
+            <h2 className="text-4xl md:text-5xl font-light text-white mb-6 leading-tight">
+              Visual work for brands, companies and projects with a story to tell
+            </h2>
+            <p className="text-base text-white/60 leading-relaxed">
+              We create visual content for companies working in environments where
+              access, logistics, and conditions require planning and flexibility —
+              helping businesses stand out and gain visibility with customers and investors.
+            </p>
+          </div>
+
+          {/* Right: 9:16 card stack */}
+          <div className="flex justify-center items-center h-full">
+            <div style={{ position: "relative", width: CARD_W, height: CARD_H }}>
+
+              {/* Card 1 */}
+              <div
+                ref={card1Ref}
+                style={{
+                  position: "absolute", inset: 0, zIndex: 1,
+                  borderRadius: 16, overflow: "hidden",
+                  transformOrigin: "bottom center",
+                }}
+              >
+                <img
+                  src={services[0].src}
+                  alt={services[0].title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  padding: "28px 24px",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+                }}>
+                  <p className="text-white text-xl font-light mb-1">{services[0].title}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{services[0].description}</p>
+                </div>
               </div>
 
-              <div className="px-5 pb-6">
-                <h3 className="text-xl font-light text-white mt-4">
-                  {service.title}
-                </h3>
-                <p className="text-white/60 mt-2 text-base leading-relaxed">
-                  {service.description}
-                </p>
+              {/* Card 2 */}
+              <div
+                ref={card2Ref}
+                style={{
+                  position: "absolute", inset: 0, zIndex: 2,
+                  borderRadius: 16, overflow: "hidden",
+                  transformOrigin: "bottom center",
+                }}
+              >
+                <video
+                  src={services[1].src}
+                  autoPlay muted loop playsInline
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  padding: "28px 24px",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+                }}>
+                  <p className="text-white text-xl font-light mb-1">{services[1].title}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{services[1].description}</p>
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+
+              {/* Card 3 */}
+              <div
+                ref={card3Ref}
+                style={{
+                  position: "absolute", inset: 0, zIndex: 3,
+                  borderRadius: 16, overflow: "hidden",
+                  transformOrigin: "bottom center",
+                }}
+              >
+                <video
+                  src={services[2].src}
+                  autoPlay muted loop playsInline
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  padding: "28px 24px",
+                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+                }}>
+                  <p className="text-white text-xl font-light mb-1">{services[2].title}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{services[2].description}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
