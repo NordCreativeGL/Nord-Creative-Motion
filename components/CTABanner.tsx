@@ -61,6 +61,7 @@ export default function CTABanner() {
           borderRadius: 22,
           overflow: 'hidden',
           position: 'relative',
+          boxShadow: '0 0 0 0.5px rgba(255,255,255,0.08), 0 8px 60px rgba(0,0,0,0.9), 0 0 80px rgba(0,0,0,0.6)',
         }}
       >
         <video
