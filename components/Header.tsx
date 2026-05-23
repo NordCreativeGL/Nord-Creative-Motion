@@ -53,7 +53,7 @@ export default function Header() {
           <a href="/beyond-the-arctic" className="transition hover:text-white">Beyond the Arctic</a>
           <a href="/about" className="transition hover:text-white">About</a>
         </nav>
-
+        <a
           href="mailto:contact@nordcreative.dk"
           className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white hover:text-black md:block"
         >
