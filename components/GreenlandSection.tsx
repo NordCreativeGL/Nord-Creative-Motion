@@ -105,8 +105,12 @@ export default function GreenlandSection() {
             ref={linkRef}
             href="/greenland"
             style={{
-              display: 'inline-block',
-              marginTop: '1.5rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'flex-start',
+              width: 'fit-content',
+              marginTop: '1.2rem',
               padding: '14px 36px',
               borderRadius: '999px',
               border: '1px solid rgba(255, 255, 255, 0.18)',
