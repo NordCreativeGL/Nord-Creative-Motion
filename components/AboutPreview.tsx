@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function AboutPreview() {
   return (
-    <section className="py-24 bg-black">
+    <section id="about-preview" data-snap="true" className="py-24 bg-black min-h-screen flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

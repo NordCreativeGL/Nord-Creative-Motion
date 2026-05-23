@@ -27,7 +27,7 @@ const videos = [
 
 export default function GreenlandSection() {
   return (
-    <section className="py-24 bg-black">
+    <section id="greenland" data-snap="true" className="py-24 bg-black min-h-screen flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

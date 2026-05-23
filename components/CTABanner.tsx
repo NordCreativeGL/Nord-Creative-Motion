@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CTABanner() {
   return (
-    <section className="py-32 bg-black">
+    <section id="cta" data-snap="true" className="py-32 bg-black min-h-screen flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

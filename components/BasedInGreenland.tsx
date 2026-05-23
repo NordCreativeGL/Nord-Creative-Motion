@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function BasedInGreenland() {
   return (
-    <section className="py-24 bg-black">
+    <section id="based-in-greenland" data-snap="true" className="py-24 bg-black min-h-screen flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
