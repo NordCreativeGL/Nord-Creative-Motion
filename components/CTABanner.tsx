@@ -61,8 +61,8 @@ export default function CTABanner() {
       <div
         ref={cardRef}
         style={{
-          width: 'calc(100% - 3rem)',
-          height: 'calc(100vh - 3rem)',
+          width: 'calc(100% - 30vw)',
+          height: '70vh',
           borderRadius: 22,
           overflow: 'hidden',
           position: 'relative',
