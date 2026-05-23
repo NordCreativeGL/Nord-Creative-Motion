@@ -35,6 +35,11 @@ export default function ServicesSection() {
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
   const card3Ref = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLParagraphElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const accentRef = useRef<HTMLParagraphElement>(null);
+  const bodyRef = useRef<HTMLParagraphElement>(null);
+  const cardContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -61,6 +66,54 @@ export default function ServicesSection() {
         .to(card2, { y: 0, duration: 1 }, 0)
         .to(card2, { scale: 0.94, duration: 1 }, 1)
         .to(card3, { y: 0, duration: 1 }, 1);
+
+      const textEls = [
+        labelRef.current,
+        headingRef.current,
+        accentRef.current,
+        bodyRef.current,
+      ].filter(Boolean);
+
+      gsap.set(textEls, {
+        opacity: 0,
+        scale: 0.90,
+        rotateX: 6,
+        transformOrigin: "center center",
+      });
+
+      gsap.set(cardContainerRef.current, {
+        opacity: 0,
+        scale: 0.90,
+        rotateX: 6,
+        rotateY: 4,
+        transformOrigin: "center center",
+      });
+
+      const entranceTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          once: true,
+        },
+      });
+
+      entranceTl
+        .to(textEls, {
+          opacity: 1,
+          scale: 1,
+          rotateX: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.08,
+        }, 0)
+        .to(cardContainerRef.current, {
+          opacity: 1,
+          scale: 1,
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.9,
+          ease: "power3.out",
+        }, 0.25);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -69,23 +122,23 @@ export default function ServicesSection() {
   return (
     <div id="services" ref={sectionRef} style={{ height: "400vh" }}>
       <div
-        style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
+        style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", perspective: "1200px" }}
         className="bg-black flex items-center"
       >
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-2 gap-16 items-center h-full">
 
           {/* Left: text */}
           <div>
-            <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
+            <p ref={labelRef} className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
               What we offer
             </p>
-            <h2 className="text-4xl md:text-5xl font-light text-white mb-4 leading-tight">
+            <h2 ref={headingRef} className="text-4xl md:text-5xl font-light text-white mb-4 leading-tight">
               Visual work for brands, companies and projects
             </h2>
-            <p className="text-xl text-white/40 font-light mb-8">
+            <p ref={accentRef} className="text-xl text-white/40 font-light mb-8">
               with a story to tell or a product to sell
             </p>
-            <p className="text-lg text-white/60 leading-relaxed">
+            <p ref={bodyRef} className="text-lg text-white/60 leading-relaxed">
               We create visual content for companies working in environments where
               access, logistics, and conditions require planning and flexibility —
               helping businesses stand out and gain visibility with customers and investors.
@@ -95,6 +148,7 @@ export default function ServicesSection() {
           {/* Right: 9:16 card stack */}
           <div className="flex justify-center items-center h-full">
             <div style={{ position: "relative", width: CARD_W, height: `calc(${CARD_H} + 44px)`, marginTop: "48px" }}>
+              <div ref={cardContainerRef} style={{ position: "relative", width: CARD_W, height: CARD_H }}>
 
               {/* Card 1 */}
               <div
@@ -168,6 +222,7 @@ export default function ServicesSection() {
                 </div>
               </div>
 
+              </div>
             </div>
           </div>
         </div>
