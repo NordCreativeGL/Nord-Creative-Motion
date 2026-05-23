@@ -74,7 +74,7 @@ export default function CTABanner() {
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
         >
           <path
-            fill="rgba(0,0,0,0.70)"
+            fill="rgba(0,0,0,0.90)"
             d="m0,6h18v6H0zm3,0a4,4 0 0,0 8,0a4,4 0 0,0-8,0"
           />
         </svg>
