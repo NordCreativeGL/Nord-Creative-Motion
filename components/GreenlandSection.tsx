@@ -112,6 +112,7 @@ export default function GreenlandSection() {
               alignItems: 'center',
               justifyContent: 'center',
               alignSelf: 'flex-start',
+              marginLeft: '3.5rem',
               width: 'fit-content',
               marginTop: '1.2rem',
               padding: '14px 36px',
