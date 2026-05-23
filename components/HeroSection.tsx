@@ -99,6 +99,7 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       className="relative h-screen w-full overflow-hidden bg-black"
+      style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
     >
       <div style={{ position: 'absolute', top: '50%', left: '50%', zIndex: 100, pointerEvents: 'none' }}>
         <div ref={ringDivRef} style={{ width: '240px', height: '240px', marginLeft: '-120px', marginTop: '-120px' }}>
