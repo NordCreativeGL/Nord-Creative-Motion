@@ -35,6 +35,11 @@ export default function ServicesSection() {
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
   const card3Ref = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<HTMLDivElement>(null);
+  const line2Ref = useRef<HTMLDivElement>(null);
+  const accentRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -61,6 +66,37 @@ export default function ServicesSection() {
         .to(card2, { y: 0, duration: 1 }, 0)
         .to(card2, { scale: 0.94, duration: 1 }, 1)
         .to(card3, { y: 0, duration: 1 }, 1);
+
+      gsap.set([labelRef.current, accentRef.current, bodyRef.current], { opacity: 0 });
+      gsap.set([line1Ref.current, line2Ref.current], {
+        clipPath: 'inset(0 100% 0 0)',
+        x: -10,
+      });
+
+      const entranceTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          once: true,
+        },
+      });
+
+      entranceTl
+        .to(labelRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0)
+        .to(line1Ref.current, {
+          clipPath: 'inset(0 0% 0 0)',
+          x: 0,
+          duration: 0.85,
+          ease: 'power4.inOut',
+        }, 0.15)
+        .to(line2Ref.current, {
+          clipPath: 'inset(0 0% 0 0)',
+          x: 0,
+          duration: 0.85,
+          ease: 'power4.inOut',
+        }, 0.30)
+        .to(accentRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.85)
+        .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -76,20 +112,21 @@ export default function ServicesSection() {
 
           {/* Left: text */}
           <div>
-            <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
+            <div ref={labelRef} className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
               What we offer
-            </p>
+            </div>
             <h2 className="text-4xl md:text-5xl font-light text-white mb-4 leading-tight">
-              Visual work for brands, companies and projects
+              <div ref={line1Ref}>Visual work for brands,</div>
+              <div ref={line2Ref}>companies and projects</div>
             </h2>
-            <p className="text-xl text-white/40 font-light mb-8">
-              with a story to tell or a product to sell
-            </p>
-            <p className="text-lg text-white/60 leading-relaxed">
+            <div ref={accentRef} className="text-xl text-white/40 font-light mb-8">
+              — with a story to tell or a product to sell
+            </div>
+            <div ref={bodyRef} className="text-lg text-white/60 leading-relaxed">
               We create visual content for companies working in environments where
               access, logistics, and conditions require planning and flexibility —
               helping businesses stand out and gain visibility with customers and investors.
-            </p>
+            </div>
           </div>
 
           {/* Right: 9:16 card stack */}
