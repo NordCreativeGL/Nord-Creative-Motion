@@ -66,7 +66,7 @@ export default function CTABanner() {
         <video
           autoPlay muted loop playsInline
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P60%20HEADER.mp4"
+          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P69%20N.mp4"
         />
         <svg
           viewBox="0 0 18 12"
