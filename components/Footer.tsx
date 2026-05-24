@@ -19,7 +19,9 @@ export default function Footer() {
         </p>
 
         <p className="text-sm text-white/50">
-          contact@nordcreative.dk · +299 245441
+          <a href="mailto:contact@nordcreative.dk" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-white transition-colors">contact@nordcreative.dk</a>
+          {' · '}
+          <a href="tel:+299245441" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-white transition-colors">+299 245441</a>
         </p>
 
         <div className="flex items-center gap-8">
