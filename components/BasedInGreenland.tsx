@@ -64,7 +64,7 @@ export default function BasedInGreenland() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingLeft: 'clamp(60px, 5vw, 80px)',
+        paddingLeft: 'clamp(140px, 14vw, 200px)',
         paddingRight: '1rem',
         zIndex: 2,
       }}>
