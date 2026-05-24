@@ -14,7 +14,7 @@ export default function Footer() {
           style={{ width: '612px', height: 'auto', objectFit: 'contain' }}
         />
 
-        <p className="text-lg text-white/40">
+        <p className="text-lg text-white/40" style={{ textTransform: 'uppercase', letterSpacing: '0.18em' }}>
           Limits are for the uncreative
         </p>
 
