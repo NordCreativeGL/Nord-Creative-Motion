@@ -11,10 +11,10 @@ export default function Footer() {
           alt="NordCreative"
           width={612}
           height={184}
-          style={{ width: '612px', height: 'auto', objectFit: 'contain' }}
+          style={{ width: '734px', height: 'auto', objectFit: 'contain' }}
         />
 
-        <p className="text-lg text-white/40" style={{ textTransform: 'uppercase', letterSpacing: '0.18em' }}>
+        <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
           Limits are for the uncreative
         </p>
 
