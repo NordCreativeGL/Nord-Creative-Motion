@@ -120,7 +120,7 @@ export default function GlobeSection() {
       if (!gsap) return
       const ease = 'cubic-bezier(0.25, 0.1, 0.15, 1)'
       const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref]
-      const delays = [0.1, 0.35, 0.65, 1.1, 1.3, 1.5]
+      const delays = [0, 0.05, 0.35, 0.8, 1.0, 1.2]
       refs.forEach((r, i) => {
         if (r.current) gsap.to(r.current, { opacity: 1, y: 0, duration: 0.9, delay: delays[i], ease })
       })
