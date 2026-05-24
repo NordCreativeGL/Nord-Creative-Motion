@@ -51,6 +51,7 @@ export default function GreenlandSection() {
       };
 
       window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     }, sectionRef);
 
     return () => ctx.revert();
