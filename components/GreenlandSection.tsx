@@ -43,7 +43,7 @@ export default function GreenlandSection() {
       const onScroll = () => {
         if (hasAnimated.current) return;
         const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
-        if (window.scrollY >= sectionTop - window.innerHeight * 1.2) {
+        if (window.scrollY >= sectionTop - window.innerHeight * 0.5) {
           hasAnimated.current = true;
           tl.play();
           window.removeEventListener('scroll', onScroll);
