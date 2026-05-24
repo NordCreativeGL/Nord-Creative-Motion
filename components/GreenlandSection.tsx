@@ -74,7 +74,7 @@ export default function GreenlandSection() {
         {/* Left: text column */}
         <div
           style={{
-            width: '42%',
+            width: '46%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -132,11 +132,11 @@ export default function GreenlandSection() {
         </div>
 
         <div style={{
-          width: '58%',
+          width: '54%',
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
-          padding: '2.5rem 3rem 2.5rem 1rem',
+          padding: '2.5rem 2rem 2.5rem 1rem',
           gap: '0.75rem',
         }}>
           <div ref={video1Ref} style={{
