@@ -81,7 +81,7 @@ export default function BasedInGreenland() {
 
         <div ref={heading1Ref} style={{
           fontSize: 'clamp(52px, 6.5vw, 88px)',
-          fontWeight: 700,
+          fontWeight: 300,
           lineHeight: 1.05,
           color: '#ffffff',
           letterSpacing: '-0.02em',
@@ -90,7 +90,7 @@ export default function BasedInGreenland() {
         </div>
         <div ref={heading2Ref} style={{
           fontSize: 'clamp(52px, 6.5vw, 88px)',
-          fontWeight: 700,
+          fontWeight: 300,
           lineHeight: 1.05,
           color: '#ffffff',
           letterSpacing: '-0.02em',
