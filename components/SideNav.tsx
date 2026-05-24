@@ -22,18 +22,24 @@ export default function SideNav() {
   }, []);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0,
+      }
+    );
     items.forEach(({ id }) => {
       const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id); },
-        { threshold: 0.4 }
-      );
-      obs.observe(el);
-      observers.push(obs);
+      if (el) observer.observe(el);
     });
-    return () => observers.forEach(obs => obs.disconnect());
+    return () => observer.disconnect();
   }, []);
 
   return (
