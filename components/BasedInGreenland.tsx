@@ -64,12 +64,12 @@ export default function BasedInGreenland() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingLeft: 'clamp(80px, 10vw, 160px)',
-        paddingRight: '3rem',
+        paddingLeft: 'clamp(60px, 5vw, 80px)',
+        paddingRight: '1rem',
         zIndex: 2,
       }}>
         <div ref={labelRef} style={{
-          fontSize: '11px',
+          fontSize: '13px',
           fontWeight: 500,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
