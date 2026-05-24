@@ -141,7 +141,7 @@ export default function GlobeSection() {
 
       const DURATION = 6
       const finalCX = W * 0.76
-      const finalCY = H * 0.62
+      const finalCY = H * 0.56
       const finalScale = 1820
 
       const t0 = performance.now()
@@ -152,7 +152,7 @@ export default function GlobeSection() {
         const proj = d3.geoOrthographic()
           .scale(finalScale)
           .translate([finalCX, finalCY])
-          .rotate([42, -48])
+          .rotate([42, -72])
         const path = d3.geoPath().projection(proj).context(ctx)
         if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
           const bounds = path.bounds(glFeature)
@@ -192,17 +192,17 @@ export default function GlobeSection() {
           const q = eio((p - 0.65) / 0.21)
           scale = lerp(450, 1820, q)
           rotLon = lerp(100, 42, q)
-          rotLat = lerp(-18, -48, q)
+          rotLat = lerp(-18, -72, q)
           cx = lerp(W / 2, W * 0.76, q)
-          cy = lerp(H / 2, H * 0.62, q)
+          cy = lerp(H / 2, H * 0.56, q)
           countriesAlpha = lerp(1, 0, q)
         } else {
           const q = eio((p - 0.86) / 0.14)
           scale = 1820
           rotLon = 42
-          rotLat = -48
+          rotLat = -72
           cx = W * 0.76
-          cy = H * 0.62
+          cy = H * 0.56
           countriesAlpha = 0
         }
 
