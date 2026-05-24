@@ -11,6 +11,7 @@ export default function GlobeSection() {
   const body1Ref = useRef<HTMLParagraphElement>(null)
   const body2Ref = useRef<HTMLParagraphElement>(null)
   const body3Ref = useRef<HTMLParagraphElement>(null)
+  const readMoreRef = useRef<HTMLAnchorElement>(null)
   const hasAnimated = useRef(false)
   const animIdRef = useRef<number>(0)
 
@@ -119,8 +120,8 @@ export default function GlobeSection() {
       const gsap = (window as any).gsap
       if (!gsap) return
       const ease = 'cubic-bezier(0.25, 0.1, 0.15, 1)'
-      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref]
-      const delays = [0, 0.05, 0.35, 0.8, 1.0, 1.2]
+      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef]
+      const delays = [0, 0.05, 0.35, 0.8, 1.0, 1.2, 1.4]
       refs.forEach((r, i) => {
         if (r.current) gsap.to(r.current, { opacity: 1, y: 0, duration: 0.9, delay: delays[i], ease })
       })
@@ -222,7 +223,7 @@ export default function GlobeSection() {
     const gsapInit = async () => {
       const gsap = (await import('gsap')).gsap
       ;(window as any).gsap = gsap
-      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref]
+      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef]
       refs.forEach(r => { if (r.current) gsap.set(r.current, { opacity: 0, y: 20 }) })
     }
     gsapInit()
@@ -270,6 +271,32 @@ export default function GlobeSection() {
         <p ref={body1Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '580px' }}>We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.</p>
         <p ref={body2Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '580px' }}>We are available for projects across all of Greenland — from remote landscapes to towns and industrial sites — creating photography and film that document people, places, and projects in their natural context.</p>
         <p ref={body3Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '580px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
+        <a
+          ref={readMoreRef}
+          href="/about"
+          style={{
+            display: 'inline-block',
+            marginTop: '2rem',
+            padding: '14px 32px',
+            border: '1px solid rgba(255,255,255,0.6)',
+            borderRadius: '999px',
+            color: 'white',
+            fontSize: '16px',
+            fontWeight: 300,
+            textDecoration: 'none',
+            transition: 'background 0.3s ease, color 0.3s ease',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLAnchorElement).style.background = 'white';
+            (e.currentTarget as HTMLAnchorElement).style.color = '#000';
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+            (e.currentTarget as HTMLAnchorElement).style.color = 'white';
+          }}
+        >
+          Read more about us
+        </a>
       </div>
     </section>
   )
