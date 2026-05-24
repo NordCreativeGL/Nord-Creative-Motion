@@ -11,7 +11,7 @@ export default function Footer() {
           alt="NordCreative"
           width={612}
           height={184}
-          style={{ width: '734px', height: 'auto', objectFit: 'contain', marginBottom: '-70px', marginTop: '-70px' }}
+          style={{ width: '734px', height: 'auto', objectFit: 'contain', marginBottom: '-90px', marginTop: '-90px' }}
         />
 
         <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
