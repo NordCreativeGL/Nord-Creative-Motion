@@ -135,12 +135,36 @@ export default function GlobeSection() {
       const ctx = canvas.getContext('2d')!
       ctx.scale(dpr, dpr)
 
-      const DURATION = 7.5
+      const DURATION = 4.8
       const finalCX = W * 0.76
       const finalCY = H * 0.5
       const finalScale = 580
 
       const t0 = performance.now()
+
+      const drawFinalLoop = () => {
+        const ctx = canvas.getContext('2d')!
+        ctx.clearRect(0, 0, W, H)
+        const proj = d3.geoOrthographic()
+          .scale(finalScale)
+          .translate([finalCX, finalCY])
+          .rotate([42, -72])
+        const path = d3.geoPath().projection(proj).context(ctx)
+        if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
+          const bounds = path.bounds(glFeature)
+          const bx = bounds[0][0], by = bounds[0][1]
+          const bw = bounds[1][0] - bx, bh = bounds[1][1] - by
+          if (bw > 0 && bh > 0) {
+            ctx.save()
+            ctx.beginPath()
+            path(glFeature)
+            ctx.clip()
+            ctx.drawImage(videoRef.current, bx, by, bw, bh)
+            ctx.restore()
+          }
+        }
+        animIdRef.current = requestAnimationFrame(drawFinalLoop)
+      }
 
       const tick = () => {
         const p = Math.min((performance.now() - t0) / 1000 / DURATION, 1)
@@ -151,7 +175,7 @@ export default function GlobeSection() {
 
         if (p < 0.26) {
           const q = eo(p / 0.26)
-          scale = lerp(18, 105, q)
+          scale = lerp(70, 105, q)
           rotLon = lerp(-260, -160, q)
           rotLat = lerp(0, -18, q)
         } else if (p < 0.60) {
@@ -174,9 +198,8 @@ export default function GlobeSection() {
         if (p < 1) {
           animIdRef.current = requestAnimationFrame(tick)
         } else {
-          canvas.style.opacity = '0'
-          canvas.style.transition = 'opacity 0.6s ease'
           animateText()
+          drawFinalLoop()
         }
       }
 
