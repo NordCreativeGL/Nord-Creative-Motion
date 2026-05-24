@@ -181,12 +181,12 @@ export default function GlobeSection() {
         if (p < 0.22) {
           const q = eo(p / 0.22)
           scale = lerp(70, 450, q)
-          rotLon = lerp(-260, -180, q)
-          rotLat = lerp(0, -18, q)
+          rotLon = lerp(-134, -80, q)
+          rotLat = lerp(25, -18, q)
         } else if (p < 0.60) {
           const q = eio((p - 0.22) / 0.38)
           scale = 450
-          rotLon = lerp(-180, 100, q)
+          rotLon = lerp(-80, 100, q)
           rotLat = -18
         } else if (p < 0.86) {
           const q = eio((p - 0.60) / 0.26)
