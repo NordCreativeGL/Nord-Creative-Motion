@@ -60,11 +60,11 @@ export default function BasedInGreenland() {
     >
       {/* Left: Text */}
       <div style={{
-        flex: '0 0 50%',
+        flex: '0 0 55%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingLeft: 'clamp(180px, 18vw, 260px)',
+        paddingLeft: 'clamp(80px, 10vw, 160px)',
         paddingRight: '3rem',
         zIndex: 2,
       }}>
@@ -80,7 +80,7 @@ export default function BasedInGreenland() {
         </div>
 
         <div ref={heading1Ref} style={{
-          fontSize: 'clamp(28px, 3.5vw, 44px)',
+          fontSize: 'clamp(34px, 4.2vw, 53px)',
           fontWeight: 300,
           lineHeight: 1.05,
           color: '#ffffff',
@@ -89,7 +89,7 @@ export default function BasedInGreenland() {
           We live here
         </div>
         <div ref={heading2Ref} style={{
-          fontSize: 'clamp(28px, 3.5vw, 44px)',
+          fontSize: 'clamp(34px, 4.2vw, 53px)',
           fontWeight: 300,
           lineHeight: 1.05,
           color: '#ffffff',
@@ -100,13 +100,13 @@ export default function BasedInGreenland() {
           We work here
         </div>
 
-        <p ref={body1Ref} style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '360px' }}>
+        <p ref={body1Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '480px' }}>
           We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.
         </p>
-        <p ref={body2Ref} style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '360px' }}>
+        <p ref={body2Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '480px' }}>
           We are available for projects across all of Greenland — from remote landscapes to towns and industrial sites — creating photography and film that document people, places, and projects in their natural context.
         </p>
-        <p ref={body3Ref} style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '360px' }}>
+        <p ref={body3Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '480px' }}>
           This allows us to operate efficiently in locations where production is often limited by logistics and conditions.
         </p>
       </div>
