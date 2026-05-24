@@ -40,7 +40,7 @@ export default function GlobeSection() {
 
     const drawFrame = (
       scale: number, rotLon: number, rotLat: number,
-      cx: number, cy: number, globeAlpha: number
+      cx: number, cy: number, globeAlpha: number, countriesAlpha: number
     ) => {
       if (!d3 || !canvas) return
       const dpr = window.devicePixelRatio || 1
@@ -74,6 +74,8 @@ export default function GlobeSection() {
       ctx.stroke()
 
       if (worldFeatures) {
+        ctx.save()
+        ctx.globalAlpha = countriesAlpha
         worldFeatures.forEach((f: any) => {
           if (f.id === '304') return
           ctx.beginPath()
@@ -84,7 +86,9 @@ export default function GlobeSection() {
           ctx.lineWidth = 0.3
           ctx.stroke()
         })
+        ctx.restore()
 
+        ctx.globalAlpha = 1
         if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
           const bounds = path.bounds(glFeature)
           const bx = bounds[0][0], by = bounds[0][1]
@@ -135,10 +139,10 @@ export default function GlobeSection() {
       const ctx = canvas.getContext('2d')!
       ctx.scale(dpr, dpr)
 
-      const DURATION = 4.8
+      const DURATION = 6
       const finalCX = W * 0.76
       const finalCY = H * 0.5
-      const finalScale = 580
+      const finalScale = 1400
 
       const t0 = performance.now()
 
@@ -172,28 +176,35 @@ export default function GlobeSection() {
         let scale: number, rotLon: number, rotLat: number
         let cx = W / 2, cy = H / 2
         let globeAlpha = 1
+        let countriesAlpha = 1
 
-        if (p < 0.26) {
-          const q = eo(p / 0.26)
-          scale = lerp(70, 105, q)
-          rotLon = lerp(-260, -160, q)
+        if (p < 0.22) {
+          const q = eo(p / 0.22)
+          scale = lerp(70, 450, q)
+          rotLon = lerp(-260, -180, q)
           rotLat = lerp(0, -18, q)
-        } else if (p < 0.60) {
-          const q = eio((p - 0.26) / 0.34)
-          scale = 105
-          rotLon = lerp(-160, -55, q)
+        } else if (p < 0.58) {
+          const q = eio((p - 0.22) / 0.36)
+          scale = 450
+          rotLon = lerp(-180, 100, q)
           rotLat = -18
-        } else {
-          const q = eio((p - 0.60) / 0.40)
-          const qz = Math.pow(q, 1.5)
-          scale = lerp(105, finalScale, qz)
-          rotLon = lerp(-55, 42, q)
+        } else if (p < 0.82) {
+          const q = eio((p - 0.58) / 0.24)
+          scale = lerp(450, 1400, q)
+          rotLon = lerp(100, 42, q)
           rotLat = lerp(-18, -68, q)
-          cx = lerp(W / 2, finalCX, eio(q))
-          cy = lerp(H / 2, finalCY, eio(q))
+          cx = lerp(W / 2, W * 0.76, q)
+          countriesAlpha = lerp(1, 0, q)
+        } else {
+          const q = eio((p - 0.82) / 0.18)
+          scale = 1400
+          rotLon = 42
+          rotLat = -68
+          cx = W * 0.76
+          countriesAlpha = 0
         }
 
-        drawFrame(scale, rotLon, rotLat, cx, cy, globeAlpha)
+        drawFrame(scale, rotLon, rotLat, cx, cy, globeAlpha, countriesAlpha)
 
         if (p < 1) {
           animIdRef.current = requestAnimationFrame(tick)
