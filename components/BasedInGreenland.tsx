@@ -231,7 +231,7 @@ export default function BasedInGreenland() {
     const onScroll = () => {
       if (hasAnimated.current || !section) return
       const top = section.getBoundingClientRect().top + window.scrollY
-      if (window.scrollY >= top - window.innerHeight * 1.5) {
+      if (window.scrollY >= top - window.innerHeight * 1.0) {
         hasAnimated.current = true
         startAnimation()
       }
