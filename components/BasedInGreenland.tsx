@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 
-export default function GlobeSection() {
+export default function BasedInGreenland() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
