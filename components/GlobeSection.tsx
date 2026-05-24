@@ -141,8 +141,8 @@ export default function GlobeSection() {
 
       const DURATION = 6
       const finalCX = W * 0.76
-      const finalCY = H * 0.56
-      const finalScale = 1820
+      const finalCY = H * 0.62
+      const finalScale = 2200
 
       const t0 = performance.now()
 
@@ -183,26 +183,26 @@ export default function GlobeSection() {
           scale = lerp(70, 450, q)
           rotLon = lerp(-260, -180, q)
           rotLat = lerp(0, -18, q)
-        } else if (p < 0.65) {
-          const q = eio((p - 0.22) / 0.43)
+        } else if (p < 0.60) {
+          const q = eio((p - 0.22) / 0.38)
           scale = 450
           rotLon = lerp(-180, 100, q)
           rotLat = -18
         } else if (p < 0.86) {
-          const q = eio((p - 0.65) / 0.21)
-          scale = lerp(450, 1820, q)
+          const q = eio((p - 0.60) / 0.26)
+          scale = lerp(450, 2200, q)
           rotLon = lerp(100, 42, q)
           rotLat = lerp(-18, -72, q)
           cx = lerp(W / 2, W * 0.76, q)
-          cy = lerp(H / 2, H * 0.56, q)
+          cy = lerp(H / 2, H * 0.62, q)
           countriesAlpha = lerp(1, 0, q)
         } else {
           const q = eio((p - 0.86) / 0.14)
-          scale = 1820
+          scale = 2200
           rotLon = 42
           rotLat = -72
           cx = W * 0.76
-          cy = H * 0.56
+          cy = H * 0.62
           countriesAlpha = 0
         }
 
