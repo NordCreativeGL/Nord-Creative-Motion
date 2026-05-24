@@ -80,7 +80,7 @@ export default function BasedInGreenland() {
         </div>
 
         <div ref={heading1Ref} style={{
-          fontSize: 'clamp(52px, 6.5vw, 88px)',
+          fontSize: 'clamp(28px, 3.5vw, 44px)',
           fontWeight: 300,
           lineHeight: 1.05,
           color: '#ffffff',
@@ -89,7 +89,7 @@ export default function BasedInGreenland() {
           We live here
         </div>
         <div ref={heading2Ref} style={{
-          fontSize: 'clamp(52px, 6.5vw, 88px)',
+          fontSize: 'clamp(28px, 3.5vw, 44px)',
           fontWeight: 300,
           lineHeight: 1.05,
           color: '#ffffff',
