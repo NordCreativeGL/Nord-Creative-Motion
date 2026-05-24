@@ -80,7 +80,7 @@ export default function BasedInGreenland() {
         </div>
 
         <div ref={heading1Ref} style={{
-          fontSize: 'clamp(40px, 5vw, 68px)',
+          fontSize: 'clamp(52px, 6.5vw, 88px)',
           fontWeight: 700,
           lineHeight: 1.05,
           color: '#ffffff',
@@ -89,7 +89,7 @@ export default function BasedInGreenland() {
           We live here
         </div>
         <div ref={heading2Ref} style={{
-          fontSize: 'clamp(40px, 5vw, 68px)',
+          fontSize: 'clamp(52px, 6.5vw, 88px)',
           fontWeight: 700,
           lineHeight: 1.05,
           color: '#ffffff',
@@ -100,13 +100,13 @@ export default function BasedInGreenland() {
           We work here
         </div>
 
-        <p ref={body1Ref} style={{ fontSize: '15px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '360px' }}>
+        <p ref={body1Ref} style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '360px' }}>
           We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.
         </p>
-        <p ref={body2Ref} style={{ fontSize: '15px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '360px' }}>
+        <p ref={body2Ref} style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '360px' }}>
           We are available for projects across all of Greenland — from remote landscapes to towns and industrial sites — creating photography and film that document people, places, and projects in their natural context.
         </p>
-        <p ref={body3Ref} style={{ fontSize: '15px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '360px' }}>
+        <p ref={body3Ref} style={{ fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '360px' }}>
           This allows us to operate efficiently in locations where production is often limited by logistics and conditions.
         </p>
       </div>
@@ -119,13 +119,14 @@ export default function BasedInGreenland() {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        paddingRight: '8%',
       }}>
         <svg
           ref={svgRef}
           width="100%"
           viewBox="6 6 619 908"
           preserveAspectRatio="xMidYMid meet"
-          style={{ maxHeight: '90vh', maxWidth: '100%' }}
+          style={{ maxHeight: '90vh', maxWidth: '100%', transform: 'translateX(-5%)' }}
         >
           <defs>
             <clipPath id="greenland-clip" clipPathUnits="userSpaceOnUse">
