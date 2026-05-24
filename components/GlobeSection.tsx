@@ -193,7 +193,7 @@ export default function GlobeSection() {
           scale = lerp(450, 2050, q)
           rotLon = lerp(100, 42, q)
           rotLat = lerp(-18, -72, q)
-          cx = lerp(W / 2, W * 0.76, q)
+          cx = lerp(W / 2, W * 0.74, q)
           cy = lerp(H / 2, H * 0.51, q)
           countriesAlpha = lerp(1, 0, q)
         } else {
@@ -201,7 +201,7 @@ export default function GlobeSection() {
           scale = 2050
           rotLon = 42
           rotLat = -72
-          cx = W * 0.76
+          cx = W * 0.74
           cy = H * 0.51
           countriesAlpha = 0
         }
