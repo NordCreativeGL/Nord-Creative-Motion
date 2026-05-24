@@ -66,6 +66,7 @@ export default function BasedInGreenland() {
         justifyContent: 'center',
         paddingLeft: 'clamp(160px, 16vw, 220px)',
         paddingRight: '1rem',
+        transform: 'translateX(150px)',
       }}>
         <div ref={labelRef} style={{
           fontSize: '13px',
