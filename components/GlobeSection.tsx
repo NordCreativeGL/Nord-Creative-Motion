@@ -276,6 +276,7 @@ export default function GlobeSection() {
           href="/about"
           style={{
             display: 'inline-block',
+            width: 'fit-content',
             marginTop: '2rem',
             padding: '14px 32px',
             border: '1px solid rgba(255,255,255,0.6)',
