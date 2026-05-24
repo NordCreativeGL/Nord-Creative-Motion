@@ -9,9 +9,9 @@ export default function Footer() {
         <Image
           src="/logo-wordmark-transparent.png"
           alt="NordCreative"
-          width={510}
-          height={153}
-          className="w-[510px] h-auto"
+          width={612}
+          height={184}
+          className="w-[612px] h-auto"
         />
 
         <p className="text-lg text-white/40">
