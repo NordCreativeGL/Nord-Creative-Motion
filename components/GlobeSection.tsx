@@ -140,7 +140,7 @@ export default function GlobeSection() {
       ctx.scale(dpr, dpr)
 
       const DURATION = 6
-      const finalCX = W * 0.76
+      const finalCX = W * 0.74
       const finalCY = H * 0.51
       const finalScale = 2050
 
