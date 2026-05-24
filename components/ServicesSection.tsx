@@ -183,6 +183,7 @@ export default function ServicesSection() {
               >
                 <video
                   src={services[1].src}
+                  preload="none"
                   autoPlay muted loop playsInline
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
@@ -207,6 +208,7 @@ export default function ServicesSection() {
               >
                 <video
                   src={services[2].src}
+                  preload="none"
                   autoPlay muted loop playsInline
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />

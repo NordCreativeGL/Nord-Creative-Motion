@@ -260,6 +260,7 @@ export default function BasedInGreenland() {
       <video
         ref={videoRef}
         src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/BEAUTY.mp4"
+        preload="none"
         autoPlay muted loop playsInline
         style={{ display: 'none' }}
       />
