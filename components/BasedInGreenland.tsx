@@ -249,7 +249,7 @@ export default function BasedInGreenland() {
   return (
     <section
       ref={sectionRef}
-      id="globe-section"
+      id="based"
       data-snap="true"
       style={{ minHeight: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative' }}
     >

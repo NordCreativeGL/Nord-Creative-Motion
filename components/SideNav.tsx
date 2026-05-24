@@ -1,0 +1,91 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+const items = [
+  { label: 'What we offer', id: 'services' },
+  { label: 'Greenland', id: 'greenland' },
+  { label: 'Work with us', id: 'cta' },
+  { label: 'Based in Greenland', id: 'based' },
+];
+
+export default function SideNav() {
+  const [visible, setVisible] = useState(false);
+  const [active, setActive] = useState('');
+  const [hovered, setHovered] = useState('');
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    items.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(id); },
+        { threshold: 0.4 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach(obs => obs.disconnect());
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        left: '28px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 50,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+        opacity: visible ? 1 : 0,
+        transition: 'opacity 0.4s ease',
+        pointerEvents: visible ? 'auto' : 'none',
+      }}
+    >
+      {items.map(({ label, id }) => {
+        const isActive = active === id;
+        const isHovered = hovered === id;
+        return (
+          <div
+            key={id}
+            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+            onMouseEnter={() => setHovered(id)}
+            onMouseLeave={() => setHovered('')}
+            style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
+          >
+            <div
+              style={{
+                width: isActive ? '28px' : '16px',
+                height: '0.5px',
+                background: isActive ? 'white' : isHovered ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.25)',
+                transition: 'width 0.2s ease, background 0.2s ease',
+              }}
+            />
+            <span
+              style={{
+                fontSize: '10px',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: isActive ? 'rgba(255,255,255,0.6)' : isHovered ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0)',
+                transition: 'color 0.2s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {label}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}

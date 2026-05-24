@@ -5,11 +5,13 @@ import CTABanner from "@/components/CTABanner";
 import BasedInGreenland from "@/components/BasedInGreenland";
 import Footer from "@/components/Footer";
 import ScrollManager from "@/components/ScrollManager";
+import SideNav from "@/components/SideNav";
 
 export default function Home() {
   return (
     <main className="bg-black">
       <ScrollManager />
+      <SideNav />
       <HeroSection />
       <ServicesSection />
       <GreenlandSection />
