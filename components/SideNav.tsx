@@ -47,8 +47,8 @@ export default function SideNav() {
       style={{
         position: 'fixed',
         left: '28px',
-        top: '50%',
-        transform: 'translateY(-50%)',
+        top: '160px',
+        transform: 'none',
         zIndex: 50,
         display: 'flex',
         flexDirection: 'column',
