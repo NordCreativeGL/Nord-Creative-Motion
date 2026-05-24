@@ -47,7 +47,7 @@ export default function SideNav() {
       style={{
         position: 'fixed',
         left: '28px',
-        top: '160px',
+        top: 'calc(100vh - 260px)',
         transform: 'none',
         zIndex: 50,
         display: 'flex',
