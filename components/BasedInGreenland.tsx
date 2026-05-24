@@ -56,18 +56,19 @@ export default function BasedInGreenland() {
         alignItems: 'center',
         overflow: 'hidden',
         position: 'relative',
-        gap: '2.5rem',
       }}
     >
       {/* Left: Text */}
       <div style={{
-        flex: '0 0 44%',
+        flex: '0 0 58%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         paddingLeft: 'clamp(80px, 8vw, 120px)',
         paddingRight: '1rem',
+        position: 'relative',
         zIndex: 2,
+        marginRight: '-8%',
       }}>
         <div ref={labelRef} style={{
           fontSize: '13px',
@@ -114,13 +115,12 @@ export default function BasedInGreenland() {
 
       {/* Right: Greenland Map SVG with video inside */}
       <div style={{
-        flex: '0 0 54%',
+        flex: '0 0 50%',
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        paddingRight: '8%',
       }}>
         <svg
           ref={svgRef}
