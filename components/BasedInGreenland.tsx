@@ -60,15 +60,12 @@ export default function BasedInGreenland() {
     >
       {/* Left: Text */}
       <div style={{
-        flex: '0 0 58%',
+        flex: '0 0 50%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingLeft: 'clamp(80px, 8vw, 120px)',
+        paddingLeft: 'clamp(160px, 16vw, 220px)',
         paddingRight: '1rem',
-        position: 'relative',
-        zIndex: 2,
-        marginRight: '-8%',
       }}>
         <div ref={labelRef} style={{
           fontSize: '13px',
@@ -121,7 +118,6 @@ export default function BasedInGreenland() {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        marginLeft: '-200px',
       }}>
         <svg
           ref={svgRef}
