@@ -11,7 +11,7 @@ export default function Footer() {
           alt="NordCreative"
           width={612}
           height={184}
-          className="w-[612px] h-auto"
+          style={{ height: '80px', width: 'auto', objectFit: 'contain' }}
         />
 
         <p className="text-lg text-white/40">
