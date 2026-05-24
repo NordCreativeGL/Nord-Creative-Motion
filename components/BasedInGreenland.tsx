@@ -121,6 +121,7 @@ export default function BasedInGreenland() {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        marginLeft: '-200px',
       }}>
         <svg
           ref={svgRef}
