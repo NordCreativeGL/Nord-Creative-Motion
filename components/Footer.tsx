@@ -5,13 +5,13 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer id="footer" data-snap="true" className="border-t border-white/10 py-16 bg-black min-h-[25vh] flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-4">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-6">
         <Image
           src="/logo-wordmark-transparent.png"
           alt="NordCreative"
           width={612}
           height={184}
-          style={{ width: '734px', height: 'auto', objectFit: 'contain', marginBottom: '0' }}
+          style={{ width: '734px', height: 'auto', objectFit: 'contain', marginTop: '-90px', marginBottom: '-90px' }}
         />
 
         <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
