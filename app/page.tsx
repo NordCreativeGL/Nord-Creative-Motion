@@ -12,7 +12,9 @@ export default function Home() {
     <main className="bg-black">
       <ScrollManager />
       <SideNav />
-      <HeroSection />
+      <div style={{ position: 'relative', zIndex: 0 }}>
+        <HeroSection />
+      </div>
       <ServicesSection />
       <GreenlandSection />
       <CTABanner />
