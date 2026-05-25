@@ -116,10 +116,10 @@ export default function CTABanner() {
           justifyContent: 'center',
           padding: '0 2rem 1.5rem 1rem',
         }}>
-          <div ref={headingRef} style={{ fontSize: 'clamp(28px,3.5vw,44px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
+          <div ref={headingRef} style={{ fontSize: 'clamp(28px,3vw,72px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
             Planning a project<br />in Greenland?
           </div>
-          <div ref={bodyRef} style={{ fontSize: '19px', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
+          <div ref={bodyRef} style={{ fontSize: 'clamp(16px,1.3vw,24px)', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
             Tell us about your project — we'll help define what's possible and how to approach it.
           </div>
           <div
@@ -134,7 +134,7 @@ export default function CTABanner() {
               border: '1px solid rgba(255,255,255,0.22)',
               background: btnHover ? '#ffffff' : 'transparent',
               color: btnHover ? '#000000' : 'rgba(255,255,255,0.88)',
-              fontSize: '17px',
+              fontSize: 'clamp(14px,1.2vw,20px)',
               cursor: 'pointer',
               filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
               transition: 'background 0.25s ease, color 0.25s ease',
