@@ -82,7 +82,7 @@ export default function GreenlandSection() {
             perspective: '900px',
           }}
         >
-          <div style={{ paddingLeft: 'clamp(180px, 18vw, 260px)' }}>
+          <div style={{ maxWidth: '680px', paddingLeft: 'clamp(180px, 18vw, 260px)' }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             Greenland
           </div>
