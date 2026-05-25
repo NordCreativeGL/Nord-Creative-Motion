@@ -116,7 +116,7 @@ export default function CTABanner() {
           justifyContent: 'center',
           padding: '0 2rem 1.5rem 1rem',
         }}>
-          <div ref={headingRef} style={{ fontSize: 'clamp(28px,3vw,72px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
+          <div ref={headingRef} style={{ fontSize: 'clamp(28px,2.78vw,68px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
             Planning a project<br />in Greenland?
           </div>
           <div ref={bodyRef} style={{ fontSize: 'clamp(16px,1.3vw,24px)', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
