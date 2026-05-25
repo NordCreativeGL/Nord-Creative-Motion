@@ -55,8 +55,9 @@ export default function HeroSection() {
       if (wmRect.width === 0) return
 
       // Both elements always start at viewport center
-      const startX = window.innerWidth / 2
-      const startY = window.innerHeight / 2
+      const ringRect = ringEl.getBoundingClientRect()
+      const startX = ringRect.left + ringRect.width / 2
+      const startY = ringRect.top + ringRect.height / 2
 
       // O center: SVG x=310.6 out of 2520.80, vertical center of wordmark
       const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80)
