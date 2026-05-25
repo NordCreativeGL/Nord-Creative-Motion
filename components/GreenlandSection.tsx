@@ -76,10 +76,11 @@ export default function GreenlandSection() {
         <div
           style={{
             width: '46%',
+            maxWidth: '680px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            paddingLeft: '18vw',
+            paddingLeft: 'clamp(180px, 18vw, 260px)',
             perspective: '900px',
           }}
         >
@@ -133,7 +134,7 @@ export default function GreenlandSection() {
         </div>
 
         <div style={{
-          width: '54%',
+          flex: 1,
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
