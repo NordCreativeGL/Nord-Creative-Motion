@@ -76,14 +76,13 @@ export default function GreenlandSection() {
         <div
           style={{
             width: '46%',
-            maxWidth: '680px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            paddingLeft: 'clamp(180px, 18vw, 260px)',
             perspective: '900px',
           }}
         >
+          <div style={{ maxWidth: '680px', paddingLeft: 'clamp(180px, 18vw, 260px)' }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             Greenland
           </div>
@@ -131,10 +130,11 @@ export default function GreenlandSection() {
           >
             Explore our work in Greenland
           </Link>
+          </div>
         </div>
 
         <div style={{
-          flex: 1,
+          width: '54%',
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
