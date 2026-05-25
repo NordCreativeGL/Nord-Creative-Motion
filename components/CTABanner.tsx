@@ -108,7 +108,7 @@ export default function CTABanner() {
         <div style={{
           position: 'absolute',
           right: 0,
-          bottom: '8%',
+          bottom: '3%',
           width: '39%',
           height: '50%',
           display: 'flex',
