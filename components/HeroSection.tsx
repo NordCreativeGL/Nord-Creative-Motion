@@ -43,22 +43,51 @@ export default function HeroSection() {
       ease: 'power1.inOut',
     }, 'spinEnd')
 
-    tl.to(ringDiv, {
-      x: 440.54 - centerX,
-      y: 462.27 - centerY,
-      scale: ringScale,
-      duration: 1.5,
-      ease: 'power2.inOut',
-      transformOrigin: '50% 50%',
-    }, 'spinEnd+=0.3')
+    tl.add(() => {
+      const wmImg = wordmarkLettersRef.current
+      const ringEl = ringDivRef.current
+      const needleEl = needleDivRef.current
+      if (!wmImg || !ringEl || !needleEl) return
 
-    tl.to(needleDiv, {
-      x: 1218.67 - centerX,
-      y: 463.14 - centerY,
-      scale: needleScale,
-      duration: 1.5,
-      ease: 'power2.inOut',
-      transformOrigin: '50% 50%',
+      const wmRect = wmImg.getBoundingClientRect()
+
+      // Safety: if image not yet rendered, abort (fallback to invisible)
+      if (wmRect.width === 0) return
+
+      // Both elements always start at viewport center
+      const startX = window.innerWidth / 2
+      const startY = window.innerHeight / 2
+
+      // O center: SVG x=310.6 out of 2520.80, vertical center of wordmark
+      const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80)
+      const oTargetY = wmRect.top + wmRect.height * 0.5
+
+      // Needle/diamond center: SVG x=2093.8 out of 2520.80
+      const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80)
+      const needleTargetY = wmRect.top + wmRect.height * 0.5
+
+      // Dynamic scale: O diameter in rendered px / ring visual diameter (always 231.6px)
+      const oDiameterPx = wmRect.width * (142 / 2520.80)
+      const dynamicRingScale = oDiameterPx / 231.6
+      const dynamicNeedleScale = dynamicRingScale * (needleScale / ringScale)
+
+      gsap.to(ringEl, {
+        x: oTargetX - startX,
+        y: oTargetY - startY,
+        scale: dynamicRingScale,
+        duration: 1.5,
+        ease: 'power2.inOut',
+        transformOrigin: '50% 50%',
+      })
+
+      gsap.to(needleEl, {
+        x: needleTargetX - startX,
+        y: needleTargetY - startY,
+        scale: dynamicNeedleScale,
+        duration: 1.5,
+        ease: 'power2.inOut',
+        transformOrigin: '50% 50%',
+      })
     }, 'spinEnd+=0.3')
 
     tl.to(wordmarkLettersRef.current, {
