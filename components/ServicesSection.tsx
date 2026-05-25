@@ -123,7 +123,7 @@ export default function ServicesSection() {
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
         className="bg-black flex items-center"
       >
-        <div className="w-[88vw] mx-auto grid grid-cols-2 gap-16 items-center h-full">
+        <div className="max-w-7xl 2xl:max-w-[88vw] mx-auto px-6 grid grid-cols-2 gap-16 items-center h-full">
 
           {/* Left: text */}
           <div>
