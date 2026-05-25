@@ -123,21 +123,21 @@ export default function ServicesSection() {
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
         className="bg-black flex items-center"
       >
-        <div className="max-w-7xl 2xl:max-w-[88vw] mx-auto px-6 grid grid-cols-2 gap-16 items-center h-full">
+        <div className="max-w-7xl 2xl:max-w-[88vw] mx-auto px-6 w-full grid grid-cols-2 gap-16 items-center h-full">
 
           {/* Left: text */}
           <div>
             <div ref={labelRef} className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
               What we offer
             </div>
-            <h2 className="text-[clamp(36px,3.3vw,64px)] font-light text-white mb-4 leading-tight">
+            <h2 className="text-4xl md:text-5xl 2xl:text-[clamp(48px,3.3vw,64px)] font-light text-white mb-4 leading-tight">
               <div ref={line1Ref}>Visual work for brands,</div>
               <div ref={line2Ref}>companies and projects</div>
             </h2>
-            <div ref={accentRef} className="text-[clamp(18px,1.4vw,26px)] text-white/40 font-light mb-8">
+            <div ref={accentRef} className="text-xl 2xl:text-[clamp(20px,1.4vw,26px)] text-white/40 font-light mb-8">
               — with a story to tell or a product to sell
             </div>
-            <div ref={bodyRef} className="text-[clamp(16px,1.3vw,24px)] text-white/60 leading-relaxed">
+            <div ref={bodyRef} className="text-lg 2xl:text-[clamp(18px,1.3vw,24px)] text-white/60 leading-relaxed">
               We create visual content for companies working in environments where
               access, logistics, and conditions require planning and flexibility —
               helping businesses stand out and gain visibility with customers and investors.
@@ -167,7 +167,7 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-[clamp(18px,1.4vw,26px)] font-light mb-1">{services[0].title}</p>
+                  <p className="text-white text-xl 2xl:text-[clamp(20px,1.4vw,26px)] font-light mb-1">{services[0].title}</p>
                   <p className="text-white/60 text-sm leading-relaxed">{services[0].description}</p>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-[clamp(18px,1.4vw,26px)] font-light mb-1">{services[1].title}</p>
+                  <p className="text-white text-xl 2xl:text-[clamp(20px,1.4vw,26px)] font-light mb-1">{services[1].title}</p>
                   <p className="text-white/60 text-sm leading-relaxed">{services[1].description}</p>
                 </div>
               </div>
@@ -217,7 +217,7 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-[clamp(18px,1.4vw,26px)] font-light mb-1">{services[2].title}</p>
+                  <p className="text-white text-xl 2xl:text-[clamp(20px,1.4vw,26px)] font-light mb-1">{services[2].title}</p>
                   <p className="text-white/60 text-sm leading-relaxed">{services[2].description}</p>
                 </div>
               </div>
