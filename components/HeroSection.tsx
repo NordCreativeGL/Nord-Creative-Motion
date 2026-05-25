@@ -61,11 +61,11 @@ export default function HeroSection() {
 
       // O center: SVG x=310.6 out of 2520.80, vertical center of wordmark
       const oTargetX = wmRect.left + wmRect.width * (310.6 / 2520.80)
-      const oTargetY = wmRect.top + wmRect.height * 0.5
+      const oTargetY = wmRect.top + wmRect.height * 0.4
 
       // Needle/diamond center: SVG x=2093.8 out of 2520.80
       const needleTargetX = wmRect.left + wmRect.width * (2093.8 / 2520.80)
-      const needleTargetY = wmRect.top + wmRect.height * 0.5
+      const needleTargetY = wmRect.top + wmRect.height * 0.41
 
       // Dynamic scale: O diameter in rendered px / ring visual diameter (always 231.6px)
       const oDiameterPx = wmRect.width * (142 / 2520.80)
