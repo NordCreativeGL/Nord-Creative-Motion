@@ -87,7 +87,10 @@ export default function BackToTop() {
             strokeDashoffset={ringVisible ? 0 : 138}
             strokeLinecap="round"
             transform="rotate(-90 24 24)"
-            style={{ transition: 'stroke-dashoffset 0.9s cubic-bezier(0.25, 0.1, 0.15, 1)' }}
+            style={{
+              transition: 'stroke-dashoffset 0.9s cubic-bezier(0.25, 0.1, 0.15, 1), opacity 0.3s ease',
+              opacity: ringVisible ? 1 : 0
+            }}
           />
         </svg>
         <svg
