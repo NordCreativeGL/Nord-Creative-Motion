@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function BasedInGreenland() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -14,6 +14,14 @@ export default function BasedInGreenland() {
   const readMoreRef = useRef<HTMLAnchorElement>(null)
   const hasAnimated = useRef(false)
   const animIdRef = useRef<number>(0)
+
+  const [isStudio, setIsStudio] = useState(false)
+  useEffect(() => {
+    const check = () => setIsStudio(window.innerWidth >= 1900)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -265,13 +273,13 @@ export default function BasedInGreenland() {
         style={{ display: 'none' }}
       />
 
-      <div style={{ flex: '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: 'clamp(160px, 16vw, 220px)', paddingRight: '1rem', zIndex: 2, transform: 'translateX(150px)' }}>
+      <div style={{ flex: '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: '1rem', zIndex: 2, transform: 'translateX(150px)' }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
-        <div ref={heading1Ref} style={{ fontSize: 'clamp(34px, 4.2vw, 53px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
-        <div ref={heading2Ref} style={{ fontSize: 'clamp(34px, 4.2vw, 53px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: 'clamp(160px, 18vw, 240px)' }}>We work here</div>
-        <p ref={body1Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '580px' }}>We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.</p>
-        <p ref={body2Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '580px' }}>We are available for projects across all of Greenland — from remote landscapes to towns and industrial sites — creating photography and film that document people, places, and projects in their natural context.</p>
-        <p ref={body3Ref} style={{ fontSize: '20px', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '580px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
+        <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
+        <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: 'clamp(160px, 18vw, 240px)' }}>We work here</div>
+        <p ref={body1Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '580px' }}>We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.</p>
+        <p ref={body2Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: '580px' }}>We are available for projects across all of Greenland — from remote landscapes to towns and industrial sites — creating photography and film that document people, places, and projects in their natural context.</p>
+        <p ref={body3Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: '580px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
         <a
           ref={readMoreRef}
           href="/about"
@@ -283,7 +291,7 @@ export default function BasedInGreenland() {
             border: '1px solid rgba(255,255,255,0.6)',
             borderRadius: '999px',
             color: 'white',
-            fontSize: '16px',
+            fontSize: 'clamp(15px, 0.9vw, 19px)',
             fontWeight: 300,
             textDecoration: 'none',
             transition: 'background 0.3s ease, color 0.3s ease',
