@@ -151,7 +151,7 @@ export default function BasedInGreenland() {
       const DURATION = 6
       const finalCX = W * 0.74
       const finalCY = H * 0.51
-      const finalScale = 2050
+      const finalScale = Math.round(2050 * (window.innerWidth / 1728))
 
       const t0 = performance.now()
 
@@ -199,7 +199,7 @@ export default function BasedInGreenland() {
           rotLat = -18
         } else if (p < 0.86) {
           const q = eio((p - 0.60) / 0.26)
-          scale = lerp(450, 2050, q)
+          scale = lerp(450, finalScale, q)
           rotLon = lerp(100, 42, q)
           rotLat = lerp(-18, -72, q)
           cx = lerp(W / 2, W * 0.74, q)
@@ -207,7 +207,7 @@ export default function BasedInGreenland() {
           countriesAlpha = lerp(1, 0, q)
         } else {
           const q = eio((p - 0.86) / 0.14)
-          scale = 2050
+          scale = finalScale
           rotLon = 42
           rotLat = -72
           cx = W * 0.74
