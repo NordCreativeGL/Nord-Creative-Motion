@@ -31,9 +31,7 @@ export default function ScrollManager() {
 
       const allSnapPoints = [
         0,
-        servicesTop,
-        servicesTop + vh * 1.5,
-        servicesTop + vh * 3,
+        ...(servicesEl ? [servicesTop, servicesTop + vh * 1.5, servicesTop + vh * 3] : []),
         ...dataSnapPoints,
       ].sort((a, b) => a - b);
 
