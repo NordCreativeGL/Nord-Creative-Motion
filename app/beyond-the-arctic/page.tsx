@@ -31,82 +31,80 @@ export default function BeyondTheArcticPage() {
   const card4Refs = useRef<(HTMLDivElement | null)[]>([null, null, null, null, null])
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const section = section4Ref.current
-      const ringEl = ring4Ref.current
-      if (!section || !ringEl) return
-      const VH = window.innerHeight
-      const N = 5
-      const BIG_H = Math.round(VH * 0.52)
-      const BIG_W = Math.round(BIG_H * 9 / 16)
-      const RX = Math.round(ringEl.offsetWidth * 0.38)
-      const RY = Math.round(BIG_H * 0.14)
-      const CX = Math.round(ringEl.offsetWidth / 2)
-      const CY = Math.round(VH / 2)
-      const ENTRY_END = 1 / 6
+    const section = section4Ref.current
+    const ringEl = ring4Ref.current
+    if (!section || !ringEl) return
 
-      function setCard(el: HTMLDivElement, i: number, activeProgress: number, opacity = 1) {
-        const rawOffset = ((i - activeProgress) % N + N) % N
-        const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
-        const theta = norm * Math.PI * 2
-        const depth = (Math.cos(theta) + 1) / 2
-        const s = 0.22 + 0.78 * (depth * depth)
-        const w = BIG_W * s, h = BIG_H * s
-        gsap.set(el, {
-          x: CX + Math.sin(theta) * RX - w / 2,
-          y: CY + Math.cos(theta) * RY - h / 2,
-          width: w, height: h,
-          opacity: (0.10 + 0.90 * depth * depth) * opacity,
-          zIndex: Math.round(depth * 100),
-          borderRadius: Math.round(14 * s),
-        })
+    const VH = window.innerHeight
+    const N = 5
+    const BIG_H = Math.round(VH * 0.52)
+    const BIG_W = Math.round(BIG_H * 9 / 16)
+    const RX = Math.round(ringEl.offsetWidth * 0.38)
+    const RY = Math.round(BIG_H * 0.14)
+    const CX = Math.round(ringEl.offsetWidth / 2)
+    const CY = Math.round(VH / 2)
+    const ENTRY_END = 1 / 6
+
+    card4Refs.current.forEach(el => { if (el) gsap.set(el, { opacity: 0, y: -400 }) })
+
+    const handleScroll = () => {
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY
+      const totalH = VH * 6
+      const p = Math.max(0, Math.min(1, (window.scrollY - sectionTop) / totalH))
+
+      if (p <= 0) {
+        card4Refs.current.forEach(el => { if (el) gsap.set(el, { opacity: 0 }) })
+        return
       }
 
-      card4Refs.current.forEach(el => { if (el) gsap.set(el, { opacity: 0, y: -400 }) })
+      if (p < ENTRY_END) {
+        const entryP = p / ENTRY_END
+        card4Refs.current.forEach((el, i) => {
+          if (!el) return
+          const rawOffset = i % N
+          const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
+          const theta = norm * Math.PI * 2
+          const depth = (Math.cos(theta) + 1) / 2
+          const s = 0.22 + 0.78 * (depth * depth)
+          const w = BIG_W * s, h = BIG_H * s
+          const finalY = CY + Math.cos(theta) * RY - h / 2
+          const delay = i * 0.12
+          const lp = Math.max(0, Math.min(1, (entryP - delay) / (1 - delay * 0.5)))
+          const ease = 1 - Math.pow(1 - lp, 3)
+          gsap.set(el, {
+            x: CX + Math.sin(theta) * RX - w / 2,
+            y: finalY - 320 * (1 - ease),
+            width: w, height: h,
+            opacity: (0.10 + 0.90 * depth * depth) * ease,
+            zIndex: Math.round(depth * 100),
+            borderRadius: Math.round(14 * s),
+          })
+        })
+      } else {
+        const ringP = ((p - ENTRY_END) / (1 - ENTRY_END)) * (N - 1)
+        card4Refs.current.forEach((el, i) => {
+          if (!el) return
+          const rawOffset = ((i - ringP) % N + N) % N
+          const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
+          const theta = norm * Math.PI * 2
+          const depth = (Math.cos(theta) + 1) / 2
+          const s = 0.22 + 0.78 * (depth * depth)
+          const w = BIG_W * s, h = BIG_H * s
+          gsap.set(el, {
+            x: CX + Math.sin(theta) * RX - w / 2,
+            y: CY + Math.cos(theta) * RY - h / 2,
+            width: w, height: h,
+            opacity: 0.10 + 0.90 * depth * depth,
+            zIndex: Math.round(depth * 100),
+            borderRadius: Math.round(14 * s),
+          })
+        })
+      }
+    }
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.8,
-        snap: {
-          snapTo: [0, 1/6, 2/6, 3/6, 4/6, 5/6, 1],
-          duration: { min: 0.2, max: 0.5 },
-          ease: 'power2.inOut',
-        },
-        onUpdate: (self) => {
-          const p = self.progress
-          if (p < ENTRY_END) {
-            const entryP = p / ENTRY_END
-            card4Refs.current.forEach((el, i) => {
-              if (!el) return
-              const rawOffset = i % N
-              const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
-              const theta = norm * Math.PI * 2
-              const depth = (Math.cos(theta) + 1) / 2
-              const s = 0.22 + 0.78 * (depth * depth)
-              const w = BIG_W * s, h = BIG_H * s
-              const finalY = CY + Math.cos(theta) * RY - h / 2
-              const delay = i * 0.12
-              const lp = Math.max(0, Math.min(1, (entryP - delay) / (1 - delay * 0.5)))
-              const ease = 1 - Math.pow(1 - lp, 3)
-              gsap.set(el, {
-                x: CX + Math.sin(theta) * RX - w / 2,
-                y: finalY - 320 * (1 - ease),
-                width: w, height: h,
-                opacity: (0.10 + 0.90 * depth * depth) * ease,
-                zIndex: Math.round(depth * 100),
-                borderRadius: Math.round(14 * s),
-              })
-            })
-          } else {
-            const ringP = ((p - ENTRY_END) / (1 - ENTRY_END)) * (N - 1)
-            card4Refs.current.forEach((el, i) => { if (el) setCard(el, i, ringP) })
-          }
-        },
-      })
-    }, section4Ref)
-    return () => ctx.revert()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [isStudio])
 
   const togglePlay = (index: number) => {
