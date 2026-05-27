@@ -125,7 +125,7 @@ export default function BeyondTheArcticPage() {
           </div>
 
           {/* Interactive 3-column portrait grid */}
-          <div className="min-[1900px]:max-w-[1230px] min-[1900px]:mx-auto" style={{
+          <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
@@ -141,7 +141,6 @@ export default function BeyondTheArcticPage() {
                   aspectRatio: '9/16',
                   background: '#111',
                   cursor: 'pointer',
-                  maxHeight: '701px',
                 }}
               >
                 <video
