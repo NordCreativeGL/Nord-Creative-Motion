@@ -10,7 +10,7 @@ export default function GreenlandPage() {
       <Header />
 
       {/* ── Section 1: Hero ── */}
-      <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+      <section data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
         <video
           src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
           autoPlay
@@ -61,7 +61,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 2: Working in Greenland ── */}
-      <section style={{ background: '#000000', paddingTop: '6rem', paddingBottom: '2rem' }}>
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
@@ -112,11 +112,11 @@ export default function GreenlandPage() {
                 loop
                 playsInline
                 style={{
-                  width: '100%',
                   aspectRatio: '16/9',
                   objectFit: 'cover',
-                  borderRadius: '14px',
-                  display: 'block',
+                  borderRadius: 14,
+                  maxHeight: '58vh',
+                  width: '100%',
                 }}
               />
             </div>
@@ -125,7 +125,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 3: How we work ── */}
-      <section style={{ background: '#000000', paddingTop: '6rem', paddingBottom: '2rem' }}>
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
@@ -141,11 +141,11 @@ export default function GreenlandPage() {
                 loop
                 playsInline
                 style={{
-                  width: '100%',
                   aspectRatio: '9/16',
                   objectFit: 'cover',
-                  borderRadius: '14px',
-                  display: 'block',
+                  borderRadius: 14,
+                  maxHeight: '72vh',
+                  width: '100%',
                 }}
               />
               <video
@@ -155,11 +155,11 @@ export default function GreenlandPage() {
                 loop
                 playsInline
                 style={{
-                  width: '100%',
                   aspectRatio: '9/16',
                   objectFit: 'cover',
-                  borderRadius: '14px',
-                  display: 'block',
+                  borderRadius: 14,
+                  maxHeight: '72vh',
+                  width: '100%',
                 }}
               />
             </div>
@@ -203,7 +203,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 4: Why choose us ── */}
-      <section style={{ background: '#060606', paddingTop: '6rem', paddingBottom: '6rem' }}>
+      <section data-snap="true" style={{ height: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', minHeight: '500px' }}>
             <video
