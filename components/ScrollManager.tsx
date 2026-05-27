@@ -40,7 +40,6 @@ export default function ScrollManager() {
           adventure4Top + vh * 2,
           adventure4Top + vh * 3,
           adventure4Top + vh * 4,
-          adventure4Top + vh * 5,
         ] : []),
         ...dataSnapPoints,
       ].sort((a, b) => a - b);

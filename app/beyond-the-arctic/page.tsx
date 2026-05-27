@@ -29,6 +29,7 @@ export default function BeyondTheArcticPage() {
   const section4Ref = useRef<HTMLElement>(null)
   const ring4Ref = useRef<HTMLDivElement>(null)
   const card4Refs = useRef<(HTMLDivElement | null)[]>([null, null, null, null, null])
+  const hasEntered4 = useRef(false)
 
   useEffect(() => {
     const section = section4Ref.current
@@ -43,68 +44,81 @@ export default function BeyondTheArcticPage() {
     const RY = Math.round(BIG_H * 0.14)
     const CX = Math.round(ringEl.offsetWidth / 2)
     const CY = Math.round(VH / 2)
-    const ENTRY_END = 1 / 6
 
-    card4Refs.current.forEach(el => { if (el) gsap.set(el, { opacity: 0, y: -400 }) })
+    card4Refs.current.forEach(el => { if (el) gsap.set(el, { opacity: 0 }) })
 
     const handleScroll = () => {
+      if (!hasEntered4.current) return
       const sectionTop = section.getBoundingClientRect().top + window.scrollY
-      const totalH = VH * 6
-      const p = Math.max(0, Math.min(1, (window.scrollY - sectionTop) / totalH))
-
-      if (p <= 0) {
-        card4Refs.current.forEach(el => { if (el) gsap.set(el, { opacity: 0 }) })
-        return
-      }
-
-      if (p < ENTRY_END) {
-        const entryP = p / ENTRY_END
-        card4Refs.current.forEach((el, i) => {
-          if (!el) return
-          const rawOffset = i % N
-          const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
-          const theta = norm * Math.PI * 2
-          const depth = (Math.cos(theta) + 1) / 2
-          const s = 0.22 + 0.78 * (depth * depth)
-          const w = BIG_W * s, h = BIG_H * s
-          const finalY = CY + Math.cos(theta) * RY - h / 2
-          const delay = i * 0.12
-          const lp = Math.max(0, Math.min(1, (entryP - delay) / (1 - delay * 0.5)))
-          const ease = 1 - Math.pow(1 - lp, 3)
-          gsap.set(el, {
-            x: CX + Math.sin(theta) * RX - w / 2,
-            y: finalY - 320 * (1 - ease),
-            width: w, height: h,
-            opacity: (0.10 + 0.90 * depth * depth) * ease,
-            zIndex: Math.round(depth * 100),
-            borderRadius: Math.round(14 * s),
-          })
+      const p = Math.max(0, Math.min(1, (window.scrollY - sectionTop) / (VH * 4)))
+      const ringP = p * (N - 1)
+      card4Refs.current.forEach((el, i) => {
+        if (!el) return
+        const rawOffset = ((i - ringP) % N + N) % N
+        const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
+        const theta = norm * Math.PI * 2
+        const depth = (Math.cos(theta) + 1) / 2
+        const s = 0.22 + 0.78 * (depth * depth)
+        const w = BIG_W * s, h = BIG_H * s
+        gsap.set(el, {
+          x: CX + Math.sin(theta) * RX - w / 2,
+          y: CY + Math.cos(theta) * RY - h / 2,
+          width: w, height: h,
+          opacity: 0.10 + 0.90 * depth * depth,
+          zIndex: Math.round(depth * 100),
+          borderRadius: Math.round(14 * s),
         })
-      } else {
-        const ringP = ((p - ENTRY_END) / (1 - ENTRY_END)) * (N - 1)
-        card4Refs.current.forEach((el, i) => {
-          if (!el) return
-          const rawOffset = ((i - ringP) % N + N) % N
-          const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
-          const theta = norm * Math.PI * 2
-          const depth = (Math.cos(theta) + 1) / 2
-          const s = 0.22 + 0.78 * (depth * depth)
-          const w = BIG_W * s, h = BIG_H * s
-          gsap.set(el, {
-            x: CX + Math.sin(theta) * RX - w / 2,
-            y: CY + Math.cos(theta) * RY - h / 2,
-            width: w, height: h,
-            opacity: 0.10 + 0.90 * depth * depth,
-            zIndex: Math.round(depth * 100),
-            borderRadius: Math.round(14 * s),
-          })
-        })
-      }
+      })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [isStudio])
+
+  useEffect(() => {
+    const section = section4Ref.current
+    const ringEl = ring4Ref.current
+    if (!section || !ringEl) return
+
+    const VH = window.innerHeight
+    const N = 5
+    const BIG_H = Math.round(VH * 0.52)
+    const BIG_W = Math.round(BIG_H * 9 / 16)
+    const RX = Math.round(ringEl.offsetWidth * 0.38)
+    const RY = Math.round(BIG_H * 0.14)
+    const CX = Math.round(ringEl.offsetWidth / 2)
+    const CY = Math.round(VH / 2)
+
+    const playEntry = () => {
+      if (hasEntered4.current) return
+      hasEntered4.current = true
+      card4Refs.current.forEach((el, i) => {
+        if (!el) return
+        const rawOffset = i % N
+        const norm = rawOffset <= N / 2 ? rawOffset / N : (rawOffset - N) / N
+        const theta = norm * Math.PI * 2
+        const depth = (Math.cos(theta) + 1) / 2
+        const s = 0.22 + 0.78 * (depth * depth)
+        const w = BIG_W * s, h = BIG_H * s
+        const finalX = CX + Math.sin(theta) * RX - w / 2
+        const finalY = CY + Math.cos(theta) * RY - h / 2
+        gsap.set(el, { x: finalX, y: finalY - 360, width: w, height: h, opacity: 0, zIndex: Math.round(depth * 100), borderRadius: Math.round(14 * s) })
+        gsap.to(el, {
+          y: finalY,
+          opacity: 0.10 + 0.90 * depth * depth,
+          duration: 0.85,
+          delay: i * 0.08,
+          ease: 'power3.out',
+        })
+      })
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => { if (entries[0].isIntersecting) playEntry() },
+      { threshold: 0.15 }
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
   }, [isStudio])
 
   const togglePlay = (index: number) => {
@@ -332,7 +346,7 @@ export default function BeyondTheArcticPage() {
       </section>
 
         {/* ── Section 4: Adventure ── */}
-        <section ref={section4Ref} id="adventure" style={{ height: '600vh', background: '#000', position: 'relative' }}>
+        <section ref={section4Ref} id="adventure" style={{ height: '500vh', background: '#000', position: 'relative' }}>
           <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
             <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <div ref={ring4Ref} style={{ flex: 1, position: 'relative', height: '100%' }}>
