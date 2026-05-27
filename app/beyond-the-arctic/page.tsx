@@ -196,7 +196,7 @@ export default function BeyondTheArcticPage() {
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '2fr 1fr',
+            gridTemplateColumns: '813px 395px',
             gap: '1.5rem',
             alignItems: 'flex-end',
           }}>
