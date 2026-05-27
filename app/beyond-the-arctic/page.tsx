@@ -125,7 +125,7 @@ export default function BeyondTheArcticPage() {
           </div>
 
           {/* Interactive 3-column portrait grid */}
-          <div style={{
+          <div className="min-[1900px]:max-w-[1230px] min-[1900px]:mx-auto" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
