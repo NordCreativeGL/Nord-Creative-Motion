@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
@@ -15,6 +15,13 @@ const GRID_VIDEOS = [
 export default function BeyondTheArcticPage() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [playing, setPlaying] = useState<boolean[]>([false, false, false]);
+  const [isStudio, setIsStudio] = useState(false)
+  useEffect(() => {
+    const check = () => setIsStudio(window.innerWidth >= 1900)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const togglePlay = (index: number) => {
     const video = videoRefs.current[index];
@@ -225,7 +232,7 @@ export default function BeyondTheArcticPage() {
             </div>
 
             {/* Right col: portrait video */}
-            <div style={{ aspectRatio: '9/16', borderRadius: 14, overflow: 'hidden' }}>
+            <div style={{ height: isStudio ? 'calc(100vh - 200px)' : undefined, aspectRatio: isStudio ? undefined : '9/16', borderRadius: 14, overflow: 'hidden' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P23.mp4"
                 autoPlay
