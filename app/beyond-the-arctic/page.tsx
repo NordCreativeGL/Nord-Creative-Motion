@@ -117,7 +117,7 @@ export default function BeyondTheArcticPage() {
             </h2>
             <p style={{
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-              lineHeight: 1.65,
+              lineHeight: 1.5,
               color: 'rgba(255,255,255,0.65)',
             }}>
               While Greenland is at the core of our work, we also collaborate with companies and organizations on projects in other locations. This portfolio presents a selection of photography and film productions created beyond Greenland.
@@ -128,7 +128,7 @@ export default function BeyondTheArcticPage() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1rem',
+            gap: '0.5rem',
           }}>
             {GRID_VIDEOS.map((src, i) => (
               <div
@@ -139,7 +139,7 @@ export default function BeyondTheArcticPage() {
                   overflow: 'hidden',
                   position: 'relative',
                   aspectRatio: '9/16',
-                  maxHeight: 'min(58vh, 560px)',
+                  maxHeight: 'min(65vh, 640px)',
                   background: '#111',
                   cursor: 'pointer',
                 }}
