@@ -247,100 +247,53 @@ export default function BeyondTheArcticPage() {
         </div>
       </section>
 
-      {/* ── Section 4: Adventure ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
-          {/* Label */}
-          <p style={{
-            fontSize: '13px',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.4)',
-            marginBottom: '8px',
-          }}>
-            ADVENTURE
-          </p>
+        {/* ── Section 4: Adventure ── */}
+        <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+          <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
 
-          {/* H2 */}
-          <h2 style={{
-            fontSize: 'clamp(22px, 2vw, 44px)',
-            fontWeight: 300,
-            letterSpacing: '-0.02em',
-            color: 'white',
-            marginBottom: '16px',
-          }}>
-            Adventure is in our DNA
-          </h2>
-
-          {/* Two landscape videos */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '0.75rem',
-          }}>
-            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', maxHeight: 'min(22vh, 180px)' }}>
-              <video
-                src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P59.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', maxHeight: 'min(22vh, 180px)' }}>
-              <video
-                src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P53A.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-          </div>
-
-          {/* Ticker text */}
-          <p style={{
-            fontSize: 'clamp(0.875rem, 0.9vw, 1.1rem)',
-            color: 'rgba(255,255,255,0.6)',
-            whiteSpace: 'nowrap',
-            textAlign: 'center',
-            padding: '16px 0',
-          }}>
-            Attention to detail, subtle nuances, and layered storytelling define our work.{' '}
-            <span style={{ color: 'rgba(255,255,255,0.4)' }}>•</span>
-            {' '}Sequences emerge naturally, creating rich, evocative, and harmonious visuals.
-          </p>
-
-          {/* Three portrait videos */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '0.75rem',
-          }}>
-            {[
-              "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P24.mp4",
-              "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P25.mp4",
-              "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P26.mp4",
-            ].map((src, i) => (
-              <div key={i} style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '9/16', maxHeight: 'min(28vh, 220px)' }}>
-                <video
-                  src={src}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
+              {/* Left: text */}
+              <div style={{ flex: '0 0 28%' }}>
+                <p style={{ fontSize: '13px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '10px' }}>
+                  ADVENTURE
+                </p>
+                <h2 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', lineHeight: 1.1, marginBottom: '1.5rem' }}>
+                  Adventure is in our DNA
+                </h2>
+                <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>
+                  Attention to detail, subtle nuances, and layered storytelling define our work. Sequences emerge naturally, creating rich, evocative, and harmonious visuals.
+                </p>
               </div>
-            ))}
+
+              {/* Right: overlapping card deck */}
+              {(() => {
+                const portH = isStudio ? 370 : 285
+                const portW = Math.round(portH * 9 / 16)
+                const landH = portW
+                const landW = Math.round(landH * 16 / 9)
+                const step = isStudio ? 156 : 120
+                const landY = Math.round((portH - landH) / 2)
+                const cards = [
+                  { src: 'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P59.mp4',  w: landW, h: landH, x: 0,        y: landY, z: 1 },
+                  { src: 'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P24.mp4',  w: portW, h: portH, x: step,     y: 0,     z: 2 },
+                  { src: 'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P25.mp4',  w: portW, h: portH, x: step * 2, y: 0,     z: 3 },
+                  { src: 'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P26.mp4',  w: portW, h: portH, x: step * 3, y: 0,     z: 4 },
+                  { src: 'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P53A.mp4', w: landW, h: landH, x: step * 4, y: landY, z: 5 },
+                ]
+                return (
+                  <div style={{ flex: 1, position: 'relative', height: portH }}>
+                    {cards.map((card, i) => (
+                      <div key={i} style={{ position: 'absolute', left: card.x, top: card.y, width: card.w, height: card.h, borderRadius: 14, overflow: 'hidden', zIndex: card.z }}>
+                        <video src={card.src} autoPlay muted loop playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                      </div>
+                    ))}
+                  </div>
+                )
+              })()}
+
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <Footer />
       <BackToTop />
