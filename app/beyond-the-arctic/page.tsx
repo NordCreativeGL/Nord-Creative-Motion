@@ -198,7 +198,7 @@ export default function BeyondTheArcticPage() {
             display: 'grid',
             gridTemplateColumns: '2fr 1fr',
             gap: '1.5rem',
-            alignItems: 'start',
+            alignItems: 'flex-end',
           }}>
             {/* Left col: quote + landscape video */}
             <div>
@@ -212,7 +212,7 @@ export default function BeyondTheArcticPage() {
               }}>
                 "Strong visuals capture attention and enhance understanding. Good storytelling starts with observation."
               </p>
-              <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', width: '100%', maxHeight: 'min(40vh, 340px)' }}>
+              <div style={{ borderRadius: 14, overflow: 'hidden', width: '805px', height: '340px' }}>
                 <video
                   src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P22.mp4"
                   autoPlay
@@ -226,7 +226,7 @@ export default function BeyondTheArcticPage() {
             </div>
 
             {/* Right col: portrait video */}
-            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '9/16', width: '100%', maxHeight: 'min(70vh, 600px)' }}>
+            <div style={{ borderRadius: 14, overflow: 'hidden', width: '402px', height: '600px' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P23.mp4"
                 autoPlay
