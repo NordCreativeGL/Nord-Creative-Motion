@@ -202,7 +202,7 @@ export default function BeyondTheArcticPage() {
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '813fr 395fr',
+            gridTemplateColumns: isStudio ? '900fr 590fr' : '813fr 395fr',
             gap: '1.5rem',
             alignItems: 'flex-end',
           }}>
@@ -232,7 +232,7 @@ export default function BeyondTheArcticPage() {
             </div>
 
             {/* Right col: portrait video */}
-            <div style={{ height: isStudio ? 'calc(100vh - 200px)' : undefined, aspectRatio: isStudio ? undefined : '9/16', borderRadius: 14, overflow: 'hidden' }}>
+            <div style={{ aspectRatio: '9/16', borderRadius: 14, overflow: 'hidden' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P23.mp4"
                 autoPlay
