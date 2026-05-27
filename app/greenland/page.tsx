@@ -144,7 +144,7 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: '62vh',
+                  maxHeight: '54vh',
                   width: '100%',
                 }}
               />
@@ -158,7 +158,7 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: '62vh',
+                  maxHeight: '54vh',
                   width: '100%',
                 }}
               />
@@ -204,8 +204,8 @@ export default function GreenlandPage() {
 
       {/* ── Section 4: Why choose us ── */}
       <section data-snap="true" style={{ height: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          <div style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', minHeight: '75vh', width: '90vw', maxWidth: '1400px' }}>
+        <div className="mx-auto max-w-7xl px-6 w-full">
+          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: 500 }}>
             <video
               src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P16.mp4"
               autoPlay
@@ -237,7 +237,7 @@ export default function GreenlandPage() {
               zIndex: 1,
               padding: '48px',
               display: 'flex',
-              minHeight: '75vh',
+              minHeight: 500,
             }}>
               {/* Left col — 2/3 */}
               <div style={{ width: '66.66%', paddingRight: '48px' }}>
