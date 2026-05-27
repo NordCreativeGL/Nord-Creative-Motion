@@ -130,10 +130,10 @@ export default function GreenlandPage() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: '3fr 2fr',
-            gap: '64px',
+            gap: '2rem',
             alignItems: 'center',
           }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P14.mp4"
                 autoPlay
@@ -144,7 +144,7 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: '72vh',
+                  maxHeight: '62vh',
                   width: '100%',
                 }}
               />
@@ -158,7 +158,7 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: '72vh',
+                  maxHeight: '62vh',
                   width: '100%',
                 }}
               />
@@ -204,8 +204,8 @@ export default function GreenlandPage() {
 
       {/* ── Section 4: Why choose us ── */}
       <section data-snap="true" style={{ height: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
-          <div style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', minHeight: '500px' }}>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <div style={{ position: 'relative', borderRadius: '14px', overflow: 'hidden', minHeight: '75vh', width: '90vw', maxWidth: '1400px' }}>
             <video
               src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P16.mp4"
               autoPlay
@@ -237,7 +237,7 @@ export default function GreenlandPage() {
               zIndex: 1,
               padding: '48px',
               display: 'flex',
-              minHeight: '500px',
+              minHeight: '75vh',
             }}>
               {/* Left col — 2/3 */}
               <div style={{ width: '66.66%', paddingRight: '48px' }}>
