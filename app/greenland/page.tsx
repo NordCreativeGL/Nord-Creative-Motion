@@ -125,8 +125,8 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 3: How we work ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'flex-start', overflow: 'hidden', paddingTop: '10vh' }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '0', paddingBottom: '0' }}>
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: '3fr 2fr',
@@ -144,7 +144,7 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: '54vh',
+                  maxHeight: 'min(50vh, 420px)',
                   width: '100%',
                 }}
               />
@@ -158,7 +158,7 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: '54vh',
+                  maxHeight: 'min(50vh, 420px)',
                   width: '100%',
                 }}
               />
