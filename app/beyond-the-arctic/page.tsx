@@ -86,7 +86,7 @@ export default function BeyondTheArcticPage() {
       </section>
 
       {/* ── Section 2: Our work ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'flex-start', overflow: 'hidden', paddingTop: '4vh' }}>
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'flex-start', overflow: 'hidden', paddingTop: '2vh' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <p style={{
             fontSize: '13px',
@@ -104,7 +104,7 @@ export default function BeyondTheArcticPage() {
             gridTemplateColumns: '1fr 1fr',
             gap: '3rem',
             alignItems: 'start',
-            marginBottom: '2rem',
+            marginBottom: '1rem',
           }}>
             <h2 style={{
               fontSize: 'clamp(28px, 2.78vw, 68px)',
@@ -141,7 +141,7 @@ export default function BeyondTheArcticPage() {
                   aspectRatio: '9/16',
                   background: '#111',
                   cursor: 'pointer',
-                  maxHeight: 'min(48vh, 440px)',
+                  maxHeight: '701px',
                 }}
               >
                 <video
