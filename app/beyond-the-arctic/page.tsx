@@ -85,8 +85,8 @@ export default function BeyondTheArcticPage() {
         </div>
       </section>
 
-      {/* ── Section 2: Intro ── */}
-      <section style={{ padding: '96px 0 48px' }}>
+      {/* ── Section 2: Our work ── */}
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <p style={{
             fontSize: '13px',
@@ -102,7 +102,7 @@ export default function BeyondTheArcticPage() {
             fontWeight: 300,
             letterSpacing: '-0.02em',
             color: 'white',
-            marginBottom: '28px',
+            marginBottom: '12px',
           }}>
             Productions beyond Greenland
           </h2>
@@ -110,20 +110,18 @@ export default function BeyondTheArcticPage() {
             fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
             lineHeight: 1.65,
             color: 'rgba(255,255,255,0.65)',
-            maxWidth: '640px',
+            maxWidth: '500px',
+            marginBottom: '0',
           }}>
             While Greenland is at the core of our work, we also collaborate with companies and organizations on projects in other locations. This portfolio presents a selection of photography and film productions created beyond Greenland.
           </p>
-        </div>
-      </section>
 
-      {/* ── Section 3: 3-column interactive video grid ── */}
-      <section style={{ padding: '0 0 48px' }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
+          {/* Interactive 3-column portrait grid */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1rem',
+            marginTop: '2rem',
           }}>
             {GRID_VIDEOS.map((src, i) => (
               <div
@@ -134,6 +132,7 @@ export default function BeyondTheArcticPage() {
                   overflow: 'hidden',
                   position: 'relative',
                   aspectRatio: '9/16',
+                  maxHeight: 'min(42vh, 360px)',
                   background: '#111',
                   cursor: 'pointer',
                 }}
@@ -185,8 +184,8 @@ export default function BeyondTheArcticPage() {
         </div>
       </section>
 
-      {/* ── Section 4: Mixed layout ── */}
-      <section style={{ padding: '96px 0' }}>
+      {/* ── Section 3: Quote + mixed layout ── */}
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
@@ -206,7 +205,7 @@ export default function BeyondTheArcticPage() {
               }}>
                 "Strong visuals capture attention and enhance understanding. Good storytelling starts with observation."
               </p>
-              <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', width: '100%' }}>
+              <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', width: '100%', maxHeight: 'min(40vh, 340px)' }}>
                 <video
                   src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P22.mp4"
                   autoPlay
@@ -220,7 +219,7 @@ export default function BeyondTheArcticPage() {
             </div>
 
             {/* Right col: portrait video */}
-            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '9/16', width: '100%' }}>
+            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '9/16', width: '100%', maxHeight: 'min(70vh, 600px)' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P23.mp4"
                 autoPlay
@@ -235,33 +234,38 @@ export default function BeyondTheArcticPage() {
         </div>
       </section>
 
-      {/* ── Section 5: Adventure ── */}
-      <section style={{ padding: '96px 0 0' }}>
+      {/* ── Section 4: Adventure ── */}
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
+          {/* Label */}
           <p style={{
             fontSize: '13px',
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
             color: 'rgba(255,255,255,0.4)',
-            marginBottom: '20px',
+            marginBottom: '8px',
           }}>
             ADVENTURE
           </p>
+
+          {/* H2 */}
           <h2 style={{
-            fontSize: 'clamp(28px, 2.78vw, 68px)',
+            fontSize: 'clamp(22px, 2vw, 44px)',
             fontWeight: 300,
             letterSpacing: '-0.02em',
             color: 'white',
-            marginBottom: '2rem',
+            marginBottom: '16px',
           }}>
             Adventure is in our DNA
           </h2>
+
+          {/* Two landscape videos */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: '1rem',
+            gap: '0.75rem',
           }}>
-            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', width: '100%' }}>
+            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', maxHeight: 'min(22vh, 180px)' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P59.mp4"
                 autoPlay
@@ -272,7 +276,7 @@ export default function BeyondTheArcticPage() {
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
             </div>
-            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', width: '100%' }}>
+            <div style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '16/9', maxHeight: 'min(22vh, 180px)' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P53A.mp4"
                 autoPlay
@@ -284,37 +288,32 @@ export default function BeyondTheArcticPage() {
               />
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ── Section 6: Ticker text ── */}
-      <section style={{ padding: '64px 0', overflow: 'hidden' }}>
-        <p style={{
-          fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-          color: 'rgba(255,255,255,0.6)',
-          whiteSpace: 'nowrap',
-          textAlign: 'center',
-        }}>
-          Attention to detail, subtle nuances, and layered storytelling define our work.{' '}
-          <span style={{ color: 'rgba(255,255,255,0.4)' }}>•</span>
-          {' '}Sequences emerge naturally, creating rich, evocative, and harmonious visuals.
-        </p>
-      </section>
+          {/* Ticker text */}
+          <p style={{
+            fontSize: 'clamp(0.875rem, 0.9vw, 1.1rem)',
+            color: 'rgba(255,255,255,0.6)',
+            whiteSpace: 'nowrap',
+            textAlign: 'center',
+            padding: '16px 0',
+          }}>
+            Attention to detail, subtle nuances, and layered storytelling define our work.{' '}
+            <span style={{ color: 'rgba(255,255,255,0.4)' }}>•</span>
+            {' '}Sequences emerge naturally, creating rich, evocative, and harmonious visuals.
+          </p>
 
-      {/* ── Section 7: 3-column portrait grid ── */}
-      <section style={{ padding: '0 0 96px' }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
+          {/* Three portrait videos */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1rem',
+            gap: '0.75rem',
           }}>
             {[
               "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P24.mp4",
               "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P25.mp4",
               "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P26.mp4",
             ].map((src, i) => (
-              <div key={i} style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '9/16' }}>
+              <div key={i} style={{ borderRadius: 14, overflow: 'hidden', aspectRatio: '9/16', maxHeight: 'min(28vh, 220px)' }}>
                 <video
                   src={src}
                   autoPlay
