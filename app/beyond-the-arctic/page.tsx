@@ -212,7 +212,7 @@ export default function BeyondTheArcticPage() {
               }}>
                 "Strong visuals capture attention and enhance understanding. Good storytelling starts with observation."
               </p>
-              <div style={{ width: '100%', height: '340px', borderRadius: 14, overflow: 'hidden' }}>
+              <div style={{ width: '100%', height: '457px', borderRadius: 14, overflow: 'hidden' }}>
                 <video
                   src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P22.mp4"
                   autoPlay
