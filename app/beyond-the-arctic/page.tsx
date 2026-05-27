@@ -201,7 +201,7 @@ export default function BeyondTheArcticPage() {
             alignItems: 'flex-end',
           }}>
             {/* Left col: quote + landscape video */}
-            <div style={{ width: '813px', height: '579px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
               <p style={{
                 fontSize: 'clamp(1.25rem, 1.4vw, 1.75rem)',
                 fontWeight: 300,
@@ -226,7 +226,7 @@ export default function BeyondTheArcticPage() {
             </div>
 
             {/* Right col: portrait video */}
-            <div style={{ width: '395px', height: '702px', borderRadius: 14, overflow: 'hidden' }}>
+            <div style={{ height: '702px', borderRadius: 14, overflow: 'hidden' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P23.mp4"
                 autoPlay
