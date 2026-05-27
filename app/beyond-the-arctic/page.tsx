@@ -334,7 +334,7 @@ export default function BeyondTheArcticPage() {
       </section>
 
         {/* ── Section 4: Adventure ── */}
-        <section ref={section4Ref} style={{ height: '600vh', background: '#000', position: 'relative' }}>
+        <section ref={section4Ref} id="adventure" style={{ height: '600vh', background: '#000', position: 'relative' }}>
           <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
             <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <div ref={ring4Ref} style={{ flex: 1, position: 'relative', height: '100%' }}>

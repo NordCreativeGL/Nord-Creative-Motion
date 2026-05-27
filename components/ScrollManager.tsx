@@ -25,6 +25,8 @@ export default function ScrollManager() {
       const vh = window.innerHeight;
       const servicesEl = document.getElementById('services');
       const servicesTop = servicesEl ? servicesEl.getBoundingClientRect().top + window.scrollY : vh;
+        const adventure4El = document.getElementById('adventure')
+        const adventure4Top = adventure4El ? adventure4El.getBoundingClientRect().top + window.scrollY : null
 
       const snapElements = Array.from(document.querySelectorAll('[data-snap="true"]'));
       const dataSnapPoints = snapElements.map(el => el.getBoundingClientRect().top + window.scrollY);
@@ -32,6 +34,14 @@ export default function ScrollManager() {
       const allSnapPoints = [
         0,
         ...(servicesEl ? [servicesTop, servicesTop + vh * 1.5, servicesTop + vh * 3] : []),
+        ...(adventure4Top !== null ? [
+          adventure4Top,
+          adventure4Top + vh,
+          adventure4Top + vh * 2,
+          adventure4Top + vh * 3,
+          adventure4Top + vh * 4,
+          adventure4Top + vh * 5,
+        ] : []),
         ...dataSnapPoints,
       ].sort((a, b) => a - b);
 
