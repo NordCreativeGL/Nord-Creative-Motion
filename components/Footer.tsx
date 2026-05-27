@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer id="footer" data-snap="true" className="border-t border-white/10 py-16 bg-black min-h-[25vh] flex flex-col justify-center">
+    <footer id="footer" className="border-t border-white/10 py-16 bg-black min-h-[25vh] flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-6">
         <Image
           src="/logo-wordmark-transparent.png"
