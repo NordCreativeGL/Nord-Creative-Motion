@@ -86,7 +86,7 @@ export default function BeyondTheArcticPage() {
       </section>
 
       {/* ── Section 2: Our work ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'flex-start', overflow: 'hidden', paddingTop: '2vh' }}>
+      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <p style={{
             fontSize: '13px',
