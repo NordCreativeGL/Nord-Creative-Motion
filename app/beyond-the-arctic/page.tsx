@@ -38,8 +38,15 @@ export default function BeyondTheArcticPage() {
 
     const VH = window.innerHeight
     const N = 5
-    const BIG_H = Math.round(VH * 0.52)
+    const BIG_H = Math.round(VH * 0.70)
     const BIG_W = Math.round(BIG_H * 9 / 16)
+    const CARD_ASPECTS = [
+      { w: Math.round(BIG_W * 16 / 9), h: BIG_W },
+      { w: BIG_W, h: BIG_H },
+      { w: BIG_W, h: BIG_H },
+      { w: BIG_W, h: BIG_H },
+      { w: Math.round(BIG_W * 16 / 9), h: BIG_W },
+    ]
     const RX = Math.round(ringEl.offsetWidth * 0.38)
     const RY = Math.round(BIG_H * 0.14)
     const CX = Math.round(ringEl.offsetWidth / 2)
@@ -59,7 +66,7 @@ export default function BeyondTheArcticPage() {
         const theta = norm * Math.PI * 2
         const depth = (Math.cos(theta) + 1) / 2
         const s = 0.22 + 0.78 * (depth * depth)
-        const w = BIG_W * s, h = BIG_H * s
+        const w = CARD_ASPECTS[i].w * s, h = CARD_ASPECTS[i].h * s
         gsap.set(el, {
           x: CX + Math.sin(theta) * RX - w / 2,
           y: CY + Math.cos(theta) * RY - h / 2,
@@ -68,6 +75,16 @@ export default function BeyondTheArcticPage() {
           zIndex: Math.round(depth * 100),
           borderRadius: Math.round(14 * s),
         })
+      })
+      const activeIndex = Math.round(ringP) % N
+      card4Refs.current.forEach((el, i) => {
+        const video = el?.querySelector('video') as HTMLVideoElement | null
+        if (!video) return
+        if (i === activeIndex) {
+          if (video.paused) video.play()
+        } else {
+          if (!video.paused) video.pause()
+        }
       })
     }
 
@@ -82,8 +99,15 @@ export default function BeyondTheArcticPage() {
 
     const VH = window.innerHeight
     const N = 5
-    const BIG_H = Math.round(VH * 0.52)
+    const BIG_H = Math.round(VH * 0.70)
     const BIG_W = Math.round(BIG_H * 9 / 16)
+    const CARD_ASPECTS = [
+      { w: Math.round(BIG_W * 16 / 9), h: BIG_W },
+      { w: BIG_W, h: BIG_H },
+      { w: BIG_W, h: BIG_H },
+      { w: BIG_W, h: BIG_H },
+      { w: Math.round(BIG_W * 16 / 9), h: BIG_W },
+    ]
     const RX = Math.round(ringEl.offsetWidth * 0.38)
     const RY = Math.round(BIG_H * 0.14)
     const CX = Math.round(ringEl.offsetWidth / 2)
@@ -99,7 +123,7 @@ export default function BeyondTheArcticPage() {
         const theta = norm * Math.PI * 2
         const depth = (Math.cos(theta) + 1) / 2
         const s = 0.22 + 0.78 * (depth * depth)
-        const w = BIG_W * s, h = BIG_H * s
+        const w = CARD_ASPECTS[i].w * s, h = CARD_ASPECTS[i].h * s
         const finalX = CX + Math.sin(theta) * RX - w / 2
         const finalY = CY + Math.cos(theta) * RY - h / 2
         gsap.set(el, { x: finalX, y: finalY - 360, width: w, height: h, opacity: 0, zIndex: Math.round(depth * 100), borderRadius: Math.round(14 * s) })
@@ -109,6 +133,12 @@ export default function BeyondTheArcticPage() {
           duration: 0.85,
           delay: i * 0.08,
           ease: 'power3.out',
+          ...(i === 4 ? {
+            onComplete: () => {
+              const video = card4Refs.current[0]?.querySelector('video') as HTMLVideoElement | null
+              if (video) video.play()
+            }
+          } : {}),
         })
       })
     }
@@ -358,7 +388,7 @@ export default function BeyondTheArcticPage() {
                   'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P53A.mp4',
                 ].map((src, i) => (
                   <div key={i} ref={el => { card4Refs.current[i] = el }} style={{ position: 'absolute', overflow: 'hidden', opacity: 0 }}>
-                    <video src={src} autoPlay muted loop playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    <video src={src} muted loop playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   </div>
                 ))}
               </div>
