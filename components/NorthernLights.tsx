@@ -96,9 +96,11 @@ export default function NorthernLights() {
       const pts: number[] = [];
       for (let i = 0; i <= PTS; i++) {
         const frac = i / PTS;
-        const w1 = Math.sin(frac * Math.PI * 2.0 * b.freq + time * b.speedMul + b.phase);
-        const w2 = Math.sin(frac * Math.PI * 3.7 * b.freq + time * b.speedMul * 1.5 + b.phase + 1.1) * 0.42;
-        const w3 = Math.sin(frac * Math.PI * 7.1 * b.freq + time * b.speedMul * 2.8 + b.phase + 2.7) * 0.18;
+        const w1 = Math.sin(frac * Math.PI * 2.0 * b.freq + time * b.speedMul + b.phase) * 0.5
+                 + Math.sin(frac * Math.PI * 2.0 * b.freq - time * b.speedMul * 0.85 + b.phase + 2.1) * 0.5;
+        const w2 = Math.sin(frac * Math.PI * 3.7 * b.freq + time * b.speedMul * 1.3 + b.phase + 1.1) * 0.21
+                 + Math.sin(frac * Math.PI * 3.7 * b.freq - time * b.speedMul * 1.1 + b.phase + 3.8) * 0.21;
+        const w3 = Math.sin(frac * Math.PI * 7.1 * b.freq + b.phase + 2.7) * Math.sin(time * b.speedMul * 0.4 + b.phase) * 0.18;
         const curtain = Math.sin(time * b.speedMul * 0.4 + b.phase * 0.5) * amp * 0.30;
         pts.push(yBase + (w1 + w2 + w3) * amp + curtain);
       }
