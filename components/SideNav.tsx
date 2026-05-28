@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-const items = [
+type NavItem = { label: string; id: string };
+
+const DEFAULT_ITEMS: NavItem[] = [
   { label: 'What we offer', id: 'services' },
   { label: 'Greenland', id: 'greenland' },
   { label: 'Work with us', id: 'cta' },
   { label: 'Based in Greenland', id: 'based' },
 ];
 
-export default function SideNav() {
+export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }) {
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState('');
   const [hovered, setHovered] = useState('');

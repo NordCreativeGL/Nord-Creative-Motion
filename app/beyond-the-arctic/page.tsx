@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollManager from "@/components/ScrollManager";
+import SideNav from "@/components/SideNav";
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
@@ -166,10 +167,16 @@ export default function BeyondTheArcticPage() {
   return (
     <main style={{ background: '#000000' }}>
       <ScrollManager />
+      <SideNav items={[
+        { label: 'Beyond the Arctic', id: 'bta-hero' },
+        { label: 'Our work', id: 'bta-work' },
+        { label: 'The journey', id: 'bta-quote' },
+        { label: 'Adventure', id: 'adventure' },
+      ]} />
       <Header />
 
       {/* ── Section 1: Hero ── */}
-      <section data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+      <section id="bta-hero" data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
         <video
           src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P60%20HEADER.mp4"
           autoPlay
@@ -221,7 +228,7 @@ export default function BeyondTheArcticPage() {
       </section>
 
       {/* ── Section 2: Our work ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="bta-work" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <p style={{
             fontSize: '13px',
@@ -326,7 +333,7 @@ export default function BeyondTheArcticPage() {
       </section>
 
       {/* ── Section 3: Quote + mixed layout ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="bta-quote" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',

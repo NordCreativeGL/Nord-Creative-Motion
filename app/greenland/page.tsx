@@ -1,16 +1,25 @@
+"use client";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollManager from "@/components/ScrollManager";
+import SideNav from "@/components/SideNav";
 
 export default function GreenlandPage() {
   return (
     <main style={{ background: '#000000' }}>
       <ScrollManager />
+      <SideNav items={[
+        { label: 'Greenland', id: 'gl-hero' },
+        { label: 'Working in Greenland', id: 'gl-working' },
+        { label: 'How we work', id: 'gl-process' },
+        { label: 'Why choose us', id: 'gl-why' },
+      ]} />
       <Header />
 
       {/* ── Section 1: Hero ── */}
-      <section data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+      <section id="gl-hero" data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
         <video
           src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
           autoPlay
@@ -61,7 +70,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 2: Working in Greenland ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="gl-working" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
@@ -125,7 +134,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 3: How we work ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '0', paddingBottom: '0' }}>
+      <section id="gl-process" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '0', paddingBottom: '0' }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
           <div style={{
             display: 'grid',
@@ -203,7 +212,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 4: Why choose us ── */}
-      <section data-snap="true" style={{ height: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="gl-why" data-snap="true" style={{ height: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div className="mx-auto max-w-7xl px-6 w-full">
           <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: 500 }}>
             <video
