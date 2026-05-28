@@ -236,8 +236,8 @@ export default function GreenlandPage() {
             <div style={{
               position: 'absolute',
               left: '66.66%',
-              top: 0,
-              bottom: 0,
+              top: '48px',
+              bottom: '48px',
               width: '1px',
               background: 'rgba(255,255,255,0.1)',
             }} />
