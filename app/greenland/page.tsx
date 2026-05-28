@@ -319,13 +319,12 @@ export default function GreenlandPage() {
                 </p>
                 <a
                   href="mailto:contact@nordcreative.dk"
-                  className="hover:bg-white hover:text-black transition-colors duration-200"
+                  className="text-white hover:bg-white hover:text-black transition-colors duration-200"
                   style={{
                     display: 'inline-block',
                     border: '1px solid rgba(255,255,255,0.6)',
                     padding: '14px 32px',
                     borderRadius: '999px',
-                    color: 'white',
                     fontSize: 'clamp(15px, 0.9vw, 19px)',
                     fontWeight: 300,
                     textDecoration: 'none',
