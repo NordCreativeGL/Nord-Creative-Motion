@@ -11,7 +11,6 @@ export default function GreenlandPage() {
     <main style={{ background: '#000000' }}>
       <ScrollManager />
       <SideNav items={[
-        { label: 'Greenland', id: 'gl-hero' },
         { label: 'Working in Greenland', id: 'gl-working' },
         { label: 'How we work', id: 'gl-process' },
         { label: 'Why choose us', id: 'gl-why' },

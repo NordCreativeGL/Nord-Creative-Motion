@@ -168,7 +168,6 @@ export default function BeyondTheArcticPage() {
     <main style={{ background: '#000000' }}>
       <ScrollManager />
       <SideNav items={[
-        { label: 'Beyond the Arctic', id: 'bta-hero' },
         { label: 'Our work', id: 'bta-work' },
         { label: 'The journey', id: 'bta-quote' },
         { label: 'Adventure', id: 'adventure' },
