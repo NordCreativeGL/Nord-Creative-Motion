@@ -19,6 +19,10 @@ const SECTIONS = [
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+function lerpHue(a: number, b: number, t: number): number {
+  const diff = ((b - a) % 360 + 540) % 360 - 180;
+  return ((a + diff * t) % 360 + 360) % 360;
+}
 
 export default function NorthernLights() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -116,10 +120,10 @@ export default function NorthernLights() {
       const sf = sectionProgress - si;
       const s0 = SECTIONS[Math.min(si, SECTIONS.length - 1)];
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
-      const hue1 = lerp(s0.hue1, s1.hue1, sf);
-      const hue2 = lerp(s0.hue2, s1.hue2, sf);
+      const hue1 = lerpHue(s0.hue1, s1.hue1, sf);
+      const hue2 = lerpHue(s0.hue2, s1.hue2, sf);
       BANDS.forEach((b, bi) => {
-        drawBand(b, lerp(hue1, hue2, bi / (BANDS.length - 1)), t);
+        drawBand(b, lerpHue(hue1, hue2, bi / (BANDS.length - 1)), t);
       });
       t += 0.007 * SPEED;
       raf = requestAnimationFrame(draw);
