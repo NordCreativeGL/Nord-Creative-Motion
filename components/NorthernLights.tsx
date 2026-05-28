@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 const INTENSITY = 0.35;
 const BASE_THICKNESS = 0.22;
-const SPEED = 0.5;
+const SPEED = 0.35;
 
 const BANDS = [
   { yFrac: 0.15, amp: 0.11, freq: 0.70, phase: 0.0, speedMul: 1.40, thickMul: 0.45, alphaMul: 0.90, hueShift:  0, drift: 0.018 },
