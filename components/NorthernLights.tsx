@@ -15,7 +15,7 @@ const BANDS = [
 const SECTIONS = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 358, hue2: 12  },
+  { id: "gl-why",     hue1: 15,  hue2: 28  },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
@@ -67,12 +67,20 @@ export default function NorthernLights() {
         canvas.style.opacity = "1";
       }
 
-      // Compute section progress (0 = gl-working, 1 = gl-process, 2 = gl-why)
+      // Per-section progress — sectionProgress = 2.0 the moment center enters gl-why
       const els = SECTIONS.map(s => document.getElementById(s.id));
-      if (!els[0] || !els[2]) return;
-      const top = els[0].offsetTop;
-      const bottom = els[2].offsetTop + els[2].offsetHeight;
-      const raw = (window.scrollY + H * 0.5 - top) / (bottom - top) * (SECTIONS.length - 1);
+      if (!els[0]) return;
+      const center = window.scrollY + H * 0.5;
+      let raw = 0;
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (!el) continue;
+        const elTop = el.offsetTop;
+        const elBot = elTop + el.offsetHeight;
+        if (center <= elTop) { raw = i; break; }
+        if (center <= elBot) { raw = i + (center - elTop) / el.offsetHeight; break; }
+        raw = i + 1;
+      }
       sectionProgress = Math.max(0, Math.min(SECTIONS.length - 1, raw));
     }
     window.addEventListener("scroll", onScroll, { passive: true });
