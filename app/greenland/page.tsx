@@ -142,6 +142,8 @@ export default function GreenlandPage() {
             gridTemplateColumns: '3fr 2fr',
             gap: '2rem',
             alignItems: 'center',
+            maxHeight: '90vh',
+            overflow: 'hidden',
           }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <video
@@ -154,8 +156,8 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: 'min(50vh, 420px)',
                   width: '100%',
+                  display: 'block',
                 }}
               />
               <video
@@ -168,8 +170,8 @@ export default function GreenlandPage() {
                   aspectRatio: '9/16',
                   objectFit: 'cover',
                   borderRadius: 14,
-                  maxHeight: 'min(50vh, 420px)',
                   width: '100%',
+                  display: 'block',
                 }}
               />
             </div>
