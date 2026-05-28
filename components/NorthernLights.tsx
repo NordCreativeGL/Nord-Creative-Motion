@@ -15,7 +15,7 @@ const BANDS = [
 const SECTIONS = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 10,  hue2: 32  },
+  { id: "gl-why",     hue1: 0,   hue2: 18  },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
@@ -142,9 +142,8 @@ export default function NorthernLights() {
         inset: 0,
         width: "100vw",
         height: "100vh",
-        zIndex: 1,
+        zIndex: 0,
         pointerEvents: "none",
-        mixBlendMode: "screen",
         opacity: 0,
         transition: "opacity 0.8s ease",
       }}

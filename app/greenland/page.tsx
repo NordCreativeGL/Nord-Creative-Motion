@@ -71,7 +71,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 2: Working in Greenland ── */}
-      <section id="gl-working" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="gl-working" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
@@ -135,7 +135,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 3: How we work ── */}
-      <section id="gl-process" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '0', paddingBottom: '0' }}>
+      <section id="gl-process" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '0', paddingBottom: '0', position: 'relative', zIndex: 1 }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
           <div style={{
             display: 'grid',
@@ -213,7 +213,7 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 4: Why choose us ── */}
-      <section id="gl-why" data-snap="true" style={{ height: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="gl-why" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
         <div className="mx-auto max-w-7xl px-6 w-full">
           <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: 500 }}>
             <video
