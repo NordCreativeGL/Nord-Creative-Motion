@@ -32,6 +32,7 @@ export default function NorthernLights() {
     let canvasVisible = true;
 
     function resize() {
+      if (!canvas) return;
       W = window.innerWidth;
       H = window.innerHeight;
       canvas.width = W * devicePixelRatio;
