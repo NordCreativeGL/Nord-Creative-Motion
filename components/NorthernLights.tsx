@@ -24,8 +24,7 @@ export default function NorthernLights() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
     let W = 0, H = 0, t = 0, raf = 0;
     let sectionProgress = 0;
