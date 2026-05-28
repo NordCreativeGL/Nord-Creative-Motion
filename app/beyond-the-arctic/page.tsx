@@ -290,7 +290,7 @@ export default function BeyondTheArcticPage() {
                   muted
                   loop
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   style={{
                     width: '100%',
                     height: '100%',
