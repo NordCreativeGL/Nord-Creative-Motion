@@ -2,20 +2,20 @@
 import { useEffect, useRef } from "react";
 
 const INTENSITY = 0.35;
-const BASE_THICKNESS = 0.18;
-const SPEED = 1;
+const BASE_THICKNESS = 0.22;
+const SPEED = 0.5;
 
 const BANDS = [
   { yFrac: 0.15, amp: 0.11, freq: 0.70, phase: 0.0, speedMul: 1.40, thickMul: 0.45, alphaMul: 0.90, hueShift:  0, drift: 0.018 },
   { yFrac: 0.38, amp: 0.18, freq: 0.32, phase: 1.6, speedMul: 0.65, thickMul: 2.10, alphaMul: 0.50, hueShift: 10, drift: 0.009 },
   { yFrac: 0.57, amp: 0.14, freq: 0.85, phase: 3.8, speedMul: 1.70, thickMul: 0.60, alphaMul: 0.85, hueShift: -8, drift: 0.022 },
-  { yFrac: 0.74, amp: 0.09, freq: 0.44, phase: 5.1, speedMul: 0.45, thickMul: 1.70, alphaMul: 0.28, hueShift: 18, drift: 0.006 },
+  { yFrac: 0.88, amp: 0.09, freq: 0.44, phase: 5.1, speedMul: 0.45, thickMul: 1.70, alphaMul: 0.28, hueShift: 5, drift: 0.006 },
 ];
 
 const SECTIONS = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 0,   hue2: 18  },
+  { id: "gl-why",     hue1: 358, hue2: 12  },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
@@ -98,8 +98,8 @@ export default function NorthernLights() {
       grad.addColorStop(0.00, `hsla(${h},88%,70%,0)`);
       grad.addColorStop(0.28, `hsla(${h},90%,73%,${alpha * 0.45})`);
       grad.addColorStop(0.50, `hsla(${h},93%,76%,${alpha})`);
-      grad.addColorStop(0.72, `hsla(${(h + 22) % 360},82%,63%,${alpha * 0.38})`);
-      grad.addColorStop(1.00, `hsla(${(h + 30) % 360},70%,55%,0)`);
+      grad.addColorStop(0.72, `hsla(${(h + 10) % 360},82%,63%,${alpha * 0.38})`);
+      grad.addColorStop(1.00, `hsla(${(h + 18) % 360},70%,55%,0)`);
 
       ctx.beginPath();
       ctx.moveTo(0, pts[0] - bH * 0.5);
