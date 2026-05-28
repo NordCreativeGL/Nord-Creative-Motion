@@ -12,10 +12,12 @@ const BANDS = [
   { yFrac: 0.88, amp: 0.09, freq: 0.44, phase: 5.1, speedMul: 0.45, thickMul: 1.70, alphaMul: 0.28, hueShift: 5, drift: 0.006 },
 ];
 
-const SECTIONS = [
+type NLSection = { id: string; hue1: number; hue2: number; bandHues?: number[] };
+
+const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 15,  hue2: 28  },
+  { id: "gl-why",     hue1: 12,  hue2: 22,  bandHues: [8, 228, 18, 232] },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
@@ -130,8 +132,16 @@ export default function NorthernLights() {
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
       const hue1 = lerpHue(s0.hue1, s1.hue1, sf);
       const hue2 = lerpHue(s0.hue2, s1.hue2, sf);
+      const nearestSectionIdx = Math.max(0, Math.min(SECTIONS.length - 1, Math.round(sectionProgress)));
+      const weight = 1 - Math.abs(sectionProgress - nearestSectionIdx);
+      const blendT = Math.max(0, (weight - 0.5) * 2);
+      const nearestSection = SECTIONS[nearestSectionIdx];
       BANDS.forEach((b, bi) => {
-        drawBand(b, lerpHue(hue1, hue2, bi / (BANDS.length - 1)), t);
+        let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
+        if (nearestSection.bandHues) {
+          h = lerpHue(h, nearestSection.bandHues[bi], blendT);
+        }
+        drawBand(b, h, t);
       });
       t += 0.007 * SPEED;
       raf = requestAnimationFrame(draw);
