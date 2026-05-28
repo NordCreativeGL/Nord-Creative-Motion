@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollManager from "@/components/ScrollManager";
 import SideNav from "@/components/SideNav";
+import NorthernLights from "@/components/NorthernLights";
 
 export default function GreenlandPage() {
   return (
@@ -16,6 +17,7 @@ export default function GreenlandPage() {
         { label: 'Why choose us', id: 'gl-why' },
       ]} />
       <Header />
+      <NorthernLights />
 
       {/* ── Section 1: Hero ── */}
       <section id="gl-hero" data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
