@@ -134,7 +134,7 @@ export default function NorthernLights() {
       const hue1 = lerpHue(s0.hue1, s1.hue1, sf);
       const hue2 = lerpHue(s0.hue2, s1.hue2, sf);
       const enterBlendT = Math.min(1, sf < 0.03 ? sf * 33.3 : 1);
-      const rawExit = Math.max(0, Math.min(1, (sf - 0.50) * 2.0));
+      const rawExit = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
       BANDS.forEach((b, bi) => {
         if (exitBlendT > 0) {
@@ -144,8 +144,11 @@ export default function NorthernLights() {
           const h1 = s1.bandHues && bi < s1.bandHues.length
             ? s1.bandHues[bi]
             : lerpHue(s1.hue1, s1.hue2, bi / (BANDS.length - 1));
-          drawBand(b, h0, t, 1 - exitBlendT);
-          drawBand(b, h1, t, exitBlendT);
+          if (exitBlendT <= 0.5) {
+            drawBand(b, h0, t, 1 - exitBlendT * 2);
+          } else {
+            drawBand(b, h1, t, (exitBlendT - 0.5) * 2);
+          }
         } else {
           let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
           if (s0.bandHues && bi < s0.bandHues.length) {
