@@ -83,6 +83,8 @@ export default function NorthernLights() {
       sectionProgress = Math.max(0, Math.min(SECTIONS.length - 1, raw));
     }
     window.addEventListener("scroll", onScroll, { passive: true });
+    const onHeroExpanded = () => { canvas.style.opacity = "1"; };
+    window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     function drawBand(b: typeof BANDS[0], hue: number, time: number, alphaMultiplier = 1) {
@@ -155,6 +157,7 @@ export default function NorthernLights() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
+      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 

@@ -27,6 +27,9 @@ export default function ScrollExpandHero() {
   useEffect(() => {
     document.body.style.overflow = isExpanded ? '' : 'hidden';
     (window as any).__snapLock = !isExpanded;
+    if (isExpanded) {
+      window.dispatchEvent(new Event('heroExpanded'));
+    }
     return () => {
       document.body.style.overflow = '';
       (window as any).__snapLock = false;
