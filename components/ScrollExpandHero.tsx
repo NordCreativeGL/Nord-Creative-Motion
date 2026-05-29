@@ -93,8 +93,8 @@ export default function ScrollExpandHero() {
     };
   }, [isExpanded, touchStartY, startExpansion]);
 
-  const startW = 360;
-  const startH = 540;
+  const startW = 468;
+  const startH = 702;
   const cardW = vw ? startW + scrollProgress * (vw - 48 - startW) : startW;
   const cardH = vh ? startH + scrollProgress * (vh - 192 - startH) : startH;
   const borderR = Math.max(8, Math.round(16 * (1 - scrollProgress)));
