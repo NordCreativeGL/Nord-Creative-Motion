@@ -25,6 +25,11 @@ export default function ScrollExpandHero() {
   }, []);
 
   useEffect(() => {
+    document.body.style.overflow = isExpanded ? '' : 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [isExpanded]);
+
+  useEffect(() => {
     return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
   }, []);
 
@@ -94,19 +99,13 @@ export default function ScrollExpandHero() {
       setTouchStartY(0);
     };
 
-    const handleScroll = () => {
-      if (!isExpanded) window.scrollTo(0, 0);
-    };
-
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('scroll', handleScroll);
     window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
@@ -210,6 +209,20 @@ export default function ScrollExpandHero() {
           whiteSpace: 'nowrap',
         }}>
           in Greenland
+        </div>
+
+        <div style={{
+          fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+          fontWeight: 300,
+          color: 'rgba(255,255,255,0.55)',
+          lineHeight: 1.65,
+          textAlign: 'center',
+          maxWidth: '480px',
+          marginTop: '1.5rem',
+          opacity: Math.max(0, 1 - scrollProgress * 2),
+          whiteSpace: 'normal',
+        }}>
+          Video and photography production across Greenland's diverse landscapes and environments.
         </div>
 
         <div style={{
