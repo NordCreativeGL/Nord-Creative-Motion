@@ -137,11 +137,15 @@ export default function NorthernLights() {
       const exitBlendT = Math.max(0, (sf - 0.75) * 4);
       BANDS.forEach((b, bi) => {
         let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
-        if (s0.bandHues && bi < s0.bandHues.length) {
-          h = lerpHue(h, s0.bandHues[bi], enterBlendT);
-        }
-        if (exitBlendT > 0 && s1.bandHues && bi < s1.bandHues.length) {
+        if (exitBlendT > 0 && s0.bandHues && bi < s0.bandHues.length) {
+          // Current section has locked colors: release toward base hue.
+          // Base hue transitions cool (through blue/purple) due to hue1=11 fix.
+          h = lerpHue(s0.bandHues[bi], h, exitBlendT);
+        } else if (exitBlendT > 0 && !s0.bandHues && s1.bandHues && bi < s1.bandHues.length) {
+          // No current section bandHues (gl-working): blend toward next section's colors.
           h = lerpHue(h, s1.bandHues[bi], exitBlendT);
+        } else if (s0.bandHues && bi < s0.bandHues.length) {
+          h = lerpHue(h, s0.bandHues[bi], enterBlendT);
         }
         drawBand(b, h, t);
       });
