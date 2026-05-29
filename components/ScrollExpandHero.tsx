@@ -1,6 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const DURATION = 1300;
+
+function ease(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 
 export default function ScrollExpandHero() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -8,6 +14,8 @@ export default function ScrollExpandHero() {
   const [touchStartY, setTouchStartY] = useState(0);
   const [vw, setVw] = useState(0);
   const [vh, setVh] = useState(0);
+  const animRef = useRef<number | null>(null);
+  const isAnimatingRef = useRef(false);
 
   useEffect(() => {
     const update = () => { setVw(window.innerWidth); setVh(window.innerHeight); };
@@ -17,19 +25,56 @@ export default function ScrollExpandHero() {
   }, []);
 
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (isExpanded && e.deltaY < 0 && window.scrollY <= 5) {
-        setIsExpanded(false);
-        e.preventDefault();
-        return;
+    return () => { if (animRef.current) cancelAnimationFrame(animRef.current); };
+  }, []);
+
+  const startExpansion = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    isAnimatingRef.current = true;
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min((now - startTime) / DURATION, 1);
+      setScrollProgress(ease(t));
+      if (t < 1) {
+        animRef.current = requestAnimationFrame(tick);
+      } else {
+        setScrollProgress(1);
+        setIsExpanded(true);
+        isAnimatingRef.current = false;
+        animRef.current = null;
       }
+    };
+    animRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  const startCollapse = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    isAnimatingRef.current = true;
+    setIsExpanded(false);
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min((now - startTime) / DURATION, 1);
+      setScrollProgress(1 - ease(t));
+      if (t < 1) {
+        animRef.current = requestAnimationFrame(tick);
+      } else {
+        setScrollProgress(0);
+        isAnimatingRef.current = false;
+        animRef.current = null;
+      }
+    };
+    animRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
       if (!isExpanded) {
         e.preventDefault();
-        setScrollProgress(prev => {
-          const next = Math.min(Math.max(prev + e.deltaY * 0.001, 0), 1);
-          if (next >= 1) setIsExpanded(true);
-          return next;
-        });
+        if (e.deltaY > 0) startExpansion();
+      } else if (e.deltaY < 0 && window.scrollY <= 5) {
+        startCollapse();
       }
     };
 
@@ -38,25 +83,16 @@ export default function ScrollExpandHero() {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (!touchStartY) return;
-      const dy = touchStartY - e.touches[0].clientY;
-      if (isExpanded && dy < -20 && window.scrollY <= 5) {
-        setIsExpanded(false);
-        e.preventDefault();
-        return;
-      }
-      if (!isExpanded) {
-        e.preventDefault();
-        setScrollProgress(prev => {
-          const next = Math.min(Math.max(prev + dy * (dy < 0 ? 0.006 : 0.004), 0), 1);
-          if (next >= 1) setIsExpanded(true);
-          return next;
-        });
-        setTouchStartY(e.touches[0].clientY);
-      }
+      if (!isExpanded) e.preventDefault();
     };
 
-    const handleTouchEnd = () => setTouchStartY(0);
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStartY) return;
+      const dy = touchStartY - e.changedTouches[0].clientY;
+      if (!isExpanded && dy > 30) startExpansion();
+      else if (isExpanded && dy < -30 && window.scrollY <= 5) startCollapse();
+      setTouchStartY(0);
+    };
 
     const handleScroll = () => {
       if (!isExpanded) window.scrollTo(0, 0);
@@ -75,7 +111,7 @@ export default function ScrollExpandHero() {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isExpanded, touchStartY]);
+  }, [isExpanded, touchStartY, startExpansion, startCollapse]);
 
   const startW = 360;
   const startH = 540;
@@ -176,7 +212,6 @@ export default function ScrollExpandHero() {
           in Greenland
         </div>
 
-        {/* Scroll hint */}
         <div style={{
           position: 'absolute',
           bottom: '12%',
