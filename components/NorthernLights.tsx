@@ -135,7 +135,7 @@ export default function NorthernLights() {
       const hue2 = lerpHue(s0.hue2, s1.hue2, sf);
       const nearestSectionIdx = Math.max(0, Math.min(SECTIONS.length - 1, Math.round(sectionProgress)));
       const weight = 1 - Math.abs(sectionProgress - nearestSectionIdx);
-      const blendT = Math.max(0, (weight - 0.5) * 2);
+      const blendT = Math.max(0, (weight - 0.75) * 4);
       const nearestSection = SECTIONS[nearestSectionIdx];
       BANDS.forEach((b, bi) => {
         let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
