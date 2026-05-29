@@ -18,7 +18,7 @@ type NLSection = { id: string; hue1: number; hue2: number; bandHues?: number[] }
 const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218, bandHues: [195, 210, 192, 215, 202] },
-  { id: "gl-why",     hue1: 11,  hue2: 21,  bandHues: [8, 25, 320, 18, 12] },
+  { id: "gl-why",     hue1: 320, hue2: 20,  bandHues: [8, 25, 320, 18, 12] },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
