@@ -57,33 +57,11 @@ export default function ScrollExpandHero() {
     animRef.current = requestAnimationFrame(tick);
   }, []);
 
-  const startCollapse = useCallback(() => {
-    if (isAnimatingRef.current) return;
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    isAnimatingRef.current = true;
-    setIsExpanded(false);
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const t = Math.min((now - startTime) / DURATION, 1);
-      setScrollProgress(1 - ease(t));
-      if (t < 1) {
-        animRef.current = requestAnimationFrame(tick);
-      } else {
-        setScrollProgress(0);
-        isAnimatingRef.current = false;
-        animRef.current = null;
-      }
-    };
-    animRef.current = requestAnimationFrame(tick);
-  }, []);
-
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (!isExpanded) {
         e.preventDefault();
         if (e.deltaY > 0) startExpansion();
-      } else if (e.deltaY < 0 && window.scrollY <= 5) {
-        startCollapse();
       }
     };
 
@@ -99,7 +77,6 @@ export default function ScrollExpandHero() {
       if (!touchStartY) return;
       const dy = touchStartY - e.changedTouches[0].clientY;
       if (!isExpanded && dy > 30) startExpansion();
-      else if (isExpanded && dy < -30 && window.scrollY <= 5) startCollapse();
       setTouchStartY(0);
     };
 
@@ -114,7 +91,7 @@ export default function ScrollExpandHero() {
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isExpanded, touchStartY, startExpansion, startCollapse]);
+  }, [isExpanded, touchStartY, startExpansion]);
 
   const startW = 360;
   const startH = 540;
