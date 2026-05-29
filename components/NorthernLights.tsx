@@ -64,7 +64,7 @@ export default function NorthernLights() {
       const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
       if (pastContent) {
         canvas.style.opacity = "0";
-      } else {
+      } else if (!heroEl || window.scrollY > (heroEl.offsetHeight * 0.9)) {
         canvas.style.opacity = "1";
       }
       const els = SECTIONS.map(s => document.getElementById(s.id));

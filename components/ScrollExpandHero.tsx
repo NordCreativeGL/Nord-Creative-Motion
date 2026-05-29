@@ -109,8 +109,7 @@ export default function ScrollExpandHero() {
       style={{
         position: 'relative',
         minHeight: '100vh',
-        background: 'transparent',
-        zIndex: 1,
+        background: '#060606',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
