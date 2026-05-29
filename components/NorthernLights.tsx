@@ -18,7 +18,7 @@ type NLSection = { id: string; hue1: number; hue2: number; bandHues?: number[] }
 const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218, bandHues: [195, 210, 192, 215, 202] },
-  { id: "gl-why",     hue1: 11,  hue2: 21,  bandHues: [8, 228, 18, 232, 12] },
+  { id: "gl-why",     hue1: 11,  hue2: 21,  bandHues: [8, 25, 320, 18, 12] },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
@@ -85,14 +85,14 @@ export default function NorthernLights() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    function drawBand(b: typeof BANDS[0], hue: number, time: number) {
+    function drawBand(b: typeof BANDS[0], hue: number, time: number, alphaMultiplier = 1) {
       const PTS = 220;
       const bH = H * BASE_THICKNESS * b.thickMul;
       const driftY = Math.sin(time * b.drift) * H * 0.035;
       const yBase = H * b.yFrac + driftY;
       const amp = b.amp * H;
       const h = (hue + b.hueShift + 360) % 360;
-      const alpha = INTENSITY * b.alphaMul;
+      const alpha = INTENSITY * b.alphaMul * alphaMultiplier;
 
       const pts: number[] = [];
       for (let i = 0; i <= PTS; i++) {
@@ -133,21 +133,25 @@ export default function NorthernLights() {
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
       const hue1 = lerpHue(s0.hue1, s1.hue1, sf);
       const hue2 = lerpHue(s0.hue2, s1.hue2, sf);
-      const enterBlendT = Math.min(1, sf < 0.25 ? sf * 4 : 1);
-      const exitBlendT = Math.max(0, (sf - 0.75) * 4);
+      const enterBlendT = Math.min(1, sf < 0.03 ? sf * 33.3 : 1);
+      const exitBlendT = Math.max(0, (sf - 0.80) * 5.0);
       BANDS.forEach((b, bi) => {
-        let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
-        if (exitBlendT > 0 && s0.bandHues && bi < s0.bandHues.length) {
-          // Current section has locked colors: release toward base hue.
-          // Base hue transitions cool (through blue/purple) due to hue1=11 fix.
-          h = lerpHue(s0.bandHues[bi], h, exitBlendT);
-        } else if (exitBlendT > 0 && !s0.bandHues && s1.bandHues && bi < s1.bandHues.length) {
-          // No current section bandHues (gl-working): blend toward next section's colors.
-          h = lerpHue(h, s1.bandHues[bi], exitBlendT);
-        } else if (s0.bandHues && bi < s0.bandHues.length) {
-          h = lerpHue(h, s0.bandHues[bi], enterBlendT);
+        if (exitBlendT > 0) {
+          const h0 = s0.bandHues && bi < s0.bandHues.length
+            ? s0.bandHues[bi]
+            : lerpHue(hue1, hue2, bi / (BANDS.length - 1));
+          const h1 = s1.bandHues && bi < s1.bandHues.length
+            ? s1.bandHues[bi]
+            : lerpHue(s1.hue1, s1.hue2, bi / (BANDS.length - 1));
+          drawBand(b, h0, t, 1 - exitBlendT);
+          drawBand(b, h1, t, exitBlendT);
+        } else {
+          let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
+          if (s0.bandHues && bi < s0.bandHues.length) {
+            h = lerpHue(h, s0.bandHues[bi], enterBlendT);
+          }
+          drawBand(b, h, t);
         }
-        drawBand(b, h, t);
       });
       t += 0.007 * SPEED;
       raf = requestAnimationFrame(draw);
