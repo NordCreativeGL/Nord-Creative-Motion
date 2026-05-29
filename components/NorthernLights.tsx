@@ -6,10 +6,11 @@ const BASE_THICKNESS = 0.22;
 const SPEED = 0.35;
 
 const BANDS = [
-  { yFrac: 0.15, amp: 0.11, freq: 0.70, phase: 0.0, speedMul: 1.40, thickMul: 0.45, alphaMul: 0.90, hueShift:  0, drift: 0.018 },
-  { yFrac: 0.38, amp: 0.18, freq: 0.32, phase: 1.6, speedMul: 0.65, thickMul: 2.10, alphaMul: 0.50, hueShift: 10, drift: 0.009 },
-  { yFrac: 0.57, amp: 0.14, freq: 0.85, phase: 3.8, speedMul: 1.70, thickMul: 0.60, alphaMul: 0.85, hueShift: -8, drift: 0.022 },
-  { yFrac: 0.88, amp: 0.09, freq: 0.44, phase: 5.1, speedMul: 0.45, thickMul: 1.70, alphaMul: 0.28, hueShift:  5, drift: 0.006 },
+  { yFrac: 0.15, amp: 0.11, freq: 0.70, phase: 0.0, speedMul: 1.40, thickMul: 0.45, alphaMul: 0.90, hueShift:  0, drift: 0.018, tilt: -0.12 },
+  { yFrac: 0.38, amp: 0.18, freq: 0.32, phase: 1.6, speedMul: 0.65, thickMul: 2.10, alphaMul: 0.50, hueShift: 10, drift: 0.009, tilt:  0.10 },
+  { yFrac: 0.57, amp: 0.14, freq: 0.85, phase: 3.8, speedMul: 1.70, thickMul: 0.60, alphaMul: 0.85, hueShift: -8, drift: 0.022, tilt: -0.08 },
+  { yFrac: 0.72, amp: 0.10, freq: 0.55, phase: 2.9, speedMul: 0.80, thickMul: 1.20, alphaMul: 0.60, hueShift:  4, drift: 0.014, tilt:  0.13 },
+  { yFrac: 0.88, amp: 0.09, freq: 0.44, phase: 5.1, speedMul: 0.45, thickMul: 1.70, alphaMul: 0.28, hueShift:  5, drift: 0.006, tilt: -0.10 },
 ];
 
 type NLSection = { id: string; hue1: number; hue2: number; bandHues?: number[] };
@@ -102,11 +103,13 @@ export default function NorthernLights() {
                  + Math.sin(frac * Math.PI * 3.7 * b.freq - time * b.speedMul * 1.1 + b.phase + 3.8) * 0.21;
         const w3 = Math.sin(frac * Math.PI * 7.1 * b.freq + b.phase + 2.7) * Math.sin(time * b.speedMul * 0.4 + b.phase) * 0.18;
         const curtain = Math.sin(time * b.speedMul * 0.4 + b.phase * 0.5) * amp * 0.30;
-        pts.push(yBase + (w1 + w2 + w3) * amp + curtain);
+        const tiltOffset = b.tilt * ((i / PTS) - 0.5) * H;
+        pts.push(yBase + (w1 + w2 + w3) * amp + curtain + tiltOffset);
       }
 
       const midY = pts.reduce((a, c) => a + c, 0) / pts.length;
-      const grad = ctx.createLinearGradient(0, midY - bH, 0, midY + bH);
+      const tiltRange = Math.abs(b.tilt) * H * 0.5;
+      const grad = ctx.createLinearGradient(0, midY - bH - tiltRange, 0, midY + bH + tiltRange);
       grad.addColorStop(0.00, `hsla(${h},88%,70%,0)`);
       grad.addColorStop(0.28, `hsla(${h},90%,73%,${alpha * 0.45})`);
       grad.addColorStop(0.50, `hsla(${h},93%,76%,${alpha})`);
