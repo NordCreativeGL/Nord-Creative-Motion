@@ -6,6 +6,7 @@ import BackToTop from "@/components/BackToTop";
 import ScrollManager from "@/components/ScrollManager";
 import SideNav from "@/components/SideNav";
 import NorthernLights from "@/components/NorthernLights";
+import ScrollExpandHero from "@/components/ScrollExpandHero";
 
 export default function GreenlandPage() {
   return (
@@ -19,56 +20,7 @@ export default function GreenlandPage() {
       <Header />
       <NorthernLights />
 
-      {/* ── Section 1: Hero ── */}
-      <section id="gl-hero" data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
-        <video
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} />
-
-        <div style={{ position: 'absolute', bottom: '20%', left: 0, right: 0 }}>
-          <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
-            <p style={{
-              fontSize: '13px',
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.4)',
-              marginBottom: '16px',
-            }}>
-              GREENLAND
-            </p>
-            <h1 style={{
-              fontSize: 'clamp(28px, 2.78vw, 68px)',
-              fontWeight: 300,
-              letterSpacing: '-0.02em',
-              color: 'white',
-              marginBottom: '20px',
-              maxWidth: '800px',
-            }}>
-              Video production in Greenland
-            </h1>
-            <p style={{
-              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-              lineHeight: 1.65,
-              color: 'rgba(255,255,255,0.7)',
-              maxWidth: '560px',
-            }}>
-              Video and photography production across Greenland's diverse landscapes and environments.
-            </p>
-          </div>
-        </div>
-      </section>
+      <ScrollExpandHero />
 
       {/* ── Section 2: Working in Greenland ── */}
       <section id="gl-working" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
