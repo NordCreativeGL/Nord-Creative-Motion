@@ -96,7 +96,7 @@ export default function ScrollExpandHero() {
   const startW = 360;
   const startH = 540;
   const cardW = vw ? startW + scrollProgress * (vw - 48 - startW) : startW;
-  const cardH = vh ? startH + scrollProgress * (vh - 48 - startH) : startH;
+  const cardH = vh ? startH + scrollProgress * (vh - 192 - startH) : startH;
   const borderR = Math.max(8, Math.round(16 * (1 - scrollProgress)));
   const textSpread = scrollProgress * (vw ? Math.max(180, vw * 0.35) : 180);
   const textOpacity = Math.max(0, 1 - scrollProgress * 2.5);
