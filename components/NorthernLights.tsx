@@ -17,8 +17,8 @@ type NLSection = { id: string; hue1: number; hue2: number; bandHues?: number[] }
 
 const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
-  { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 12,  hue2: 22,  bandHues: [8, 228, 18, 232] },
+  { id: "gl-process", hue1: 192, hue2: 218, bandHues: [195, 210, 192, 215, 202] },
+  { id: "gl-why",     hue1: 12,  hue2: 22,  bandHues: [8, 228, 18, 232, 12] },
 ];
 
 function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
@@ -139,7 +139,7 @@ export default function NorthernLights() {
       const nearestSection = SECTIONS[nearestSectionIdx];
       BANDS.forEach((b, bi) => {
         let h = lerpHue(hue1, hue2, bi / (BANDS.length - 1));
-        if (nearestSection.bandHues) {
+        if (nearestSection.bandHues && bi < nearestSection.bandHues.length) {
           h = lerpHue(h, nearestSection.bandHues[bi], blendT);
         }
         drawBand(b, h, t);
