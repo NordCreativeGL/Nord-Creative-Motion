@@ -96,7 +96,7 @@ export default function ScrollExpandHero() {
     };
   }, [isExpanded, touchStartY, startExpansion]);
 
-  const startW = 468;
+  const startW = 562;
   const startH = vh ? vh - 192 : 702;
   const cardW = vw ? startW + scrollProgress * (vw - 48 - startW) : startW;
   const cardH = vh ? startH + scrollProgress * (vh - 192 - startH) : startH;
