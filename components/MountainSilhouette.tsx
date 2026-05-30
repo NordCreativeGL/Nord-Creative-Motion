@@ -8,33 +8,21 @@ export default function MountainSilhouette() {
     const svgEl = svgRef.current;
     if (!svgEl) return;
 
-    const heroEl = document.getElementById("gl-hero");
+    const workingEl = document.getElementById("gl-working");
     const lastEl = document.getElementById("gl-why");
 
     function onScroll() {
-      if (!svgEl) return;
-      if (!lastEl) return;
-      const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
-      if (pastContent) {
-        svgEl.style.opacity = "0";
-      } else if (!heroEl || window.scrollY > heroEl.offsetHeight * 0.9) {
-        svgEl.style.opacity = "1";
-      } else {
-        svgEl.style.opacity = "0";
-      }
+      if (!svgEl || !workingEl || !lastEl) return;
+      const pastStart = window.scrollY >= workingEl.offsetTop - 80;
+      const pastEnd = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
+      svgEl.style.opacity = (pastStart && !pastEnd) ? "1" : "0";
     }
 
-    const onHeroExpanded = () => {
-      if (svgEl) svgEl.style.opacity = "1";
-    };
-
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
