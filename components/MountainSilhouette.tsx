@@ -29,14 +29,11 @@ export default function MountainSilhouette() {
       }
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-    const onHeroExpanded = () => { svg.style.opacity = "1"; };
-    window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
-      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
