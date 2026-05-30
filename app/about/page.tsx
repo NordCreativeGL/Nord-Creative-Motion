@@ -31,7 +31,6 @@ export default function About() {
               <p className="text-xl text-white/70 leading-relaxed">That path brought us to Greenland. We are now based in Qaqortoq in the south of Greenland, where we live and work year-round. It's a place that continues to shape both how we live and how we work.</p>
               <p className="text-xl text-white/70 leading-relaxed">Working in Greenland has shaped how we approach production. The Arctic environment requires awareness, planning, and the ability to adapt — both creatively and in terms of safety. This is something we bring into every project. Today, we work with companies looking to create visual content in environments that require both structure and flexibility.</p>
             </div>
-            <h2 className="text-4xl md:text-5xl font-light text-white mt-8">Let's tell a story</h2>
           </div>
           <div className="relative rounded-2xl overflow-hidden aspect-[3/4] w-full">
             <Image
