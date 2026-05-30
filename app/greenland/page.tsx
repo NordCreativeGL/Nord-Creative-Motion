@@ -20,9 +20,10 @@ export default function GreenlandPage() {
       ]} />
       <Header />
       <NorthernLights />
-      <MountainSilhouette />
 
       <ScrollExpandHero />
+
+      <MountainSilhouette />
 
       {/* ── Section 2: Working in Greenland ── */}
       <section id="gl-working" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
