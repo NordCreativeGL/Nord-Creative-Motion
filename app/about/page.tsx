@@ -1,12 +1,10 @@
 import Image from "next/image";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollManager from "@/components/ScrollManager";
 export default function About() {
   return (
     <main className="min-h-screen text-white">
       <ScrollManager />
-      <Header />
 
       <section id="about-hero" data-snap="true" className="relative h-screen w-full overflow-hidden">
         <video
@@ -25,7 +23,7 @@ export default function About() {
       </section>
 
       {/* Story */}
-      <section id="about-text" data-snap="true" className="bg-black py-24">
+      <section id="about-text" data-snap="true" className="bg-black py-24" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="flex flex-col justify-between h-full">
             <div className="space-y-6">
