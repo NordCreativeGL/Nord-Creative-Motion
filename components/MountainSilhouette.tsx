@@ -1,9 +1,20 @@
+"use client";
+import { useEffect, useState } from "react";
+
 export default function MountainSilhouette() {
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY >= window.innerHeight * 0.95);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <svg
       viewBox="0 0 1728 500"
       preserveAspectRatio="none"
-      style={{ position: "fixed", bottom: 0, width: "100%", height: "50vh", zIndex: 1, pointerEvents: "none" }}
+      style={{ position: "fixed", bottom: 0, width: "100%", height: "50vh", zIndex: 1, pointerEvents: "none", display: pastHero ? "block" : "none" }}
     >
       <defs>
         <linearGradient id="gradL1" gradientUnits="userSpaceOnUse" x1="0" y1="272" x2="0" y2="500">
