@@ -19,6 +19,7 @@ export default function MountainSilhouette() {
         window.scrollY > heroBottom - 80 &&
         window.scrollY < whyBottom;
 
+      svgEl.style.transition = "none";
       svgEl.style.opacity = inNorthernLightsRange ? "1" : "0";
     }
 
@@ -44,7 +45,6 @@ export default function MountainSilhouette() {
         zIndex: 1,
         pointerEvents: "none",
         opacity: 0,
-        transition: "opacity 1s ease",
       }}
     >
       <defs>
