@@ -48,7 +48,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section id="about-cta" data-snap="true" className="bg-black pt-8 pb-24">
+      <section id="about-cta" data-snap="true" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#060606' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="relative rounded-2xl overflow-hidden aspect-[16/7] bg-zinc-900">
             <Image
