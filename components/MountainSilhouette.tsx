@@ -13,10 +13,10 @@ export default function MountainSilhouette() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.target === heroEl) {
-          svg.style.opacity = e.isIntersecting ? "0" : "1";
+          if (svg) svg.style.opacity = e.intersectionRatio < 0.5 ? "1" : "0";
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: [0, 0.5] });
     if (heroEl) observer.observe(heroEl);
 
     function onScroll() {
@@ -25,14 +25,11 @@ export default function MountainSilhouette() {
       if (pastContent) svg.style.opacity = "0";
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-    const onHeroExpanded = () => { if (svg) svg.style.opacity = "1"; };
-    window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
-      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
@@ -46,7 +43,7 @@ export default function MountainSilhouette() {
         bottom: 0,
         width: "100%",
         height: "50vh",
-        zIndex: 0,
+        zIndex: 1,
         pointerEvents: "none",
         opacity: "0",
         transition: "opacity 0.3s ease",
