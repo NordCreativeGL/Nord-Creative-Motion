@@ -10,6 +10,7 @@ export default function MountainSilhouette() {
     const heroEl = document.getElementById("gl-hero");
 
     function handleScroll() {
+      if (!svgEl) return;
       if (window.scrollY > (heroEl?.offsetHeight ?? 0) * 0.9) {
         svgEl.style.opacity = "1";
       } else {
@@ -18,6 +19,7 @@ export default function MountainSilhouette() {
     }
 
     function onHeroExpanded() {
+      if (!svgEl) return;
       svgEl.style.opacity = "1";
     }
 
