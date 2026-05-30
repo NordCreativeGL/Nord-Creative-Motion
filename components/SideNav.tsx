@@ -7,8 +7,8 @@ type NavItem = { label: string; id: string };
 const DEFAULT_ITEMS: NavItem[] = [
   { label: 'What we offer', id: 'services' },
   { label: 'Greenland', id: 'greenland' },
-  { label: 'Work with us', id: 'cta' },
   { label: 'Based in Greenland', id: 'based' },
+  { label: 'Work with us', id: 'cta' },
 ];
 
 export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }) {
