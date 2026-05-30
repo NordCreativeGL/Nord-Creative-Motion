@@ -8,14 +8,12 @@ export default function MountainSilhouette() {
     const svgEl = svgRef.current;
     if (!svgEl) return;
 
-    const workingEl = document.getElementById("gl-working");
     const lastEl = document.getElementById("gl-why");
 
     function onScroll() {
-      if (!svgEl || !workingEl || !lastEl) return;
-      const pastStart = window.scrollY >= workingEl.offsetTop - 80;
+      if (!svgEl || !lastEl) return;
       const pastEnd = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
-      svgEl.style.opacity = (pastStart && !pastEnd) ? "1" : "0";
+      svgEl.style.opacity = !pastEnd ? "1" : "0";
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -39,7 +37,7 @@ export default function MountainSilhouette() {
         height: "50vh",
         zIndex: 1,
         pointerEvents: "none",
-        opacity: 0,
+        opacity: 1,
       }}
     >
       <defs>
