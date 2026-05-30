@@ -1,45 +1,9 @@
-"use client";
-import { useEffect, useRef } from "react";
-
 export default function MountainSilhouette() {
-  const svgRef = useRef<SVGSVGElement>(null);
-
-  useEffect(() => {
-    const svgEl = svgRef.current;
-    if (!svgEl) return;
-
-    const lastEl = document.getElementById("gl-why");
-
-    function updateOpacity() {
-      if (!svgEl || !lastEl) return;
-      const pastEnd = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
-      svgEl.style.opacity = (window.scrollY >= window.innerHeight * 0.9 && !pastEnd) ? "1" : "0";
-    }
-
-    window.addEventListener("scroll", updateOpacity, { passive: true });
-    updateOpacity();
-
-    return () => {
-      window.removeEventListener("scroll", updateOpacity);
-    };
-  }, []);
-
   return (
     <svg
-      ref={svgRef}
       viewBox="0 0 1728 500"
       preserveAspectRatio="none"
-      style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        width: "100%",
-        height: "50vh",
-        zIndex: 1,
-        pointerEvents: "none",
-        opacity: 0,
-        transition: "opacity 0.3s ease",
-      }}
+      style={{ position: "fixed", bottom: 0, width: "100%", height: "50vh", zIndex: 1, pointerEvents: "none" }}
     >
       <defs>
         <linearGradient id="gradL1" gradientUnits="userSpaceOnUse" x1="0" y1="272" x2="0" y2="500">
