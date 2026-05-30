@@ -16,17 +16,13 @@ export default function MountainSilhouette() {
           svg.style.opacity = e.isIntersecting ? "0" : "1";
         }
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.1 });
     if (heroEl) observer.observe(heroEl);
 
     function onScroll() {
       if (!lastEl) return;
       const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
-      if (pastContent) {
-        svg.style.opacity = "0";
-      } else if (!heroEl || window.scrollY > (heroEl.offsetHeight * 0.9)) {
-        svg.style.opacity = "1";
-      }
+      if (pastContent) svg.style.opacity = "0";
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
