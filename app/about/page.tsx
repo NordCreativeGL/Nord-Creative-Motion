@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import ScrollManager from "@/components/ScrollManager";
 export default function About() {
   return (
     <main className="min-h-screen text-white">
-
+      <ScrollManager />
       <section id="about-hero" data-snap="true" className="relative h-screen w-full overflow-hidden">
         <video
           autoPlay
