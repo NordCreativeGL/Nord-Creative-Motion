@@ -6,6 +6,7 @@ import BackToTop from "@/components/BackToTop";
 import ScrollManager from "@/components/ScrollManager";
 import SideNav from "@/components/SideNav";
 import NorthernLights from "@/components/NorthernLights";
+import MountainSilhouette from "@/components/MountainSilhouette";
 import ScrollExpandHero from "@/components/ScrollExpandHero";
 
 export default function GreenlandPage() {
@@ -19,6 +20,7 @@ export default function GreenlandPage() {
       ]} />
       <Header />
       <NorthernLights />
+      <MountainSilhouette />
 
       <ScrollExpandHero />
 
