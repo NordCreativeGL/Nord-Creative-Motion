@@ -52,8 +52,7 @@ export default function MountainSilhouette() {
         height: "50vh",
         zIndex: 1,
         pointerEvents: "none",
-        opacity: 0,
-        transition: "opacity 0.8s ease",
+        opacity: "0",
       }}
     >
       <defs>
