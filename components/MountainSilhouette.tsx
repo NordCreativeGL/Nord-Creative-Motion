@@ -13,8 +13,9 @@ export default function MountainSilhouette() {
 
     function updateOpacity() {
       if (!svgEl || !lastEl) return;
+      const pastHero = window.scrollY > 10;
       const pastEnd = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
-      svgEl.style.opacity = (heroExpanded && !pastEnd) ? "1" : "0";
+      svgEl.style.opacity = (heroExpanded && pastHero && !pastEnd) ? "1" : "0";
     }
 
     function onHeroExpanded() {
