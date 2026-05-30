@@ -7,29 +7,34 @@ export default function MountainSilhouette() {
   useEffect(() => {
     const svg = svgRef.current!;
 
-    const heroEl = document.getElementById("gl-hero");
+    const workingEl = document.getElementById("gl-working");
     const lastEl = document.getElementById("gl-why");
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.target === heroEl) {
-          if (svg) svg.style.opacity = e.intersectionRatio < 0.5 ? "1" : "0";
-        }
-      });
-    }, { threshold: [0, 0.5] });
-    if (heroEl) observer.observe(heroEl);
+    let heroExpandedFired = false;
 
-    function onScroll() {
-      if (!lastEl) return;
-      const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
-      if (pastContent) svg.style.opacity = "0";
+    function updateVisibility() {
+      if (!svg || !workingEl) return;
+      const scrollY = window.scrollY;
+      const showThreshold = workingEl.offsetTop * 0.5;
+      const pastEnd = lastEl
+        ? scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3
+        : false;
+      const visible = heroExpandedFired && scrollY >= showThreshold && !pastEnd;
+      svg.style.opacity = visible ? "1" : "0";
     }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+
+    function onHeroExpanded() {
+      heroExpandedFired = true;
+      updateVisibility();
+    }
+
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("heroExpanded", onHeroExpanded);
+    updateVisibility();
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
