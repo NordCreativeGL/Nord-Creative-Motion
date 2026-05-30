@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollManager from "@/components/ScrollManager";
 export default function About() {
   return (
     <main className="min-h-screen text-white">
+      <ScrollManager />
       <Header />
 
-      <section className="relative h-screen w-full overflow-hidden">
+      <section id="about-hero" data-snap="true" className="relative h-screen w-full overflow-hidden">
         <video
           autoPlay
           muted
@@ -23,7 +25,7 @@ export default function About() {
       </section>
 
       {/* Story */}
-      <section className="bg-black py-24">
+      <section id="about-text" data-snap="true" className="bg-black py-24">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div className="flex flex-col justify-between h-full">
             <div className="space-y-6">
@@ -46,7 +48,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="bg-black pt-8 pb-24">
+      <section id="about-cta" data-snap="true" className="bg-black pt-8 pb-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="relative rounded-2xl overflow-hidden aspect-[16/7] bg-zinc-900">
             <Image
