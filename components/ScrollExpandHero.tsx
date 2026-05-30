@@ -117,6 +117,7 @@ export default function ScrollExpandHero() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        zIndex: 2,
       }}
     >
       {/* Expanding video card */}
