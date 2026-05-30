@@ -32,7 +32,7 @@ export default function GreenlandPage() {
             display: 'grid',
             gridTemplateColumns: '2fr 3fr',
             gap: '64px',
-            alignItems: 'center',
+            alignItems: 'stretch',
           }}>
             <div>
               <p style={{
@@ -69,7 +69,7 @@ export default function GreenlandPage() {
                 We produce video and photography in Greenland under these conditions — making it possible to document projects where logistics and environment would otherwise limit production.
               </p>
             </div>
-            <div>
+            <div style={{ display: 'flex' }}>
               <video
                 src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P18K.mp4"
                 autoPlay
@@ -82,6 +82,7 @@ export default function GreenlandPage() {
                   borderRadius: 14,
                   maxHeight: '58vh',
                   width: '100%',
+                  height: '100%',
                 }}
               />
             </div>
