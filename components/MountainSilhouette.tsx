@@ -1,20 +1,62 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function MountainSilhouette() {
-  const [pastHero, setPastHero] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setPastHero(window.scrollY >= window.innerHeight * 0.95);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    const heroEl = document.getElementById("gl-hero");
+    const lastEl = document.getElementById("gl-why");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.target === heroEl) {
+          svg.style.opacity = e.isIntersecting ? "0" : "1";
+        }
+      });
+    }, { threshold: 0.05 });
+    if (heroEl) observer.observe(heroEl);
+
+    function onScroll() {
+      if (!lastEl) return;
+      const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
+      if (pastContent) {
+        svg.style.opacity = "0";
+      } else if (!heroEl || window.scrollY > (heroEl.offsetHeight * 0.9)) {
+        svg.style.opacity = "1";
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const onHeroExpanded = () => { svg.style.opacity = "1"; };
+    window.addEventListener("heroExpanded", onHeroExpanded);
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("heroExpanded", onHeroExpanded);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <svg
+      ref={svgRef}
       viewBox="0 0 1728 500"
       preserveAspectRatio="none"
-      style={{ position: "fixed", bottom: 0, width: "100%", height: "50vh", zIndex: 1, pointerEvents: "none", display: pastHero ? "block" : "none" }}
+      style={{
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        height: "50vh",
+        zIndex: 1,
+        pointerEvents: "none",
+        opacity: 0,
+        transition: "opacity 0.8s ease",
+      }}
     >
       <defs>
         <linearGradient id="gradL1" gradientUnits="userSpaceOnUse" x1="0" y1="272" x2="0" y2="500">
