@@ -17,8 +17,8 @@ export default function Home() {
       </div>
       <ServicesSection />
       <GreenlandSection />
-      <CTABanner />
       <BasedInGreenland />
+      <CTABanner />
       <Footer />
     </main>
   );
