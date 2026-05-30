@@ -13,7 +13,7 @@ export default function MountainSilhouette() {
 
     function onScroll() {
       if (!svgEl || !workingEl || !lastEl) return;
-      const pastStart = window.scrollY >= workingEl.offsetTop - window.innerHeight;
+      const pastStart = window.scrollY >= workingEl.offsetTop;
       const pastEnd = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
       svgEl.style.opacity = (pastStart && !pastEnd) ? "1" : "0";
     }
