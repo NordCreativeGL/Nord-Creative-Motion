@@ -5,8 +5,7 @@ export default function MountainSilhouette() {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
+    const svg = svgRef.current!;
 
     const heroEl = document.getElementById("gl-hero");
     const lastEl = document.getElementById("gl-why");
@@ -14,7 +13,7 @@ export default function MountainSilhouette() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.target === heroEl) {
-          if (svg) svg.style.opacity = e.isIntersecting ? "0" : "1";
+          svg.style.opacity = e.isIntersecting ? "0" : "1";
         }
       });
     }, { threshold: 0.05 });
@@ -24,21 +23,20 @@ export default function MountainSilhouette() {
       if (!lastEl) return;
       const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
       if (pastContent) {
-        if (svg) svg.style.opacity = "0";
+        svg.style.opacity = "0";
       } else if (!heroEl || window.scrollY > (heroEl.offsetHeight * 0.9)) {
-        if (svg) svg.style.opacity = "1";
+        svg.style.opacity = "1";
       }
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    const onHeroExpanded = () => { if (svg) svg.style.opacity = "1"; };
+    const onHeroExpanded = () => { svg.style.opacity = "1"; };
     window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("heroExpanded", onHeroExpanded);
       observer.disconnect();
+      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
