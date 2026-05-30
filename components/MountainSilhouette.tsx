@@ -25,11 +25,14 @@ export default function MountainSilhouette() {
       if (pastContent) svg.style.opacity = "0";
     }
     window.addEventListener("scroll", onScroll, { passive: true });
+    const onHeroExpanded = () => { if (svg) svg.style.opacity = "1"; };
+    window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
+      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
@@ -43,9 +46,10 @@ export default function MountainSilhouette() {
         bottom: 0,
         width: "100%",
         height: "50vh",
-        zIndex: 1,
+        zIndex: 0,
         pointerEvents: "none",
         opacity: "0",
+        transition: "opacity 0.3s ease",
       }}
     >
       <defs>
