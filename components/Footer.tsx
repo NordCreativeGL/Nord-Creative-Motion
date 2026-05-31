@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer id="footer" data-snap="true" className="border-t border-white/10 py-16 min-h-[25vh] flex flex-col justify-center" style={{ position: 'relative', zIndex: 2 }}>
+    <footer id="footer" data-snap="true" className="border-t border-white/10 pt-10 pb-16 min-h-[25vh] flex flex-col justify-center" style={{ position: 'relative', zIndex: 2 }}>
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-6">
         <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
           Website designed &amp; built by
@@ -14,7 +14,7 @@ export default function Footer() {
           alt="NordCreative"
           width={612}
           height={184}
-          style={{ width: '734px', height: 'auto', objectFit: 'contain', marginTop: '-90px', marginBottom: '-90px' }}
+          style={{ width: '734px', height: 'auto', objectFit: 'contain', marginTop: '-65px', marginBottom: '-90px' }}
         />
 
         <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
