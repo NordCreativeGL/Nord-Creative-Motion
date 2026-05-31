@@ -29,39 +29,39 @@ export default function Navbar() {
         scrolled ? "border-b border-white/10" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex-1">
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/logo-icon-transparent.png"
-              alt="NordCreative"
-              width={48}
-              height={48}
-              className="h-8 w-auto"
-              priority
-            />
-          </Link>
-        </div>
+      <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-3 items-center">
+        <Link href="/" className="flex-shrink-0">
+          <Image
+            src="/logo-icon-transparent.png"
+            alt="NordCreative"
+            width={48}
+            height={48}
+            className="h-8 w-auto"
+            priority
+          />
+        </Link>
 
-        <div className="hidden md:flex items-center justify-center gap-10">
-          {navLinks.map((link, i) => (
-            <motion.div
-              key={link.href}
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
-            >
-              <Link
-                href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
+        <div className="flex justify-center">
+          <div className="hidden md:flex items-center justify-center gap-10">
+            {navLinks.map((link, i) => (
+              <motion.div
+                key={link.href}
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
               >
-                {link.label}
-              </Link>
-            </motion.div>
-          ))}
+                <Link
+                  href={link.href}
+                  className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        <div className="flex-1 flex justify-end">
+        <div className="flex justify-end">
           <motion.a
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
