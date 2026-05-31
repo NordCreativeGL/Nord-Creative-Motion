@@ -394,7 +394,7 @@ export default function BeyondTheArcticPage() {
                   'https://cdn.nordcreative.dk/P53A.mp4',
                 ].map((src, i) => (
                   <div key={i} ref={el => { card4Refs.current[i] = el }} style={{ position: 'absolute', overflow: 'hidden', opacity: 0 }}>
-                    <video src={src} muted loop playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    <video src={src} muted loop playsInline preload="auto" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   </div>
                 ))}
               </div>
