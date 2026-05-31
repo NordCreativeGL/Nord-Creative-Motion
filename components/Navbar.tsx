@@ -29,7 +29,7 @@ export default function Navbar() {
         scrolled ? "border-b border-white/10" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 grid grid-cols-3 items-center">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         <Link href="/" className="flex-shrink-0">
           <Image
             src="/logo-icon-transparent.png"
@@ -41,37 +41,33 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className="flex justify-center">
-          <div className="hidden md:flex items-center justify-center gap-10">
-            {navLinks.map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
+        <div className="hidden md:flex items-center gap-10">
+          {navLinks.map((link, i) => (
+            <motion.div
+              key={link.href}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
+            >
+              <Link
+                href={link.href}
+                className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
               >
-                <Link
-                  href={link.href}
-                  className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                {link.label}
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="flex justify-end">
-          <motion.a
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.72 }}
-            href="mailto:contact@nordcreative.dk"
-            className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
-          >
-            Work with us
-          </motion.a>
-        </div>
+        <motion.a
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.72 }}
+          href="mailto:contact@nordcreative.dk"
+          className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
+        >
+          Work with us
+        </motion.a>
       </div>
     </motion.nav>
   );
