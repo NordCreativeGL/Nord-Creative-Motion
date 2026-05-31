@@ -182,7 +182,7 @@ export default function BeyondTheArcticPage() {
           muted
           loop
           playsInline
-          preload="none"
+          preload="auto"
           style={{
             position: 'absolute',
             inset: 0,

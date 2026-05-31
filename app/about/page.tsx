@@ -16,6 +16,7 @@ export default function About() {
           muted
           loop
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
           src="https://cdn.nordcreative.dk/P68%20HEADER.mp4"
         />

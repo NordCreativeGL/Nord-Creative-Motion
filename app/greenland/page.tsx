@@ -76,6 +76,7 @@ export default function GreenlandPage() {
                 muted
                 loop
                 playsInline
+                preload="none"
                 style={{
                   aspectRatio: '16/9',
                   objectFit: 'cover',
@@ -108,6 +109,7 @@ export default function GreenlandPage() {
                 muted
                 loop
                 playsInline
+                preload="none"
                 style={{
                   aspectRatio: '9/16',
                   objectFit: 'cover',
@@ -122,6 +124,7 @@ export default function GreenlandPage() {
                 muted
                 loop
                 playsInline
+                preload="none"
                 style={{
                   aspectRatio: '9/16',
                   objectFit: 'cover',
@@ -180,6 +183,7 @@ export default function GreenlandPage() {
               muted
               loop
               playsInline
+              preload="none"
               style={{
                 position: 'absolute',
                 inset: 0,
