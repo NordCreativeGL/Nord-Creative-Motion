@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer id="footer" data-snap="true" className="border-t border-white/10 pt-6 pb-16 min-h-[25vh] flex flex-col justify-center" style={{ position: 'relative', zIndex: 2 }}>
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-6">
-        <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
+        <p className="text-white/40" style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
           Website designed &amp; built by
         </p>
         <Image
