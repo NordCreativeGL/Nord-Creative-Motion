@@ -32,7 +32,7 @@ export default function About() {
           <div className="flex flex-col justify-between h-full">
             <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">Our story</p>
             <Image
-              src="/logo-wordmark-transparent.png"
+              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
               alt="Nord Creative"
               width={612}
               height={184}
