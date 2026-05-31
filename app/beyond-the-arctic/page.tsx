@@ -145,7 +145,17 @@ export default function BeyondTheArcticPage() {
     }
 
     const observer = new IntersectionObserver(
-      (entries) => { if (entries[0].isIntersecting) playEntry() },
+      (entries) => {
+        if (!entries[0].isIntersecting) return
+        const videoElements = document.querySelectorAll('#adventure video');
+        const firstVideo = videoElements[0] as HTMLVideoElement;
+        if (!firstVideo) { playEntry(); return; }
+        if (firstVideo.readyState >= 3) {
+          playEntry();
+        } else {
+          firstVideo.addEventListener('canplay', () => playEntry(), { once: true });
+        }
+      },
       { threshold: 0.15 }
     )
     observer.observe(section)
