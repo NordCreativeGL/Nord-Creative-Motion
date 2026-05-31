@@ -30,6 +30,8 @@ export default function About() {
       <section id="about-text" data-snap="true" className="bg-black min-h-screen flex items-center">
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 md:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full">
           <div className="flex flex-col justify-between h-full">
+            <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">Our story</p>
+            <h2 className="text-4xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white mb-8 leading-tight">Two careers,<br/>one direction.</h2>
             <div className="space-y-6">
               <p className="text-xl min-[1900px]:text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/70 leading-relaxed">Before Nord Creative, we had different careers — Oskar as a police officer, Johanna in real estate. What we shared was a life spent outdoors, and a growing interest in photography and video as a way of documenting what we experienced.</p>
               <p className="text-xl min-[1900px]:text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/70 leading-relaxed">That interest gradually became something more. Alongside our previous careers, we took on smaller projects — and at some point, the work became serious enough that we chose to follow it fully.</p>
