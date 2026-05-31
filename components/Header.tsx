@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -37,7 +38,7 @@ export default function Header() {
       } ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        <a href="/">
+        <Link href="/">
           <Image
             src="/logo-icon.png"
             alt="Nord Creative"
@@ -46,12 +47,12 @@ export default function Header() {
             className="object-contain"
             priority
           />
-        </a>
+        </Link>
         <nav className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
-          <a href="/" className="transition hover:text-white">Home</a>
-          <a href="/greenland" className="transition hover:text-white">Greenland</a>
-          <a href="/beyond-the-arctic" className="transition hover:text-white">Beyond the Arctic</a>
-          <a href="/about" className="transition hover:text-white">About</a>
+          <Link href="/" className="transition hover:text-white">Home</Link>
+          <Link href="/greenland" className="transition hover:text-white">Greenland</Link>
+          <Link href="/beyond-the-arctic" className="transition hover:text-white">Beyond the Arctic</Link>
+          <Link href="/about" className="transition hover:text-white">About</Link>
         </nav>
         <a
           href="mailto:contact@nordcreative.dk"
