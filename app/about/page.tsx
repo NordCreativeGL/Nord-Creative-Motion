@@ -7,7 +7,7 @@ export default function About() {
     <main className="min-h-screen text-white">
       <ScrollManager />
       <SideNav items={[
-        { label: 'About us', id: 'about-text' },
+        { label: 'Our story', id: 'about-text' },
         { label: 'Contact', id: 'about-cta' },
       ]} />
       <section id="about-hero" data-snap="true" className="relative h-screen w-full overflow-hidden">
