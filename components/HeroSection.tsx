@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function HeroSection() {
   const sectionRef      = useRef<HTMLElement>(null);
-  const wordmarkImgRef  = useRef<HTMLImageElement>(null);
   const videoRef        = useRef<HTMLVideoElement>(null);
   const contentRef      = useRef<HTMLDivElement>(null);
   const taglineRef      = useRef<HTMLParagraphElement>(null);
@@ -109,12 +108,6 @@ export default function HeroSection() {
     const section = sectionRef.current;
 
     const ctx = gsap.context(() => {
-      gsap.to(wordmarkImgRef.current, {
-        opacity: 1,
-        duration: 1,
-        delay: 0.5,
-      });
-
       if (video)   gsap.to(video,   { opacity: 1, duration: 1.5, delay: 1.0, ease: 'power2.out' });
       if (tagline) gsap.to(tagline, { opacity: 1, duration: 0.8, delay: 1.8, ease: 'power2.out' });
       if (navbar)  gsap.to(navbar,  { opacity: 1, duration: 0.8, delay: 2.0, ease: 'power2.out' });
