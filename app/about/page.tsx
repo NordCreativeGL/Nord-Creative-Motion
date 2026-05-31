@@ -36,7 +36,7 @@ export default function About() {
               alt="Nord Creative"
               width={612}
               height={184}
-              className="block self-start h-10 min-[1900px]:h-12 w-auto mb-4 opacity-90"
+              className="block self-start h-10 min-[1900px]:h-16 w-auto mb-4 min-[1900px]:-mt-6 min-[1900px]:-mb-2 opacity-90"
             />
             <div className="space-y-6">
               <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">Before Nord Creative, we had different careers — Oskar as a police officer, Johanna in real estate — and a growing interest in photography and video as a way of documenting what we experienced.</p>
