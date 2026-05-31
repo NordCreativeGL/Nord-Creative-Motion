@@ -9,19 +9,19 @@ gsap.registerPlugin(ScrollTrigger);
 const services = [
   {
     type: "image" as const,
-    src: "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/IMG_5200.jpg",
+    src: "https://cdn.nordcreative.dk/IMG_5200.jpg",
     title: "Photography",
     description: "Professional photography that showcases your product, project, or business through strong visual storytelling.",
   },
   {
     type: "video" as const,
-    src: "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P46%20%C3%98ST%20KYSTEN%20.mp4",
+    src: "https://cdn.nordcreative.dk/P46%20%C3%98ST%20KYSTEN%20.mp4",
     title: "Drone & Aerial",
     description: "Aerial imagery that reveals landscapes, projects, and locations from powerful new perspectives.",
   },
   {
     type: "video" as const,
-    src: "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P37.mp4",
+    src: "https://cdn.nordcreative.dk/P37.mp4",
     title: "Video production",
     description: "Cinematic shots that communicate your story and present your business, product, or project in a compelling way.",
   },

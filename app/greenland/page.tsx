@@ -71,7 +71,7 @@ export default function GreenlandPage() {
             </div>
             <div style={{ display: 'flex' }}>
               <video
-                src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P18K.mp4"
+                src="https://cdn.nordcreative.dk/P18K.mp4"
                 autoPlay
                 muted
                 loop
@@ -103,7 +103,7 @@ export default function GreenlandPage() {
           }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <video
-                src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P14.mp4"
+                src="https://cdn.nordcreative.dk/P14.mp4"
                 autoPlay
                 muted
                 loop
@@ -117,7 +117,7 @@ export default function GreenlandPage() {
                 }}
               />
               <video
-                src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P46.mp4"
+                src="https://cdn.nordcreative.dk/P46.mp4"
                 autoPlay
                 muted
                 loop
@@ -175,7 +175,7 @@ export default function GreenlandPage() {
         <div className="mx-auto max-w-7xl px-6 w-full">
           <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: 500 }}>
             <video
-              src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P16.mp4"
+              src="https://cdn.nordcreative.dk/P16.mp4"
               autoPlay
               muted
               loop

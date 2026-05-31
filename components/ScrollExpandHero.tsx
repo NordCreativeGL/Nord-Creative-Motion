@@ -135,7 +135,7 @@ export default function ScrollExpandHero() {
         }}
       >
         <video
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P1%20HEADER.mp4"
+          src="https://cdn.nordcreative.dk/P1%20HEADER.mp4"
           autoPlay muted loop playsInline
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />

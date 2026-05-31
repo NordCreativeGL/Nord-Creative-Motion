@@ -161,7 +161,7 @@ export default function HeroSection() {
       {/* ── Video ──────────────────────────────────────────────────────── */}
       <video
         ref={videoRef}
-        src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P19%20Header%20Boomerang.mp4"
+        src="https://cdn.nordcreative.dk/P19%20Header%20Boomerang.mp4"
         preload="auto"
         autoPlay
         muted

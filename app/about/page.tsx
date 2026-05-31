@@ -17,7 +17,7 @@ export default function About() {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P68%20HEADER.mp4"
+          src="https://cdn.nordcreative.dk/P68%20HEADER.mp4"
         />
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pb-20">
@@ -62,7 +62,7 @@ export default function About() {
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div className="relative rounded-2xl overflow-hidden aspect-[16/7] bg-zinc-900">
             <Image
-              src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/CTA%20about.jpg"
+              src="https://cdn.nordcreative.dk/CTA%20about.jpg"
               alt="Planning a project in Greenland"
               fill
               className="object-cover"

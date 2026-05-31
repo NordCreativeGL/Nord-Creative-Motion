@@ -11,9 +11,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const GRID_VIDEOS = [
-  "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P33%20MALLORCA.mp4",
-  "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P61%20SOUTH%20AFRICA.mp4",
-  "https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P35%20INDONESIA.mp4",
+  "https://cdn.nordcreative.dk/P33%20MALLORCA.mp4",
+  "https://cdn.nordcreative.dk/P61%20SOUTH%20AFRICA.mp4",
+  "https://cdn.nordcreative.dk/P35%20INDONESIA.mp4",
 ];
 
 export default function BeyondTheArcticPage() {
@@ -177,7 +177,7 @@ export default function BeyondTheArcticPage() {
       {/* ── Section 1: Hero ── */}
       <section id="bta-hero" data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
         <video
-          src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P60%20HEADER.mp4"
+          src="https://cdn.nordcreative.dk/P60%20HEADER.mp4"
           autoPlay
           muted
           loop
@@ -354,7 +354,7 @@ export default function BeyondTheArcticPage() {
               </p>
               <div style={{ width: '100%', aspectRatio: '16/9', borderRadius: 14, overflow: 'hidden' }}>
                 <video
-                  src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P22.mp4"
+                  src="https://cdn.nordcreative.dk/P22.mp4"
                   autoPlay
                   muted
                   loop
@@ -368,7 +368,7 @@ export default function BeyondTheArcticPage() {
             {/* Right col: portrait video */}
             <div style={{ aspectRatio: '9/16', borderRadius: 14, overflow: 'hidden' }}>
               <video
-                src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P23.mp4"
+                src="https://cdn.nordcreative.dk/P23.mp4"
                 autoPlay
                 muted
                 loop
@@ -387,11 +387,11 @@ export default function BeyondTheArcticPage() {
             <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <div ref={ring4Ref} style={{ flex: 1, position: 'relative', height: '100%' }}>
                 {[
-                  'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P59.mp4',
-                  'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P24.mp4',
-                  'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P25.mp4',
-                  'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P26.mp4',
-                  'https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P53A.mp4',
+                  'https://cdn.nordcreative.dk/P59.mp4',
+                  'https://cdn.nordcreative.dk/P24.mp4',
+                  'https://cdn.nordcreative.dk/P25.mp4',
+                  'https://cdn.nordcreative.dk/P26.mp4',
+                  'https://cdn.nordcreative.dk/P53A.mp4',
                 ].map((src, i) => (
                   <div key={i} ref={el => { card4Refs.current[i] = el }} style={{ position: 'absolute', overflow: 'hidden', opacity: 0 }}>
                     <video src={src} muted loop playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />

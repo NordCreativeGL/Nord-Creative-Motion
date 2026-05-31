@@ -149,7 +149,7 @@ export default function GreenlandSection() {
             overflow: 'hidden',
           }}>
             <video
-              src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P18K.mp4"
+              src="https://cdn.nordcreative.dk/P18K.mp4"
               preload="none"
               autoPlay muted loop playsInline
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -165,7 +165,7 @@ export default function GreenlandSection() {
             overflow: 'hidden',
           }}>
             <video
-              src="https://pub-fa494a3b296345cdb20796e5eafa3316.r2.dev/P21.mp4"
+              src="https://cdn.nordcreative.dk/P21.mp4"
               preload="none"
               autoPlay muted loop playsInline
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
