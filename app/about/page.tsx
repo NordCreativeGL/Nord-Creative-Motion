@@ -32,7 +32,7 @@ export default function About() {
           <div className="flex flex-col justify-between h-full">
             <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">Our story</p>
             <Image
-              src="/logo-wordmark-needle.png"
+              src="/nord-creative-wordmark-needle-white.svg"
               alt="Nord Creative"
               width={200}
               height={40}
@@ -50,6 +50,7 @@ export default function About() {
               src="/IMG_3883.jpg"
               alt="Oskar & Johanna"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
