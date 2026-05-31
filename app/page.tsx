@@ -26,8 +26,18 @@ export default function Home() {
         document.head.appendChild(link);
       });
     };
-    const timer = setTimeout(prefetch, 3000);
-    return () => clearTimeout(timer);
+
+    if (document.readyState === 'complete') {
+      const timer = setTimeout(prefetch, 2000);
+      return () => clearTimeout(timer);
+    } else {
+      const onLoad = () => {
+        const timer = setTimeout(prefetch, 2000);
+        return () => clearTimeout(timer);
+      };
+      window.addEventListener('load', onLoad, { once: true });
+      return () => window.removeEventListener('load', onLoad);
+    }
   }, []);
 
   return (
