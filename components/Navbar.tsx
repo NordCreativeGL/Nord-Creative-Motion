@@ -30,18 +30,20 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex-shrink-0">
-          <Image
-            src="/logo-icon-transparent.png"
-            alt="NordCreative"
-            width={48}
-            height={48}
-            className="h-8 w-auto"
-            priority
-          />
-        </Link>
+        <div className="flex-1">
+          <Link href="/" className="flex-shrink-0">
+            <Image
+              src="/logo-icon-transparent.png"
+              alt="NordCreative"
+              width={48}
+              height={48}
+              className="h-8 w-auto"
+              priority
+            />
+          </Link>
+        </div>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center justify-center gap-10">
           {navLinks.map((link, i) => (
             <motion.div
               key={link.href}
@@ -59,15 +61,17 @@ export default function Navbar() {
           ))}
         </div>
 
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.72 }}
-          href="mailto:contact@nordcreative.dk"
-          className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
-        >
-          Work with us
-        </motion.a>
+        <div className="flex-1 flex justify-end">
+          <motion.a
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.72 }}
+            href="mailto:contact@nordcreative.dk"
+            className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
+          >
+            Work with us
+          </motion.a>
+        </div>
       </div>
     </motion.nav>
   );
