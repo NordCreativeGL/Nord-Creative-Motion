@@ -29,14 +29,14 @@ export default function GreenlandSection() {
 
       const tl = gsap.timeline({ paused: true });
 
-      tl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0.10)
-        .to(line1Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0.40)
-        .to(line2Ref.current,  { opacity: 1, rotateY: 0, y: 0, duration: 1.3, ease: 'power2.inOut' }, 0.70)
-        .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 1.00)
-        .to(bodyRef.current,   { opacity: 1, y: 0,       duration: 0.9, ease: 'power2.inOut' }, 1.50)
-        .to(linkRef.current,   { opacity: 1,             duration: 0.8, ease: 'power2.inOut' }, 1.80)
-        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0.80)
-        .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.60);
+      tl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0)
+        .to(line1Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0.20)
+        .to(line2Ref.current,  { opacity: 1, rotateY: 0, y: 0, duration: 1.3, ease: 'power2.inOut' }, 0.42)
+        .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0.64)
+        .to(bodyRef.current,   { opacity: 1, y: 0,       duration: 0.9, ease: 'power2.inOut' }, 1.00)
+        .to(linkRef.current,   { opacity: 1,             duration: 0.8, ease: 'power2.inOut' }, 1.25)
+        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0.50)
+        .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.10);
 
       const hasAnimated = { current: false };
 
