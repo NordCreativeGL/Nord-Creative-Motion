@@ -31,13 +31,15 @@ export default function About() {
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 md:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full">
           <div className="flex flex-col justify-between h-full">
             <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">Our story</p>
-            <Image
-              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
-              alt="Nord Creative"
-              width={612}
-              height={184}
-              className="block self-start h-10 min-[1900px]:h-16 w-auto mb-4 min-[1900px]:-mt-6 min-[1900px]:-mb-2 opacity-90"
-            />
+            <div className="self-start overflow-hidden mb-4 h-[24px] min-[1900px]:h-[32px]">
+              <Image
+                src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+                alt="Nord Creative"
+                width={612}
+                height={184}
+                className="h-10 min-[1900px]:h-[56px] w-auto -mt-[8px] min-[1900px]:-mt-[11px] opacity-90"
+              />
+            </div>
             <div className="space-y-6">
               <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">Before Nord Creative, we had different careers — Oskar as a police officer, Johanna in real estate — and a growing interest in photography and video as a way of documenting what we experienced.</p>
               <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">That interest gradually became something more. Alongside our previous careers, we took on smaller projects — and at some point, the work became serious enough that we chose to follow it fully.</p>
