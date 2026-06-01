@@ -163,7 +163,7 @@ export default function Header() {
             fontSize: '13px',
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
-            marginTop: '20px',
+            marginTop: '4px',
             border: '1px solid rgba(255,255,255,0.4)',
             borderRadius: '999px',
             padding: '10px 24px',
