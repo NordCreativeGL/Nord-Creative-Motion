@@ -104,13 +104,14 @@ export default function Header() {
         style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: '#000000',
+          backgroundColor: 'rgba(0,0,0,0.93)',
           zIndex: 1000,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
-          gap: '40px',
+          paddingLeft: '40px',
+          gap: '28px',
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? 'auto' : 'none',
           transition: 'opacity 0.3s ease',
@@ -131,30 +132,47 @@ export default function Header() {
               window.location.href = href;
             }}
             style={{
-              color: 'white',
-              fontSize: 'clamp(32px, 8vw, 48px)',
-              fontWeight: 300,
-              letterSpacing: '0.05em',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
               textDecoration: 'none',
+              color: 'rgba(255,255,255,0.6)',
+              fontSize: '13px',
+              letterSpacing: '0.15em',
               textTransform: 'uppercase',
             }}
           >
+            <span style={{
+              display: 'block',
+              width: '28px',
+              height: '0.5px',
+              background: 'white',
+              flexShrink: 0,
+            }} />
             {label}
           </a>
         ))}
         <a
           href="mailto:contact@nordcreative.dk"
           style={{
-            color: 'white',
-            fontSize: 'clamp(13px, 3.5vw, 16px)',
-            fontWeight: 300,
-            letterSpacing: '0.15em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
             textDecoration: 'none',
+            color: 'rgba(255,255,255,0.3)',
+            fontSize: '10px',
+            letterSpacing: '0.15em',
             textTransform: 'uppercase',
             marginTop: '16px',
-            opacity: 0.5,
           }}
         >
+          <span style={{
+            display: 'block',
+            width: '16px',
+            height: '0.5px',
+            background: 'rgba(255,255,255,0.3)',
+            flexShrink: 0,
+          }} />
           Work with us
         </a>
       </div>
