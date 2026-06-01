@@ -3,9 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   const lastScrollY = useRef(0);
   const [visible, setVisible] = React.useState(true);
 
@@ -38,7 +40,16 @@ export default function Header() {
       } ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        <Link href="/">
+        <Link
+          href="/"
+          style={{ display: 'block' }}
+          onClick={(e) => {
+            if (pathname === '/') {
+              e.preventDefault();
+              window.location.href = '/';
+            }
+          }}
+        >
           <Image
             src="/logo-icon.png"
             alt="Nord Creative"
@@ -49,10 +60,10 @@ export default function Header() {
           />
         </Link>
         <nav className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
-          <Link href="/" className="transition hover:text-white">Home</Link>
-          <Link href="/greenland" className="transition hover:text-white">Greenland</Link>
-          <Link href="/beyond-the-arctic" className="transition hover:text-white">Beyond the Arctic</Link>
-          <Link href="/about" className="transition hover:text-white">About</Link>
+          <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>Home</Link>
+          <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>Greenland</Link>
+          <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link>
+          <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>About</Link>
         </nav>
         <a
           href="mailto:contact@nordcreative.dk"
