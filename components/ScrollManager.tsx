@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 export default function ScrollManager() {
-  const isMobileRef = useRef(typeof window !== 'undefined' && window.innerWidth < 768)
+  const isMobileRef = useRef(typeof window !== 'undefined' && window.innerWidth < 1024)
 
   useEffect(() => {
     const smoothScrollTo = (targetY: number): Promise<void> => {
@@ -77,7 +77,7 @@ export default function ScrollManager() {
       handleSnap(direction);
     };
 
-    const onResize = () => { isMobileRef.current = window.innerWidth < 768 }
+    const onResize = () => { isMobileRef.current = window.innerWidth < 1024 }
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('resize', onResize);
     return () => {
