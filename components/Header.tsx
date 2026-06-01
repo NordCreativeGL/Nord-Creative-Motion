@@ -48,6 +48,7 @@ export default function Header() {
         style={{
           transform: (!visible && !menuOpen) ? 'translateY(-100%)' : 'translateY(0)',
           transition: 'transform 0.3s ease',
+          zIndex: 1001,
         }}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
@@ -104,13 +105,14 @@ export default function Header() {
         style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: 'rgba(0,0,0,0.93)',
+          backgroundColor: 'rgba(0,0,0,0.82)',
           zIndex: 1000,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          paddingLeft: '40px',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-start',
+          paddingTop: '80px',
+          paddingRight: '28px',
           gap: '28px',
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? 'auto' : 'none',
@@ -133,6 +135,7 @@ export default function Header() {
             }}
             style={{
               display: 'flex',
+              flexDirection: 'row-reverse',
               alignItems: 'center',
               gap: '12px',
               textDecoration: 'none',
@@ -155,24 +158,17 @@ export default function Header() {
         <a
           href="mailto:contact@nordcreative.dk"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
             textDecoration: 'none',
-            color: 'rgba(255,255,255,0.3)',
-            fontSize: '10px',
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '13px',
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
-            marginTop: '16px',
+            marginTop: '20px',
+            border: '1px solid rgba(255,255,255,0.4)',
+            borderRadius: '999px',
+            padding: '10px 24px',
           }}
         >
-          <span style={{
-            display: 'block',
-            width: '16px',
-            height: '0.5px',
-            background: 'rgba(255,255,255,0.3)',
-            flexShrink: 0,
-          }} />
           Work with us
         </a>
       </div>
