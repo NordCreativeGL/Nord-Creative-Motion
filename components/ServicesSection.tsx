@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -27,9 +27,6 @@ const services = [
   },
 ];
 
-const CARD_H = "84vh";
-const CARD_W = "calc(84vh * 9 / 16)";
-
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const card1Ref = useRef<HTMLDivElement>(null);
@@ -41,6 +38,17 @@ export default function ServicesSection() {
   const accentRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  const CARD_H = isMobile ? 'calc(80vw * 16 / 9)' : '84vh';
+  const CARD_W = isMobile ? '80vw' : 'calc(84vh * 9 / 16)';
+
   useEffect(() => {
     const section = sectionRef.current;
     const card1 = card1Ref.current;
@@ -49,7 +57,9 @@ export default function ServicesSection() {
     if (!section || !card1 || !card2 || !card3) return;
 
     const ctx = gsap.context(() => {
-      const cardHeightPx = window.innerHeight * 0.84;
+      const cardHeightPx = window.innerWidth < 1024
+        ? window.innerWidth * 0.80 * (16 / 9)
+        : window.innerHeight * 0.84;
       gsap.set(card2, { y: cardHeightPx });
       gsap.set(card3, { y: cardHeightPx + 22 });
 
@@ -121,9 +131,9 @@ export default function ServicesSection() {
     <div id="services" ref={sectionRef} style={{ height: "400vh" }}>
       <div
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
-        className="bg-black flex items-center"
+        className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center"
       >
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 gap-16 min-[1900px]:gap-24 items-center h-full">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full">
 
           {/* Left: text */}
           <div>
