@@ -97,9 +97,7 @@ export default function ServicesSection() {
           }
         })
         .to(card1Ref.current, { y: 0, duration: 1 }, 0)
-        .to(card1, { scale: 0.94, duration: 1 }, 0.33)
         .to(card2, { y: 0, duration: 1 }, 0.33)
-        .to(card2, { scale: 0.94, duration: 1 }, 0.66)
         .to(card3, { y: 0, duration: 1 }, 0.66);
       }
 
@@ -160,7 +158,7 @@ export default function ServicesSection() {
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
         className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center max-[1024px]:relative"
       >
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-16">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-8 max-[1024px]:items-start">
 
           {/* Left: text */}
           <div>
