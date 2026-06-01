@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function ScrollManager() {
+  const isMobileRef = useRef(typeof window !== 'undefined' && window.innerWidth < 768)
+
   useEffect(() => {
     const smoothScrollTo = (targetY: number): Promise<void> => {
       return new Promise((resolve) => {
@@ -67,6 +69,7 @@ export default function ScrollManager() {
     };
 
     const handleWheel = (e: WheelEvent) => {
+      if (isMobileRef.current) return;
       e.preventDefault();
       if ((window as any).__snapLock) return;
       if (Math.abs(e.deltaY) < 10) return;
@@ -74,8 +77,13 @@ export default function ScrollManager() {
       handleSnap(direction);
     };
 
+    const onResize = () => { isMobileRef.current = window.innerWidth < 768 }
     window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   return null;
