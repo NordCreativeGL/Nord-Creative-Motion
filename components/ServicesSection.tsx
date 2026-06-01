@@ -48,8 +48,8 @@ export default function ServicesSection() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const CARD_H = isMobile ? 'calc(72vw * 16 / 9)' : '84vh';
-  const CARD_W = isMobile ? '72vw' : 'calc(84vh * 9 / 16)';
+  const CARD_H = isMobile ? '82vh' : '84vh';
+  const CARD_W = isMobile ? '88vw' : 'calc(84vh * 9 / 16)';
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -60,24 +60,48 @@ export default function ServicesSection() {
 
     const ctx = gsap.context(() => {
       const cardHeightPx = window.innerWidth < 1024
-        ? window.innerWidth * 0.72 * (16 / 9)
+        ? window.innerHeight * 0.82
         : window.innerHeight * 0.84;
-      gsap.set(card2, { y: cardHeightPx });
-      gsap.set(card3, { y: cardHeightPx + 22 });
+      if (window.innerWidth >= 1024) {
+        gsap.set(card2, { y: cardHeightPx });
+        gsap.set(card3, { y: cardHeightPx + 22 });
+      }
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1.2,
-        },
-      });
+      if (window.innerWidth >= 1024) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1.2,
+          },
+        });
 
-      tl.to(card1, { scale: 0.94, duration: 1 }, 0)
-        .to(card2, { y: 0, duration: 1 }, 0)
-        .to(card2, { scale: 0.94, duration: 1 }, 1)
-        .to(card3, { y: 0, duration: 1 }, 1);
+        tl.to(card1, { scale: 0.94, duration: 1 }, 0)
+          .to(card2, { y: 0, duration: 1 }, 0)
+          .to(card2, { scale: 0.94, duration: 1 }, 1)
+          .to(card3, { y: 0, duration: 1 }, 1);
+      }
+
+      if (window.innerWidth < 1024) {
+        const vh = window.innerHeight;
+        gsap.set(card1Ref.current, { y: vh });
+        gsap.set(card2, { y: vh });
+        gsap.set(card3, { y: vh });
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.2,
+          }
+        })
+        .to(card1Ref.current, { y: 0, duration: 1 }, 0)
+        .to(card1, { scale: 0.94, duration: 1 }, 0.33)
+        .to(card2, { y: 0, duration: 1 }, 0.33)
+        .to(card2, { scale: 0.94, duration: 1 }, 0.66)
+        .to(card3, { y: 0, duration: 1 }, 0.66);
+      }
 
       gsap.set([labelRef.current, accentRef.current, bodyRef.current], { opacity: 0 });
       gsap.set([line1Ref.current, line2Ref.current], {
@@ -85,7 +109,9 @@ export default function ServicesSection() {
         x: -10,
       });
 
-      gsap.set(card1Ref.current, { y: cardHeightPx });
+      if (window.innerWidth >= 1024) {
+        gsap.set(card1Ref.current, { y: cardHeightPx });
+      }
 
       const entranceTl = gsap.timeline({ paused: true });
 
@@ -104,12 +130,11 @@ export default function ServicesSection() {
           ease: 'power4.inOut',
         }, 0.30)
         .to(accentRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.85)
-        .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0)
-        .to(card1Ref.current, {
-          y: 0,
-          duration: 1.0,
-          ease: 'power3.out',
-        }, 0.2);
+        .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
+
+      if (window.innerWidth >= 1024) {
+        entranceTl.to(card1Ref.current, { y: 0, duration: 1.0, ease: 'power3.out' }, 0.2);
+      }
 
       const hasAnimated = { current: false };
 
@@ -133,9 +158,9 @@ export default function ServicesSection() {
     <div id="services" ref={sectionRef} style={{ height: "400vh" }} className="max-[1024px]:pt-16">
       <div
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
-        className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center"
+        className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center max-[1024px]:relative"
       >
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-16">
 
           {/* Left: text */}
           <div>
@@ -157,7 +182,7 @@ export default function ServicesSection() {
           </div>
 
           {/* Right: 9:16 card stack */}
-          <div className="flex justify-center items-center h-full">
+          <div className="flex justify-center items-center h-full max-[1024px]:absolute max-[1024px]:inset-0 max-[1024px]:z-20 max-[1024px]:flex max-[1024px]:items-center max-[1024px]:justify-center">
             <div style={{ position: "relative", width: CARD_W, height: `calc(${CARD_H} + 44px)`, marginTop: "48px" }}>
 
               {/* Card 1 */}
