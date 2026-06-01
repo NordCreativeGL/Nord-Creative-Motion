@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -14,6 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -30,7 +32,16 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <Link href="/" className="flex-shrink-0">
+        <Link
+          href="/"
+          className="flex-shrink-0"
+          onClick={(e) => {
+            if (pathname === '/') {
+              e.preventDefault();
+              window.location.reload();
+            }
+          }}
+        >
           <Image
             src="/logo-icon-transparent.png"
             alt="NordCreative"
@@ -52,6 +63,12 @@ export default function Navbar() {
               <Link
                 href={link.href}
                 className="text-sm text-white/60 hover:text-white transition-colors duration-200 tracking-wide"
+                onClick={(e) => {
+                  if (pathname === link.href) {
+                    e.preventDefault();
+                    window.location.reload();
+                  }
+                }}
               >
                 {link.label}
               </Link>
