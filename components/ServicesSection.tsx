@@ -38,7 +38,9 @@ export default function ServicesSection() {
   const accentRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth < 1024
+  );
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
     check();
@@ -46,8 +48,8 @@ export default function ServicesSection() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const CARD_H = isMobile ? 'calc(80vw * 16 / 9)' : '84vh';
-  const CARD_W = isMobile ? '80vw' : 'calc(84vh * 9 / 16)';
+  const CARD_H = isMobile ? 'calc(72vw * 16 / 9)' : '84vh';
+  const CARD_W = isMobile ? '72vw' : 'calc(84vh * 9 / 16)';
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -58,7 +60,7 @@ export default function ServicesSection() {
 
     const ctx = gsap.context(() => {
       const cardHeightPx = window.innerWidth < 1024
-        ? window.innerWidth * 0.80 * (16 / 9)
+        ? window.innerWidth * 0.72 * (16 / 9)
         : window.innerHeight * 0.84;
       gsap.set(card2, { y: cardHeightPx });
       gsap.set(card3, { y: cardHeightPx + 22 });
@@ -128,7 +130,7 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <div id="services" ref={sectionRef} style={{ height: "400vh" }}>
+    <div id="services" ref={sectionRef} style={{ height: "400vh" }} className="max-[1024px]:pt-16">
       <div
         style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
         className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center"
