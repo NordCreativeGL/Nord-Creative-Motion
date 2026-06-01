@@ -46,6 +46,7 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
 
   return (
     <div
+      className="max-[1024px]:hidden"
       style={{
         position: 'fixed',
         left: '28px',
