@@ -71,7 +71,7 @@ export default function Header() {
               priority
             />
           </Link>
-          <nav className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
+          <nav className="hidden items-center gap-8 text-sm text-zinc-300 lg:flex">
             <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>Home</Link>
             <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>Greenland</Link>
             <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link>
@@ -79,12 +79,12 @@ export default function Header() {
           </nav>
           <a
             href="mailto:contact@nordcreative.dk"
-            className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white hover:text-black md:block"
+            className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white hover:text-black lg:block"
           >
             Work with us
           </a>
           <button
-            className="md:hidden flex flex-col justify-center items-center gap-[6px] w-10 h-10"
+            className="lg:hidden flex flex-col justify-center items-center gap-[6px] w-10 h-10"
             style={{ zIndex: 1001, position: 'relative' }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
