@@ -182,10 +182,15 @@ export default function HeroSection() {
         {/* Tagline */}
         <p
           ref={taglineRef}
-          className="text-base tracking-[0.3em] uppercase text-white/60 max-[768px]:text-center max-[768px]:px-6"
+          className="text-base tracking-[0.3em] uppercase text-white/60 max-[1024px]:text-center max-[1024px]:px-6"
           style={{ opacity: 0 }}
         >
-          Video Production · Photography · Arctic Storytelling
+          <>
+            <span className="max-[1024px]:hidden">Video Production · Photography · Arctic Storytelling</span>
+            <span className="hidden max-[1024px]:block">
+              Video Production<br />Photography<br />Arctic Storytelling
+            </span>
+          </>
         </p>
       </div>
 
