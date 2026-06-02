@@ -159,7 +159,7 @@ export default function BasedInGreenland() {
       const DURATION = 6
       const finalCX = W * 0.74
       const finalCY = H * 0.51
-      const finalScale = Math.round(2050 * (window.innerWidth / 1728))
+      const finalScale = isMobile ? Math.round(700 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
 
       const t0 = performance.now()
 
@@ -267,11 +267,21 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ minHeight: '100dvh', background: '#060606', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: 'hidden', position: 'relative' }}
+      style={{ minHeight: isMobile ? '148dvh' : '100vh', background: '#060606', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: 'hidden', position: 'relative' }}
     >
       <canvas
         ref={canvasRef}
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 5, pointerEvents: 'none' }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: isMobile ? 'auto' : 0,
+          width: '100%',
+          height: isMobile ? '52dvh' : '100%',
+          zIndex: isMobile ? 1 : 5,
+          pointerEvents: 'none',
+        }}
       />
       <video
         ref={videoRef}
@@ -281,7 +291,7 @@ export default function BasedInGreenland() {
         style={{ display: 'none' }}
       />
 
-      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '48px' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
+      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '48dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
         <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
         <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>We work here</div>
