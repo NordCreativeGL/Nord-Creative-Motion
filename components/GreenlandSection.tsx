@@ -6,6 +6,13 @@ import gsap from "gsap";
 
 export default function GreenlandSection() {
   const [btnHover, setBtnHover] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const sectionRef = useRef<HTMLDivElement>(null);
   const labelRef   = useRef<HTMLDivElement>(null);
   const line1Ref   = useRef<HTMLDivElement>(null);
@@ -64,25 +71,27 @@ export default function GreenlandSection() {
       ref={sectionRef}
       style={{
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        minHeight: '100vh',
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'flex-start' : 'center',
+        minHeight: isMobile ? '100dvh' : '100vh',
         position: 'relative',
         background: 'black',
-        overflow: 'hidden',
+        overflow: isMobile ? 'visible' : 'hidden',
       }}
     >
         {/* Left: text column */}
         <div
           style={{
-            width: '46%',
+            width: isMobile ? '100%' : '46%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             perspective: '900px',
+            paddingTop: isMobile ? '48px' : undefined,
+            paddingBottom: isMobile ? '8px' : undefined,
           }}
         >
-          <div style={{ maxWidth: 'clamp(680px, 40vw, 820px)', paddingLeft: 'clamp(180px, 18vw, 260px)' }}>
+          <div style={{ maxWidth: isMobile ? '100%' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             Greenland
           </div>
@@ -112,8 +121,8 @@ export default function GreenlandSection() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              alignSelf: 'flex-start',
-              width: 'fit-content',
+              alignSelf: isMobile ? undefined : 'flex-start',
+              width: isMobile ? '100%' : 'fit-content',
               marginTop: '1.2rem',
               padding: '14px 36px',
               borderRadius: '999px',
@@ -134,16 +143,17 @@ export default function GreenlandSection() {
         </div>
 
         <div style={{
-          width: '54%',
-          height: '100vh',
+          width: isMobile ? '100%' : '54%',
+          height: isMobile ? 'auto' : '100vh',
           display: 'flex',
           flexDirection: 'column',
-          padding: '2.5rem 2rem 2.5rem 1rem',
+          padding: isMobile ? '0 24px 48px 24px' : '2.5rem 2rem 2.5rem 1rem',
           gap: '0.75rem',
         }}>
           <div ref={video1Ref} style={{
             position: 'relative',
-            flex: 1,
+            flex: isMobile ? undefined : 1,
+            height: isMobile ? '220px' : undefined,
             width: '100%',
             borderRadius: 14,
             overflow: 'hidden',
@@ -159,7 +169,8 @@ export default function GreenlandSection() {
 
           <div ref={video2Ref} style={{
             position: 'relative',
-            flex: 1,
+            flex: isMobile ? undefined : 1,
+            height: isMobile ? '220px' : undefined,
             width: '100%',
             borderRadius: 14,
             overflow: 'hidden',
