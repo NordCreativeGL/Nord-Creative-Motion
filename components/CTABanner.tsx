@@ -5,6 +5,13 @@ import gsap from "gsap";
 
 export default function CTABanner() {
   const [btnHover, setBtnHover] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const sectionRef  = useRef<HTMLElement>(null);
   const cardRef     = useRef<HTMLDivElement>(null);
   const headingRef  = useRef<HTMLDivElement>(null);
@@ -80,8 +87,8 @@ export default function CTABanner() {
       <div
         ref={cardRef}
         style={{
-          width: '70vw',
-          aspectRatio: '3/2',
+          width: isMobile ? '90vw' : '70vw',
+          aspectRatio: isMobile ? '9/16' : '3/2',
           borderRadius: 22,
           overflow: 'hidden',
           position: 'relative',
@@ -98,7 +105,7 @@ export default function CTABanner() {
         <svg
           viewBox="0 0 18 12"
           preserveAspectRatio="none"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: isMobile ? 'none' : 'block' }}
         >
           <path
             fill="rgba(0,0,0,0.85)"
@@ -107,14 +114,16 @@ export default function CTABanner() {
         </svg>
         <div style={{
           position: 'absolute',
-          right: 0,
-          bottom: '3%',
-          width: '39%',
-          height: '50%',
+          right: isMobile ? undefined : 0,
+          bottom: isMobile ? 0 : '3%',
+          left: isMobile ? 0 : undefined,
+          width: isMobile ? '100%' : '39%',
+          height: isMobile ? 'auto' : '50%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          padding: '0 2rem 1.5rem 1rem',
+          justifyContent: isMobile ? 'flex-end' : 'center',
+          padding: isMobile ? '48px 24px 32px 24px' : '0 2rem 1.5rem 1rem',
+          background: isMobile ? 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)' : undefined,
         }}>
           <div ref={headingRef} style={{ fontSize: 'clamp(28px,2.78vw,68px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
             Planning a project<br />in Greenland?
@@ -128,7 +137,8 @@ export default function CTABanner() {
             onMouseLeave={() => setBtnHover(false)}
             style={{
               display: 'inline-flex',
-              width: 'fit-content',
+              width: isMobile ? '100%' : 'fit-content',
+              justifyContent: isMobile ? 'center' : undefined,
               padding: '13px 30px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.22)',
