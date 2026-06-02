@@ -48,7 +48,7 @@ export default function ServicesSection() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const CARD_H = isMobile ? '82vh' : '84vh';
+  const CARD_H = isMobile ? 'calc(88vw * 16 / 9)' : '84vh';
   const CARD_W = isMobile ? '88vw' : 'calc(84vh * 9 / 16)';
 
   useEffect(() => {
@@ -81,24 +81,6 @@ export default function ServicesSection() {
           .to(card2, { y: 0, duration: 1 }, 0)
           .to(card2, { scale: 0.94, duration: 1 }, 1)
           .to(card3, { y: 0, duration: 1 }, 1);
-      }
-
-      if (window.innerWidth < 1024) {
-        const vh = window.innerHeight;
-        gsap.set(card1Ref.current, { y: vh });
-        gsap.set(card2, { y: vh });
-        gsap.set(card3, { y: vh });
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1.2,
-          }
-        })
-        .to(card1Ref.current, { y: 0, duration: 1 }, 0)
-        .to(card2, { y: 0, duration: 1 }, 1)
-        .to(card3, { y: 0, duration: 1 }, 2);
       }
 
       if (window.innerWidth >= 1024) {
@@ -152,9 +134,9 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <div id="services" ref={sectionRef} style={{ height: "400vh" }} className="max-[1024px]:pt-16">
+    <div id="services" ref={sectionRef} style={{ height: isMobile ? 'auto' : '400vh' }} className="max-[1024px]:pt-16">
       <div
-        style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}
+        style={{ position: "sticky", top: 0, height: isMobile ? 'auto' : '100vh', overflow: "hidden" }}
         className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center max-[1024px]:relative max-[1024px]:items-start"
       >
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-8 max-[1024px]:items-start">
@@ -179,7 +161,7 @@ export default function ServicesSection() {
           </div>
 
           {/* Right: 9:16 card stack */}
-          <div className="flex justify-center items-center h-full max-[1024px]:absolute max-[1024px]:inset-0 max-[1024px]:z-20 max-[1024px]:flex max-[1024px]:items-center max-[1024px]:justify-center">
+          <div className="flex justify-center items-center h-full max-[1024px]:relative max-[1024px]:w-full max-[1024px]:flex-col max-[1024px]:items-center max-[1024px]:gap-6 max-[1024px]:pt-4 max-[1024px]:pb-16 max-[1024px]:justify-center">
             <div style={{ position: "relative", width: CARD_W, height: `calc(${CARD_H} + 44px)`, marginTop: "48px" }}>
 
               {/* Card 1 */}
