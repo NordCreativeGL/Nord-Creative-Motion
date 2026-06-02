@@ -23,7 +23,7 @@ export default function BasedInGreenland() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024)
+  const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()

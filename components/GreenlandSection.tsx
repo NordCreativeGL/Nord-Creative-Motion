@@ -6,7 +6,7 @@ import gsap from "gsap";
 
 export default function GreenlandSection() {
   const [btnHover, setBtnHover] = useState(false);
-  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024)
+  const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()
