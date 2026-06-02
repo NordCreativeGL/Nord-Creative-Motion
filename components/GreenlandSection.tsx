@@ -87,7 +87,7 @@ export default function GreenlandSection() {
             flexDirection: 'column',
             justifyContent: 'center',
             perspective: '900px',
-            paddingTop: isMobile ? '48px' : undefined,
+            paddingTop: isMobile ? '24px' : undefined,
             paddingBottom: isMobile ? '8px' : undefined,
           }}
         >
