@@ -18,13 +18,21 @@ export default function Footer() {
         <p className="text-white/40" style={{ fontSize: isMobile ? '0.9rem' : '1rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
           Website designed &amp; built by
         </p>
-        <Image
-          src="/logo-wordmark-transparent.png"
-          alt="NordCreative"
-          width={612}
-          height={184}
-          style={{ width: isMobile ? 'min(734px, 92vw)' : 'min(734px, 85vw)', maxWidth: isMobile ? '92vw' : 'none', height: 'auto', objectFit: 'contain', marginTop: isMobile ? '-24px' : '-80px', marginBottom: isMobile ? '-28px' : '-90px', transform: isMobile ? 'scaleX(2.0)' : 'none' }}
-        />
+        <div style={isMobile ? {
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '92vw',
+        } : {}}>
+          <Image
+            src="/logo-wordmark-transparent.png"
+            alt="NordCreative"
+            width={612}
+            height={184}
+            style={{ width: isMobile ? 'min(734px, 92vw)' : 'min(734px, 85vw)', maxWidth: isMobile ? '92vw' : 'none', height: 'auto', objectFit: 'contain', marginTop: isMobile ? '-24px' : '-80px', marginBottom: isMobile ? '-28px' : '-90px', transform: isMobile ? 'scale(2.0)' : 'none' }}
+          />
+        </div>
 
         <p className="text-white/40" style={{ fontSize: isMobile ? '0.85rem' : '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
           Limits are for the uncreative
