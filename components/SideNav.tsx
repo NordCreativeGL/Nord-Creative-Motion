@@ -15,6 +15,13 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState('');
   const [hovered, setHovered] = useState('');
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.8);
@@ -54,7 +61,7 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
         top: 'auto',
         transform: 'none',
         zIndex: 50,
-        display: 'flex',
+        display: isMobile ? 'none' : 'flex',
         flexDirection: 'column',
         gap: '10px',
         opacity: visible ? 1 : 0,
