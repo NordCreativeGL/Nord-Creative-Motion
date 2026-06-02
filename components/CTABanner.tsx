@@ -76,10 +76,10 @@ export default function CTABanner() {
       ref={sectionRef}
       style={{
         minHeight: isMobile ? 'auto' : '100vh',
-        padding: isMobile ? '48px 0' : undefined,
+        padding: isMobile ? '0px' : '48px 0px',
         background: '#060606',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: isMobile ? 'flex-start' : 'center',
         justifyContent: 'center',
         overflow: 'hidden',
         position: 'relative',
