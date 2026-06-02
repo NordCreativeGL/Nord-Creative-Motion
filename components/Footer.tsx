@@ -1,8 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <footer id="footer" data-snap="true" className="border-t border-white/10 pt-6 pb-16 min-h-[25vh] flex flex-col justify-center" style={{ position: 'relative', zIndex: 2 }}>
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-6">
@@ -14,7 +23,7 @@ export default function Footer() {
           alt="NordCreative"
           width={612}
           height={184}
-          style={{ width: 'min(734px, 85vw)', height: 'auto', objectFit: 'contain', marginTop: '-80px', marginBottom: '-90px' }}
+          style={{ width: 'min(734px, 85vw)', height: 'auto', objectFit: 'contain', marginTop: isMobile ? '-12px' : '-80px', marginBottom: isMobile ? '-12px' : '-90px' }}
         />
 
         <p className="text-white/40" style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
