@@ -23,7 +23,7 @@ export default function Footer() {
           alt="NordCreative"
           width={612}
           height={184}
-          style={{ width: isMobile ? 'min(734px, 92vw)' : 'min(734px, 85vw)', maxWidth: isMobile ? '92vw' : 'none', height: 'auto', objectFit: 'contain', marginTop: isMobile ? '-24px' : '-80px', marginBottom: isMobile ? '-28px' : '-90px' }}
+          style={{ width: isMobile ? 'min(734px, 92vw)' : 'min(734px, 85vw)', maxWidth: isMobile ? '92vw' : 'none', height: 'auto', objectFit: 'contain', marginTop: isMobile ? '-24px' : '-80px', marginBottom: isMobile ? '-28px' : '-90px', transform: isMobile ? 'scaleX(2.0)' : 'none' }}
         />
 
         <p className="text-white/40" style={{ fontSize: isMobile ? '0.85rem' : '0.9rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
