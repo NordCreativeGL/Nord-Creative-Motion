@@ -34,16 +34,17 @@ export default function GreenlandSection() {
       gsap.set(video1Ref.current, { opacity: 0, rotateY: -90, x: 0, transformOrigin: 'center center' });
       gsap.set(video2Ref.current, { opacity: 0, rotateY:  90, x: 0, transformOrigin: 'center center' });
 
+      const isMobileAnim = window.innerWidth < 1024;
       const tl = gsap.timeline({ paused: true });
 
-      tl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0)
-        .to(line1Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0.20)
-        .to(line2Ref.current,  { opacity: 1, rotateY: 0, y: 0, duration: 1.3, ease: 'power2.inOut' }, 0.42)
-        .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: 1.3, ease: 'power2.inOut' }, 0.64)
-        .to(bodyRef.current,   { opacity: 1, y: 0,       duration: 0.9, ease: 'power2.inOut' }, 1.00)
-        .to(linkRef.current,   { opacity: 1,             duration: 0.8, ease: 'power2.inOut' }, 1.25)
-        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0.50)
-        .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.10);
+      tl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, 0)
+        .to(line1Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0    : 0.20)
+        .to(line2Ref.current,  { opacity: 1, rotateY: 0, y: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0.05 : 0.42)
+        .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0.10 : 0.64)
+        .to(bodyRef.current,   { opacity: 1, y: 0,             duration: isMobileAnim ? 0.5 : 0.9, ease: 'power2.inOut' }, isMobileAnim ? 0.15 : 1.00)
+        .to(linkRef.current,   { opacity: 1,                   duration: isMobileAnim ? 0.5 : 0.8, ease: 'power2.inOut' }, isMobileAnim ? 0.20 : 1.25)
+        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.05 : 0.50)
+        .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.20 : 1.10);
 
       const hasAnimated = { current: false };
 
