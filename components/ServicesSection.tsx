@@ -97,8 +97,8 @@ export default function ServicesSection() {
           }
         })
         .to(card1Ref.current, { y: 0, duration: 1 }, 0)
-        .to(card2, { y: 0, duration: 1 }, 0.33)
-        .to(card3, { y: 0, duration: 1 }, 0.66);
+        .to(card2, { y: 0, duration: 1 }, 1)
+        .to(card3, { y: 0, duration: 1 }, 2);
       }
 
       if (window.innerWidth >= 1024) {
