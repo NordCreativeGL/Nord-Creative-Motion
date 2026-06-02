@@ -75,7 +75,8 @@ export default function CTABanner() {
       data-snap="true"
       ref={sectionRef}
       style={{
-        minHeight: '100vh',
+        minHeight: isMobile ? 'auto' : '100vh',
+        padding: isMobile ? '48px 0' : undefined,
         background: '#060606',
         display: 'flex',
         alignItems: 'center',
