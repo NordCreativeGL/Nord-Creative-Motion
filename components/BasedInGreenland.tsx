@@ -158,9 +158,9 @@ export default function BasedInGreenland() {
       ctx.scale(dpr, dpr)
 
       const DURATION = 6
-      const finalCX = isMobileNow ? W * 0.60 : W * 0.74
-      const finalCY = isMobileNow ? H * 0.16 : H * 0.51
-      const finalScale = isMobileNow ? Math.round(700 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
+      const finalCX = isMobileNow ? W * 0.50 : W * 0.74
+      const finalCY = isMobileNow ? H * 0.14 : H * 0.51
+      const finalScale = isMobileNow ? Math.round(1050 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
 
       const t0 = performance.now()
 
@@ -198,29 +198,29 @@ export default function BasedInGreenland() {
 
         if (p < 0.22) {
           const q = eo(p / 0.22)
-          scale = lerp(70, 450, q)
+          scale = lerp(70, isMobileNow ? 135 : 450, q)
           rotLon = lerp(-134, -80, q)
           rotLat = lerp(25, -18, q)
         } else if (p < 0.60) {
           const q = eio((p - 0.22) / 0.38)
-          scale = 450
+          scale = isMobileNow ? 135 : 450
           rotLon = lerp(-80, 100, q)
           rotLat = -18
         } else if (p < 0.86) {
           const q = eio((p - 0.60) / 0.26)
-          scale = lerp(450, finalScale, q)
+          scale = lerp(isMobileNow ? 135 : 450, finalScale, q)
           rotLon = lerp(100, 42, q)
           rotLat = lerp(-18, -72, q)
-          cx = lerp(W / 2, isMobileNow ? W * 0.60 : W * 0.74, q)
-          cy = lerp(H / 2, isMobileNow ? H * 0.16 : H * 0.51, q)
+          cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
+          cy = lerp(H / 2, isMobileNow ? H * 0.14 : H * 0.51, q)
           countriesAlpha = lerp(1, 0, q)
         } else {
           const q = eio((p - 0.86) / 0.14)
           scale = finalScale
           rotLon = 42
           rotLat = -72
-          cx = isMobileNow ? W * 0.60 : W * 0.74
-          cy = isMobileNow ? H * 0.16 : H * 0.51
+          cx = isMobileNow ? W * 0.50 : W * 0.74
+          cy = isMobileNow ? H * 0.14 : H * 0.51
           countriesAlpha = 0
         }
 
