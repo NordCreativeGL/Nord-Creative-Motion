@@ -273,12 +273,9 @@ export default function BasedInGreenland() {
         ref={canvasRef}
         style={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: isMobile ? 'auto' : 0,
+          inset: 0,
           width: '100%',
-          height: isMobile ? '52dvh' : '100%',
+          height: '100%',
           zIndex: isMobile ? 1 : 5,
           pointerEvents: 'none',
         }}
