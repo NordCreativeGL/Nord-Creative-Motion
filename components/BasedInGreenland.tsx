@@ -23,6 +23,14 @@ export default function BasedInGreenland() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   useEffect(() => {
     const section = sectionRef.current
     const canvas = canvasRef.current
@@ -259,7 +267,7 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ minHeight: '100vh', background: '#060606', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative' }}
+      style={{ minHeight: '100dvh', background: '#060606', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: 'hidden', position: 'relative' }}
     >
       <canvas
         ref={canvasRef}
@@ -273,19 +281,20 @@ export default function BasedInGreenland() {
         style={{ display: 'none' }}
       />
 
-      <div style={{ flex: '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: '1rem', zIndex: 2, transform: 'translateX(150px)' }}>
+      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '48px' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
         <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
-        <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>We work here</div>
-        <p ref={body1Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isStudio ? '540px' : '510px' }}>We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.</p>
-        <p ref={body2Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isStudio ? '540px' : '510px' }}>We are available for projects across all of Greenland, from remote landscapes to towns and industrial sites, creating photography and film that document people, places, and projects in their natural context.</p>
-        <p ref={body3Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: isStudio ? '540px' : '510px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
+        <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>We work here</div>
+        <p ref={body1Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.</p>
+        <p ref={body2Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>We are available for projects across all of Greenland, from remote landscapes to towns and industrial sites, creating photography and film that document people, places, and projects in their natural context.</p>
+        <p ref={body3Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
         <a
           ref={readMoreRef}
           href="/about"
           style={{
             display: 'inline-block',
-            width: 'fit-content',
+            width: isMobile ? '100%' : 'fit-content',
+            textAlign: isMobile ? 'center' : undefined,
             marginTop: '2rem',
             padding: '14px 32px',
             border: '1px solid rgba(255,255,255,0.6)',
