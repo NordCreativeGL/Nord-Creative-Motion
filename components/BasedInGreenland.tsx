@@ -192,7 +192,7 @@ export default function BasedInGreenland() {
         const p = Math.min((performance.now() - t0) / 1000 / DURATION, 1)
 
         let scale: number, rotLon: number, rotLat: number
-        let cx = W / 2, cy = H / 2
+        let cx = W / 2, cy = isMobileNow ? 0.14 * H : H / 2
         let globeAlpha = 1
         let countriesAlpha = 1
 
@@ -212,7 +212,7 @@ export default function BasedInGreenland() {
           rotLon = lerp(100, 42, q)
           rotLat = lerp(-18, -72, q)
           cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
-          cy = lerp(H / 2, isMobileNow ? H * 0.14 : H * 0.51, q)
+          cy = lerp(isMobileNow ? 0.14 * H : H / 2, isMobileNow ? H * 0.14 : H * 0.51, q)
           countriesAlpha = lerp(1, 0, q)
         } else {
           const q = eio((p - 0.86) / 0.14)
