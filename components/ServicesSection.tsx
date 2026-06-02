@@ -137,7 +137,7 @@ export default function ServicesSection() {
         style={{ position: "sticky", top: 0, height: isMobile ? 'auto' : '100vh', overflow: isMobile ? 'visible' : 'hidden' }}
         className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center max-[1024px]:relative max-[1024px]:items-start"
       >
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-8 max-[1024px]:items-start">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 max-[1024px]:gap-8 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-8 max-[1024px]:items-start">
 
           {/* Left: text */}
           <div>
@@ -160,7 +160,7 @@ export default function ServicesSection() {
 
           {/* Right: 9:16 card stack */}
           <div className="flex justify-center items-center h-full max-[1024px]:relative max-[1024px]:w-full max-[1024px]:flex-col max-[1024px]:items-center max-[1024px]:gap-6 max-[1024px]:pt-4 max-[1024px]:pb-16 max-[1024px]:justify-center">
-            <div style={{ position: "relative", width: isMobile ? '100%' : CARD_W, height: isMobile ? 'auto' : `calc(${CARD_H} + 44px)`, marginTop: "48px" }}>
+            <div style={{ position: "relative", width: isMobile ? '100%' : CARD_W, height: isMobile ? 'auto' : `calc(${CARD_H} + 44px)`, marginTop: isMobile ? '0px' : '48px' }}>
 
               {/* Card 1 */}
               <div
