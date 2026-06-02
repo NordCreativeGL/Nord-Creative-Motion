@@ -101,52 +101,51 @@ export default function ServicesSection() {
         .to(card3, { y: 0, duration: 1 }, 0.66);
       }
 
-      gsap.set([labelRef.current, accentRef.current, bodyRef.current], { opacity: 0 });
-      gsap.set([line1Ref.current, line2Ref.current], {
-        clipPath: 'inset(0 100% 0 0)',
-        x: -10,
-      });
+      if (window.innerWidth >= 1024) {
+        gsap.set([labelRef.current, accentRef.current, bodyRef.current], { opacity: 0 });
+        gsap.set([line1Ref.current, line2Ref.current], {
+          clipPath: 'inset(0 100% 0 0)',
+          x: -10,
+        });
+      }
 
       if (window.innerWidth >= 1024) {
         gsap.set(card1Ref.current, { y: cardHeightPx });
+
+        const entranceTl = gsap.timeline({ paused: true });
+
+        entranceTl
+          .to(labelRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0)
+          .to(line1Ref.current, {
+            clipPath: 'inset(0 0% 0 0)',
+            x: 0,
+            duration: 0.85,
+            ease: 'power4.inOut',
+          }, 0.15)
+          .to(line2Ref.current, {
+            clipPath: 'inset(0 0% 0 0)',
+            x: 0,
+            duration: 0.85,
+            ease: 'power4.inOut',
+          }, 0.30)
+          .to(accentRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.85)
+          .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0)
+          .to(card1Ref.current, { y: 0, duration: 1.0, ease: 'power3.out' }, 0.2);
+
+        const hasAnimated = { current: false };
+
+        const onScroll = () => {
+          if (hasAnimated.current) return;
+          const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
+          if (window.scrollY >= sectionTop - 20) {
+            hasAnimated.current = true;
+            entranceTl.play();
+            window.removeEventListener('scroll', onScroll);
+          }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
       }
-
-      const entranceTl = gsap.timeline({ paused: true });
-
-      entranceTl
-        .to(labelRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0)
-        .to(line1Ref.current, {
-          clipPath: 'inset(0 0% 0 0)',
-          x: 0,
-          duration: 0.85,
-          ease: 'power4.inOut',
-        }, 0.15)
-        .to(line2Ref.current, {
-          clipPath: 'inset(0 0% 0 0)',
-          x: 0,
-          duration: 0.85,
-          ease: 'power4.inOut',
-        }, 0.30)
-        .to(accentRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.85)
-        .to(bodyRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.0);
-
-      if (window.innerWidth >= 1024) {
-        entranceTl.to(card1Ref.current, { y: 0, duration: 1.0, ease: 'power3.out' }, 0.2);
-      }
-
-      const hasAnimated = { current: false };
-
-      const onScroll = () => {
-        if (hasAnimated.current) return;
-        const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
-        if (window.scrollY >= sectionTop - 20) {
-          hasAnimated.current = true;
-          entranceTl.play();
-          window.removeEventListener('scroll', onScroll);
-        }
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
     }, sectionRef);
 
     return () => ctx.revert();
