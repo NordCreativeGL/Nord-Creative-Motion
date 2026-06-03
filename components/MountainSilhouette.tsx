@@ -1,8 +1,16 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function MountainSilhouette() {
   const svgRef = useRef<SVGSVGElement>(null);
+
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     const svg = svgRef.current!;
@@ -27,8 +35,8 @@ export default function MountainSilhouette() {
   return (
     <svg
       ref={svgRef}
-      viewBox="0 0 1728 500"
-      preserveAspectRatio="xMidYMax slice"
+      viewBox={isMobile ? "0 0 450 500" : "0 0 1728 500"}
+      preserveAspectRatio={isMobile ? "xMidYMax meet" : "xMidYMax slice"}
       style={{
         position: "fixed",
         bottom: 0,
