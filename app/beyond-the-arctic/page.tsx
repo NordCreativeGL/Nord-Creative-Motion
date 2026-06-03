@@ -253,7 +253,7 @@ export default function BeyondTheArcticPage() {
           background: '#000',
           display: 'flex',
           alignItems: isMobile ? 'flex-start' : 'center',
-          overflow: isMobile ? 'visible' : 'hidden',
+          overflow: 'hidden',
           paddingTop: isMobile ? '80px' : undefined,
           paddingBottom: isMobile ? '60px' : undefined,
         }}>
