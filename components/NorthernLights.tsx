@@ -50,15 +50,6 @@ export default function NorthernLights() {
     const heroEl = document.getElementById("gl-hero");
     const lastEl = document.getElementById("gl-why");
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.target === heroEl) {
-          canvas.style.opacity = e.isIntersecting ? "0" : "1";
-        }
-      });
-    }, { threshold: 0.05 });
-    if (heroEl) observer.observe(heroEl);
-
     function onScroll() {
       if (!lastEl) return;
       const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
@@ -156,7 +147,6 @@ export default function NorthernLights() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
       window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);

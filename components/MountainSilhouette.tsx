@@ -9,10 +9,6 @@ export default function MountainSilhouette() {
 
     const lastEl = document.getElementById("gl-why");
 
-    const onHeroExpanded = () => {
-      if (svg) svg.style.opacity = "1";
-    };
-
     const onScroll = () => {
       if (!svg) return;
       const pastEnd = lastEl
@@ -21,11 +17,9 @@ export default function MountainSilhouette() {
       if (pastEnd) svg.style.opacity = "0";
     };
 
-    window.addEventListener("heroExpanded", onHeroExpanded);
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("heroExpanded", onHeroExpanded);
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
@@ -42,7 +36,7 @@ export default function MountainSilhouette() {
         height: "50vh",
         zIndex: 1,
         pointerEvents: "none",
-        opacity: "0",
+        opacity: "1",
         transition: "opacity 0.3s ease",
       }}
     >
