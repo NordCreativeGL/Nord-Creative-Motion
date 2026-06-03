@@ -28,7 +28,7 @@ export default function MountainSilhouette() {
     <svg
       ref={svgRef}
       viewBox="0 0 1728 500"
-      preserveAspectRatio="none"
+      preserveAspectRatio="xMidYMax slice"
       style={{
         position: "fixed",
         bottom: 0,
