@@ -314,7 +314,7 @@ export default function BeyondTheArcticPage() {
             {GRID_VIDEOS.map((src, i) => (
               <div
                 key={i}
-                onClick={() => { if (!isMobile) togglePlay(i); }}
+                onClick={() => togglePlay(i)}
                 style={{
                   borderRadius: 14,
                   overflow: 'hidden',
@@ -332,9 +332,11 @@ export default function BeyondTheArcticPage() {
                   loop
                   playsInline
                   preload="auto"
-                  onPlay={() => setS2PlayingIdx(i)}
-                  onPause={() => setS2PlayingIdx(null)}
-                  onEnded={() => setS2PlayingIdx(null)}
+                  {...(isMobile ? {
+                    onPlay: () => setS2PlayingIdx(i),
+                    onPause: () => setS2PlayingIdx(null),
+                    onEnded: () => setS2PlayingIdx(null),
+                  } : {})}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -342,7 +344,7 @@ export default function BeyondTheArcticPage() {
                     display: 'block',
                   }}
                 />
-                {/* Desktop play overlay */}
+                {/* Desktop play overlay — pointer-events:none so card onClick fires */}
                 {!isMobile && (
                   <div style={{
                     position: 'absolute',
@@ -371,39 +373,39 @@ export default function BeyondTheArcticPage() {
                     </div>
                   </div>
                 )}
-                {/* Mobile play overlay */}
+                {/* Mobile play overlay — container is pointer-events:none; button receives events */}
                 {isMobile && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      opacity: s2PlayingIdx === i ? 0 : 1,
-                      transition: 'opacity 0.3s ease',
-                      pointerEvents: s2PlayingIdx === i ? 'none' : 'auto',
-                    }}
-                    onClick={() => {
-                      const video = s2VideoRefs.current[i];
-                      if (video) { video.muted = false; video.play(); }
-                    }}
-                  >
-                    <div style={{
-                      border: '1px solid rgba(255,255,255,0.5)',
-                      borderRadius: '50%',
-                      width: 56,
-                      height: 56,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'rgba(0,0,0,0.3)',
-                      backdropFilter: 'blur(4px)',
-                    }}>
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: s2PlayingIdx === i ? 0 : 1,
+                    transition: 'opacity 0.3s ease',
+                    pointerEvents: 'none',
+                  }}>
+                    <button
+                      style={{
+                        border: '1px solid rgba(255,255,255,0.5)',
+                        borderRadius: '50%',
+                        width: 56,
+                        height: 56,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'rgba(0,0,0,0.3)',
+                        backdropFilter: 'blur(4px)',
+                        cursor: 'pointer',
+                        padding: 0,
+                        pointerEvents: 'auto',
+                      }}
+                      onClick={(e) => { e.stopPropagation(); const video = s2VideoRefs.current[i]; if (video) { video.muted = false; video.play(); } }}
+                    >
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
                         <polygon points="6,3 17,10 6,17" />
                       </svg>
-                    </div>
+                    </button>
                   </div>
                 )}
               </div>
