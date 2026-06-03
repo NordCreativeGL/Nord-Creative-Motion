@@ -328,7 +328,7 @@ export default function BeyondTheArcticPage() {
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="auto"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -424,7 +424,6 @@ export default function BeyondTheArcticPage() {
               borderRadius: 14,
               overflow: 'hidden',
               ...(isMobile ? {
-                order: -1,
                 width: '72vw',
                 maxHeight: '55vh',
                 margin: '0 auto 2rem',
@@ -479,11 +478,11 @@ export default function BeyondTheArcticPage() {
                 >
                   <video
                     src={src}
-                    autoPlay={i === 0}
+                    autoPlay
                     muted
                     loop
                     playsInline
-                    preload={i === 0 ? 'auto' : 'none'}
+                    preload="auto"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
                 </div>
