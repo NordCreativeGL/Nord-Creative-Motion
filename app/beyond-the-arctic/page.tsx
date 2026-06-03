@@ -41,6 +41,7 @@ export default function BeyondTheArcticPage() {
   const hasEntered4 = useRef(false)
 
   useEffect(() => {
+    if (isMobile) return;
     const section = section4Ref.current
     const ringEl = ring4Ref.current
     if (!section || !ringEl) return
@@ -99,9 +100,10 @@ export default function BeyondTheArcticPage() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isStudio])
+  }, [isStudio, isMobile])
 
   useEffect(() => {
+    if (isMobile) return;
     const section = section4Ref.current
     const ringEl = ring4Ref.current
     if (!section || !ringEl) return
@@ -168,7 +170,7 @@ export default function BeyondTheArcticPage() {
     )
     observer.observe(section)
     return () => observer.disconnect()
-  }, [isStudio])
+  }, [isStudio, isMobile])
 
   const togglePlay = (index: number) => {
     const video = videoRefs.current[index];
@@ -442,8 +444,53 @@ export default function BeyondTheArcticPage() {
         </div>
       </section>
 
-        {/* ── Section 4: Adventure ── */}
-        <section ref={section4Ref} id="adventure" style={{ height: '500vh', background: '#000', position: 'relative' }}>
+      {/* ── Section 4: Adventure ── */}
+      <section
+        ref={section4Ref}
+        id="adventure"
+        style={{
+          height: isMobile ? 'auto' : '500vh',
+          minHeight: isMobile ? '100dvh' : undefined,
+          background: '#000',
+          position: 'relative',
+        }}
+      >
+        {isMobile ? (
+          <div>
+            <div
+              className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16"
+              style={{ paddingTop: '80px', paddingBottom: '2rem' }}
+            >
+              <p style={{ fontSize: '13px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '10px' }}>ADVENTURE</p>
+              <h2 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', lineHeight: 1.1, marginBottom: '1rem' }}>Adventure is in our DNA</h2>
+              <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>Attention to detail, subtle nuances, and layered storytelling define our work.</p>
+            </div>
+            <div style={{ display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory', gap: '12px', paddingLeft: '24px', paddingRight: '24px', paddingBottom: '60px' }}>
+              {[
+                'https://cdn.nordcreative.dk/P59.mp4',
+                'https://cdn.nordcreative.dk/P24.mp4',
+                'https://cdn.nordcreative.dk/P25.mp4',
+                'https://cdn.nordcreative.dk/P26.mp4',
+                'https://cdn.nordcreative.dk/P53A.mp4',
+              ].map((src, i) => (
+                <div
+                  key={i}
+                  style={{ flex: '0 0 80vw', flexShrink: 0, aspectRatio: '9/16', borderRadius: 16, overflow: 'hidden', scrollSnapAlign: 'start' }}
+                >
+                  <video
+                    src={src}
+                    autoPlay={i === 0}
+                    muted
+                    loop
+                    playsInline
+                    preload={i === 0 ? 'auto' : 'none'}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
           <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
             <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <div ref={ring4Ref} style={{ flex: 1, position: 'relative', height: '100%' }}>
@@ -466,7 +513,8 @@ export default function BeyondTheArcticPage() {
               </div>
             </div>
           </div>
-        </section>
+        )}
+      </section>
 
       <Footer />
       <BackToTop />
