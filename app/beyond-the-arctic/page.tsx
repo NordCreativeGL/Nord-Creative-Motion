@@ -368,16 +368,25 @@ export default function BeyondTheArcticPage() {
       </section>
 
       {/* ── Section 3: Quote + mixed layout ── */}
-      <section id="bta-quote" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="bta-quote" data-snap="true" style={{
+          height: isMobile ? 'auto' : '100vh',
+          minHeight: isMobile ? '100dvh' : undefined,
+          background: '#000',
+          display: 'flex',
+          alignItems: isMobile ? 'flex-start' : 'center',
+          overflow: 'hidden',
+          paddingTop: isMobile ? '80px' : undefined,
+          paddingBottom: isMobile ? '60px' : undefined,
+        }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: isStudio ? '900fr 590fr' : '813fr 395fr',
+            gridTemplateColumns: isMobile ? '1fr' : (isStudio ? '900fr 590fr' : '813fr 395fr'),
             gap: '1.5rem',
-            alignItems: 'flex-end',
+            alignItems: isMobile ? 'flex-start' : 'flex-end',
           }}>
             {/* Left col: quote + landscape video */}
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: isMobile ? 'flex-start' : 'flex-end' }}>
               <p style={{
                 fontSize: 'clamp(1.25rem, 1.4vw, 1.75rem)',
                 fontWeight: 300,
@@ -388,7 +397,13 @@ export default function BeyondTheArcticPage() {
               }}>
                 "Strong visuals capture attention and enhance understanding. Good storytelling starts with observation."
               </p>
-              <div style={{ width: '100%', aspectRatio: '16/9', borderRadius: 14, overflow: 'hidden' }}>
+              <div style={{
+                width: '100%',
+                aspectRatio: '16/9',
+                borderRadius: 14,
+                overflow: 'hidden',
+                display: isMobile ? 'none' : undefined,
+              }}>
                 <video
                   src="https://cdn.nordcreative.dk/P22.mp4"
                   autoPlay
@@ -402,7 +417,17 @@ export default function BeyondTheArcticPage() {
             </div>
 
             {/* Right col: portrait video */}
-            <div style={{ aspectRatio: '9/16', borderRadius: 14, overflow: 'hidden' }}>
+            <div style={{
+              aspectRatio: '9/16',
+              borderRadius: 14,
+              overflow: 'hidden',
+              ...(isMobile ? {
+                order: -1,
+                width: '72vw',
+                maxHeight: '55vh',
+                margin: '0 auto 2rem',
+              } : {}),
+            }}>
               <video
                 src="https://cdn.nordcreative.dk/P23.mp4"
                 autoPlay
