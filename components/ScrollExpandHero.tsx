@@ -6,8 +6,11 @@ export default function ScrollExpandHero() {
   useEffect(() => {
     document.body.style.overflow = '';
     (window as any).__snapLock = false;
-    window.dispatchEvent(new Event('heroExpanded'));
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('heroExpanded'))
+    }, 0)
     return () => {
+      clearTimeout(timer)
       document.body.style.overflow = '';
       (window as any).__snapLock = false;
     };
