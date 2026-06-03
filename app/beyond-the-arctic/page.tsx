@@ -413,7 +413,7 @@ export default function BeyondTheArcticPage() {
                         backdropFilter: 'blur(4px)',
                         cursor: 'pointer',
                         padding: 0,
-                        pointerEvents: 'auto',
+                        pointerEvents: s2PlayingIdx === i ? 'none' : 'auto',
                       }}
                       onClick={(e) => { e.stopPropagation(); const video = s2VideoRefs.current[i]; if (video) { video.muted = false; video.play(); } }}
                     >
