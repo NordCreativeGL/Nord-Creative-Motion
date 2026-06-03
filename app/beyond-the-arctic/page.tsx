@@ -35,6 +35,9 @@ export default function BeyondTheArcticPage() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  const s2VideoRefs = useRef<(HTMLVideoElement | null)[]>([])
+  const [s2PlayingIdx, setS2PlayingIdx] = useState<number | null>(null)
+
   const section4Ref = useRef<HTMLElement>(null)
   const ring4Ref = useRef<HTMLDivElement>(null)
   const card4Refs = useRef<(HTMLDivElement | null)[]>([null, null, null, null, null])
@@ -311,7 +314,7 @@ export default function BeyondTheArcticPage() {
             {GRID_VIDEOS.map((src, i) => (
               <div
                 key={i}
-                onClick={() => togglePlay(i)}
+                onClick={() => { if (!isMobile) togglePlay(i); }}
                 style={{
                   borderRadius: 14,
                   overflow: 'hidden',
@@ -323,13 +326,15 @@ export default function BeyondTheArcticPage() {
                 }}
               >
                 <video
-                  ref={(el) => { videoRefs.current[i] = el; if (el) { el.muted = true; el.load(); } }}
+                  ref={(el) => { videoRefs.current[i] = el; s2VideoRefs.current[i] = el; if (el) { el.muted = true; el.load(); } }}
                   src={src}
-                  autoPlay={isMobile}
                   muted
                   loop
                   playsInline
                   preload="auto"
+                  onPlay={() => setS2PlayingIdx(i)}
+                  onPause={() => setS2PlayingIdx(null)}
+                  onEnded={() => setS2PlayingIdx(null)}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -337,33 +342,70 @@ export default function BeyondTheArcticPage() {
                     display: 'block',
                   }}
                 />
-                {/* Play overlay — visible when paused */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  opacity: (playing[i] || isMobile) ? 0 : 1,
-                  transition: 'opacity 0.3s ease',
-                  pointerEvents: 'none',
-                }}>
+                {/* Desktop play overlay */}
+                {!isMobile && (
                   <div style={{
-                    border: '1px solid rgba(255,255,255,0.5)',
-                    borderRadius: '50%',
-                    width: 56,
-                    height: 56,
+                    position: 'absolute',
+                    inset: 0,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: 'rgba(0,0,0,0.3)',
-                    backdropFilter: 'blur(4px)',
+                    opacity: playing[i] ? 0 : 1,
+                    transition: 'opacity 0.3s ease',
+                    pointerEvents: 'none',
                   }}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
-                      <polygon points="6,3 17,10 6,17" />
-                    </svg>
+                    <div style={{
+                      border: '1px solid rgba(255,255,255,0.5)',
+                      borderRadius: '50%',
+                      width: 56,
+                      height: 56,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: 'rgba(0,0,0,0.3)',
+                      backdropFilter: 'blur(4px)',
+                    }}>
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                        <polygon points="6,3 17,10 6,17" />
+                      </svg>
+                    </div>
                   </div>
-                </div>
+                )}
+                {/* Mobile play overlay */}
+                {isMobile && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      opacity: s2PlayingIdx === i ? 0 : 1,
+                      transition: 'opacity 0.3s ease',
+                      pointerEvents: s2PlayingIdx === i ? 'none' : 'auto',
+                    }}
+                    onClick={() => {
+                      const video = s2VideoRefs.current[i];
+                      if (video) { video.muted = false; video.play(); }
+                    }}
+                  >
+                    <div style={{
+                      border: '1px solid rgba(255,255,255,0.5)',
+                      borderRadius: '50%',
+                      width: 56,
+                      height: 56,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: 'rgba(0,0,0,0.3)',
+                      backdropFilter: 'blur(4px)',
+                    }}>
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                        <polygon points="6,3 17,10 6,17" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -373,7 +415,6 @@ export default function BeyondTheArcticPage() {
       {/* ── Section 3: Quote + mixed layout ── */}
       <section id="bta-quote" data-snap="true" style={{
           height: isMobile ? 'auto' : '100vh',
-          minHeight: isMobile ? '100dvh' : undefined,
           background: '#000',
           display: 'flex',
           alignItems: isMobile ? 'flex-start' : 'center',
@@ -406,6 +447,7 @@ export default function BeyondTheArcticPage() {
                 borderRadius: isMobile ? 12 : 14,
                 overflow: 'hidden',
                 order: isMobile ? -1 : undefined,
+                ...(isMobile ? { marginBottom: '24px' } : {}),
               }}>
                 <video
                   ref={(el) => { if (el) { el.muted = true; el.load(); } }}
@@ -426,9 +468,9 @@ export default function BeyondTheArcticPage() {
               borderRadius: 14,
               overflow: 'hidden',
               ...(isMobile ? {
-                width: '72vw',
+                width: '100%',
                 maxHeight: '55vh',
-                margin: '0 auto 2rem',
+                marginTop: '24px',
               } : {}),
             }}>
               <video
