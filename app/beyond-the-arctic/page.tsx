@@ -27,6 +27,14 @@ export default function BeyondTheArcticPage() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   const section4Ref = useRef<HTMLElement>(null)
   const ring4Ref = useRef<HTMLDivElement>(null)
   const card4Refs = useRef<(HTMLDivElement | null)[]>([null, null, null, null, null])
@@ -177,15 +185,17 @@ export default function BeyondTheArcticPage() {
   return (
     <main style={{ background: '#000000' }}>
       <ScrollManager />
-      <SideNav items={[
-        { label: 'Our work', id: 'bta-work' },
-        { label: 'The journey', id: 'bta-quote' },
-        { label: 'Adventure', id: 'adventure' },
-      ]} />
+      {!isMobile && (
+        <SideNav items={[
+          { label: 'Our work', id: 'bta-work' },
+          { label: 'The journey', id: 'bta-quote' },
+          { label: 'Adventure', id: 'adventure' },
+        ]} />
+      )}
       <Header />
 
       {/* ── Section 1: Hero ── */}
-      <section id="bta-hero" data-snap="true" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+      <section id="bta-hero" data-snap="true" style={{ position: 'relative', minHeight: isMobile ? '100dvh' : '100vh', overflow: 'hidden' }}>
         <video
           src="https://cdn.nordcreative.dk/P60%20HEADER.mp4"
           autoPlay
@@ -237,7 +247,16 @@ export default function BeyondTheArcticPage() {
       </section>
 
       {/* ── Section 2: Our work ── */}
-      <section id="bta-work" data-snap="true" style={{ height: '100vh', background: '#000', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+      <section id="bta-work" data-snap="true" style={{
+          height: isMobile ? 'auto' : '100vh',
+          minHeight: isMobile ? '100dvh' : undefined,
+          background: '#000',
+          display: 'flex',
+          alignItems: isMobile ? 'flex-start' : 'center',
+          overflow: isMobile ? 'visible' : 'hidden',
+          paddingTop: isMobile ? '80px' : undefined,
+          paddingBottom: isMobile ? '60px' : undefined,
+        }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <p style={{
             fontSize: '13px',
@@ -252,10 +271,10 @@ export default function BeyondTheArcticPage() {
           {/* H2 + body two-column grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '3rem',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? '1rem' : '3rem',
             alignItems: 'start',
-            marginBottom: '1rem',
+            marginBottom: isMobile ? '1.5rem' : '1rem',
           }}>
             <h2 style={{
               fontSize: 'clamp(28px, 2.78vw, 68px)',
@@ -276,7 +295,13 @@ export default function BeyondTheArcticPage() {
           </div>
 
           {/* Interactive 3-column portrait grid */}
-          <div style={{
+          <div style={isMobile ? {
+            display: 'flex',
+            overflowX: 'scroll',
+            scrollSnapType: 'x mandatory',
+            gap: '12px',
+            paddingRight: '24px',
+          } : {
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1.5rem',
@@ -292,6 +317,7 @@ export default function BeyondTheArcticPage() {
                   aspectRatio: '9/16',
                   background: '#111',
                   cursor: 'pointer',
+                  ...(isMobile ? { flex: '0 0 76vw', scrollSnapAlign: 'start' } : {}),
                 }}
               >
                 <video
