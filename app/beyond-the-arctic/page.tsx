@@ -438,7 +438,8 @@ export default function BeyondTheArcticPage() {
                 fontWeight: 300,
                 color: 'rgba(255,255,255,0.85)',
                 lineHeight: 1.5,
-                marginBottom: '1.5rem',
+                marginTop: isMobile ? 0 : undefined,
+                marginBottom: isMobile ? 0 : '1.5rem',
                 fontStyle: 'italic',
               }}>
                 "Strong visuals capture attention and enhance understanding. Good storytelling starts with observation."
@@ -471,7 +472,7 @@ export default function BeyondTheArcticPage() {
               overflow: 'hidden',
               ...(isMobile ? {
                 width: '100%',
-                maxHeight: '55vh',
+                borderRadius: 12,
                 marginTop: '24px',
               } : {}),
             }}>
