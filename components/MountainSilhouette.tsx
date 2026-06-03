@@ -22,7 +22,11 @@ export default function MountainSilhouette() {
       const pastEnd = lastEl
         ? window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3
         : false;
-      if (pastEnd) svg.style.opacity = "0";
+      if (pastEnd) {
+        svg.style.opacity = "0";
+      } else if (window.scrollY > 100) {
+        svg.style.opacity = "1";
+      }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -44,7 +48,7 @@ export default function MountainSilhouette() {
         height: "50vh",
         zIndex: 1,
         pointerEvents: "none",
-        opacity: "1",
+        opacity: "0",
         transition: "opacity 0.3s ease",
       }}
     >

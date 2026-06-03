@@ -47,7 +47,6 @@ export default function NorthernLights() {
     resize();
     window.addEventListener("resize", resize);
 
-    const heroEl = document.getElementById("gl-hero");
     const lastEl = document.getElementById("gl-why");
 
     function onScroll() {
@@ -55,7 +54,7 @@ export default function NorthernLights() {
       const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
       if (pastContent) {
         canvas.style.opacity = "0";
-      } else if (!heroEl || window.scrollY > (heroEl.offsetHeight * 0.9)) {
+      } else if (window.scrollY > 100) {
         canvas.style.opacity = "1";
       }
       const els = SECTIONS.map(s => document.getElementById(s.id));
@@ -74,8 +73,6 @@ export default function NorthernLights() {
       sectionProgress = Math.max(0, Math.min(SECTIONS.length - 1, raw));
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-    const onHeroExpanded = () => { canvas.style.opacity = "1"; };
-    window.addEventListener("heroExpanded", onHeroExpanded);
     onScroll();
 
     function drawBand(b: typeof BANDS[0], hue: number, time: number, alphaMultiplier = 1) {
@@ -147,7 +144,6 @@ export default function NorthernLights() {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("heroExpanded", onHeroExpanded);
     };
   }, []);
 
