@@ -325,6 +325,7 @@ export default function BeyondTheArcticPage() {
                 <video
                   ref={el => { videoRefs.current[i] = el; }}
                   src={src}
+                  autoPlay={isMobile}
                   muted
                   loop
                   playsInline
@@ -343,7 +344,7 @@ export default function BeyondTheArcticPage() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  opacity: playing[i] ? 0 : 1,
+                  opacity: (playing[i] || isMobile) ? 0 : 1,
                   transition: 'opacity 0.3s ease',
                   pointerEvents: 'none',
                 }}>
