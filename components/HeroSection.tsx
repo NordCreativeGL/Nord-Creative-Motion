@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,6 +14,14 @@ export default function HeroSection() {
   const needleDivRef = useRef<HTMLDivElement>(null)
   const wordmarkLettersRef = useRef<HTMLImageElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
+
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     const ringDiv = ringDivRef.current
@@ -175,7 +183,7 @@ export default function HeroSection() {
         <img
           ref={wordmarkLettersRef}
           src="/logos/final/svg/nord-creative-wordmark-letters-only-white.svg"
-          style={{ width: 'clamp(320px, 72vw, 1100px)', height: 'auto', opacity: 0 }}
+          style={{ width: isMobile ? '94vw' : 'clamp(320px, 72vw, 1100px)', height: 'auto', opacity: 0 }}
           alt="Nord Creative"
         />
 
