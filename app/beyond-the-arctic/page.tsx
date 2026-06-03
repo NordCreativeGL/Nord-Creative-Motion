@@ -323,7 +323,7 @@ export default function BeyondTheArcticPage() {
                 }}
               >
                 <video
-                  ref={el => { videoRefs.current[i] = el; }}
+                  ref={(el) => { videoRefs.current[i] = el; if (el) { el.muted = true; el.load(); } }}
                   src={src}
                   autoPlay={isMobile}
                   muted
@@ -403,17 +403,18 @@ export default function BeyondTheArcticPage() {
               <div style={{
                 width: '100%',
                 aspectRatio: '16/9',
-                borderRadius: 14,
+                borderRadius: isMobile ? 12 : 14,
                 overflow: 'hidden',
-                display: isMobile ? 'none' : undefined,
+                order: isMobile ? -1 : undefined,
               }}>
                 <video
+                  ref={(el) => { if (el) { el.muted = true; el.load(); } }}
                   src="https://cdn.nordcreative.dk/P22.mp4"
                   autoPlay
                   muted
                   loop
                   playsInline
-                  preload="none"
+                  preload="auto"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </div>
