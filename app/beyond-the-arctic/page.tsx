@@ -38,6 +38,19 @@ export default function BeyondTheArcticPage() {
   const s2VideoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const [s2PlayingIdx, setS2PlayingIdx] = useState<number | null>(null)
 
+  useEffect(() => {
+    if (!isMobile) return;
+    const timer = setTimeout(() => {
+      s2VideoRefs.current.forEach(video => {
+        if (video) {
+          video.muted = true;
+          video.load();
+        }
+      });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [isMobile]);
+
   const section4Ref = useRef<HTMLElement>(null)
   const ring4Ref = useRef<HTMLDivElement>(null)
   const card4Refs = useRef<(HTMLDivElement | null)[]>([null, null, null, null, null])
@@ -314,7 +327,7 @@ export default function BeyondTheArcticPage() {
             {GRID_VIDEOS.map((src, i) => (
               <div
                 key={i}
-                onClick={() => togglePlay(i)}
+                onClick={isMobile ? undefined : () => togglePlay(i)}
                 style={{
                   borderRadius: 14,
                   overflow: 'hidden',
@@ -326,7 +339,7 @@ export default function BeyondTheArcticPage() {
                 }}
               >
                 <video
-                  ref={(el) => { videoRefs.current[i] = el; s2VideoRefs.current[i] = el; if (el) { el.muted = true; el.load(); } }}
+                  ref={(el) => { videoRefs.current[i] = el; s2VideoRefs.current[i] = el; }}
                   src={src}
                   muted
                   loop
