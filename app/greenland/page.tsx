@@ -97,7 +97,7 @@ export default function GreenlandPage() {
 
       {/* ── Section 3: How we work ── */}
       <section id="gl-process" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', paddingTop: isMobile ? '80px' : '0', paddingBottom: isMobile ? '64px' : '0', position: 'relative', zIndex: 1 }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: isMobile ? 'none' : '100vh', overflow: isMobile ? 'visible' : 'hidden' }}>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 2fr', gap: isMobile ? '28px' : '2rem', alignItems: isMobile ? 'flex-start' : 'center', maxHeight: isMobile ? 'none' : '90vh', overflow: isMobile ? 'visible' : 'hidden' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <video
