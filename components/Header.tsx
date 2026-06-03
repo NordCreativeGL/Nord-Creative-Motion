@@ -105,7 +105,7 @@ export default function Header() {
         style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: 'rgba(0,0,0,0.82)',
+          backgroundColor: 'rgba(0,0,0,0.92)',
           zIndex: 1000,
           display: 'flex',
           flexDirection: 'column',
