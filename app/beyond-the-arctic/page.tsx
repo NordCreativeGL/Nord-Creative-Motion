@@ -327,7 +327,10 @@ export default function BeyondTheArcticPage() {
             {GRID_VIDEOS.map((src, i) => (
               <div
                 key={i}
-                onClick={isMobile ? undefined : () => togglePlay(i)}
+                onClick={isMobile
+                  ? () => { const v = s2VideoRefs.current[i]; if (v && s2PlayingIdx === i) v.pause(); }
+                  : () => togglePlay(i)
+                }
                 style={{
                   borderRadius: 14,
                   overflow: 'hidden',
@@ -341,7 +344,6 @@ export default function BeyondTheArcticPage() {
                 <video
                   ref={(el) => { videoRefs.current[i] = el; s2VideoRefs.current[i] = el; }}
                   src={src}
-                  muted
                   loop
                   playsInline
                   preload="auto"
