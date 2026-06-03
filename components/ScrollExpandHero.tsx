@@ -32,7 +32,7 @@ export default function ScrollExpandHero() {
         autoPlay muted loop playsInline preload="auto"
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       />
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.1)' }} />
 
       <div
         style={{
