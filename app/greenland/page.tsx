@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from 'react'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
@@ -10,14 +11,22 @@ import MountainSilhouette from "@/components/MountainSilhouette";
 import ScrollExpandHero from "@/components/ScrollExpandHero";
 
 export default function GreenlandPage() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   return (
     <main style={{ background: '#000000' }}>
       <ScrollManager />
-      <SideNav items={[
+      {!isMobile && <SideNav items={[
         { label: 'Working in Greenland', id: 'gl-working' },
         { label: 'How we work', id: 'gl-process' },
         { label: 'Why choose us', id: 'gl-why' },
-      ]} />
+      ]} />}
       <Header />
       <NorthernLights />
 
@@ -26,14 +35,9 @@ export default function GreenlandPage() {
       <MountainSilhouette />
 
       {/* ── Section 2: Working in Greenland ── */}
-      <section id="gl-working" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+      <section id="gl-working" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', position: 'relative', zIndex: 1, paddingTop: isMobile ? '80px' : undefined, paddingBottom: isMobile ? '64px' : undefined }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '2fr 3fr',
-            gap: '64px',
-            alignItems: 'stretch',
-          }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 3fr', gap: isMobile ? '28px' : '64px', alignItems: 'stretch' }}>
             <div>
               <p style={{
                 fontSize: '13px',
@@ -92,16 +96,9 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 3: How we work ── */}
-      <section id="gl-process" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: '0', paddingBottom: '0', position: 'relative', zIndex: 1 }}>
+      <section id="gl-process" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', paddingTop: isMobile ? '80px' : '0', paddingBottom: isMobile ? '64px' : '0', position: 'relative', zIndex: 1 }}>
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '3fr 2fr',
-            gap: '2rem',
-            alignItems: 'center',
-            maxHeight: '90vh',
-            overflow: 'hidden',
-          }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 2fr', gap: isMobile ? '28px' : '2rem', alignItems: isMobile ? 'flex-start' : 'center', maxHeight: isMobile ? 'none' : '90vh', overflow: isMobile ? 'visible' : 'hidden' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <video
                 src="https://cdn.nordcreative.dk/P14.mp4"
@@ -134,7 +131,7 @@ export default function GreenlandPage() {
                 }}
               />
             </div>
-            <div>
+            <div style={{ order: isMobile ? -1 : 0 }}>
               <p style={{
                 fontSize: '13px',
                 letterSpacing: '0.22em',
@@ -174,9 +171,9 @@ export default function GreenlandPage() {
       </section>
 
       {/* ── Section 4: Why choose us ── */}
-      <section id="gl-why" data-snap="true" style={{ height: '100vh', background: 'transparent', display: 'flex', alignItems: 'center', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+      <section id="gl-why" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', position: 'relative', zIndex: 1, paddingTop: isMobile ? '60px' : undefined, paddingBottom: isMobile ? '60px' : undefined }}>
         <div className="mx-auto max-w-7xl px-6 w-full">
-          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: 500 }}>
+          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: isMobile ? 'auto' : 500 }}>
             <video
               src="https://cdn.nordcreative.dk/P16.mp4"
               autoPlay
@@ -202,17 +199,12 @@ export default function GreenlandPage() {
               bottom: '48px',
               width: '1px',
               background: 'rgba(255,255,255,0.1)',
+              display: isMobile ? 'none' : 'block',
             }} />
 
-            <div style={{
-              position: 'relative',
-              zIndex: 1,
-              padding: '48px',
-              display: 'flex',
-              minHeight: 500,
-            }}>
+            <div style={{ position: 'relative', zIndex: 1, padding: isMobile ? '32px 24px' : '48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', minHeight: isMobile ? 'auto' : 500 }}>
               {/* Left col — 2/3 */}
-              <div style={{ width: '66.66%', paddingRight: '48px' }}>
+              <div style={{ width: isMobile ? '100%' : '66.66%', paddingRight: isMobile ? '0' : '48px', marginBottom: isMobile ? '32px' : undefined }}>
                 <p style={{
                   fontSize: '13px',
                   letterSpacing: '0.22em',
@@ -261,7 +253,7 @@ export default function GreenlandPage() {
               </div>
 
               {/* Right col — 1/3 */}
-              <div style={{ width: '33.33%', paddingLeft: '40px', paddingTop: '52px' }}>
+              <div style={{ width: isMobile ? '100%' : '33.33%', paddingLeft: isMobile ? '0' : '40px', paddingTop: isMobile ? '0' : '52px' }}>
                 <h3 style={{
                   fontSize: 'clamp(20px, 1.3vw, 28px)',
                   fontWeight: 300,
@@ -283,13 +275,15 @@ export default function GreenlandPage() {
                   href="mailto:contact@nordcreative.dk"
                   className="text-white hover:bg-white hover:text-black transition-colors duration-200"
                   style={{
-                    display: 'inline-block',
+                    display: isMobile ? 'block' : 'inline-block',
                     border: '1px solid rgba(255,255,255,0.6)',
                     padding: '14px 32px',
                     borderRadius: '999px',
                     fontSize: 'clamp(15px, 0.9vw, 19px)',
                     fontWeight: 300,
                     textDecoration: 'none',
+                    width: isMobile ? '100%' : undefined,
+                    textAlign: isMobile ? 'center' as const : undefined,
                   }}
                 >
                   Start your project
