@@ -204,7 +204,7 @@ export default function GreenlandPage() {
 
             <div style={{ position: 'relative', zIndex: 1, padding: isMobile ? '32px 24px' : '48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', minHeight: isMobile ? 'auto' : 500 }}>
               {/* Left col — 2/3 */}
-              <div style={{ width: isMobile ? '100%' : '66.66%', paddingRight: isMobile ? '0' : '48px', marginBottom: isMobile ? '32px' : undefined }}>
+              <div style={{ width: isMobile ? '100%' : '66.66%', paddingRight: isMobile ? '0' : '48px', marginBottom: isMobile ? '24px' : undefined }}>
                 <p style={{
                   fontSize: '13px',
                   letterSpacing: '0.22em',
@@ -215,35 +215,35 @@ export default function GreenlandPage() {
                   WHY US
                 </p>
                 <h2 style={{
-                  fontSize: 'clamp(28px, 2.78vw, 68px)',
+                  fontSize: isMobile ? '20px' : 'clamp(28px, 2.78vw, 68px)',
                   fontWeight: 300,
                   letterSpacing: '-0.02em',
                   color: 'white',
-                  marginBottom: '28px',
+                  marginBottom: isMobile ? '16px' : '28px',
                   maxWidth: '640px',
                 }}>
                   Why choose us for projects in Greenland
                 </h2>
                 <p style={{
-                  fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
                   lineHeight: 1.65,
                   color: 'rgba(255,255,255,0.65)',
-                  marginBottom: '20px',
+                  marginBottom: isMobile ? '12px' : '20px',
                   maxWidth: '560px',
                 }}>
                   We combine visual storytelling with real experience working in Greenland's conditions.
                 </p>
                 <p style={{
-                  fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
                   lineHeight: 1.65,
                   color: 'rgba(255,255,255,0.65)',
-                  marginBottom: '20px',
+                  marginBottom: isMobile ? '12px' : '20px',
                   maxWidth: '560px',
                 }}>
                   We understand the logistics, the unpredictability, and what it takes to execute production in remote environments — without compromising quality.
                 </p>
                 <p style={{
-                  fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
                   lineHeight: 1.65,
                   color: 'rgba(255,255,255,0.65)',
                   maxWidth: '560px',
@@ -258,13 +258,13 @@ export default function GreenlandPage() {
                   fontSize: 'clamp(20px, 1.3vw, 28px)',
                   fontWeight: 300,
                   color: 'white',
-                  marginBottom: '16px',
+                  marginBottom: isMobile ? '12px' : '16px',
                   letterSpacing: '-0.01em',
                 }}>
                   Planning a project in Greenland?
                 </h3>
                 <p style={{
-                  fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
                   lineHeight: 1.65,
                   color: 'rgba(255,255,255,0.65)',
                   marginBottom: '32px',
