@@ -2,44 +2,69 @@
 
 import { useEffect, useRef } from 'react'
 
-interface Star {
-  rDeg: number
-  thetaDeg: number
-  size: number
-  brightness: number
-}
+const FOCAL = 500
+const Z_SPEED = 0.35
 
-const STARS: Star[] = [
+interface StarOffset { dx: number; dy: number; dz?: number; s: number; b: number }
+interface ConstellDef { cx: number; cy: number; cz: number; stars: StarOffset[] }
+interface Star3D { x: number; y: number; z: number; size: number; bright: number }
+
+const CONSTELLATIONS: ConstellDef[] = [
+  // Ursa Minor — fades in at Services entry
+  { cx: 20, cy: -50, cz: 450, stars: [
+    { dx: 36, dy: -26, s: 2.5, b: 0.90 }, { dx: -34, dy: 8, s: 2.8, b: 0.82 },
+    { dx: -28, dy: 26, s: 2.2, b: 0.65 }, { dx: -4, dy: 36, s: 1.5, b: 0.48 },
+    { dx: 9, dy: 20, s: 1.6, b: 0.46 },  { dx: 24, dy: 2, s: 1.5, b: 0.44 },
+  ]},
   // Ursa Major / Karlsvognen
-  { rDeg: 28.3, thetaDeg: 165.9, size: 3.5, brightness: 0.92 },
-  { rDeg: 33.6, thetaDeg: 165.5, size: 2.8, brightness: 0.78 },
-  { rDeg: 36.3, thetaDeg: 178.5, size: 2.5, brightness: 0.70 },
-  { rDeg: 33.0, thetaDeg: 183.9, size: 2.0, brightness: 0.60 },
-  { rDeg: 34.0, thetaDeg: 193.5, size: 3.0, brightness: 0.86 },
-  { rDeg: 35.1, thetaDeg: 201.0, size: 2.8, brightness: 0.80 },
-  { rDeg: 40.7, thetaDeg: 206.9, size: 3.0, brightness: 0.88 },
-  // Cassiopeia
-  { rDeg: 30.9, thetaDeg: 2.3,   size: 2.5, brightness: 0.75 },
-  { rDeg: 33.5, thetaDeg: 10.1,  size: 3.0, brightness: 0.86 },
-  { rDeg: 29.3, thetaDeg: 14.2,  size: 2.8, brightness: 0.80 },
-  { rDeg: 29.8, thetaDeg: 21.5,  size: 2.5, brightness: 0.75 },
-  { rDeg: 26.3, thetaDeg: 28.6,  size: 2.2, brightness: 0.68 },
+  { cx: -55, cy: 18, cz: 700, stars: [
+    { dx: -58, dy: -16, s: 3.0, b: 0.88 }, { dx: -39, dy: -8, s: 2.8, b: 0.80 },
+    { dx: -20, dy: -2, s: 3.0, b: 0.86 }, { dx: 0, dy: 7, s: 2.0, b: 0.60 },
+    { dx: 3, dy: 26, s: 2.5, b: 0.70 },   { dx: 28, dy: 16, s: 2.0, b: 0.72 },
+    { dx: 30, dy: -8, s: 3.5, b: 0.92 },
+  ]},
   // Draco
-  { rDeg: 25.6, thetaDeg: 211.1, size: 2.0, brightness: 0.58 },
-  { rDeg: 31.0, thetaDeg: 231.2, size: 1.8, brightness: 0.52 },
-  { rDeg: 24.3, thetaDeg: 257.2, size: 2.0, brightness: 0.58 },
-  { rDeg: 17.3, thetaDeg: 275.3, size: 1.8, brightness: 0.50 },
-  { rDeg: 22.3, thetaDeg: 288.1, size: 1.8, brightness: 0.52 },
-  { rDeg: 37.7, thetaDeg: 262.6, size: 2.8, brightness: 0.78 },
-  { rDeg: 38.5, thetaDeg: 269.2, size: 3.0, brightness: 0.86 },
-  // Orion
-  { rDeg: 82.6, thetaDeg: 88.8,  size: 4.5, brightness: 0.96 },
-  { rDeg: 98.2, thetaDeg: 78.6,  size: 5.0, brightness: 0.99 },
-  { rDeg: 83.7, thetaDeg: 81.3,  size: 3.5, brightness: 0.88 },
-  { rDeg: 90.3, thetaDeg: 83.0,  size: 2.8, brightness: 0.78 },
-  { rDeg: 91.2, thetaDeg: 84.1,  size: 3.0, brightness: 0.82 },
-  { rDeg: 91.9, thetaDeg: 85.2,  size: 2.8, brightness: 0.78 },
-  { rDeg: 99.7, thetaDeg: 86.9,  size: 2.5, brightness: 0.72 },
+  { cx: 60, cy: -30, cz: 1000, stars: [
+    { dx: 26, dy: 16, s: 3.0, b: 0.86 },  { dx: 7, dy: 26, s: 2.0, b: 0.73 },
+    { dx: -16, dy: -7, s: 1.8, b: 0.55 }, { dx: -31, dy: -23, s: 1.5, b: 0.52 },
+    { dx: -8, dy: -36, s: 1.8, b: 0.50 }, { dx: 13, dy: -18, s: 1.5, b: 0.45 },
+  ]},
+  // Cassiopeia — Greenland section
+  { cx: -60, cy: -50, cz: 1400, stars: [
+    { dx: -48, dy: -10, s: 2.5, b: 0.75 }, { dx: -20, dy: 10, s: 3.0, b: 0.86 },
+    { dx: 0, dy: -9, s: 2.8, b: 0.80 },   { dx: 21, dy: 10, s: 2.5, b: 0.75 },
+    { dx: 44, dy: -7, s: 2.2, b: 0.68 },
+  ]},
+  // Cepheus
+  { cx: 50, cy: 45, cz: 1650, stars: [
+    { dx: 26, dy: 20, s: 2.5, b: 0.76 },   { dx: 11, dy: -8, s: 2.2, b: 0.68 },
+    { dx: -16, dy: -26, s: 2.0, b: 0.62 }, { dx: -30, dy: 4, s: 2.2, b: 0.68 },
+    { dx: -13, dy: 28, s: 1.8, b: 0.55 },
+  ]},
+  // Cygnus / Northern Cross — Based in Greenland
+  { cx: -40, cy: 30, cz: 1850, stars: [
+    { dx: 0, dy: -36, s: 3.5, b: 0.90 }, { dx: 0, dy: 0, s: 2.5, b: 0.74 },
+    { dx: 0, dy: 50, s: 2.2, b: 0.68 },  { dx: -30, dy: -6, s: 2.0, b: 0.62 },
+    { dx: 30, dy: -6, s: 2.2, b: 0.70 },
+  ]},
+  // Lyra / Vega
+  { cx: 55, cy: -25, cz: 2000, stars: [
+    { dx: 0, dy: -2, s: 4.0, b: 0.96 },  { dx: 16, dy: 13, s: 2.0, b: 0.60 },
+    { dx: 21, dy: 22, s: 2.0, b: 0.60 }, { dx: -3, dy: 16, s: 1.6, b: 0.48 },
+  ]},
+  // Perseus — CTA section
+  { cx: -50, cy: 20, cz: 2150, stars: [
+    { dx: 0, dy: 0, s: 3.0, b: 0.86 },    { dx: -25, dy: 22, s: 2.5, b: 0.74 },
+    { dx: 16, dy: -16, s: 2.2, b: 0.68 }, { dx: -8, dy: -25, s: 2.0, b: 0.62 },
+    { dx: 25, dy: 18, s: 2.2, b: 0.68 },
+  ]},
+  // Orion — the finale
+  { cx: 15, cy: 10, cz: 2350, stars: [
+    { dx: -42, dy: -36, s: 4.5, b: 0.96 }, { dx: 38, dy: -40, s: 3.5, b: 0.88 },
+    { dx: -16, dy: 4, s: 2.8, b: 0.78 },   { dx: 0, dy: 7, s: 3.0, b: 0.82 },
+    { dx: 16, dy: 9, s: 2.8, b: 0.78 },    { dx: 34, dy: 50, s: 5.0, b: 0.99 },
+    { dx: -26, dy: 48, s: 2.5, b: 0.72 },
+  ]},
 ]
 
 export default function StarfieldCanvas() {
@@ -51,56 +76,66 @@ export default function StarfieldCanvas() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    let width = 0, height = 0, cx = 0, cy = 0, maxRadius = 0
-    let rotation = 0
-    const BASE_SPEED = 0.00009
-    let scrollVel = 0
-    const DECAY = 0.94
-    const MAX_VEL = 0.0015
-    let opacity = 0
-    let lastScrollY = window.scrollY
+    let W = 0, H = 0, cx = 0, cy = 0, opacity = 0
+    let bgStars: Star3D[] = []
 
-    interface BgStar { rDeg: number; thetaDeg: number; size: number; brightness: number }
-    let bgStars: BgStar[] = []
+    const constStars: Star3D[] = []
+    for (const c of CONSTELLATIONS) {
+      for (const s of c.stars) {
+        constStars.push({
+          x: c.cx + s.dx, y: c.cy + s.dy,
+          z: c.cz + (s.dz ?? 0),
+          size: s.s, bright: s.b,
+        })
+      }
+    }
 
     function isMob() { return window.innerWidth < 1024 }
 
-    function initBgStars() {
+    function initBg() {
       const count = isMob() ? 120 : 250
       bgStars = Array.from({ length: count }, () => ({
-        rDeg: Math.random() * 100,
-        thetaDeg: Math.random() * 360,
-        size: Math.random() * 0.9 + 0.4,
-        brightness: Math.random() * 0.20 + 0.06,
+        x: (Math.random() - 0.5) * 500,
+        y: (Math.random() - 0.5) * 500,
+        z: 50 + Math.random() * 2800,
+        size: 0.25 + Math.random() * 0.7,
+        bright: 0.05 + Math.random() * 0.16,
       }))
     }
 
     function resize() {
-      if (!canvas) return
-      if (!ctx) return
-      width = window.innerWidth
-      height = window.innerHeight
-      const dpr = window.devicePixelRatio || 1
-      canvas.width = width * dpr
-      canvas.height = height * dpr
-      canvas.style.width = width + 'px'
-      canvas.style.height = height + 'px'
+      if (!canvas || !ctx) return
+      W = window.innerWidth
+      H = window.innerHeight
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = W * dpr
+      canvas.height = H * dpr
+      canvas.style.width = W + 'px'
+      canvas.style.height = H + 'px'
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      cx = width * 0.5
-      cy = height * 0.40
-      maxRadius = Math.min(width, height) * (isMob() ? 0.78 : 0.88)
-      initBgStars()
+      cx = W * 0.5
+      cy = H * 0.44
     }
 
     function onScroll() {
-      const y = window.scrollY
-      const delta = y - lastScrollY
-      lastScrollY = y
-      const contribution = delta * 0.000018
-      scrollVel = Math.max(-MAX_VEL, Math.min(MAX_VEL, scrollVel + contribution))
       const heroH = window.innerHeight
-      const t = (y - heroH * 0.05) / (heroH * 0.5)
+      const t = (window.scrollY - heroH * 0.05) / (heroH * 0.5)
       opacity = Math.min(1, Math.max(0, t))
+    }
+
+    function spike(c: CanvasRenderingContext2D, x: number, y: number, len: number, lw: number, al: number) {
+      const g1 = c.createLinearGradient(x - len, y, x + len, y)
+      g1.addColorStop(0, 'rgba(245,250,255,0)')
+      g1.addColorStop(0.5, `rgba(245,250,255,${al * 0.65})`)
+      g1.addColorStop(1, 'rgba(245,250,255,0)')
+      c.beginPath(); c.moveTo(x - len, y); c.lineTo(x + len, y)
+      c.strokeStyle = g1; c.lineWidth = lw; c.stroke()
+      const g2 = c.createLinearGradient(x, y - len, x, y + len)
+      g2.addColorStop(0, 'rgba(245,250,255,0)')
+      g2.addColorStop(0.5, `rgba(245,250,255,${al * 0.65})`)
+      g2.addColorStop(1, 'rgba(245,250,255,0)')
+      c.beginPath(); c.moveTo(x, y - len); c.lineTo(x, y + len)
+      c.strokeStyle = g2; c.lineWidth = lw; c.stroke()
     }
 
     let rafId: number
@@ -108,51 +143,60 @@ export default function StarfieldCanvas() {
     function draw() {
       rafId = requestAnimationFrame(draw)
       if (!ctx) return
-      ctx.clearRect(0, 0, width, height)
-      if (opacity <= 0.01) return
+      ctx.clearRect(0, 0, W, H)
+      if (opacity <= 0.005) return
 
-      scrollVel *= DECAY
-      rotation += BASE_SPEED + scrollVel
+      const camZ = window.scrollY * Z_SPEED
+      const camX = Math.sin(camZ * 0.004) * 30
+      const camY = -camZ * 0.008
 
       for (const s of bgStars) {
-        const r = (s.rDeg / 90) * maxRadius
-        const angle = (s.thetaDeg * Math.PI) / 180 + rotation
-        const sx = cx + r * Math.cos(angle)
-        const sy = cy + r * Math.sin(angle)
-        if (sx < -5 || sx > width + 5 || sy < -5 || sy > height + 5) continue
-        ctx.beginPath()
-        ctx.arc(sx, sy, s.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(220,230,255,${s.brightness * opacity})`
-        ctx.fill()
+        const dz = s.z - camZ
+        if (dz < 8) {
+          s.z = camZ + 800 + Math.random() * 2000
+          s.x = (Math.random() - 0.5) * 500
+          s.y = (Math.random() - 0.5) * 500
+          continue
+        }
+        const scale = FOCAL / dz
+        const sx = cx + (s.x - camX) * scale
+        const sy = cy + (s.y - camY) * scale
+        if (sx < -8 || sx > W + 8 || sy < -8 || sy > H + 8) continue
+        const sz = Math.min(s.size * scale, 2.2)
+        const al = s.bright * opacity * Math.min(1, dz / 150)
+        ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
       }
 
-      const pgrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 14)
-      pgrd.addColorStop(0, `rgba(200,220,255,${0.35 * opacity})`)
-      pgrd.addColorStop(1, 'rgba(200,220,255,0)')
-      ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2)
-      ctx.fillStyle = pgrd; ctx.fill()
-      ctx.beginPath(); ctx.arc(cx, cy, 3.0, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(245,250,255,${0.95 * opacity})`; ctx.fill()
+      ctx.save()
+      for (const star of constStars) {
+        const dz = star.z - camZ
+        if (dz < 8) continue
+        const scale = FOCAL / dz
+        const sx = cx + (star.x - camX) * scale
+        const sy = cy + (star.y - camY) * scale
+        if (sx < -50 || sx > W + 50 || sy < -50 || sy > H + 50) continue
 
-      for (const star of STARS) {
-        const r = (star.rDeg / 90) * maxRadius
-        const angle = (star.thetaDeg * Math.PI) / 180 + rotation
-        const sx = cx + r * Math.cos(angle)
-        const sy = cy + r * Math.sin(angle)
-        const alpha = star.brightness * opacity
+        const sz = Math.min(star.size * scale * 0.8, 24)
+        const al = star.bright * opacity * Math.min(1, dz / 60)
 
-        if (star.size >= 2.5) {
-          const gr = star.size * 5
+        if (sz >= 2.5 && star.bright >= 0.7) spike(ctx, sx, sy, sz * 7, sz * 0.22, al)
+
+        if (sz >= 2.0) {
+          const gr = sz * 4
           const grd = ctx.createRadialGradient(sx, sy, 0, sx, sy, gr)
-          grd.addColorStop(0, `rgba(200,225,255,${0.30 * alpha})`)
-          grd.addColorStop(1, 'rgba(200,225,255,0)')
+          grd.addColorStop(0, `rgba(205,225,255,${0.24 * al})`)
+          grd.addColorStop(1, 'rgba(205,225,255,0)')
           ctx.beginPath(); ctx.arc(sx, sy, gr, 0, Math.PI * 2)
           ctx.fillStyle = grd; ctx.fill()
         }
 
-        ctx.beginPath(); ctx.arc(sx, sy, star.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(245,250,255,${alpha})`; ctx.fill()
+        ctx.beginPath(); ctx.arc(sx, sy, sz * 0.65, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255,255,255,${Math.min(1, al * 1.1)})`; ctx.fill()
+        ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(235,245,255,${al * 0.45})`; ctx.fill()
       }
+      ctx.restore()
     }
 
     const heroH = window.innerHeight
@@ -160,6 +204,7 @@ export default function StarfieldCanvas() {
     opacity = Math.min(1, Math.max(0, initT))
 
     resize()
+    initBg()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', resize)
     rafId = requestAnimationFrame(draw)
