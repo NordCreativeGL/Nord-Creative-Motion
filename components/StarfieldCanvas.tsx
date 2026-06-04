@@ -74,13 +74,13 @@ export default function StarfieldCanvas() {
     function isMob() { return window.innerWidth < 1024 }
 
     function initBg() {
-      const count = isMob() ? 250 : 500
+      const count = isMob() ? 700 : 1800
       bgStars = Array.from({ length: count }, () => ({
-        x: (Math.random()-0.5)*600,
-        y: (Math.random()-0.5)*600,
+        x: (Math.random()-0.5)*900,
+        y: (Math.random()-0.5)*900,
         z: 50 + Math.random()*2800,
-        size: 0.2 + Math.random()*0.6,
-        bright: 0.04 + Math.random()*0.14,
+        size: 0.25 + Math.random()*0.85,
+        bright: 0.06 + Math.random()*0.20,
       }))
     }
 
