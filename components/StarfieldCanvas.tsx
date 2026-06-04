@@ -69,21 +69,8 @@ export default function StarfieldCanvas() {
     if (!ctx) return
 
     let W=0,H=0,cx=0,cy=0,opacity=0,time=0
-    let bgStars: Star3D[] = []
 
     function isMob() { return window.innerWidth < 1024 }
-
-    function initBg() {
-      const totalH = 10000
-      const count = isMob() ? 4000 : 10000
-      bgStars = Array.from({ length: count }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * totalH,
-        z: Math.random(),
-        size: 0.8 + Math.random() * 1.4,
-        bright: 0.15 + Math.random() * 0.50,
-      }))
-    }
 
     function resize() {
       if (!canvas||!ctx) return
@@ -93,7 +80,6 @@ export default function StarfieldCanvas() {
       canvas.style.width=W+'px'; canvas.style.height=H+'px'
       ctx.setTransform(dpr,0,0,dpr,0,0)
       cx=W*0.5; cy=H*0.44
-      initBg()
     }
 
     function onScroll() {
@@ -129,15 +115,6 @@ export default function StarfieldCanvas() {
       const camZ = window.scrollY*Z_SPEED
       const camX = Math.sin(camZ*0.003)*50
       const camY = Math.cos(camZ*0.002)*25 - camZ*0.006
-
-      const scrY = window.scrollY
-      for (const s of bgStars) {
-        const screenY = s.y - scrY
-        if (screenY < -4 || screenY > H + 4) continue
-        const al = s.bright * opacity
-        ctx.beginPath(); ctx.arc(s.x, screenY, s.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
-      }
 
       ctx.save()
       for (const c of CONSTELLATIONS) {
@@ -175,7 +152,7 @@ export default function StarfieldCanvas() {
     const heroH=window.innerHeight
     opacity=Math.min(1,Math.max(0,(window.scrollY-heroH*0.05)/(heroH*0.5)))
 
-    resize(); initBg()
+    resize()
     window.addEventListener('scroll',onScroll,{passive:true})
     window.addEventListener('resize',resize)
     rafId=requestAnimationFrame(draw)
