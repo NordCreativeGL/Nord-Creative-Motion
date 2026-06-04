@@ -74,7 +74,7 @@ export default function StarfieldCanvas() {
     function isMob() { return window.innerWidth < 1024 }
 
     function initBg() {
-      const count = isMob() ? 700 : 1800
+      const count = isMob() ? 1200 : 3500
       bgStars = Array.from({ length: count }, () => ({
         x: (Math.random()-0.5)*900,
         y: (Math.random()-0.5)*900,
@@ -159,8 +159,8 @@ export default function StarfieldCanvas() {
           const sx=cx+(ax-camX)*sc
           const sy=cy+(ay-camY)*sc
           if (sx<-50||sx>W+50||sy<-50||sy>H+50) continue
-          const sz=Math.min(s.s*sc*0.55,14)
-          const al=s.b*opacity*Math.min(1,dz/50)
+          const sz=Math.min(s.s*sc*0.72,16)
+          const al=s.b*opacity*Math.min(1,dz/40)
           if (sz>=3.0&&s.b>=0.7) spike(ctx,sx,sy,sz*5,sz*0.2,al)
           if (sz>=1.8) {
             const gr=sz*3.5
