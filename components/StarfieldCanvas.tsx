@@ -75,6 +75,7 @@ export default function StarfieldCanvas() {
     }
 
     function resize() {
+      if (!canvas) return
       width = window.innerWidth
       height = window.innerHeight
       canvas.width = width
