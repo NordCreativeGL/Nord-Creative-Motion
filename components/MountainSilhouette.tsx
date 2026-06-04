@@ -44,13 +44,14 @@ export default function MountainSilhouette() {
       style={{
         position: "fixed",
         bottom: 0,
+        left: isMobile ? 0 : undefined,
         width: "100%",
         height: "50vh",
         zIndex: 1,
         pointerEvents: "none",
         opacity: "0",
         transition: "opacity 0.3s ease",
-        transform: isMobile ? "translateX(-8%)" : undefined,
+        transform: isMobile ? "none" : undefined,
       }}
     >
       <defs>
