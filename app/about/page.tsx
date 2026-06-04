@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Footer from "@/components/Footer";
-import ScrollManager from "@/components/ScrollManager";
 import SideNav from "@/components/SideNav";
 export default function About() {
   return (
     <main className="min-h-screen text-white">
-      <ScrollManager />
       <SideNav items={[
         { label: 'Our story', id: 'about-text' },
         { label: 'Contact', id: 'about-cta' },

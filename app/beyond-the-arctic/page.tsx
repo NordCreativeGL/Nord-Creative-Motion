@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
-import ScrollManager from "@/components/ScrollManager";
 import SideNav from "@/components/SideNav";
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -202,7 +201,6 @@ export default function BeyondTheArcticPage() {
 
   return (
     <main style={{ background: '#000000' }}>
-      <ScrollManager />
       {!isMobile && (
         <SideNav items={[
           { label: 'Our work', id: 'bta-work' },

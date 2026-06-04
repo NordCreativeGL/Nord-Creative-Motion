@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
-import ScrollManager from "@/components/ScrollManager";
 import SideNav from "@/components/SideNav";
 import NorthernLights from "@/components/NorthernLights";
 import MountainSilhouette from "@/components/MountainSilhouette";
@@ -21,7 +20,6 @@ export default function GreenlandPage() {
 
   return (
     <main style={{ background: '#000000' }}>
-      <ScrollManager />
       {!isMobile && <SideNav items={[
         { label: 'Working in Greenland', id: 'gl-working' },
         { label: 'How we work', id: 'gl-process' },
