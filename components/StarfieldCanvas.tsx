@@ -78,7 +78,7 @@ export default function StarfieldCanvas() {
       bgStars = Array.from({ length: count }, () => ({
         x: (Math.random()-0.5)*400,
         y: (Math.random()-0.5)*400,
-        z: 30 + Math.random()*1200,
+        z: 30 + Math.random()*500,
         size: 0.3 + Math.random()*1.0,
         bright: 0.08 + Math.random()*0.22,
       }))
@@ -131,9 +131,9 @@ export default function StarfieldCanvas() {
       for (const s of bgStars) {
         const dz = s.z-camZ
         if (dz<8) {
-          s.z=camZ+800+Math.random()*2000
-          s.x=(Math.random()-0.5)*600
-          s.y=(Math.random()-0.5)*600
+          s.z=camZ+50+Math.random()*500
+          s.x=(Math.random()-0.5)*300
+          s.y=(Math.random()-0.5)*300
           continue
         }
         const sc=FOCAL/dz
