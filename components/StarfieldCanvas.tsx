@@ -99,6 +99,7 @@ export default function StarfieldCanvas() {
     let rafId: number
 
     function draw() {
+      if (!ctx) return
       rafId = requestAnimationFrame(draw)
       ctx.clearRect(0, 0, width, height)
       if (opacity <= 0.01) return
