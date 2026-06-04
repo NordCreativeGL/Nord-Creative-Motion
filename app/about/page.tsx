@@ -29,7 +29,7 @@ export default function About() {
 
       {/* Story */}
       <section id="about-text" data-snap="true" className="bg-black min-h-screen flex items-center">
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 md:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 min-[1024px]:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full">
           <div className="flex flex-col justify-between h-full">
             <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">Our story</p>
             <Image
@@ -61,7 +61,7 @@ export default function About() {
       {/* CTA */}
       <section id="about-cta" data-snap="true" className="bg-black pt-8 pb-24">
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
-          <div className="relative rounded-2xl overflow-hidden aspect-[16/7] bg-zinc-900">
+          <div className="relative rounded-2xl overflow-hidden aspect-[16/7] bg-zinc-900 max-[1024px]:aspect-auto max-[1024px]:min-h-[340px]">
             <Image
               src="https://cdn.nordcreative.dk/CTA%20about.jpg"
               alt="Planning a project in Greenland"
