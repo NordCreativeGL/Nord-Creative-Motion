@@ -8,6 +8,7 @@ import CTABanner from "@/components/CTABanner";
 import BasedInGreenland from "@/components/BasedInGreenland";
 import Footer from "@/components/Footer";
 import SideNav from "@/components/SideNav";
+import StarfieldCanvas from '@/components/StarfieldCanvas'
 
 export default function Home() {
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function Home() {
 
   return (
     <main className="bg-black">
+      <StarfieldCanvas />
       <SideNav />
       <div style={{ position: 'relative', zIndex: 0 }}>
         <HeroSection />
