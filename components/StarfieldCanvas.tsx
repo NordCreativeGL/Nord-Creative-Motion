@@ -76,11 +76,11 @@ export default function StarfieldCanvas() {
     function initBg() {
       const count = isMob() ? 1200 : 3500
       bgStars = Array.from({ length: count }, () => ({
-        x: (Math.random()-0.5)*900,
-        y: (Math.random()-0.5)*900,
-        z: 50 + Math.random()*2800,
-        size: 0.25 + Math.random()*0.85,
-        bright: 0.06 + Math.random()*0.20,
+        x: (Math.random()-0.5)*400,
+        y: (Math.random()-0.5)*400,
+        z: 30 + Math.random()*1200,
+        size: 0.3 + Math.random()*1.0,
+        bright: 0.08 + Math.random()*0.22,
       }))
     }
 
