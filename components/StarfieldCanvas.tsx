@@ -74,13 +74,15 @@ export default function StarfieldCanvas() {
     function isMob() { return window.innerWidth < 1024 }
 
     function initBg() {
-      const count = isMob() ? 1200 : 3500
+      const totalH = Math.max(document.documentElement.scrollHeight, H * 12)
+      const density = isMob() ? 0.00035 : 0.00055
+      const count = Math.floor(density * W * totalH)
       bgStars = Array.from({ length: count }, () => ({
-        x: (Math.random()-0.5)*400,
-        y: (Math.random()-0.5)*400,
-        z: 30 + Math.random()*500,
-        size: 0.3 + Math.random()*1.0,
-        bright: 0.08 + Math.random()*0.22,
+        x: Math.random() * W,
+        y: Math.random() * totalH,
+        z: Math.random(),
+        size: 0.3 + Math.random() * 0.9,
+        bright: 0.06 + Math.random() * 0.22,
       }))
     }
 
@@ -92,6 +94,7 @@ export default function StarfieldCanvas() {
       canvas.style.width=W+'px'; canvas.style.height=H+'px'
       ctx.setTransform(dpr,0,0,dpr,0,0)
       cx=W*0.5; cy=H*0.44
+      initBg()
     }
 
     function onScroll() {
@@ -128,22 +131,14 @@ export default function StarfieldCanvas() {
       const camX = Math.sin(camZ*0.003)*50
       const camY = Math.cos(camZ*0.002)*25 - camZ*0.006
 
+      const scrY = window.scrollY
       for (const s of bgStars) {
-        const dz = s.z-camZ
-        if (dz<8) {
-          s.z=camZ+50+Math.random()*500
-          s.x=(Math.random()-0.5)*300
-          s.y=(Math.random()-0.5)*300
-          continue
-        }
-        const sc=FOCAL/dz
-        const sx=cx+(s.x-camX)*sc
-        const sy=cy+(s.y-camY)*sc
-        if (sx<-8||sx>W+8||sy<-8||sy>H+8) continue
-        const sz=Math.min(s.size*sc,2.0)
-        const al=s.bright*opacity*Math.min(1,dz/150)
-        ctx.beginPath();ctx.arc(sx,sy,sz,0,Math.PI*2)
-        ctx.fillStyle=`rgba(215,228,255,${al})`;ctx.fill()
+        const screenY = s.y - scrY
+        if (screenY < -4 || screenY > H + 4) continue
+        const sz = s.size * (0.35 + s.z * 0.65)
+        const al = s.bright * (0.5 + s.z * 0.5) * opacity
+        ctx.beginPath(); ctx.arc(s.x, screenY, sz, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
       }
 
       ctx.save()
