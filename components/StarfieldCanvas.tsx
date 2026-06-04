@@ -134,6 +134,12 @@ export default function StarfieldCanvas() {
           s.y = (Math.random() - 0.5) * 4000
           continue
         }
+        if (dz > 2600) {
+          s.z = camZ + 30 + Math.random() * 300
+          s.x = (Math.random() - 0.5) * 6000
+          s.y = (Math.random() - 0.5) * 4000
+          continue
+        }
         const scale = FOCAL / dz
         const sx = cx + (s.x - camX) * scale
         const sy = cy + (s.y - camY) * scale
