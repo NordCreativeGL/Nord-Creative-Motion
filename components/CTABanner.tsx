@@ -77,7 +77,6 @@ export default function CTABanner() {
       style={{
         minHeight: isMobile ? 'auto' : '100vh',
         padding: isMobile ? '0px' : '48px 0px',
-        background: '#060606',
         display: 'flex',
         alignItems: isMobile ? 'flex-start' : 'center',
         justifyContent: 'center',

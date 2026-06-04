@@ -76,7 +76,6 @@ export default function GreenlandSection() {
         alignItems: isMobile ? 'flex-start' : 'center',
         minHeight: isMobile ? '100dvh' : '100vh',
         position: 'relative',
-        background: 'black',
         overflow: isMobile ? 'visible' : 'hidden',
       }}
     >

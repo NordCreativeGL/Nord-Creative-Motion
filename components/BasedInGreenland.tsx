@@ -268,7 +268,7 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ minHeight: isMobile ? '148dvh' : '100vh', background: '#060606', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: 'hidden', position: 'relative' }}
+      style={{ minHeight: isMobile ? '148dvh' : '100vh', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: 'hidden', position: 'relative' }}
     >
       <canvas
         ref={canvasRef}
