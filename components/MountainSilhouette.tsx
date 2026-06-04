@@ -50,6 +50,7 @@ export default function MountainSilhouette() {
         pointerEvents: "none",
         opacity: "0",
         transition: "opacity 0.3s ease",
+        transform: isMobile ? "translateX(-8%)" : undefined,
       }}
     >
       <defs>
