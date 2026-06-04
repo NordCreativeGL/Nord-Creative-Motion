@@ -68,7 +68,7 @@ export default function StarfieldCanvas() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    let W=0,H=0,cx=0,cy=0,opacity=0,time=0
+    let W=0,H=0,cx=0,cy=0,opacity=1,time=0
 
     function isMob() { return window.innerWidth < 1024 }
 
@@ -83,9 +83,6 @@ export default function StarfieldCanvas() {
     }
 
     function onScroll() {
-      const heroH = window.innerHeight
-      const t = (window.scrollY - heroH*0.05) / (heroH*0.5)
-      opacity = Math.min(1,Math.max(0,t))
     }
 
     function spike(c:CanvasRenderingContext2D,x:number,y:number,len:number,lw:number,al:number) {
@@ -130,7 +127,7 @@ export default function StarfieldCanvas() {
           const sy=cy+(ay-camY)*sc
           if (sx<-50||sx>W+50||sy<-50||sy>H+50) continue
           const sz=Math.min(s.s*sc*0.72,16)
-          const al=s.b*opacity*Math.min(1,dz/40)
+          const al=s.b*Math.min(1,dz/40)
           if (sz>=3.0&&s.b>=0.7) spike(ctx,sx,sy,sz*5,sz*0.2,al)
           if (sz>=1.8) {
             const gr=sz*3.5
@@ -148,9 +145,6 @@ export default function StarfieldCanvas() {
       }
       ctx.restore()
     }
-
-    const heroH=window.innerHeight
-    opacity=Math.min(1,Math.max(0,(window.scrollY-heroH*0.05)/(heroH*0.5)))
 
     resize()
     window.addEventListener('scroll',onScroll,{passive:true})
