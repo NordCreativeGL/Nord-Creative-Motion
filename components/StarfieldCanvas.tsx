@@ -74,15 +74,14 @@ export default function StarfieldCanvas() {
     function isMob() { return window.innerWidth < 1024 }
 
     function initBg() {
-      const totalH = Math.max(document.documentElement.scrollHeight, H * 12)
-      const density = isMob() ? 0.00035 : 0.00055
-      const count = Math.floor(density * W * totalH)
+      const totalH = 10000
+      const count = isMob() ? 4000 : 10000
       bgStars = Array.from({ length: count }, () => ({
         x: Math.random() * W,
         y: Math.random() * totalH,
         z: Math.random(),
-        size: 0.3 + Math.random() * 0.9,
-        bright: 0.06 + Math.random() * 0.22,
+        size: 0.8 + Math.random() * 1.4,
+        bright: 0.15 + Math.random() * 0.50,
       }))
     }
 
@@ -135,9 +134,8 @@ export default function StarfieldCanvas() {
       for (const s of bgStars) {
         const screenY = s.y - scrY
         if (screenY < -4 || screenY > H + 4) continue
-        const sz = s.size * (0.35 + s.z * 0.65)
-        const al = s.bright * (0.5 + s.z * 0.5) * opacity
-        ctx.beginPath(); ctx.arc(s.x, screenY, sz, 0, Math.PI * 2)
+        const al = s.bright * opacity
+        ctx.beginPath(); ctx.arc(s.x, screenY, s.size, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
       }
 
