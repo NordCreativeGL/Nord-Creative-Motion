@@ -41,17 +41,27 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black">
+    <main>
       <StarfieldCanvas />
       <SideNav />
-      <div style={{ position: 'relative', zIndex: 0 }}>
+      <div style={{ position: 'relative', zIndex: 1 }}>
         <HeroSection />
       </div>
-      <ServicesSection />
-      <GreenlandSection />
-      <BasedInGreenland />
-      <CTABanner />
-      <Footer />
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <ServicesSection />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <GreenlandSection />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <BasedInGreenland />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <CTABanner />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <Footer />
+      </div>
     </main>
   );
 }

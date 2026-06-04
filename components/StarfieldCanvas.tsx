@@ -56,7 +56,9 @@ export default function StarfieldCanvas() {
     const BASE_SPEED = 0.00009
     let scrollVel = 0
     const DECAY = 0.92
-    let opacity = 0
+    const heroH = window.innerHeight
+    const initialT = (window.scrollY - heroH * 0.05) / (heroH * 0.5)
+    let opacity = Math.min(1, Math.max(0, initialT))
     let lastScrollY = window.scrollY
 
     interface BgStar { x: number; y: number; z: number; baseSize: number }
