@@ -75,13 +75,16 @@ export default function StarfieldCanvas() {
 
     function initBg() {
       const count = isMob() ? 500 : 1200
-      bgStars = Array.from({ length: count }, () => ({
-        x: (Math.random() - 0.5) * 6000,
-        y: (Math.random() - 0.5) * 4000,
-        z: 30 + Math.random() * 2500,
-        size: 0.25 + Math.random() * 0.65,
-        bright: 0.18 + Math.random() * 0.28,
-      }))
+      bgStars = Array.from({ length: count }, () => {
+        const z = 30 + Math.random() * 2500
+        return {
+          x: (Math.random() - 0.5) * z * 2.2,
+          y: (Math.random() - 0.5) * z * 1.4,
+          z,
+          size: 0.25 + Math.random() * 0.65,
+          bright: 0.18 + Math.random() * 0.28,
+        }
+      })
     }
 
     function resize() {
@@ -129,15 +132,17 @@ export default function StarfieldCanvas() {
       for (const s of bgStars) {
         const dz = s.z - camZ
         if (dz < 8) {
-          s.z = camZ + 400 + Math.random() * 1200
-          s.x = (Math.random() - 0.5) * 6000
-          s.y = (Math.random() - 0.5) * 4000
+          const newZ1 = camZ + 400 + Math.random() * 1200
+          s.z = newZ1
+          s.x = (Math.random() - 0.5) * newZ1 * 2.2
+          s.y = (Math.random() - 0.5) * newZ1 * 1.4
           continue
         }
         if (dz > 2600) {
-          s.z = camZ + 30 + Math.random() * 300
-          s.x = (Math.random() - 0.5) * 6000
-          s.y = (Math.random() - 0.5) * 4000
+          const newZ2 = camZ + 30 + Math.random() * 300
+          s.z = newZ2
+          s.x = (Math.random() - 0.5) * newZ2 * 2.2
+          s.y = (Math.random() - 0.5) * newZ2 * 1.4
           continue
         }
         const scale = FOCAL / dz
