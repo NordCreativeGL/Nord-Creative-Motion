@@ -77,6 +77,7 @@ export default function StarfieldCanvas() {
 
     function resize() {
       if (!canvas) return
+      if (!ctx) return
       width = window.innerWidth
       height = window.innerHeight
       const dpr = window.devicePixelRatio || 1
