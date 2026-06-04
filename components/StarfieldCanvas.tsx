@@ -69,8 +69,20 @@ export default function StarfieldCanvas() {
     if (!ctx) return
 
     let W=0,H=0,cx=0,cy=0,opacity=1,time=0
+    let bgStars: Star3D[] = []
 
     function isMob() { return window.innerWidth < 1024 }
+
+    function initBg() {
+      const count = isMob() ? 500 : 1200
+      bgStars = Array.from({ length: count }, () => ({
+        x: (Math.random() - 0.5) * 700,
+        y: (Math.random() - 0.5) * 700,
+        z: 30 + Math.random() * 2500,
+        size: 0.22 + Math.random() * 0.5,
+        bright: 0.06 + Math.random() * 0.14,
+      }))
+    }
 
     function resize() {
       if (!canvas||!ctx) return
@@ -80,6 +92,7 @@ export default function StarfieldCanvas() {
       canvas.style.width=W+'px'; canvas.style.height=H+'px'
       ctx.setTransform(dpr,0,0,dpr,0,0)
       cx=W*0.5; cy=H*0.44
+      initBg()
     }
 
     function onScroll() {
@@ -112,6 +125,24 @@ export default function StarfieldCanvas() {
       const camZ = window.scrollY*Z_SPEED
       const camX = Math.sin(camZ*0.003)*50
       const camY = Math.cos(camZ*0.002)*25 - camZ*0.006
+
+      for (const s of bgStars) {
+        const dz = s.z - camZ
+        if (dz < 8) {
+          s.z = camZ + 400 + Math.random() * 1200
+          s.x = (Math.random() - 0.5) * 700
+          s.y = (Math.random() - 0.5) * 700
+          continue
+        }
+        const scale = FOCAL / dz
+        const sx = cx + (s.x - camX) * scale
+        const sy = cy + (s.y - camY) * scale
+        if (sx < -5 || sx > W + 5 || sy < -5 || sy > H + 5) continue
+        const sz = Math.max(0.4, Math.min(s.size * scale, 1.8))
+        const al = s.bright * Math.min(1, dz / 100)
+        ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
+      }
 
       ctx.save()
       for (const c of CONSTELLATIONS) {
@@ -147,6 +178,7 @@ export default function StarfieldCanvas() {
     }
 
     resize()
+    initBg()
     window.addEventListener('scroll',onScroll,{passive:true})
     window.addEventListener('resize',resize)
     rafId=requestAnimationFrame(draw)
