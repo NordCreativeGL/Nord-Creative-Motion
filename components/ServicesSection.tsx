@@ -135,7 +135,7 @@ export default function ServicesSection() {
     <div id="services" ref={sectionRef} style={{ height: isMobile ? 'auto' : '400vh' }} className="max-[1024px]:pt-16">
       <div
         style={{ position: "sticky", top: 0, height: isMobile ? 'auto' : '100vh', overflow: isMobile ? 'visible' : 'hidden' }}
-        className="bg-black flex items-center max-[1024px]:flex max-[1024px]:justify-center max-[1024px]:relative max-[1024px]:items-start"
+        className="flex items-center max-[1024px]:flex max-[1024px]:justify-center max-[1024px]:relative max-[1024px]:items-start"
       >
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full grid grid-cols-2 max-[1024px]:grid-cols-1 gap-16 max-[1024px]:gap-8 min-[1900px]:gap-24 items-center h-full max-[1024px]:h-auto max-[1024px]:pt-8 max-[1024px]:items-start">
 
