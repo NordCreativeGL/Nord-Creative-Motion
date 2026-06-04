@@ -79,8 +79,8 @@ export default function StarfieldCanvas() {
         x: (Math.random() - 0.5) * 4000,
         y: (Math.random() - 0.5) * 3000,
         z: 30 + Math.random() * 2500,
-        size: 0.8 + Math.random() * 2.0,
-        bright: 0.30 + Math.random() * 0.45,
+        size: 0.25 + Math.random() * 0.65,
+        bright: 0.18 + Math.random() * 0.28,
       }))
     }
 
@@ -138,7 +138,7 @@ export default function StarfieldCanvas() {
         const sx = cx + (s.x - camX) * scale
         const sy = cy + (s.y - camY) * scale
         if (sx < -5 || sx > W + 5 || sy < -5 || sy > H + 5) continue
-        const sz = Math.max(0.5, Math.min(s.size * scale, 4.0))
+        const sz = Math.max(0.4, Math.min(s.size * scale, 2.0))
         const al = s.bright * Math.min(1, dz / 100)
         ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
