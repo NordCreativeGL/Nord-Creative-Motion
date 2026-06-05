@@ -14,6 +14,7 @@ export default function BasedInGreenland() {
   const readMoreRef = useRef<HTMLAnchorElement>(null)
   const hasAnimated = useRef(false)
   const animIdRef = useRef<number>(0)
+  const scrollPRef = useRef(0)
 
   const [isStudio, setIsStudio] = useState(false)
   useEffect(() => {
@@ -157,84 +158,68 @@ export default function BasedInGreenland() {
       const ctx = canvas.getContext('2d')!
       ctx.scale(dpr, dpr)
 
-      const DURATION = 6
       const finalCX = isMobileNow ? W * 0.50 : W * 0.74
       const finalCY = isMobileNow ? H * 0.16 : H * 0.51
       const finalScale = isMobileNow ? Math.round(3400 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
 
-      const t0 = performance.now()
+      let textFired = false
 
-      const drawFinalLoop = () => {
-        const ctx = canvas.getContext('2d')!
-        ctx.clearRect(0, 0, W, H)
-        const proj = d3.geoOrthographic()
-          .scale(finalScale)
-          .translate([finalCX, finalCY])
-          .rotate([42, -72])
-        const path = d3.geoPath().projection(proj).context(ctx)
-        if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
-          const bounds = path.bounds(glFeature)
-          const bx = bounds[0][0], by = bounds[0][1]
-          const bw = bounds[1][0] - bx, bh = bounds[1][1] - by
-          if (bw > 0 && bh > 0) {
-            ctx.save()
-            ctx.beginPath()
-            path(glFeature)
-            ctx.clip()
-            ctx.drawImage(videoRef.current, bx, by, bw, bh)
-            ctx.restore()
+      const drawLoop = () => {
+        const p = scrollPRef.current
+
+        if (p >= 0.86) {
+          ctx.clearRect(0, 0, W, H)
+          if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
+            const proj = d3.geoOrthographic()
+              .scale(finalScale)
+              .translate([finalCX, finalCY])
+              .rotate([42, -72])
+            const path = d3.geoPath().projection(proj).context(ctx)
+            const bounds = path.bounds(glFeature)
+            const bx = bounds[0][0], by = bounds[0][1]
+            const bw = bounds[1][0] - bx, bh = bounds[1][1] - by
+            if (bw > 0 && bh > 0) {
+              ctx.save()
+              ctx.beginPath()
+              path(glFeature)
+              ctx.clip()
+              ctx.drawImage(videoRef.current, bx, by, bw, bh)
+              ctx.restore()
+            }
           }
+          if (!textFired) { textFired = true; animateText() }
+        } else {
+          let scale: number, rotLon: number, rotLat: number
+          let cx = W / 2, cy = isMobileNow ? 0.16 * H : H / 2
+          let countriesAlpha = 1
+
+          if (p < 0.22) {
+            const q = eo(p / 0.22)
+            scale = lerp(70, isMobileNow ? 135 : 450, q)
+            rotLon = lerp(-134, -80, q)
+            rotLat = lerp(25, -18, q)
+          } else if (p < 0.60) {
+            const q = eio((p - 0.22) / 0.38)
+            scale = isMobileNow ? 135 : 450
+            rotLon = lerp(-80, 100, q)
+            rotLat = -18
+          } else {
+            const q = eio((p - 0.60) / 0.26)
+            scale = lerp(isMobileNow ? 135 : 450, finalScale, q)
+            rotLon = lerp(100, 42, q)
+            rotLat = lerp(-18, -72, q)
+            cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
+            cy = lerp(isMobileNow ? 0.16 * H : H / 2, isMobileNow ? H * 0.16 : H * 0.51, q)
+            countriesAlpha = lerp(1, 0, q)
+          }
+
+          drawFrame(scale, rotLon, rotLat, cx, cy, 1, countriesAlpha)
         }
-        animIdRef.current = requestAnimationFrame(drawFinalLoop)
+
+        animIdRef.current = requestAnimationFrame(drawLoop)
       }
 
-      const tick = () => {
-        const p = Math.min((performance.now() - t0) / 1000 / DURATION, 1)
-
-        let scale: number, rotLon: number, rotLat: number
-        let cx = W / 2, cy = isMobileNow ? 0.16 * H : H / 2
-        let globeAlpha = 1
-        let countriesAlpha = 1
-
-        if (p < 0.22) {
-          const q = eo(p / 0.22)
-          scale = lerp(70, isMobileNow ? 135 : 450, q)
-          rotLon = lerp(-134, -80, q)
-          rotLat = lerp(25, -18, q)
-        } else if (p < 0.60) {
-          const q = eio((p - 0.22) / 0.38)
-          scale = isMobileNow ? 135 : 450
-          rotLon = lerp(-80, 100, q)
-          rotLat = -18
-        } else if (p < 0.86) {
-          const q = eio((p - 0.60) / 0.26)
-          scale = lerp(isMobileNow ? 135 : 450, finalScale, q)
-          rotLon = lerp(100, 42, q)
-          rotLat = lerp(-18, -72, q)
-          cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
-          cy = lerp(isMobileNow ? 0.16 * H : H / 2, isMobileNow ? H * 0.16 : H * 0.51, q)
-          countriesAlpha = lerp(1, 0, q)
-        } else {
-          const q = eio((p - 0.86) / 0.14)
-          scale = finalScale
-          rotLon = 42
-          rotLat = -72
-          cx = isMobileNow ? W * 0.50 : W * 0.74
-          cy = isMobileNow ? H * 0.16 : H * 0.51
-          countriesAlpha = 0
-        }
-
-        drawFrame(scale, rotLon, rotLat, cx, cy, globeAlpha, countriesAlpha)
-
-        if (p < 1) {
-          animIdRef.current = requestAnimationFrame(tick)
-        } else {
-          animateText()
-          drawFinalLoop()
-        }
-      }
-
-      animIdRef.current = requestAnimationFrame(tick)
+      animIdRef.current = requestAnimationFrame(drawLoop)
     }
 
     const gsapInit = async () => {
@@ -245,11 +230,18 @@ export default function BasedInGreenland() {
     }
     gsapInit()
 
+    let animStarted = false
+
     const onScroll = () => {
-      if (hasAnimated.current || !section) return
-      const top = section.getBoundingClientRect().top + window.scrollY
-      if (window.scrollY >= top - window.innerHeight * 0.5) {
-        hasAnimated.current = true
+      const el = sectionRef.current
+      if (!el) return
+      const sectionTop = el.getBoundingClientRect().top + window.scrollY
+      const startScrollY = sectionTop - window.innerHeight
+      const totalRange = el.offsetHeight
+      scrollPRef.current = Math.max(0, Math.min(1, (window.scrollY - startScrollY) / totalRange))
+
+      if (!animStarted && window.scrollY >= sectionTop - window.innerHeight) {
+        animStarted = true
         startAnimation()
       }
     }
@@ -268,8 +260,18 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ minHeight: isMobile ? '148dvh' : '100vh', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: 'hidden', position: 'relative' }}
+      style={{ height: isMobile ? '300dvh' : '300vh' }}
     >
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: isMobile ? '100dvh' : '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: isMobile ? 'flex-start' : 'center',
+        }}
+      >
       <canvas
         ref={canvasRef}
         style={{
@@ -324,6 +326,7 @@ export default function BasedInGreenland() {
         >
           Read more about us
         </a>
+      </div>
       </div>
     </section>
   )
