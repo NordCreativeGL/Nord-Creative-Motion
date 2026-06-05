@@ -99,6 +99,22 @@ function randomStarColor(): string {
   return '215,228,255'
 }
 
+function randomStarXY(z: number): { x: number; y: number } {
+  if (Math.random() < 0.35) {
+    const angle = Math.PI * 0.18
+    const along = (Math.random() - 0.5) * z * 1.8
+    const across = (Math.random() - 0.5) * z * 0.35
+    return {
+      x: along * Math.cos(angle) - across * Math.sin(angle),
+      y: along * Math.sin(angle) + across * Math.cos(angle)
+    }
+  }
+  return {
+    x: (Math.random() - 0.5) * z * 2.2,
+    y: (Math.random() - 0.5) * z * 1.4
+  }
+}
+
 interface Star3D { x:number; y:number; z:number; size:number; bright:number; color:string }
 
 export default function StarfieldCanvas() {
@@ -123,9 +139,10 @@ export default function StarfieldCanvas() {
       const count = isMob() ? 1300 : 3500
       bgStars = Array.from({ length: count }, () => {
         const z = 300 + Math.random() * 2200
+        const _p = randomStarXY(z)
         return {
-          x: (Math.random() - 0.5) * z * 2.2,
-          y: (Math.random() - 0.5) * z * 1.4,
+          x: _p.x,
+          y: _p.y,
           z,
           size: 0.25 + Math.random() * 0.65,
           bright: 0.18 + Math.random() * 0.28,
@@ -181,16 +198,18 @@ export default function StarfieldCanvas() {
         if (dz < 8) {
           const newZ1 = camZ + 300 + Math.random() * 2000
           s.z = newZ1
-          s.x = (Math.random() - 0.5) * newZ1 * 2.2
-          s.y = (Math.random() - 0.5) * newZ1 * 1.4
+          const _p1 = randomStarXY(newZ1)
+          s.x = _p1.x
+          s.y = _p1.y
           s.color = randomStarColor()
           continue
         }
         if (dz > 2600) {
           const newZ2 = camZ + 400 + Math.random() * 800
           s.z = newZ2
-          s.x = (Math.random() - 0.5) * newZ2 * 2.2
-          s.y = (Math.random() - 0.5) * newZ2 * 1.4
+          const _p2 = randomStarXY(newZ2)
+          s.x = _p2.x
+          s.y = _p2.y
           s.color = randomStarColor()
           continue
         }
