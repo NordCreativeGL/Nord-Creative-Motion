@@ -76,7 +76,7 @@ export default function StarfieldCanvas() {
     function initBg() {
       const count = isMob() ? 500 : 1200
       bgStars = Array.from({ length: count }, () => {
-        const z = 30 + Math.random() * 2500
+        const z = 400 + Math.random() * 2100
         return {
           x: (Math.random() - 0.5) * z * 2.2,
           y: (Math.random() - 0.5) * z * 1.4,
@@ -132,14 +132,14 @@ export default function StarfieldCanvas() {
       for (const s of bgStars) {
         const dz = s.z - camZ
         if (dz < 8) {
-          const newZ1 = camZ + 400 + Math.random() * 1200
+          const newZ1 = camZ + 300 + Math.random() * 2000
           s.z = newZ1
           s.x = (Math.random() - 0.5) * newZ1 * 2.2
           s.y = (Math.random() - 0.5) * newZ1 * 1.4
           continue
         }
         if (dz > 2600) {
-          const newZ2 = camZ + 30 + Math.random() * 300
+          const newZ2 = camZ + 400 + Math.random() * 800
           s.z = newZ2
           s.x = (Math.random() - 0.5) * newZ2 * 2.2
           s.y = (Math.random() - 0.5) * newZ2 * 1.4
