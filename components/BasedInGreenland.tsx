@@ -77,6 +77,7 @@ export default function BasedInGreenland() {
       ctx.save()
       ctx.globalAlpha = globeAlpha
 
+      ctx.globalAlpha = globeAlpha * countriesAlpha
       ctx.beginPath()
       path({ type: 'Sphere' })
       ctx.fillStyle = '#040404'
@@ -84,6 +85,8 @@ export default function BasedInGreenland() {
       ctx.strokeStyle = 'rgba(255,255,255,0.05)'
       ctx.lineWidth = 0.5
       ctx.stroke()
+
+      ctx.globalAlpha = globeAlpha
 
       ctx.beginPath()
       path(d3.geoGraticule()())
