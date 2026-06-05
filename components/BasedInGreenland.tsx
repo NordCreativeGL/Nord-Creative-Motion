@@ -77,7 +77,7 @@ export default function BasedInGreenland() {
       ctx.save()
       ctx.globalAlpha = globeAlpha
 
-      ctx.globalAlpha = globeAlpha * countriesAlpha
+      ctx.globalAlpha = globeAlpha * Math.min(1, countriesAlpha * 4)
       ctx.beginPath()
       path({ type: 'Sphere' })
       ctx.fillStyle = '#040404'
