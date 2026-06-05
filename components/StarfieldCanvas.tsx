@@ -100,10 +100,10 @@ function randomStarColor(): string {
 }
 
 function randomStarXY(z: number): { x: number; y: number } {
-  if (z > 2000 && Math.random() < 0.35) {
+  if (z > 2000 && Math.random() < 0.60) {
     const angle = Math.PI * 0.18
     const along = (Math.random() - 0.5) * z * 1.8
-    const across = (Math.random() - 0.5) * z * 0.35
+    const across = (Math.random() - 0.5) * z * 0.22
     return {
       x: along * Math.cos(angle) - across * Math.sin(angle),
       y: along * Math.sin(angle) + across * Math.cos(angle)
@@ -136,7 +136,7 @@ export default function StarfieldCanvas() {
     function isMob() { return window.innerWidth < 1024 }
 
     function initBg() {
-      const count = isMob() ? 1300 : 3500
+      const count = isMob() ? 1700 : 4500
       bgStars = Array.from({ length: count }, () => {
         const z = 300 + Math.random() * 2200
         const _p = randomStarXY(z)
@@ -192,6 +192,23 @@ export default function StarfieldCanvas() {
       const camZ = window.scrollY*Z_SPEED
       const camX = Math.sin(camZ*0.003)*50 + Math.sin(time*26.2)*12
       const camY = Math.cos(camZ*0.002)*25 - camZ*0.006 + Math.cos(time*20.9)*9
+
+      const mwAlpha = Math.min(1, Math.max(0, (camZ - 1400) / 600)) * 0.07
+      if (mwAlpha > 0.001) {
+        ctx.save()
+        ctx.translate(cx, cy)
+        ctx.rotate(Math.PI * 0.18)
+        const bh = Math.min(W, H) * 0.15
+        const mwGrad = ctx.createLinearGradient(0, -bh, 0, bh)
+        mwGrad.addColorStop(0,   `rgba(160,185,255,0)`)
+        mwGrad.addColorStop(0.3, `rgba(160,185,255,${mwAlpha})`)
+        mwGrad.addColorStop(0.5, `rgba(210,225,255,${(mwAlpha*1.5).toFixed(3)})`)
+        mwGrad.addColorStop(0.7, `rgba(160,185,255,${mwAlpha})`)
+        mwGrad.addColorStop(1,   `rgba(160,185,255,0)`)
+        ctx.fillStyle = mwGrad
+        ctx.fillRect(-W, -bh, W * 2, bh * 2)
+        ctx.restore()
+      }
 
       for (const s of bgStars) {
         const dz = s.z - camZ
