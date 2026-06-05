@@ -237,34 +237,6 @@ export default function StarfieldCanvas() {
           ctx.beginPath();ctx.arc(sx,sy,sz,0,Math.PI*2)
           ctx.fillStyle=`rgba(235,245,255,${al*0.4})`;ctx.fill()
         }
-        const lines = (c as any).lines as [number, number][] | undefined
-        if (lines && lines.length > 0) {
-          const consDz = c.cz - camZ
-          if (consDz > 40 && consDz < 600) {
-            const fadeIn = Math.min(1, (consDz - 40) / 80)
-            const fadeOut = Math.min(1, (600 - consDz) / 150)
-            const lineAl = fadeIn * fadeOut * 0.3
-            const sPos = c.stars.map(s => {
-              const spinA = c.spin ? time : 0
-              const dx = spinA !== 0 ? s.dx * Math.cos(spinA) - s.dy * Math.sin(spinA) : s.dx
-              const dy = spinA !== 0 ? s.dx * Math.sin(spinA) + s.dy * Math.cos(spinA) : s.dy
-              const az = c.cz + (s.dz ?? 0)
-              const dz = az - camZ
-              if (dz < 8) return null
-              const sc = FOCAL / dz
-              return { x: cx + (c.cx + dx - camX) * sc, y: cy + (c.cy + dy - camY) * sc }
-            })
-            ctx.save()
-            ctx.strokeStyle = `rgba(180,210,255,${lineAl.toFixed(3)})`
-            ctx.lineWidth = 0.6
-            for (const [i, j] of lines) {
-              const pa = sPos[i]; const pb = sPos[j]
-              if (!pa || !pb) continue
-              ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke()
-            }
-            ctx.restore()
-          }
-        }
       }
       ctx.restore()
 
