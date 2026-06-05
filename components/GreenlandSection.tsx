@@ -71,7 +71,7 @@ export default function GreenlandSection() {
       id="greenland"
       data-snap="true"
       ref={sectionRef}
-      style={{ height: isMobile ? '300dvh' : '300vh' }}
+      style={{ height: isMobile ? '200dvh' : '200vh' }}
     >
       <div
         style={{
