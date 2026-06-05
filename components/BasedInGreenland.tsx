@@ -152,7 +152,7 @@ export default function BasedInGreenland() {
 
       const dpr = window.devicePixelRatio || 1
       const W = section.offsetWidth
-      const H = section.offsetHeight
+      const H = window.innerHeight
       canvas.width = W * dpr
       canvas.height = H * dpr
       const ctx = canvas.getContext('2d')!
@@ -163,6 +163,18 @@ export default function BasedInGreenland() {
       const finalScale = isMobileNow ? Math.round(3400 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
 
       let textFired = false
+
+      const hideText = () => {
+        const gsap = (window as any).gsap
+        if (!gsap) return
+        const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef]
+        refs.forEach(r => {
+          if (r.current) {
+            gsap.killTweensOf(r.current)
+            gsap.to(r.current, { opacity: 0, y: 20, duration: 0.3 })
+          }
+        })
+      }
 
       const drawLoop = () => {
         const p = scrollPRef.current
@@ -189,6 +201,7 @@ export default function BasedInGreenland() {
           }
           if (!textFired) { textFired = true; animateText() }
         } else {
+          if (textFired) { textFired = false; hideText() }
           let scale: number, rotLon: number, rotLat: number
           let cx = W / 2, cy = isMobileNow ? 0.16 * H : H / 2
           let countriesAlpha = 1
