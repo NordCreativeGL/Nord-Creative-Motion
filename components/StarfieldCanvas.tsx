@@ -173,8 +173,8 @@ export default function StarfieldCanvas() {
 
       time += 0.0002
       const camZ = window.scrollY*Z_SPEED
-      const camX = Math.sin(camZ*0.003)*50 + Math.sin(time*26.2)*4
-      const camY = Math.cos(camZ*0.002)*25 - camZ*0.006 + Math.cos(time*20.9)*3
+      const camX = Math.sin(camZ*0.003)*50 + Math.sin(time*26.2)*12
+      const camY = Math.cos(camZ*0.002)*25 - camZ*0.006 + Math.cos(time*20.9)*9
 
       for (const s of bgStars) {
         const dz = s.z - camZ
