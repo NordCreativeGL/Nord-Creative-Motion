@@ -112,7 +112,7 @@ export default function StarfieldCanvas() {
 
     let W=0,H=0,cx=0,cy=0,opacity=1,time=0
     let ss = { active: false, x: 0, y: 0, vx: 0, vy: 0, life: 0, maxLife: 0 }
-    let ssNext = performance.now() + 20000 + Math.random() * 15000
+    let ssNext = performance.now() + 6000 + Math.random() * 4000
     let bgStars: Star3D[] = []
 
     function isMob() { return window.innerWidth < 1024 }
@@ -245,7 +245,7 @@ export default function StarfieldCanvas() {
         ss.life = 0
         ss.maxLife = 18 + Math.floor(Math.random() * 10)
         ss.active = true
-        ssNext = now + 20000 + Math.random() * 15000
+        ssNext = now + 6000 + Math.random() * 4000
       }
       if (ss.active) {
         ss.life++
