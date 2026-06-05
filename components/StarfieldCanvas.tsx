@@ -100,7 +100,7 @@ function randomStarColor(): string {
 }
 
 function randomStarXY(z: number): { x: number; y: number } {
-  if (Math.random() < 0.35) {
+  if (z > 2000 && Math.random() < 0.35) {
     const angle = Math.PI * 0.18
     const along = (Math.random() - 0.5) * z * 1.8
     const across = (Math.random() - 0.5) * z * 0.35
