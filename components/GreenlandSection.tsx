@@ -53,9 +53,10 @@ export default function GreenlandSection() {
       const el = sectionRef.current;
       if (!el || !tl) return;
       const sectionTop = el.getBoundingClientRect().top + window.scrollY;
-      const scrollable = el.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const raw = (window.scrollY - sectionTop) / scrollable;
+      const startScrollY = sectionTop - window.innerHeight;
+      const totalRange = el.offsetHeight;
+
+      const raw = (window.scrollY - startScrollY) / totalRange;
       tl.progress(Math.max(0, Math.min(1, raw)));
     };
 
