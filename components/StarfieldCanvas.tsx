@@ -94,9 +94,8 @@ const CONSTELLATIONS: ConstellDef[] = [
 
 function randomStarColor(): string {
   const r = Math.random()
-  if (r < 0.02) return '255,210,150'
-  if (r < 0.07) return '255,248,200'
-  if (r < 0.15) return '180,210,255'
+  if (r < 0.04) return '255,210,150'
+  if (r < 0.16) return '255,248,200'
   return '215,228,255'
 }
 
@@ -117,7 +116,7 @@ export default function StarfieldCanvas() {
     function isMob() { return window.innerWidth < 1024 }
 
     function initBg() {
-      const count = isMob() ? 900 : 2500
+      const count = isMob() ? 1300 : 3500
       bgStars = Array.from({ length: count }, () => {
         const z = 300 + Math.random() * 2200
         return {
