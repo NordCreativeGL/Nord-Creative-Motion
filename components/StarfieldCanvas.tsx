@@ -111,6 +111,8 @@ export default function StarfieldCanvas() {
     if (!ctx) return
 
     let W=0,H=0,cx=0,cy=0,opacity=1,time=0
+    let ss = { active: false, x: 0, y: 0, vx: 0, vy: 0, life: 0, maxLife: 0 }
+    let ssNext = performance.now() + 20000 + Math.random() * 15000
     let bgStars: Star3D[] = []
 
     function isMob() { return window.innerWidth < 1024 }
@@ -231,6 +233,45 @@ export default function StarfieldCanvas() {
         }
       }
       ctx.restore()
+
+      const now = performance.now()
+      if (!ss.active && now >= ssNext) {
+        const angle = Math.PI * (0.14 + Math.random() * 0.22)
+        const speed = 10 + Math.random() * 4
+        ss.x = Math.random() * W * 0.75
+        ss.y = -10
+        ss.vx = Math.cos(angle) * speed
+        ss.vy = Math.sin(angle) * speed
+        ss.life = 0
+        ss.maxLife = 18 + Math.floor(Math.random() * 10)
+        ss.active = true
+        ssNext = now + 20000 + Math.random() * 15000
+      }
+      if (ss.active) {
+        ss.life++
+        ss.x += ss.vx
+        ss.y += ss.vy
+        if (ss.x > W + 20 || ss.y > H + 20) {
+          ss.active = false
+        } else {
+          const t = ss.life / ss.maxLife
+          const al = Math.sin(t * Math.PI) * 0.85
+          const tx = ss.x - ss.vx * 6
+          const ty = ss.y - ss.vy * 6
+          const grad = ctx.createLinearGradient(tx, ty, ss.x, ss.y)
+          grad.addColorStop(0, `rgba(255,255,255,0)`)
+          grad.addColorStop(1, `rgba(255,255,255,${al.toFixed(2)})`)
+          ctx.save()
+          ctx.beginPath()
+          ctx.moveTo(tx, ty)
+          ctx.lineTo(ss.x, ss.y)
+          ctx.strokeStyle = grad
+          ctx.lineWidth = 1.5
+          ctx.stroke()
+          ctx.restore()
+          if (ss.life >= ss.maxLife) ss.active = false
+        }
+      }
     }
 
     resize()
