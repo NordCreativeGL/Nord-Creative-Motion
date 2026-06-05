@@ -24,6 +24,8 @@ export default function GreenlandSection() {
   const video2Ref  = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let tl: gsap.core.Timeline;
+
     const ctx = gsap.context(() => {
       gsap.set(labelRef.current,  { opacity: 0, rotateY: 360,  x: -60 });
       gsap.set(line1Ref.current,  { opacity: 0, rotateY: -360, x: 80  });
@@ -35,7 +37,7 @@ export default function GreenlandSection() {
       gsap.set(video2Ref.current, { opacity: 0, rotateY:  90, x: 0, transformOrigin: 'center center' });
 
       const isMobileAnim = window.innerWidth < 1024;
-      const tl = gsap.timeline({ paused: true });
+      tl = gsap.timeline({ paused: true });
 
       tl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, 0)
         .to(line1Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0    : 0.20)
@@ -45,24 +47,22 @@ export default function GreenlandSection() {
         .to(linkRef.current,   { opacity: 1,                   duration: isMobileAnim ? 0.5 : 0.8, ease: 'power2.inOut' }, isMobileAnim ? 0.20 : 1.25)
         .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.05 : 0.50)
         .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.20 : 1.10);
-
-      const hasAnimated = { current: false };
-
-      const onScroll = () => {
-        if (hasAnimated.current) return;
-        const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
-        if (window.scrollY >= sectionTop - window.innerHeight * 0.5) {
-          hasAnimated.current = true;
-          tl.play();
-          window.removeEventListener('scroll', onScroll);
-        }
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
     }, sectionRef);
 
-    return () => ctx.revert();
+    const onScroll = () => {
+      const el = sectionRef.current;
+      if (!el || !tl) return;
+      const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+      const scrollable = el.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const raw = (window.scrollY - sectionTop) / scrollable;
+      tl.progress(Math.max(0, Math.min(1, raw)));
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => { ctx.revert(); window.removeEventListener('scroll', onScroll); };
   }, []);
 
   return (
@@ -70,15 +70,19 @@ export default function GreenlandSection() {
       id="greenland"
       data-snap="true"
       ref={sectionRef}
-      style={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        minHeight: isMobile ? '100dvh' : '100vh',
-        position: 'relative',
-        overflow: isMobile ? 'visible' : 'hidden',
-      }}
+      style={{ height: isMobile ? '300dvh' : '300vh' }}
     >
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: isMobile ? '100dvh' : '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: isMobile ? 'flex-start' : 'center',
+        }}
+      >
         {/* Left: text column */}
         <div
           style={{
@@ -184,6 +188,7 @@ export default function GreenlandSection() {
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, background: 'linear-gradient(to top, rgba(0,0,0,0.6), transparent)' }} />
           </div>
         </div>
+      </div>
     </div>
   );
 }
