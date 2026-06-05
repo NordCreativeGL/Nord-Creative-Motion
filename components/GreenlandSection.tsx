@@ -24,7 +24,9 @@ export default function GreenlandSection() {
   const video2Ref  = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let tl: gsap.core.Timeline;
+    let textTl: gsap.core.Timeline;
+    let videoTl: gsap.core.Timeline;
+    let textFired = false;
 
     const ctx = gsap.context(() => {
       gsap.set(labelRef.current,  { opacity: 0, rotateY: 360,  x: -60 });
@@ -37,33 +39,46 @@ export default function GreenlandSection() {
       gsap.set(video2Ref.current, { opacity: 0, rotateY:  90, x: 0, transformOrigin: 'center center' });
 
       const isMobileAnim = window.innerWidth < 1024;
-      tl = gsap.timeline({ paused: true });
+      textTl = gsap.timeline({ paused: true });
 
-      tl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, 0)
+      textTl.to(labelRef.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, 0)
         .to(line1Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0    : 0.20)
         .to(line2Ref.current,  { opacity: 1, rotateY: 0, y: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0.05 : 0.42)
         .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0.10 : 0.64)
         .to(bodyRef.current,   { opacity: 1, y: 0,             duration: isMobileAnim ? 0.5 : 0.9, ease: 'power2.inOut' }, isMobileAnim ? 0.15 : 1.00)
-        .to(linkRef.current,   { opacity: 1,                   duration: isMobileAnim ? 0.5 : 0.8, ease: 'power2.inOut' }, isMobileAnim ? 0.20 : 1.25)
-        .to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.05 : 0.50)
+        .to(linkRef.current,   { opacity: 1,                   duration: isMobileAnim ? 0.5 : 0.8, ease: 'power2.inOut' }, isMobileAnim ? 0.20 : 1.25);
+
+      videoTl = gsap.timeline({ paused: true });
+
+      videoTl.to(video1Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.05 : 0.50)
         .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.20 : 1.10);
     }, sectionRef);
 
     const onScroll = () => {
       const el = sectionRef.current;
-      if (!el || !tl) return;
+      if (!el) return;
       const sectionTop = el.getBoundingClientRect().top + window.scrollY;
-      const startScrollY = sectionTop - window.innerHeight;
-      const totalRange = el.offsetHeight;
 
-      const raw = (window.scrollY - startScrollY) / totalRange;
-      tl.progress(Math.max(0, Math.min(1, raw)));
+      if (!textFired && textTl && window.scrollY >= sectionTop - window.innerHeight * 0.5) {
+        textFired = true;
+        textTl.play();
+      }
+
+      if (videoTl) {
+        const startScrollY = sectionTop - window.innerHeight;
+        const totalRange = el.offsetHeight;
+        const raw = (window.scrollY - startScrollY) / totalRange;
+        videoTl.progress(Math.max(0, Math.min(1, raw)));
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    return () => { ctx.revert(); window.removeEventListener('scroll', onScroll); };
+    return () => {
+      ctx.revert();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (
