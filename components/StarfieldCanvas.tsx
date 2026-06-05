@@ -92,7 +92,15 @@ const CONSTELLATIONS: ConstellDef[] = [
   ]},
 ]
 
-interface Star3D { x:number; y:number; z:number; size:number; bright:number }
+function randomStarColor(): string {
+  const r = Math.random()
+  if (r < 0.02) return '255,210,150'
+  if (r < 0.07) return '255,248,200'
+  if (r < 0.15) return '180,210,255'
+  return '215,228,255'
+}
+
+interface Star3D { x:number; y:number; z:number; size:number; bright:number; color:string }
 
 export default function StarfieldCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -118,6 +126,7 @@ export default function StarfieldCanvas() {
           z,
           size: 0.25 + Math.random() * 0.65,
           bright: 0.18 + Math.random() * 0.28,
+          color: randomStarColor(),
         }
       })
     }
@@ -171,6 +180,7 @@ export default function StarfieldCanvas() {
           s.z = newZ1
           s.x = (Math.random() - 0.5) * newZ1 * 2.2
           s.y = (Math.random() - 0.5) * newZ1 * 1.4
+          s.color = randomStarColor()
           continue
         }
         if (dz > 2600) {
@@ -178,6 +188,7 @@ export default function StarfieldCanvas() {
           s.z = newZ2
           s.x = (Math.random() - 0.5) * newZ2 * 2.2
           s.y = (Math.random() - 0.5) * newZ2 * 1.4
+          s.color = randomStarColor()
           continue
         }
         const scale = FOCAL / dz
@@ -187,7 +198,7 @@ export default function StarfieldCanvas() {
         const sz = Math.max(0.4, Math.min(s.size * scale, 2.0))
         const al = s.bright * Math.min(1, dz / 100)
         ctx.beginPath(); ctx.arc(sx, sy, sz, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(215,228,255,${al})`; ctx.fill()
+        ctx.fillStyle = `rgba(${s.color},${al})`; ctx.fill()
       }
 
       ctx.save()
