@@ -14,11 +14,11 @@ const CONSTELLATIONS: ConstellDef[] = [
     {dx:-32,dy:30,s:1.6,b:.50},{dx:0,dy:42,s:1.4,b:.42},
     {dx:15,dy:24,s:1.4,b:.40},{dx:28,dy:3,s:1.4,b:.38},
   ]},
-  { cx:130,cy:-80,cz:630,spin:false, stars:[
-    {dx:-70,dy:-18,s:2.5,b:.78},{dx:-48,dy:-10,s:2.3,b:.72},
-    {dx:-26,dy:-2,s:2.5,b:.76},{dx:0,dy:8,s:1.7,b:.54},
-    {dx:4,dy:32,s:2.0,b:.62},{dx:34,dy:18,s:1.7,b:.64},
-    {dx:36,dy:-10,s:3.0,b:.84},
+  { cx: 130, cy: -80, cz: 630, spin: false, stars: [
+    {dx:   0, dy: -60, s: 2.3, b: 0.74},
+    {dx:  55, dy:  -5, s: 2.0, b: 0.63},
+    {dx:   5, dy:  50, s: 1.7, b: 0.55},
+    {dx: -50, dy:  10, s: 2.1, b: 0.68},
   ]},
   { cx:-180,cy:20,cz:900,spin:false, stars:[
     {dx:30,dy:18,s:2.5,b:.76},{dx:8,dy:28,s:1.7,b:.64},
