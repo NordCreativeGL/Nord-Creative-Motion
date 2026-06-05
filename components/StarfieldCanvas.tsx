@@ -6,7 +6,7 @@ const FOCAL = 500
 const Z_SPEED = 0.22
 
 interface StarOffset { dx: number; dy: number; dz?: number; s: number; b: number }
-interface ConstellDef { cx: number; cy: number; cz: number; spin: boolean; stars: StarOffset[] }
+interface ConstellDef { cx: number; cy: number; cz: number; spin: boolean; stars: StarOffset[]; lines?: [number, number][] }
 
 const CONSTELLATIONS: ConstellDef[] = [
   { cx:-130,cy:-90,cz:400,spin:false, stars:[
@@ -25,10 +25,14 @@ const CONSTELLATIONS: ConstellDef[] = [
     {dx:-18,dy:-8,s:1.5,b:.48},{dx:-35,dy:-26,s:1.4,b:.45},
     {dx:-10,dy:-40,s:1.5,b:.44},{dx:15,dy:-20,s:1.3,b:.40},
   ]},
-  { cx:-110,cy:130,cz:1260,spin:false, stars:[
-    {dx:-55,dy:-12,s:2.0,b:.68},{dx:-22,dy:11,s:2.5,b:.80},
-    {dx:0,dy:-10,s:2.3,b:.74},{dx:23,dy:11,s:2.0,b:.68},
-    {dx:50,dy:-8,s:1.8,b:.60},
+  { cx: 20, cy: -30, cz: 1260, spin: false, lines: [[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]], stars: [
+    {dx: 55,  dy: -42, s: 2.8, b: 0.82},
+    {dx: 52,  dy:  22, s: 2.4, b: 0.72},
+    {dx: -18, dy:  30, s: 2.2, b: 0.68},
+    {dx: -18, dy: -32, s: 1.8, b: 0.55},
+    {dx: -65, dy: -48, s: 2.6, b: 0.80},
+    {dx:-108, dy: -43, s: 2.3, b: 0.74},
+    {dx:-145, dy: -12, s: 2.4, b: 0.76},
   ]},
   { cx:30,cy:-160,cz:1480,spin:false, stars:[
     {dx:30,dy:22,s:2.0,b:.68},{dx:12,dy:-9,s:1.8,b:.60},
