@@ -55,6 +55,37 @@ const CONSTELLATIONS: ConstellDef[] = [
     {dx:18,dy:10,s:2.2,b:.70},{dx:38,dy:55,s:4.0,b:.88},
     {dx:-29,dy:52,s:2.0,b:.64},
   ]},
+  { cx:-170, cy:90, cz:2250, spin:false, stars:[
+    {dx:0,dy:0,s:3.5,b:.92},
+    {dx:28,dy:28,s:2.0,b:.62},
+    {dx:18,dy:55,s:1.8,b:.55},
+    {dx:-18,dy:55,s:1.9,b:.58},
+    {dx:-28,dy:28,s:2.1,b:.65},
+  ]},
+  { cx:150, cy:-70, cz:2400, spin:false, stars:[
+    {dx:-50,dy:0,s:3.0,b:.85},
+    {dx:-25,dy:15,s:2.2,b:.68},
+    {dx:0,dy:10,s:2.0,b:.62},
+    {dx:25,dy:-5,s:2.3,b:.70},
+    {dx:48,dy:-20,s:2.5,b:.74},
+    {dx:60,dy:10,s:1.8,b:.56},
+    {dx:55,dy:35,s:1.9,b:.60},
+  ]},
+  { cx:-80, cy:-120, cz:2560, spin:false, stars:[
+    {dx:0,dy:0,s:2.8,b:.80},
+    {dx:30,dy:-20,s:2.4,b:.72},
+    {dx:60,dy:-30,s:2.0,b:.63},
+    {dx:85,dy:-15,s:2.6,b:.76},
+    {dx:100,dy:10,s:1.9,b:.58},
+    {dx:-30,dy:20,s:2.2,b:.67},
+  ]},
+  { cx:60, cy:130, cz:2720, spin:true, stars:[
+    {dx:0,dy:-45,s:2.5,b:.74},
+    {dx:-35,dy:0,s:2.2,b:.68},
+    {dx:-35,dy:35,s:2.0,b:.63},
+    {dx:35,dy:35,s:1.9,b:.60},
+    {dx:35,dy:0,s:2.3,b:.70},
+  ]},
 ]
 
 interface Star3D { x:number; y:number; z:number; size:number; bright:number }
