@@ -17,9 +17,9 @@ export default function CTABanner() {
   const headingRef  = useRef<HTMLDivElement>(null);
   const bodyRef     = useRef<HTMLDivElement>(null);
   const btnRef      = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
-
   useEffect(() => {
+    let tl: gsap.core.Timeline
+
     const ctx = gsap.context(() => {
       gsap.set(cardRef.current, {
         opacity: 0,
@@ -33,40 +33,31 @@ export default function CTABanner() {
         y: 10,
       });
 
-      const onScroll = () => {
-        if (hasAnimated.current) return;
-        const sectionTop = (sectionRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
-        if (window.scrollY >= sectionTop - window.innerHeight * 0.5) {
-          hasAnimated.current = true;
-          gsap.to(cardRef.current, {
-            opacity: 1,
-            rotateY: 0,
-            scale: 1,
-            duration: 2.6,
-            ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)',
-          });
-
-          const textEase = 'cubic-bezier(0.25, 0.1, 0.15, 1)';
-          const textDelays = [0.8, 1.0, 1.2];
-          const textRefs = [headingRef, bodyRef, btnRef];
-          textRefs.forEach((ref, i) => {
-            gsap.to(ref.current, {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: textEase,
-              delay: textDelays[i],
-            });
-          });
-
-          window.removeEventListener('scroll', onScroll);
-        }
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
+      tl = gsap.timeline({ paused: true })
+        .to(cardRef.current, { opacity: 1, rotateY: 0, scale: 1, duration: 2.6, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' })
+        .to(headingRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0.8)
+        .to(bodyRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.0)
+        .to(btnRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.2)
     }, sectionRef);
 
-    return () => ctx.revert();
+    const onScroll = () => {
+      const el = sectionRef.current
+      if (!el || !tl) return
+      const sectionTop = el.getBoundingClientRect().top + window.scrollY
+      const startScrollY = sectionTop - window.innerHeight
+      const totalRange = el.offsetHeight
+      if (totalRange <= 0) return
+      const raw = (window.scrollY - startScrollY) / totalRange
+      tl.progress(Math.max(0, Math.min(1, raw)))
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    return () => {
+      ctx.revert()
+      window.removeEventListener('scroll', onScroll)
+    }
   }, []);
 
   return (
@@ -74,16 +65,20 @@ export default function CTABanner() {
       id="cta"
       data-snap="true"
       ref={sectionRef}
-      style={{
-        minHeight: isMobile ? 'auto' : '100vh',
-        padding: isMobile ? '0px' : '48px 0px',
-        display: 'flex',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        position: 'relative',
-      }}
+      style={{ height: isMobile ? '200dvh' : '200vh' }}
     >
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: isMobile ? '100dvh' : '100vh',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: isMobile ? 'flex-start' : 'center',
+          justifyContent: 'center',
+          padding: isMobile ? '0px' : '48px 0px',
+        }}
+      >
       <div
         ref={cardRef}
         style={{
@@ -153,6 +148,7 @@ export default function CTABanner() {
             Work with us
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
