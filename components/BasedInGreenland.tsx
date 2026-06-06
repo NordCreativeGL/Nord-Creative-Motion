@@ -283,7 +283,7 @@ export default function BasedInGreenland() {
           position: 'sticky',
           top: 0,
           height: isMobile ? '100dvh' : '100vh',
-          overflow: 'hidden',
+          overflow: isMobile ? 'visible' : 'hidden',
           display: 'flex',
           alignItems: isMobile ? 'flex-start' : 'center',
         }}
