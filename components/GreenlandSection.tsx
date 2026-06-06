@@ -130,7 +130,7 @@ export default function GreenlandSection() {
             flexDirection: 'column',
             justifyContent: 'center',
             perspective: '900px',
-            paddingTop: isMobile ? '24px' : undefined,
+            paddingTop: isMobile ? '0px' : undefined,
             paddingBottom: isMobile ? '8px' : undefined,
           }}
         >
@@ -190,7 +190,7 @@ export default function GreenlandSection() {
           height: isMobile ? 'auto' : '100vh',
           display: 'flex',
           flexDirection: 'column',
-          padding: isMobile ? '0 24px 48px 24px' : '2.5rem 2rem 2.5rem 1rem',
+          padding: isMobile ? '0 24px 0 24px' : '2.5rem 2rem 2.5rem 1rem',
           gap: '0.75rem',
         }}>
           <div ref={video1Ref} style={{
