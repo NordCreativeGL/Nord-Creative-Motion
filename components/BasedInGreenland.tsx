@@ -295,7 +295,7 @@ export default function BasedInGreenland() {
           inset: 0,
           width: '100%',
           height: '100%',
-          zIndex: isMobile ? 1 : 5,
+          zIndex: isMobile ? 3 : 5,
           pointerEvents: 'none',
         }}
       />
