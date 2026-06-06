@@ -253,7 +253,7 @@ export default function BasedInGreenland() {
       if (!el) return
       const sectionTop = el.getBoundingClientRect().top + window.scrollY
       const startScrollY = sectionTop - window.innerHeight
-      const totalRange = el.offsetHeight
+      const totalRange = window.innerWidth < 1024 ? window.innerHeight * 6.5 : el.offsetHeight
       scrollPRef.current = Math.max(0, Math.min(1, (window.scrollY - startScrollY) / totalRange))
 
       if (!animStarted && window.scrollY >= sectionTop - window.innerHeight) {
@@ -276,7 +276,7 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ height: isMobile ? '650dvh' : '500vh' }}
+      style={{ height: isMobile ? '900dvh' : '500vh' }}
     >
       <div
         style={{
