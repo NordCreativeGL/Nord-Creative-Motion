@@ -257,12 +257,13 @@ export default function BasedInGreenland() {
       const el = sectionRef.current
       if (!el) return
       const sectionTop = el.getBoundingClientRect().top + window.scrollY
-      // Mobile: fade canvas in during entry phase (0 when section enters from below, 1 when section top reaches viewport top)
       if (window.innerWidth < 1024) {
-        const entryProgress = Math.max(0, Math.min(1,
-          (window.scrollY - (sectionTop - window.innerHeight)) / window.innerHeight
-        ))
-        canvas.style.opacity = String(entryProgress)
+        if (window.scrollY < sectionTop) {
+          canvas.style.opacity = '0'
+        } else {
+          const fadeIn = Math.min(1, (window.scrollY - sectionTop) / (window.innerHeight * 0.2))
+          canvas.style.opacity = String(fadeIn)
+        }
       }
       const startScrollY = sectionTop - window.innerHeight
       const totalRange = el.offsetHeight
