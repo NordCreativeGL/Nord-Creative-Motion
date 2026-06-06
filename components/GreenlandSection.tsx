@@ -196,7 +196,7 @@ export default function GreenlandSection() {
           <div ref={video1Ref} style={{
             position: 'relative',
             flex: isMobile ? undefined : 1,
-            height: isMobile ? '220px' : undefined,
+            height: isMobile ? '170px' : undefined,
             width: '100%',
             borderRadius: 14,
             overflow: 'hidden',
@@ -213,7 +213,7 @@ export default function GreenlandSection() {
           <div ref={video2Ref} style={{
             position: 'relative',
             flex: isMobile ? undefined : 1,
-            height: isMobile ? '220px' : undefined,
+            height: isMobile ? '170px' : undefined,
             width: '100%',
             borderRadius: 14,
             overflow: 'hidden',
