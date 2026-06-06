@@ -69,7 +69,8 @@ export default function GreenlandSection() {
         },
         { threshold: 0.2 }
       )
-      if (el) observer.observe(el)
+      const target = sectionRef.current
+      if (target) observer.observe(target)
       return () => {
         ctx.revert()
         observer.disconnect()
