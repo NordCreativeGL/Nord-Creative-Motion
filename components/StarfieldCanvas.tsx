@@ -100,7 +100,7 @@ function randomStarColor(): string {
 }
 
 function randomStarXY(z: number): { x: number; y: number } {
-  if (z > 2000 && Math.random() < 0.60) {
+  if (z > 2000 && Math.random() < (window.innerWidth < 1024 ? 0.80 : 0.60)) {
     const angle = Math.PI * 0.18
     const along = (Math.random() - 0.5) * z * 1.8
     const across = (Math.random() - 0.5) * z * 0.22
@@ -193,7 +193,7 @@ export default function StarfieldCanvas() {
       const camX = Math.sin(camZ*0.003)*50 + Math.sin(time*26.2)*12
       const camY = Math.cos(camZ*0.002)*25 - camZ*0.006 + Math.cos(time*20.9)*9
 
-      const mwAlpha = Math.min(1, Math.max(0, (camZ - 1400) / 600)) * 0.07
+      const mwAlpha = Math.min(1, Math.max(0, (camZ - 1400) / 600)) * (window.innerWidth < 1024 ? 0.15 : 0.07)
       if (mwAlpha > 0.001) {
         ctx.save()
         ctx.translate(cx, cy)
