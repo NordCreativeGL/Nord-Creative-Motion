@@ -37,11 +37,6 @@ export default function BasedInGreenland() {
     const canvas = canvasRef.current
     if (!section || !canvas) return
 
-    // Mobile: canvas starts invisible and fades in as section enters viewport
-    if (window.innerWidth < 1024) {
-      canvas.style.opacity = '0'
-    }
-
     let d3: any, topojson: any, worldFeatures: any[], glFeature: any
 
     const loadLibs = async () => {
@@ -257,14 +252,6 @@ export default function BasedInGreenland() {
       const el = sectionRef.current
       if (!el) return
       const sectionTop = el.getBoundingClientRect().top + window.scrollY
-      if (window.innerWidth < 1024) {
-        if (window.scrollY < sectionTop) {
-          canvas.style.opacity = '0'
-        } else {
-          const fadeIn = Math.min(1, (window.scrollY - sectionTop) / (window.innerHeight * 0.2))
-          canvas.style.opacity = String(fadeIn)
-        }
-      }
       const startScrollY = sectionTop - window.innerHeight
       const totalRange = el.offsetHeight
       scrollPRef.current = Math.max(0, Math.min(1, (window.scrollY - startScrollY) / totalRange))
