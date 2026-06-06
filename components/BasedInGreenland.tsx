@@ -283,7 +283,7 @@ export default function BasedInGreenland() {
           position: 'sticky',
           top: 0,
           height: isMobile ? '100dvh' : '100vh',
-          overflow: isMobile ? 'visible' : 'hidden',
+          overflow: 'hidden',
           display: 'flex',
           alignItems: isMobile ? 'flex-start' : 'center',
         }}
@@ -307,7 +307,7 @@ export default function BasedInGreenland() {
         style={{ display: 'none' }}
       />
 
-      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '48dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
+      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '46dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
         <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
         <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>We work here</div>
