@@ -109,14 +109,14 @@ export default function GreenlandSection() {
       id="greenland"
       data-snap="true"
       ref={sectionRef}
-      style={{ height: isMobile ? '150dvh' : '200vh' }}
+      style={{ height: isMobile ? 'auto' : '200vh' }}
     >
       <div
         style={{
-          position: 'sticky',
+          position: isMobile ? 'static' : 'sticky',
           top: 0,
-          height: isMobile ? '100dvh' : '100vh',
-          overflow: 'hidden',
+          height: isMobile ? 'auto' : '100vh',
+          overflow: isMobile ? 'visible' : 'hidden',
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
           alignItems: isMobile ? 'flex-start' : 'center',
