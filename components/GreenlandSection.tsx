@@ -54,6 +54,28 @@ export default function GreenlandSection() {
         .to(video2Ref.current, { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.7 : 1.4, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, isMobileAnim ? 0.20 : 1.10);
     }, sectionRef);
 
+    const isMobileForIO = window.innerWidth < 1024
+
+    if (isMobileForIO) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !textFired) {
+              textFired = true
+              textTl?.play()
+              videoTl?.play()
+            }
+          })
+        },
+        { threshold: 0.2 }
+      )
+      if (el) observer.observe(el)
+      return () => {
+        ctx.revert()
+        observer.disconnect()
+      }
+    }
+
     const onScroll = () => {
       const el = sectionRef.current;
       if (!el) return;
@@ -86,7 +108,7 @@ export default function GreenlandSection() {
       id="greenland"
       data-snap="true"
       ref={sectionRef}
-      style={{ height: isMobile ? '200dvh' : '200vh' }}
+      style={{ height: isMobile ? '150dvh' : '200vh' }}
     >
       <div
         style={{
