@@ -162,8 +162,8 @@ export default function BasedInGreenland() {
       ctx.scale(dpr, dpr)
 
       const finalCX = isMobileNow ? W * 0.50 : W * 0.74
-      const finalCY = isMobileNow ? H * 0.42 : H * 0.51
-      const finalScale = isMobileNow ? Math.round(3400 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
+      const finalCY = isMobileNow ? H * 0.27 : H * 0.51
+      const finalScale = isMobileNow ? Math.round(2500 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
 
       let textFired = false
 
@@ -225,7 +225,7 @@ export default function BasedInGreenland() {
             rotLon = lerp(100, 42, q)
             rotLat = lerp(-18, -72, q)
             cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
-            cy = lerp(isMobileNow ? 0.42 * H : H / 2, isMobileNow ? H * 0.42 : H * 0.51, q)
+            cy = lerp(isMobileNow ? 0.42 * H : H / 2, isMobileNow ? H * 0.27 : H * 0.51, q)
             countriesAlpha = lerp(1, 0, q)
           }
 
