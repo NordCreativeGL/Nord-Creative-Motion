@@ -307,7 +307,7 @@ export default function BasedInGreenland() {
         style={{ display: 'none' }}
       />
 
-      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '46dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
+      <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: isMobile ? 'none' : 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '46dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
         <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
         <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>We work here</div>
@@ -344,6 +344,57 @@ export default function BasedInGreenland() {
         </a>
       </div>
       </div>
+      {isMobile && (
+        <div
+          style={{
+            marginTop: '459dvh',
+            position: 'sticky',
+            top: 0,
+            zIndex: 10,
+            backgroundColor: '#060606',
+            paddingTop: '48px',
+            paddingBottom: '64px',
+            paddingLeft: '24px',
+            paddingRight: '24px',
+          }}
+        >
+          <div style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>
+            Based in Greenland
+          </div>
+          <div style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>
+            We live here
+          </div>
+          <div style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem' }}>
+            We work here
+          </div>
+          <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 1rem 0' }}>
+            We are based in Qaqortoq in South Greenland, where we live and work close to the nature that inspires us every day.
+          </p>
+          <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 1rem 0' }}>
+            We are available for projects across all of Greenland, from remote landscapes to towns and industrial sites, creating photography and film that document people, places, and projects in their natural context.
+          </p>
+          <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 2rem 0' }}>
+            This allows us to operate efficiently in locations where production is often limited by logistics and conditions.
+          </p>
+          <a
+            href="/about"
+            style={{
+              display: 'block',
+              textAlign: 'center',
+              padding: '14px 32px',
+              border: '1px solid rgba(255,255,255,0.6)',
+              borderRadius: '999px',
+              color: 'white',
+              fontSize: 'clamp(15px, 0.9vw, 19px)',
+              fontWeight: 300,
+              textDecoration: 'none',
+              transition: 'background 0.3s ease, color 0.3s ease',
+            }}
+          >
+            Read more about us
+          </a>
+        </div>
+      )}
     </section>
   )
 }
