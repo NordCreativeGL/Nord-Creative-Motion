@@ -68,7 +68,7 @@ type NLSection = { id: string; hue1: number; hue2: number };
 const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 320, hue2: 8   },
+  { id: "gl-why",     hue1: 350, hue2: 12  },
 ];
 
 function lerpHue(a: number, b: number, t: number): number {
@@ -157,7 +157,7 @@ export default function NorthernLights() {
 
       AURORA_UPPER.forEach(p => patch(p, hue + (p as AuroraPatch).hs));
       AURORA_MAIN.forEach(p  => patch(p, hue + (p as AuroraPatch).hs));
-      AURORA_PINK.forEach(p  => patch(p, 332));
+      AURORA_PINK.forEach(p  => patch(p, 215));
     }
 
     function draw() {
@@ -166,7 +166,7 @@ export default function NorthernLights() {
       const sf = sectionProgress - si;
       const s0 = SECTIONS[Math.min(si,     SECTIONS.length - 1)];
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
-      const rawExit   = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
+      const rawExit   = Math.max(0, Math.min(1, (sf - 0.40) / 0.60));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
       const currentHue = lerpHue(s0.hue1, s1.hue1, exitBlendT);
       drawPatches(currentHue);
