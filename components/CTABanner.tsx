@@ -83,7 +83,7 @@ export default function CTABanner() {
         ref={cardRef}
         style={{
           width: isMobile ? '90vw' : '70vw',
-          aspectRatio: isMobile ? '9/16' : '3/2',
+          aspectRatio: isMobile ? '3/2' : '3/2',
           borderRadius: 22,
           overflow: 'hidden',
           position: 'relative',
@@ -100,7 +100,7 @@ export default function CTABanner() {
         <svg
           viewBox="0 0 18 12"
           preserveAspectRatio="none"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: isMobile ? 'none' : 'block' }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}
         >
           <path
             fill="rgba(0,0,0,0.85)"
