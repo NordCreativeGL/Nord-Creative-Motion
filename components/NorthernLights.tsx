@@ -1,46 +1,96 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const INTENSITY = 0.35;
-const BASE_THICKNESS = 0.22;
-const SPEED = 0.35;
+// ── Seeded RNG ────────────────────────────────────────────────────────────────
+let _rng = 98321;
+function sRng(): number {
+  _rng = (_rng ^ (_rng << 13)) ^ (_rng >> 17) ^ (_rng << 5);
+  return ((_rng >>> 0) / 4294967296);
+}
 
-const BANDS = [
-  { yFrac: 0.15, amp: 0.11, freq: 0.70, phase: 0.0, speedMul: 1.40, thickMul: 0.45, alphaMul: 0.90, hueShift:  0, drift: 0.018, tilt: -0.12 },
-  { yFrac: 0.38, amp: 0.18, freq: 0.32, phase: 1.6, speedMul: 0.65, thickMul: 2.10, alphaMul: 0.50, hueShift: 10, drift: 0.009, tilt:  0.10 },
-  { yFrac: 0.57, amp: 0.14, freq: 0.85, phase: 3.8, speedMul: 1.70, thickMul: 0.60, alphaMul: 0.85, hueShift: -8, drift: 0.022, tilt: -0.08 },
-  { yFrac: 0.72, amp: 0.10, freq: 0.55, phase: 2.9, speedMul: 0.80, thickMul: 1.20, alphaMul: 0.60, hueShift:  4, drift: 0.014, tilt:  0.13 },
-  { yFrac: 0.88, amp: 0.09, freq: 0.44, phase: 5.1, speedMul: 0.45, thickMul: 1.70, alphaMul: 0.28, hueShift:  5, drift: 0.006, tilt: -0.10 },
-];
+// ── Patch types ───────────────────────────────────────────────────────────────
+interface AuroraPatch {
+  x: number; yc: number; rxF: number; ryF: number;
+  br: number; ph: number; phY: number; sp: number; spY: number;
+  dr: number; hs: number; tilt: number;
+}
+interface PinkPatch {
+  x: number; yc: number; rxF: number; ryF: number;
+  br: number; ph: number; sp: number; dr: number; tilt: number;
+}
 
-type NLSection = { id: string; hue1: number; hue2: number; bandHues?: number[] };
+// ── Patch arrays (seeded — stable layout on every load) ───────────────────────
+_rng = 98321;
+const AURORA_MAIN: AuroraPatch[] = Array.from({ length: 34 }, (_, i) => ({
+  x:   ((i / 34) + sRng() * 0.04 - 0.02 + 1) % 1,
+  yc:  0.24 + sRng() * 0.12,
+  rxF: 0.065 + sRng() * 0.095,
+  ryF: 1.6  + sRng() * 2.2,
+  br:  0.30 + sRng() * 0.65,
+  ph:  sRng() * Math.PI * 2,
+  phY: sRng() * Math.PI * 2,
+  sp:  0.28 + sRng() * 0.55,
+  spY: 0.35 + sRng() * 0.50,
+  dr:  (sRng() - 0.5) * 0.00016,
+  hs:  (sRng() - 0.5) * 18,
+  tilt:(sRng() - 0.5) * 0.20,
+}));
 
+const AURORA_UPPER: AuroraPatch[] = Array.from({ length: 16 }, (_, i) => ({
+  x:   ((i / 16) + sRng() * 0.06 - 0.03 + 1) % 1,
+  yc:  0.14 + sRng() * 0.08,
+  rxF: 0.045 + sRng() * 0.065,
+  ryF: 1.2  + sRng() * 1.8,
+  br:  0.12 + sRng() * 0.28,
+  ph:  sRng() * Math.PI * 2,
+  phY: sRng() * Math.PI * 2,
+  sp:  0.35 + sRng() * 0.60,
+  spY: 0.40 + sRng() * 0.55,
+  dr:  (sRng() - 0.5) * 0.00012,
+  hs:  (sRng() - 0.5) * 14,
+  tilt:(sRng() - 0.5) * 0.15,
+}));
+
+const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
+  x:   ((i / 10) + sRng() * 0.08 - 0.04 + 1) % 1,
+  yc:  0.36 + sRng() * 0.07,
+  rxF: 0.040 + sRng() * 0.060,
+  ryF: 0.6  + sRng() * 1.0,
+  br:  0.12 + sRng() * 0.30,
+  ph:  sRng() * Math.PI * 2,
+  sp:  0.32 + sRng() * 0.55,
+  dr:  (sRng() - 0.5) * 0.00014,
+  tilt:(sRng() - 0.5) * 0.25,
+}));
+
+// ── Section colour config ─────────────────────────────────────────────────────
+type NLSection = { id: string; hue1: number; hue2: number };
 const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
-  { id: "gl-process", hue1: 192, hue2: 218, bandHues: [195, 210, 192, 215, 202] },
-  { id: "gl-why",     hue1: 320, hue2: 8,   bandHues: [8, 5, 320, 8,  12] },
+  { id: "gl-process", hue1: 192, hue2: 218 },
+  { id: "gl-why",     hue1: 320, hue2: 8   },
 ];
 
-function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 function lerpHue(a: number, b: number, t: number): number {
   const diff = ((b - a) % 360 + 540) % 360 - 180;
   return ((a + diff * t) % 360 + 360) % 360;
 }
 
+// ── Component ─────────────────────────────────────────────────────────────────
 export default function NorthernLights() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
-    let W = 0, H = 0, t = 0, raf = 0;
+    const ctx    = canvas.getContext("2d")!;
+    let W = 0, H = 0, tp = 0, raf = 0;
     let sectionProgress = 0;
 
     function resize() {
       if (!canvas) return;
       W = window.innerWidth;
       H = window.innerHeight;
-      canvas.width = W * devicePixelRatio;
+      canvas.width  = W * devicePixelRatio;
       canvas.height = H * devicePixelRatio;
       ctx.scale(devicePixelRatio, devicePixelRatio);
     }
@@ -51,7 +101,8 @@ export default function NorthernLights() {
 
     function onScroll() {
       if (!lastEl) return;
-      const pastContent = window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
+      const pastContent =
+        window.scrollY > lastEl.offsetTop + lastEl.offsetHeight - window.innerHeight * 0.3;
       if (pastContent) {
         canvas.style.opacity = "0";
       } else if (window.scrollY > 100) {
@@ -75,68 +126,52 @@ export default function NorthernLights() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    function drawBand(b: typeof BANDS[0], hue: number, time: number, alphaMultiplier = 1) {
-      const PTS = 220;
-      const bH = H * BASE_THICKNESS * b.thickMul;
-      const driftY = Math.sin(time * b.drift) * H * 0.035;
-      const yBase = H * b.yFrac + driftY;
-      const amp = b.amp * H;
-      const h = (hue + b.hueShift + 360) % 360;
-      const alpha = INTENSITY * b.alphaMul * alphaMultiplier;
+    function drawPatches(hue: number) {
+      const master = 0.72 + 0.28 * Math.sin(tp * 0.22);
 
-      const pts: number[] = [];
-      for (let i = 0; i <= PTS; i++) {
-        const frac = i / PTS;
-        const w1 = Math.sin(frac * Math.PI * 2.0 * b.freq + time * b.speedMul + b.phase) * 0.5
-                 + Math.sin(frac * Math.PI * 2.0 * b.freq - time * b.speedMul * 0.85 + b.phase + 2.1) * 0.5;
-        const w2 = Math.sin(frac * Math.PI * 3.7 * b.freq + time * b.speedMul * 1.3 + b.phase + 1.1) * 0.21
-                 + Math.sin(frac * Math.PI * 3.7 * b.freq - time * b.speedMul * 1.1 + b.phase + 3.8) * 0.21;
-        const w3 = Math.sin(frac * Math.PI * 7.1 * b.freq + b.phase + 2.7) * Math.sin(time * b.speedMul * 0.4 + b.phase) * 0.18;
-        const curtain = Math.sin(time * b.speedMul * 0.4 + b.phase * 0.5) * amp * 0.30;
-        const tiltOffset = b.tilt * ((i / PTS) - 0.5) * H;
-        pts.push(yBase + (w1 + w2 + w3) * amp + curtain + tiltOffset);
+      function patch(p: AuroraPatch | PinkPatch, pHue: number) {
+        p.x = ((p.x + p.dr + 1) % 1);
+        const phY = (p as AuroraPatch).phY ?? 0;
+        const spY = (p as AuroraPatch).spY ?? 0.4;
+        const cy  = (p.yc + 0.016 * Math.sin(tp * spY + phY)) * H;
+        const rx  = p.rxF * W;
+        const raw = 0.52 + 0.48 * Math.sin(tp * p.sp + p.ph);
+        const br  = p.br * raw * master;
+        if (br < 0.018) return;
+        ctx.save();
+        ctx.translate(p.x * W, cy);
+        if (p.tilt) ctx.rotate(p.tilt);
+        ctx.scale(1, p.ryF);
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+        g.addColorStop(0,    `hsla(${pHue},90%,70%,${br * 0.55})`);
+        g.addColorStop(0.28, `hsla(${pHue},88%,68%,${br * 0.30})`);
+        g.addColorStop(0.58, `hsla(${pHue},85%,65%,${br * 0.10})`);
+        g.addColorStop(0.82, `hsla(${pHue},82%,62%,${br * 0.03})`);
+        g.addColorStop(1,    `hsla(${pHue},80%,60%,0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(0, 0, rx, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
       }
 
-      const midY = pts.reduce((a, c) => a + c, 0) / pts.length;
-      const tiltRange = Math.abs(b.tilt) * H * 0.5;
-      const grad = ctx.createLinearGradient(0, midY - bH - tiltRange, 0, midY + bH + tiltRange);
-      grad.addColorStop(0.00, `hsla(${h},88%,70%,0)`);
-      grad.addColorStop(0.28, `hsla(${h},90%,73%,${alpha * 0.45})`);
-      grad.addColorStop(0.50, `hsla(${h},93%,76%,${alpha})`);
-      grad.addColorStop(0.72, `hsla(${(h + 10) % 360},82%,63%,${alpha * 0.38})`);
-      grad.addColorStop(1.00, `hsla(${(h + 18) % 360},70%,55%,0)`);
-
-      ctx.beginPath();
-      ctx.moveTo(0, pts[0] - bH * 0.5);
-      for (let i = 1; i <= PTS; i++) ctx.lineTo((i / PTS) * W, pts[i] - bH * 0.5);
-      for (let i = PTS; i >= 0; i--) ctx.lineTo((i / PTS) * W, pts[i] + bH * 0.5);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
+      AURORA_UPPER.forEach(p => patch(p, hue + (p as AuroraPatch).hs));
+      AURORA_MAIN.forEach(p  => patch(p, hue + (p as AuroraPatch).hs));
+      AURORA_PINK.forEach(p  => patch(p, 332));
     }
 
     function draw() {
       ctx.clearRect(0, 0, W, H);
       const si = Math.floor(sectionProgress);
       const sf = sectionProgress - si;
-      const s0 = SECTIONS[Math.min(si, SECTIONS.length - 1)];
+      const s0 = SECTIONS[Math.min(si,     SECTIONS.length - 1)];
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
-      const hue1 = lerpHue(s0.hue1, s1.hue1, sf);
-      const hue2 = lerpHue(s0.hue2, s1.hue2, sf);
-      const rawExit = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
+      const rawExit   = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
-      BANDS.forEach((b, bi) => {
-        const h0 = s0.bandHues && bi < s0.bandHues.length
-          ? s0.bandHues[bi]
-          : lerpHue(s0.hue1, s0.hue2, bi / (BANDS.length - 1));
-        const h1 = s1.bandHues && bi < s1.bandHues.length
-          ? s1.bandHues[bi]
-          : lerpHue(s1.hue1, s1.hue2, bi / (BANDS.length - 1));
-        const h = lerpHue(h0, h1, exitBlendT);
-        drawBand(b, h, t);
-      });
-      t += 0.007 * SPEED;
-      raf = requestAnimationFrame(draw);
+      const currentHue = lerpHue(s0.hue1, s1.hue1, exitBlendT);
+      drawPatches(currentHue);
+      tp  += 0.007;
+      raf  = requestAnimationFrame(draw);
     }
     draw();
 
@@ -151,14 +186,14 @@ export default function NorthernLights() {
     <canvas
       ref={canvasRef}
       style={{
-        position: "fixed",
-        inset: 0,
-        width: "100vw",
-        height: "100vh",
-        zIndex: 0,
+        position:      "fixed",
+        inset:         0,
+        width:         "100vw",
+        height:        "100vh",
+        zIndex:        0,
         pointerEvents: "none",
-        opacity: 0,
-        transition: "opacity 0.8s ease",
+        opacity:       0,
+        transition:    "opacity 0.8s ease",
       }}
     />
   );
