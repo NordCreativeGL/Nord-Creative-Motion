@@ -169,7 +169,6 @@ export default function NorthernLights() {
       const rawExit   = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
       const currentHue = lerpHue(s0.hue1, s1.hue1, exitBlendT);
-      (window as any).__nlHue = currentHue;
       drawPatches(currentHue);
       tp  += 0.007;
       raf  = requestAnimationFrame(draw);
