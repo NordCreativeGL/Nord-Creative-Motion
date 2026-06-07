@@ -12,6 +12,7 @@ export default function BasedInGreenland() {
   const body2Ref = useRef<HTMLParagraphElement>(null)
   const body3Ref = useRef<HTMLParagraphElement>(null)
   const readMoreRef = useRef<HTMLAnchorElement>(null)
+  const mobileLabelOverlayRef = useRef<HTMLDivElement>(null)
   const hasAnimated = useRef(false)
   const animIdRef = useRef<number>(0)
   const scrollPRef = useRef(0)
@@ -140,7 +141,7 @@ export default function BasedInGreenland() {
       const gsap = (window as any).gsap
       if (!gsap) return
       const ease = 'cubic-bezier(0.25, 0.1, 0.15, 1)'
-      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef]
+      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef, mobileLabelOverlayRef]
       const delays = [0, 0, 0.15, 0.6, 0.8, 1.0, 1.2]
       refs.forEach((r, i) => {
         if (r.current) gsap.to(r.current, { opacity: 1, y: 0, duration: 0.9, delay: delays[i], ease })
@@ -170,7 +171,7 @@ export default function BasedInGreenland() {
       const hideText = () => {
         const gsap = (window as any).gsap
         if (!gsap) return
-        const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef]
+        const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef, mobileLabelOverlayRef]
         refs.forEach(r => {
           if (r.current) {
             gsap.killTweensOf(r.current)
@@ -241,7 +242,7 @@ export default function BasedInGreenland() {
     const gsapInit = async () => {
       const gsap = (await import('gsap')).gsap
       ;(window as any).gsap = gsap
-      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef]
+      const refs = [labelRef, heading1Ref, heading2Ref, body1Ref, body2Ref, body3Ref, readMoreRef, mobileLabelOverlayRef]
       refs.forEach(r => { if (r.current) gsap.set(r.current, { opacity: 0, y: 20 }) })
     }
     gsapInit()
@@ -306,6 +307,26 @@ export default function BasedInGreenland() {
         autoPlay muted loop playsInline
         style={{ display: 'none' }}
       />
+
+      {isMobile && (
+        <div
+          ref={mobileLabelOverlayRef}
+          style={{
+            position: 'absolute',
+            bottom: '12%',
+            left: '24px',
+            zIndex: 6,
+            fontSize: '13px',
+            fontWeight: 500,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.55)',
+            pointerEvents: 'none',
+          }}
+        >
+          Based in Greenland
+        </div>
+      )}
 
       <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: isMobile ? 'none' : 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '46dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
