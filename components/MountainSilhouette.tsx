@@ -187,6 +187,22 @@ export default function MountainSilhouette() {
       if (!W || !H) return;
       ctx.clearRect(0, 0, W, H);
       const sc = window.scrollY;
+      // Aurora sky glow — simulates aurora light falling on mountains from above
+      const nlHue: number = (window as any).__nlHue ?? 128;
+      const skyG = ctx.createLinearGradient(0, 0, 0, H);
+      skyG.addColorStop(0,    `hsla(${nlHue},78%,30%,0.32)`);
+      skyG.addColorStop(0.22, `hsla(${nlHue},72%,22%,0.16)`);
+      skyG.addColorStop(0.50, `hsla(${nlHue},62%,16%,0.06)`);
+      skyG.addColorStop(1,    `hsla(0,0%,0%,0)`);
+      ctx.fillStyle = skyG;
+      ctx.fillRect(0, 0, W, H);
+      const radG = ctx.createRadialGradient(W * 0.5, H * -0.15, 0, W * 0.5, H * -0.15, W * 0.72);
+      radG.addColorStop(0,    `hsla(${nlHue},82%,35%,0.22)`);
+      radG.addColorStop(0.38, `hsla(${nlHue},74%,26%,0.09)`);
+      radG.addColorStop(0.70, `hsla(${nlHue},65%,18%,0.03)`);
+      radG.addColorStop(1,    `hsla(0,0%,0%,0)`);
+      ctx.fillStyle = radG;
+      ctx.fillRect(0, 0, W, H);
       BASE_LAYERS.forEach((l, li) => drawLayer(l, RPTS[li], MTEX[li], -sc*l.p, li));
     }
 
