@@ -163,8 +163,8 @@ export default function BasedInGreenland() {
       ctx.scale(dpr, dpr)
 
       const finalCX = isMobileNow ? W * 0.50 : W * 0.74
-      const finalCY = isMobileNow ? H * 0.47 : H * 0.51
-      const finalScale = isMobileNow ? Math.round(6400 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
+      const finalCY = isMobileNow ? H * 0.50 : H * 0.51
+      const finalScale = isMobileNow ? Math.round(5800 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
 
       let textFired = false
 
@@ -226,7 +226,7 @@ export default function BasedInGreenland() {
             rotLon = lerp(100, 42, q)
             rotLat = lerp(-18, -72, q)
             cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
-            cy = lerp(isMobileNow ? 0.42 * H : H / 2, isMobileNow ? H * 0.47 : H * 0.51, q)
+            cy = lerp(isMobileNow ? 0.42 * H : H / 2, isMobileNow ? H * 0.50 : H * 0.51, q)
             countriesAlpha = lerp(1, 0, q)
           }
 
@@ -313,7 +313,7 @@ export default function BasedInGreenland() {
           ref={mobileLabelOverlayRef}
           style={{
             position: 'absolute',
-            bottom: '12%',
+            bottom: '6%',
             left: '24px',
             zIndex: 6,
             fontSize: '13px',
