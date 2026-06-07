@@ -277,7 +277,7 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ height: isMobile ? '900dvh' : '500vh' }}
+      style={{ height: isMobile ? '700dvh' : '500vh' }}
     >
       <div
         style={{
