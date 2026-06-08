@@ -170,17 +170,24 @@ export default function NorthernLights() {
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
       const rawExit   = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
-      const MIN_ALPHA = 0.08;
-      const mainHue = exitBlendT <= 0.5 ? s0.mainHue : s1.mainHue;
-      const mainFade = exitBlendT <= 0.5
-        ? 1 - exitBlendT * 2 * (1 - MIN_ALPHA)
-        : MIN_ALPHA + (exitBlendT - 0.5) * 2 * (1 - MIN_ALPHA);
-      const upperHue   = lerpHue(s0.upperHue,   s1.upperHue,   exitBlendT);
-      const upperScale = s0.upperScale + (s1.upperScale - s0.upperScale) * exitBlendT;
-      const fringeHue   = lerpHue(s0.fringeHue,  s1.fringeHue,  exitBlendT);
+      const upperHue   = lerpHue(s0.upperHue,  s1.upperHue,  exitBlendT);
+      const upperScale = s0.upperScale  + (s1.upperScale  - s0.upperScale)  * exitBlendT;
+      const fringeHue  = lerpHue(s0.fringeHue, s1.fringeHue, exitBlendT);
       const fringeScale = s0.fringeScale + (s1.fringeScale - s0.fringeScale) * exitBlendT;
-      (window as any).__nlHue = mainHue;
-      drawPatches(mainHue, mainFade, upperHue, upperScale, fringeHue, fringeScale);
+      (window as any).__nlHue = exitBlendT <= 0.5 ? s0.mainHue : s1.mainHue;
+      if (si === 1 && exitBlendT > 0) {
+        const MIN_ALPHA = 0.45;
+        const mainHue  = exitBlendT <= 0.5 ? s0.mainHue : s1.mainHue;
+        const mainFade = exitBlendT <= 0.5
+          ? 1 - exitBlendT * 2 * (1 - MIN_ALPHA)
+          : MIN_ALPHA + (exitBlendT - 0.5) * 2 * (1 - MIN_ALPHA);
+        drawPatches(mainHue, mainFade, upperHue, upperScale, fringeHue, fringeScale);
+      } else if (exitBlendT > 0) {
+        drawPatches(s0.mainHue, 1 - exitBlendT, upperHue, upperScale * 0.5, fringeHue, fringeScale * 0.5);
+        drawPatches(s1.mainHue, exitBlendT,      upperHue, upperScale * 0.5, fringeHue, fringeScale * 0.5);
+      } else {
+        drawPatches(s0.mainHue, 1.0, upperHue, upperScale, fringeHue, fringeScale);
+      }
       tp  += 0.007;
       raf  = requestAnimationFrame(draw);
     }
