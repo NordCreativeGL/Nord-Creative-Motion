@@ -64,11 +64,11 @@ const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
 }));
 
 // ── Section colour config ─────────────────────────────────────────────────────
-type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number };
+type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number; xShift: number; yShift: number };
 const SECTIONS: NLSection[] = [
-  { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.35, fringeHue: 215, fringeScale: 0.75 },
-  { id: "gl-process", mainHue: 215, upperHue: 270, upperScale: 0.40, fringeHue: 282, fringeScale: 0.45 },
-  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.32, fringeHue: 215, fringeScale: 0.68 },
+  { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.35, fringeHue: 215, fringeScale: 0.75, xShift:  0.00, yShift:  0.00 },
+  { id: "gl-process", mainHue: 215, upperHue: 270, upperScale: 0.40, fringeHue: 282, fringeScale: 0.45, xShift:  0.15, yShift:  0.06 },
+  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.32, fringeHue: 215, fringeScale: 0.68, xShift: -0.10, yShift: -0.05 },
 ];
 
 function lerpHue(a: number, b: number, t: number): number {
@@ -86,6 +86,8 @@ export default function NorthernLights() {
     let W = 0, H = 0, tp = 0, raf = 0;
     let _prevScrollY = window.scrollY;
     let _scrollYOffset = 0;
+    let _sectionXShift = 0;
+    let _sectionYShift = 0;
     let sectionProgress = 0;
 
     function resize() {
@@ -138,14 +140,15 @@ export default function NorthernLights() {
         p.x = ((p.x + p.dr + 1) % 1);
         const phY = (p as AuroraPatch).phY ?? 0;
         const spY = (p as AuroraPatch).spY ?? 0.4;
-        const cy  = (p.yc + _scrollYOffset + 0.008 * Math.sin(tp * spY + phY)) * H;
+        const cy  = (p.yc + _scrollYOffset + 0.022 * Math.sin(tp * spY + phY)) * H;
         const rx  = p.rxF * W;
         const raw = 0.52 + 0.48 * Math.sin(tp * p.sp + p.ph);
-        const edgeFactor = Math.min(1, Math.max(0, 1 - Math.max(0, Math.abs(p.x - 0.5) - 0.35) / 0.12));
+        const shiftedX = ((p.x + _sectionXShift) + 2) % 1;
+        const edgeFactor = Math.min(1, Math.max(0, 1 - Math.max(0, Math.abs(shiftedX - 0.5) - 0.35) / 0.12));
         const br  = p.br * raw * masterBase * layerScale * edgeFactor;
         if (br < 0.018) return;
         ctx.save();
-        ctx.translate(p.x * W, cy);
+        ctx.translate(shiftedX * W, cy + _sectionYShift * H);
         if (p.tilt) ctx.rotate(p.tilt);
         ctx.scale(1, p.ryF);
         const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
@@ -177,6 +180,8 @@ export default function NorthernLights() {
       const upperScale = s0.upperScale  + (s1.upperScale  - s0.upperScale)  * exitBlendT;
       const fringeHue  = lerpHue(s0.fringeHue, s1.fringeHue, exitBlendT);
       const fringeScale = s0.fringeScale + (s1.fringeScale - s0.fringeScale) * exitBlendT;
+      _sectionXShift = s0.xShift + (s1.xShift - s0.xShift) * exitBlendT;
+      _sectionYShift = s0.yShift + (s1.yShift - s0.yShift) * exitBlendT;
       (window as any).__nlHue = exitBlendT <= 0.5 ? s0.mainHue : s1.mainHue;
       if (exitBlendT > 0) {
         drawPatches(s0.mainHue, 1 - exitBlendT, upperHue, upperScale * 0.5, fringeHue, fringeScale * 0.5);
@@ -188,7 +193,7 @@ export default function NorthernLights() {
       _prevScrollY = window.scrollY;
       _scrollYOffset = Math.max(-0.06, Math.min(0.06, _scrollYOffset + _sd * 0.00012));
       _scrollYOffset *= 0.88;
-      tp += 0.003;
+      tp += 0.005;
       raf  = requestAnimationFrame(draw);
     }
     draw();
