@@ -66,9 +66,9 @@ const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
 // ── Section colour config ─────────────────────────────────────────────────────
 type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number };
 const SECTIONS: NLSection[] = [
-  { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.22, fringeHue: 215, fringeScale: 0.60 },
-  { id: "gl-process", mainHue: 215, upperHue: 135, upperScale: 0.25, fringeHue: 358, fringeScale: 0.28 },
-  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.20, fringeHue: 215, fringeScale: 0.55 },
+  { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.35, fringeHue: 215, fringeScale: 0.75 },
+  { id: "gl-process", mainHue: 215, upperHue: 135, upperScale: 0.40, fringeHue: 358, fringeScale: 0.45 },
+  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.32, fringeHue: 215, fringeScale: 0.68 },
 ];
 
 function lerpHue(a: number, b: number, t: number): number {
@@ -146,11 +146,11 @@ export default function NorthernLights() {
         if (p.tilt) ctx.rotate(p.tilt);
         ctx.scale(1, p.ryF);
         const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
-        g.addColorStop(0,    `hsla(${pHue},90%,70%,${br * 0.55})`);
-        g.addColorStop(0.28, `hsla(${pHue},88%,68%,${br * 0.30})`);
-        g.addColorStop(0.58, `hsla(${pHue},85%,65%,${br * 0.10})`);
-        g.addColorStop(0.82, `hsla(${pHue},82%,62%,${br * 0.03})`);
-        g.addColorStop(1,    `hsla(${pHue},80%,60%,0)`);
+        g.addColorStop(0,    `hsla(${pHue},92%,72%,${Math.min(1, br * 0.88)})`);
+        g.addColorStop(0.28, `hsla(${pHue},90%,70%,${Math.min(1, br * 0.55)})`);
+        g.addColorStop(0.58, `hsla(${pHue},88%,68%,${Math.min(1, br * 0.22)})`);
+        g.addColorStop(0.82, `hsla(${pHue},85%,65%,${Math.min(1, br * 0.06)})`);
+        g.addColorStop(1,    `hsla(${pHue},82%,62%,0)`);
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(0, 0, rx, 0, Math.PI * 2);
@@ -168,7 +168,7 @@ export default function NorthernLights() {
       const sf = sectionProgress - si;
       const s0 = SECTIONS[Math.min(si,     SECTIONS.length - 1)];
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
-      const rawExit   = Math.max(0, Math.min(1, (sf - 0.40) / 0.60));
+      const rawExit   = Math.max(0, Math.min(1, (sf - 0.70) / 0.30));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
       const MIN_ALPHA = 0.08;
       const mainHue = exitBlendT <= 0.5 ? s0.mainHue : s1.mainHue;
