@@ -64,11 +64,11 @@ const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
 }));
 
 // ── Section colour config ─────────────────────────────────────────────────────
-type NLSection = { id: string; greenScale: number; blueScale: number; redScale: number };
+type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number };
 const SECTIONS: NLSection[] = [
-  { id: "gl-working", greenScale: 1.00, blueScale: 0.50, redScale: 0.18 },
-  { id: "gl-process", greenScale: 0.22, blueScale: 1.20, redScale: 0.30 },
-  { id: "gl-why",     greenScale: 0.12, blueScale: 0.45, redScale: 1.80 },
+  { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.22, fringeHue: 215, fringeScale: 0.60 },
+  { id: "gl-process", mainHue: 215, upperHue: 135, upperScale: 0.25, fringeHue: 358, fringeScale: 0.28 },
+  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.20, fringeHue: 215, fringeScale: 0.55 },
 ];
 
 function lerpHue(a: number, b: number, t: number): number {
@@ -126,7 +126,11 @@ export default function NorthernLights() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    function drawPatches(greenScale: number, blueScale: number, redScale: number) {
+    function drawPatches(
+      mainHue: number, mainFade: number,
+      upperHue: number, upperScale: number,
+      fringeHue: number, fringeScale: number
+    ) {
       const masterBase = 0.72 + 0.28 * Math.sin(tp * 0.22);
       function patch(p: AuroraPatch | PinkPatch, pHue: number, layerScale: number) {
         p.x = ((p.x + p.dr + 1) % 1);
@@ -153,9 +157,9 @@ export default function NorthernLights() {
         ctx.fill();
         ctx.restore();
       }
-      AURORA_UPPER.forEach(p => patch(p, 215 + ((p as AuroraPatch).hs ?? 0), blueScale));
-      AURORA_MAIN.forEach(p  => patch(p, 135 + ((p as AuroraPatch).hs ?? 0), greenScale));
-      AURORA_PINK.forEach(p  => patch(p, 358, redScale));
+      AURORA_MAIN.forEach(p  => patch(p, mainHue  + ((p as AuroraPatch).hs ?? 0), mainFade));
+      AURORA_UPPER.forEach(p => patch(p, upperHue + ((p as AuroraPatch).hs ?? 0), upperScale));
+      AURORA_PINK.forEach(p  => patch(p, fringeHue, fringeScale));
     }
 
     function draw() {
@@ -166,12 +170,17 @@ export default function NorthernLights() {
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
       const rawExit   = Math.max(0, Math.min(1, (sf - 0.40) / 0.60));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
-      const greenScale = s0.greenScale + (s1.greenScale - s0.greenScale) * exitBlendT;
-      const blueScale  = s0.blueScale  + (s1.blueScale  - s0.blueScale)  * exitBlendT;
-      const redScale   = s0.redScale   + (s1.redScale   - s0.redScale)   * exitBlendT;
-      (window as any).__nlHue = redScale >= blueScale && redScale >= greenScale ? 358
-        : blueScale >= greenScale ? 215 : 135;
-      drawPatches(greenScale, blueScale, redScale);
+      const MIN_ALPHA = 0.08;
+      const mainHue = exitBlendT <= 0.5 ? s0.mainHue : s1.mainHue;
+      const mainFade = exitBlendT <= 0.5
+        ? 1 - exitBlendT * 2 * (1 - MIN_ALPHA)
+        : MIN_ALPHA + (exitBlendT - 0.5) * 2 * (1 - MIN_ALPHA);
+      const upperHue   = lerpHue(s0.upperHue,   s1.upperHue,   exitBlendT);
+      const upperScale = s0.upperScale + (s1.upperScale - s0.upperScale) * exitBlendT;
+      const fringeHue   = lerpHue(s0.fringeHue,  s1.fringeHue,  exitBlendT);
+      const fringeScale = s0.fringeScale + (s1.fringeScale - s0.fringeScale) * exitBlendT;
+      (window as any).__nlHue = mainHue;
+      drawPatches(mainHue, mainFade, upperHue, upperScale, fringeHue, fringeScale);
       tp  += 0.007;
       raf  = requestAnimationFrame(draw);
     }
