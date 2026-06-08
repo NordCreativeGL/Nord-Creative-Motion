@@ -68,7 +68,7 @@ type NLSection = { id: string; hue1: number; hue2: number };
 const SECTIONS: NLSection[] = [
   { id: "gl-working", hue1: 128, hue2: 152 },
   { id: "gl-process", hue1: 192, hue2: 218 },
-  { id: "gl-why",     hue1: 15,  hue2: 12  },
+  { id: "gl-why",     hue1: 358, hue2: 12  },
 ];
 
 function lerpHue(a: number, b: number, t: number): number {
@@ -126,8 +126,8 @@ export default function NorthernLights() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    function drawPatches(hue: number) {
-      const master = 0.72 + 0.28 * Math.sin(tp * 0.22);
+    function drawPatches(hue: number, fadeAlpha: number = 1) {
+      const master = (0.72 + 0.28 * Math.sin(tp * 0.22)) * fadeAlpha;
 
       function patch(p: AuroraPatch | PinkPatch, pHue: number) {
         p.x = ((p.x + p.dr + 1) % 1);
@@ -166,10 +166,19 @@ export default function NorthernLights() {
       const sf = sectionProgress - si;
       const s0 = SECTIONS[Math.min(si,     SECTIONS.length - 1)];
       const s1 = SECTIONS[Math.min(si + 1, SECTIONS.length - 1)];
-      const rawExit   = Math.max(0, Math.min(1, (sf - 0.40) / 0.60));
+      const rawExit   = Math.max(0, Math.min(1, (sf - 0.65) / 0.35));
       const exitBlendT = rawExit * rawExit * (3 - 2 * rawExit);
-      const currentHue = lerpHue(s0.hue1, s1.hue1, exitBlendT);
-      drawPatches(currentHue);
+      const MIN_ALPHA = 0.08;
+      let drawHue: number;
+      let fadeAlpha: number;
+      if (exitBlendT <= 0.5) {
+        drawHue = s0.hue1;
+        fadeAlpha = 1 - exitBlendT * 2 * (1 - MIN_ALPHA);
+      } else {
+        drawHue = s1.hue1;
+        fadeAlpha = MIN_ALPHA + (exitBlendT - 0.5) * 2 * (1 - MIN_ALPHA);
+      }
+      drawPatches(drawHue, fadeAlpha);
       tp  += 0.007;
       raf  = requestAnimationFrame(draw);
     }
