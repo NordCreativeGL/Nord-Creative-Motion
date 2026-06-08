@@ -84,6 +84,8 @@ export default function NorthernLights() {
     const canvas = canvasRef.current!;
     const ctx    = canvas.getContext("2d")!;
     let W = 0, H = 0, tp = 0, raf = 0;
+    let _prevScrollY = window.scrollY;
+    let _scrollYOffset = 0;
     let sectionProgress = 0;
 
     function resize() {
@@ -136,10 +138,11 @@ export default function NorthernLights() {
         p.x = ((p.x + p.dr + 1) % 1);
         const phY = (p as AuroraPatch).phY ?? 0;
         const spY = (p as AuroraPatch).spY ?? 0.4;
-        const cy  = (p.yc + 0.016 * Math.sin(tp * spY + phY)) * H;
+        const cy  = (p.yc + _scrollYOffset + 0.008 * Math.sin(tp * spY + phY)) * H;
         const rx  = p.rxF * W;
         const raw = 0.52 + 0.48 * Math.sin(tp * p.sp + p.ph);
-        const br  = p.br * raw * masterBase * layerScale;
+        const edgeFactor = Math.min(1, Math.max(0, 1 - Math.max(0, Math.abs(p.x - 0.5) - 0.35) / 0.12));
+        const br  = p.br * raw * masterBase * layerScale * edgeFactor;
         if (br < 0.018) return;
         ctx.save();
         ctx.translate(p.x * W, cy);
@@ -181,7 +184,11 @@ export default function NorthernLights() {
       } else {
         drawPatches(s0.mainHue, 1.0, upperHue, upperScale, fringeHue, fringeScale);
       }
-      tp  += 0.007;
+      const _sd = window.scrollY - _prevScrollY;
+      _prevScrollY = window.scrollY;
+      _scrollYOffset = Math.max(-0.06, Math.min(0.06, _scrollYOffset + _sd * 0.00012));
+      _scrollYOffset *= 0.88;
+      tp += 0.003;
       raf  = requestAnimationFrame(draw);
     }
     draw();
