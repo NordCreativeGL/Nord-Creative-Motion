@@ -67,7 +67,7 @@ const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
 type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number };
 const SECTIONS: NLSection[] = [
   { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.35, fringeHue: 215, fringeScale: 0.75 },
-  { id: "gl-process", mainHue: 215, upperHue: 135, upperScale: 0.40, fringeHue: 358, fringeScale: 0.45 },
+  { id: "gl-process", mainHue: 215, upperHue: 270, upperScale: 0.40, fringeHue: 282, fringeScale: 0.45 },
   { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.32, fringeHue: 215, fringeScale: 0.68 },
 ];
 
