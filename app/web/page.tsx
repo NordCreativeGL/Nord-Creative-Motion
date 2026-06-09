@@ -82,7 +82,7 @@ export default function WebPage() {
           color: 'white',
           marginTop: '24px',
         }}>
-          The web, built differently.
+          The web, built differently
         </h1>
         <p style={{
           fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
@@ -119,7 +119,7 @@ export default function WebPage() {
           color: 'white',
           marginBottom: '28px',
         }}>
-          You're already on one.
+          You're already on one
         </h2>
         <p style={{
           fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
@@ -164,7 +164,7 @@ export default function WebPage() {
           color: 'white',
           marginBottom: '40px',
         }}>
-          A website. Or everything it needs.
+          A website — Or everything it needs
         </h2>
         <div style={{
           display: 'flex',
@@ -233,7 +233,7 @@ export default function WebPage() {
           color: 'white',
           marginBottom: '48px',
         }}>
-          Three ways to work with us.
+          Three ways to work with us
         </h2>
         <div style={{
           display: 'grid',
