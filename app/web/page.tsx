@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import SideNav from '@/components/SideNav'
 
 const packages = [
   {
@@ -46,6 +47,13 @@ export default function WebPage() {
 
   return (
     <main style={{ background: '#060606' }}>
+      <SideNav items={[
+        { label: 'Overview', id: 'web-hero' },
+        { label: 'The Proof', id: 'web-proof' },
+        { label: 'The Offer', id: 'web-offer' },
+        { label: 'Packages', id: 'web-packages' },
+        { label: 'Contact', id: 'web-cta' },
+      ]} />
       <Header />
 
       {/* ── Section 1: Hero ── */}
