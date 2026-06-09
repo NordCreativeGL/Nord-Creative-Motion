@@ -232,41 +232,61 @@ export default function WebPage() {
         }}>
           A website — Or everything it needs
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 32px', maxWidth: '420px', margin: '48px auto 0 auto' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+          gap: '1px',
+          background: '#1a1a1a',
+          border: '1px solid #1a1a1a',
+          marginTop: '80px',
+        }}>
           {[
             {
               label: 'WEBSITE DESIGN',
+              description: 'Designed from scratch. No templates.',
               lines: ['6,9 34,9', '6,9 6,31 34,31 34,9', '6,19 34,19', '20,19 20,31'],
               dots: [[6,9],[34,9],[6,31],[34,31],[6,19],[34,19],[20,19],[20,31]]
             },
             {
               label: 'COPYWRITING',
+              description: 'Words that match the visual.',
               lines: ['10,30 30,10', '14,26 24,16', '28,8 30,10 32,12'],
               dots: [[10,30],[30,10],[14,26],[24,16],[28,8],[32,12]]
             },
             {
               label: 'SEO',
+              description: 'Found where it matters.',
               lines: ['14,10 26,10 30,20 26,30 14,30 10,20 14,10', '27,27 34,34'],
               dots: [[14,10],[26,10],[30,20],[26,30],[14,30],[10,20],[27,27],[34,34]]
             },
             {
               label: 'PHOTO & VIDEO',
+              description: 'Content from our own productions.',
               lines: ['20,6 34,20 20,34 6,20 20,6', '20,6 20,20', '34,20 20,20', '20,34 20,20', '6,20 20,20'],
               dots: [[20,6],[34,20],[20,34],[6,20],[20,20]]
             },
             {
               label: 'DEVELOPMENT',
+              description: 'Custom code. Fast and stable.',
               lines: ['16,8 8,20 16,32', '24,8 32,20 24,32'],
               dots: [[16,8],[8,20],[16,32],[24,8],[32,20],[24,32]]
             },
             {
               label: 'MAINTENANCE',
+              description: 'We keep it running.',
               lines: ['20,6 29,9 34,18 32,28 24,34 14,33 7,26 6,16 10,9', '10,9 14,6', '10,9 7,13'],
               dots: [[20,6],[29,9],[34,18],[32,28],[24,34],[14,33],[7,26],[6,16],[10,9]]
             }
           ].map((icon) => (
-            <div key={icon.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <div key={icon.label} style={{
+              background: '#000000',
+              padding: '40px 32px 36px 32px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '20px',
+            }}>
+              <svg width="56" height="56" viewBox="0 0 40 40" fill="none">
                 {icon.lines.map((pts, i) => (
                   <polyline key={i} points={pts} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                 ))}
@@ -274,9 +294,12 @@ export default function WebPage() {
                   <circle key={i} cx={cx} cy={cy} r="2" fill="white" />
                 ))}
               </svg>
-              <span style={{ fontSize: '9px', letterSpacing: '0.14em', color: '#444', textTransform: 'uppercase' as const, marginTop: '10px', textAlign: 'center' as const }}>
+              <span style={{ fontSize: 'clamp(13px, 0.9vw, 15px)', letterSpacing: '0.1em', color: '#ffffff', fontWeight: 300, textTransform: 'uppercase' as const }}>
                 {icon.label}
               </span>
+              <p style={{ fontSize: 'clamp(12px, 0.75vw, 13px)', color: '#444', fontWeight: 300, lineHeight: 1.6 }}>
+                {icon.description}
+              </p>
             </div>
           ))}
         </div>
