@@ -214,6 +214,54 @@ export default function WebPage() {
         }}>
           A website — Or everything it needs
         </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 32px', maxWidth: '420px', margin: '48px auto 0 auto' }}>
+          {[
+            {
+              label: 'WEBSITE DESIGN',
+              lines: ['6,9 34,9', '6,9 6,31 34,31 34,9', '6,19 34,19', '20,19 20,31'],
+              dots: [[6,9],[34,9],[6,31],[34,31],[6,19],[34,19],[20,19],[20,31]]
+            },
+            {
+              label: 'COPYWRITING',
+              lines: ['10,30 30,10', '14,26 24,16', '28,8 30,10 32,12'],
+              dots: [[10,30],[30,10],[14,26],[24,16],[28,8],[32,12]]
+            },
+            {
+              label: 'SEO',
+              lines: ['14,10 26,10 30,20 26,30 14,30 10,20 14,10', '27,27 34,34'],
+              dots: [[14,10],[26,10],[30,20],[26,30],[14,30],[10,20],[27,27],[34,34]]
+            },
+            {
+              label: 'PHOTO & VIDEO',
+              lines: ['20,6 34,20 20,34 6,20 20,6', '20,6 20,20', '34,20 20,20', '20,34 20,20', '6,20 20,20'],
+              dots: [[20,6],[34,20],[20,34],[6,20],[20,20]]
+            },
+            {
+              label: 'DEVELOPMENT',
+              lines: ['16,8 8,20 16,32', '24,8 32,20 24,32'],
+              dots: [[16,8],[8,20],[16,32],[24,8],[32,20],[24,32]]
+            },
+            {
+              label: 'MAINTENANCE',
+              lines: ['20,6 29,9 34,18 32,28 24,34 14,33 7,26 6,16 10,9', '10,9 14,6', '10,9 7,13'],
+              dots: [[20,6],[29,9],[34,18],[32,28],[24,34],[14,33],[7,26],[6,16],[10,9]]
+            }
+          ].map((icon) => (
+            <div key={icon.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                {icon.lines.map((pts, i) => (
+                  <polyline key={i} points={pts} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                ))}
+                {icon.dots.map(([cx, cy], i) => (
+                  <circle key={i} cx={cx} cy={cy} r="2" fill="white" />
+                ))}
+              </svg>
+              <span style={{ fontSize: '9px', letterSpacing: '0.14em', color: '#444', textTransform: 'uppercase' as const, marginTop: '10px', textAlign: 'center' as const }}>
+                {icon.label}
+              </span>
+            </div>
+          ))}
+        </div>
         <div style={{
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
