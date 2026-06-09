@@ -75,12 +75,27 @@ export default function WebPage() {
         }}>
           WEBSITE PRODUCTION
         </p>
+        <div style={{
+          display: 'inline-flex',
+          border: '1px solid #333',
+          borderRadius: '999px',
+          padding: '6px 16px',
+          marginBottom: '24px',
+        }}>
+          <span style={{
+            fontSize: 'clamp(10px, 0.7vw, 12px)',
+            letterSpacing: '0.15em',
+            fontWeight: 300,
+            color: '#888',
+          }}>
+            UNDER CONSTRUCTION
+          </span>
+        </div>
         <h1 style={{
           fontSize: 'clamp(36px, 4vw, 72px)',
           fontWeight: 300,
           letterSpacing: '-0.02em',
           color: 'white',
-          marginTop: '24px',
         }}>
           The web, built differently
         </h1>
