@@ -24,6 +24,24 @@ const packages = [
   },
 ]
 
+const mountainMarks = [
+  {
+    tier: 'I',
+    points: '10,55 50,10 90,55',
+    ground: '5,55 95,55'
+  },
+  {
+    tier: 'II',
+    points: '8,55 32,25 50,38 68,15 90,55',
+    ground: '5,55 95,55'
+  },
+  {
+    tier: 'III',
+    points: '5,55 18,38 30,46 42,20 54,34 68,12 80,38 92,55',
+    ground: '3,55 97,55'
+  }
+]
+
 export default function WebPage() {
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
@@ -336,7 +354,7 @@ export default function WebPage() {
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
           gap: '24px',
         }}>
-          {packages.map((pkg) => (
+          {packages.map((pkg, i) => (
             <div
               key={pkg.title}
               style={{
@@ -348,6 +366,19 @@ export default function WebPage() {
                 flexDirection: 'column',
               }}
             >
+              <svg
+                width="80"
+                height="48"
+                viewBox="0 0 100 60"
+                fill="none"
+                style={{ marginBottom: '20px', display: 'block' }}
+              >
+                <polyline points={mountainMarks[i].ground} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.25" />
+                <polyline points={mountainMarks[i].points} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.6" />
+              </svg>
+              <span style={{ fontSize: '9px', letterSpacing: '0.2em', color: '#444', textTransform: 'uppercase' as const, marginBottom: '12px' }}>
+                {mountainMarks[i].tier}
+              </span>
               <h3 style={{
                 fontSize: 'clamp(20px, 1.3vw, 28px)',
                 fontWeight: 300,
