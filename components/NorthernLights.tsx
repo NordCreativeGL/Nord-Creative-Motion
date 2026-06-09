@@ -13,6 +13,7 @@ interface AuroraPatch {
   x: number; yc: number; rxF: number; ryF: number;
   br: number; ph: number; phY: number; sp: number; spY: number;
   dr: number; hs: number; tilt: number;
+  phX: number; spX: number; dxA: number;
 }
 interface PinkPatch {
   x: number; yc: number; rxF: number; ryF: number;
@@ -34,6 +35,9 @@ const AURORA_MAIN: AuroraPatch[] = Array.from({ length: 34 }, (_, i) => ({
   dr:  (sRng() - 0.5) * 0.00016,
   hs:  (sRng() - 0.5) * 18,
   tilt:(sRng() - 0.5) * 0.20,
+  phX: sRng() * Math.PI * 2,
+  spX: 0.12 + sRng() * 0.20,
+  dxA: 0.03 + sRng() * 0.05,
 }));
 
 const AURORA_UPPER: AuroraPatch[] = Array.from({ length: 16 }, (_, i) => ({
@@ -49,6 +53,9 @@ const AURORA_UPPER: AuroraPatch[] = Array.from({ length: 16 }, (_, i) => ({
   dr:  (sRng() - 0.5) * 0.00012,
   hs:  (sRng() - 0.5) * 14,
   tilt:(sRng() - 0.5) * 0.15,
+  phX: sRng() * Math.PI * 2,
+  spX: 0.12 + sRng() * 0.20,
+  dxA: 0.03 + sRng() * 0.05,
 }));
 
 const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
@@ -61,14 +68,17 @@ const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
   sp:  0.32 + sRng() * 0.55,
   dr:  (sRng() - 0.5) * 0.00014,
   tilt:(sRng() - 0.5) * 0.25,
+  phX: sRng() * Math.PI * 2,
+  spX: 0.12 + sRng() * 0.20,
+  dxA: 0.03 + sRng() * 0.05,
 }));
 
 // ── Section colour config ─────────────────────────────────────────────────────
 type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number; xShift: number; yShift: number };
 const SECTIONS: NLSection[] = [
   { id: "gl-working", mainHue: 135, upperHue: 358, upperScale: 0.35, fringeHue: 215, fringeScale: 0.75, xShift:  0.00, yShift:  0.00 },
-  { id: "gl-process", mainHue: 215, upperHue: 270, upperScale: 0.40, fringeHue: 282, fringeScale: 0.45, xShift:  0.15, yShift:  0.06 },
-  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.32, fringeHue: 215, fringeScale: 0.68, xShift: -0.10, yShift: -0.05 },
+  { id: "gl-process", mainHue: 215, upperHue: 270, upperScale: 0.40, fringeHue: 282, fringeScale: 0.45, xShift:  0.00, yShift:  0.05 },
+  { id: "gl-why",     mainHue: 358, upperHue: 135, upperScale: 0.32, fringeHue: 215, fringeScale: 0.68, xShift:  0.00, yShift: -0.04 },
 ];
 
 function lerpHue(a: number, b: number, t: number): number {
@@ -143,7 +153,8 @@ export default function NorthernLights() {
         const cy  = (p.yc + _scrollYOffset + 0.022 * Math.sin(tp * spY + phY)) * H;
         const rx  = p.rxF * W;
         const raw = 0.52 + 0.48 * Math.sin(tp * p.sp + p.ph);
-        const shiftedX = ((p.x + _sectionXShift) + 2) % 1;
+        const xOsc = ((p as AuroraPatch).dxA ?? 0) * Math.sin(tp * ((p as AuroraPatch).spX ?? 0.2) + ((p as AuroraPatch).phX ?? 0));
+        const shiftedX = ((p.x + xOsc + _sectionXShift) + 2) % 1;
         const edgeFactor = Math.min(1, Math.max(0, 1 - Math.max(0, Math.abs(shiftedX - 0.5) - 0.35) / 0.12));
         const br  = p.br * raw * masterBase * layerScale * edgeFactor;
         if (br < 0.018) return;
