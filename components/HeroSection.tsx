@@ -194,9 +194,9 @@ export default function HeroSection() {
           style={{ opacity: 0 }}
         >
           <>
-            <span className="max-[1024px]:hidden">Video Production · Photography · Arctic Storytelling</span>
+            <span className="max-[1024px]:hidden">Video Production · Photography · Website Production</span>
             <span className="hidden max-[1024px]:block">
-              Video Production<br />Photography<br />Arctic Storytelling
+              Video Production<br />Photography<br />Website Production
             </span>
           </>
         </p>
