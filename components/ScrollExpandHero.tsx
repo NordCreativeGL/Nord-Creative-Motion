@@ -28,7 +28,7 @@ export default function ScrollExpandHero() {
       }}
     >
       <video
-        src="https://cdn.nordcreative.dk/P1%20HEADER.mp4"
+        src="https://cdn.nordcreative.dk/p3.mp4"
         autoPlay muted loop playsInline preload="auto"
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       />
