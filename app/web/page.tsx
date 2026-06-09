@@ -136,6 +136,39 @@ export default function WebPage() {
         }}>
           You're already on one
         </h2>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+          margin: '48px 0 48px 0',
+        }}>
+          <div style={{
+            width: 'clamp(320px, 60vw, 680px)',
+            height: '52px',
+            background: '#0a0a0a',
+            border: '1px solid #252525',
+            borderRadius: '999px',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0 22px',
+            gap: '10px',
+          }}>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <rect x="2" y="5" width="8" height="6" rx="1" stroke="#444" strokeWidth="1.5"/>
+              <path d="M4 5V3.5a2 2 0 1 1 4 0V5" stroke="#444" strokeWidth="1.5"/>
+            </svg>
+            <span style={{
+              fontFamily: 'monospace',
+              fontSize: '13px',
+              color: '#666',
+              letterSpacing: '0.02em',
+              flexGrow: 1,
+            }}>
+              nordcreative.dk/web
+            </span>
+            <span className="url-cursor" style={{ color: '#444', fontSize: '13px' }}>|</span>
+          </div>
+        </div>
         <p style={{
           fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
           lineHeight: 1.65,
@@ -358,6 +391,11 @@ export default function WebPage() {
 
       <Footer />
       <BackToTop />
+
+      <style jsx global>{`
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .url-cursor { animation: blink 1.1s step-end infinite; }
+      `}</style>
     </main>
   );
 }
