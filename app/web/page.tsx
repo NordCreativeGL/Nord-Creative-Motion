@@ -73,7 +73,7 @@ export default function WebPage() {
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.4)',
         }}>
-          NORD CREATIVE — WEBSITE PRODUCTION
+          WEBSITE PRODUCTION
         </p>
         <h1 style={{
           fontSize: 'clamp(36px, 4vw, 72px)',
