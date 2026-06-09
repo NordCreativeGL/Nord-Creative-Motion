@@ -73,6 +73,15 @@ const AURORA_PINK: PinkPatch[] = Array.from({ length: 10 }, (_, i) => ({
   dxA: 0.03 + sRng() * 0.05,
 }));
 
+const STARS = Array.from({ length: 200 }, () => ({
+  x:  sRng(),
+  y:  sRng() * 0.90,
+  r:  0.35 + sRng() * 1.1,
+  br: 0.25 + sRng() * 0.55,
+  ph: sRng() * Math.PI * 2,
+  sp: 0.4 + sRng() * 1.6,
+}));
+
 // ── Section colour config ─────────────────────────────────────────────────────
 type NLSection = { id: string; mainHue: number; upperHue: number; upperScale: number; fringeHue: number; fringeScale: number; xShift: number; yShift: number };
 const SECTIONS: NLSection[] = [
@@ -140,6 +149,25 @@ export default function NorthernLights() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
+    function drawStars() {
+      for (const s of STARS) {
+        const alpha = s.br * (0.65 + 0.35 * Math.sin(tp * s.sp + s.ph));
+        if (alpha < 0.04) continue;
+        const x = s.x * W;
+        const y = s.y * H;
+        ctx.fillStyle = `rgba(215,228,255,${alpha.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(x, y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        if (s.r > 0.9 && alpha > 0.45) {
+          ctx.fillStyle = `rgba(215,228,255,${(alpha * 0.12).toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(x, y, s.r * 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
     function drawPatches(
       mainHue: number, mainFade: number,
       upperHue: number, upperScale: number,
@@ -181,6 +209,7 @@ export default function NorthernLights() {
 
     function draw() {
       ctx.clearRect(0, 0, W, H);
+      drawStars();
       const si = Math.floor(sectionProgress);
       const sf = sectionProgress - si;
       const s0 = SECTIONS[Math.min(si,     SECTIONS.length - 1)];
