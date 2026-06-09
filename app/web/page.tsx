@@ -48,11 +48,10 @@ export default function WebPage() {
   return (
     <main style={{ background: '#060606' }}>
       <SideNav items={[
-        { label: 'Overview', id: 'web-hero' },
         { label: 'The Proof', id: 'web-proof' },
         { label: 'The Offer', id: 'web-offer' },
         { label: 'Packages', id: 'web-packages' },
-        { label: 'Contact', id: 'web-cta' },
+        { label: 'Work with us', id: 'web-cta' },
       ]} />
       <Header />
 
