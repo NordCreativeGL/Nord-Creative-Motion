@@ -14,28 +14,70 @@ function seededRand(seed: number) {
   return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646 }
 }
 
-function makeShape(verts: number, r: () => number): [number, number][] {
+function makeShape(verts: number, r: () => number, irregularity = 0.28): [number, number][] {
   const pts: [number, number][] = []
   const step = (2 * Math.PI) / verts
   for (let i = 0; i < verts; i++) {
-    const a = i * step + (r() - 0.5) * step * 0.75
-    pts.push([Math.cos(a) * (0.5 + r() * 0.8), Math.sin(a) * (0.5 + r() * 0.8)])
+    const a = i * step + (r() - 0.5) * step * 0.35
+    const d = 0.78 + (r() - 0.5) * 2 * irregularity
+    pts.push([Math.cos(a) * d, Math.sin(a) * d])
   }
   return pts
+}
+
+function drawPath(ctx: CanvasRenderingContext2D, pts: [number, number][], radius: number) {
+  const n = pts.length
+  ctx.beginPath()
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n]
+    const p1 = pts[i]
+    const p2 = pts[(i + 1) % n]
+    const p3 = pts[(i + 2) % n]
+    const cp1x = (p1[0] + (p2[0] - p0[0]) / 6) * radius
+    const cp1y = (p1[1] + (p2[1] - p0[1]) / 6) * radius
+    const cp2x = (p2[0] - (p3[0] - p1[0]) / 6) * radius
+    const cp2y = (p2[1] - (p3[1] - p1[1]) / 6) * radius
+    if (i === 0) ctx.moveTo(p1[0] * radius, p1[1] * radius)
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2[0] * radius, p2[1] * radius)
+  }
+  ctx.closePath()
 }
 
 function initFloes(W: number, H: number): Floe[] {
   const r = seededRand(42)
   const placed: Floe[] = []
+
+  const push = (x: number, y: number, radius: number, verts: number, irregularity?: number) => {
+    placed.push({
+      x, y, radius,
+      vx: (r() - 0.5) * 0.06,
+      vy: (r() - 0.5) * 0.06,
+      pts: makeShape(verts, r, irregularity ?? 0.28),
+      rotation: r() * Math.PI * 2,
+      rotSpeed: (r() - 0.5) * 0.00009,
+      brightness: Math.floor(168 + r() * 52),
+      opacity: 0.25 + r() * 0.30,
+    })
+  }
+
+  // 2 hero floes — large, unique, very slow
+  push(W * 0.12, H * 0.72, 160, 18, 0.38)
+  placed[placed.length - 1].vx *= 0.4
+  placed[placed.length - 1].vy *= 0.4
+
+  push(W * 0.82, H * 0.28, 140, 20, 0.42)
+  placed[placed.length - 1].vx *= 0.4
+  placed[placed.length - 1].vy *= 0.4
+
+  // Regular floes placed with collision-free spawning
   const layers = [
-    { count: 12, rMin: 48, rMax: 72 },
-    { count: 24, rMin: 22, rMax: 46 },
-    { count: 30, rMin: 7,  rMax: 20 },
+    { count: 11, rMin: 48, rMax: 72,  verts: 12, irr: 0.26 },
+    { count: 22, rMin: 22, rMax: 46,  verts: 10, irr: 0.24 },
+    { count: 28, rMin: 7,  rMax: 20,  verts: 8,  irr: 0.20 },
   ]
-  for (const { count, rMin, rMax } of layers) {
+  for (const { count, rMin, rMax, verts, irr } of layers) {
     for (let i = 0; i < count; i++) {
       const radius = rMin + r() * (rMax - rMin)
-      let ok = false
       for (let att = 0; att < 60; att++) {
         const x = r() * (W + 80) - 40
         const y = r() * (H + 80) - 40
@@ -44,22 +86,8 @@ function initFloes(W: number, H: number): Floe[] {
           const dx = f.x - x, dy = f.y - y
           if (dx * dx + dy * dy < (f.radius + radius + 6) ** 2) { clear = false; break }
         }
-        if (clear) {
-          placed.push({
-            x, y, radius,
-            vx: (r() - 0.5) * 0.07,
-            vy: (r() - 0.5) * 0.07,
-            pts: makeShape(Math.floor(5 + r() * 4), r),
-            rotation: r() * Math.PI * 2,
-            rotSpeed: (r() - 0.5) * 0.00010,
-            brightness: Math.floor(168 + r() * 52),
-            opacity: 0.22 + r() * 0.30,
-          })
-          ok = true
-          break
-        }
+        if (clear) { push(x, y, radius, verts, irr); break }
       }
-      if (!ok) r()
     }
   }
   return placed
@@ -89,22 +117,22 @@ function resolveCollisions(floes: Floe[]) {
 }
 
 function drawFloe(ctx: CanvasRenderingContext2D, f: Floe) {
-  const draw = (ox: number, oy: number, style: string) => {
-    ctx.save()
-    ctx.translate(f.x + ox, f.y + oy)
-    ctx.rotate(f.rotation)
-    ctx.beginPath()
-    ctx.moveTo(f.pts[0][0] * f.radius, f.pts[0][1] * f.radius)
-    for (let i = 1; i < f.pts.length; i++)
-      ctx.lineTo(f.pts[i][0] * f.radius, f.pts[i][1] * f.radius)
-    ctx.closePath()
-    ctx.fillStyle = style
-    ctx.fill()
-    ctx.restore()
-  }
-  draw(3, 4, `rgba(0,0,0,${f.opacity * 0.4})`)
+  ctx.save()
+  ctx.translate(f.x + 3, f.y + 5)
+  ctx.rotate(f.rotation)
+  drawPath(ctx, f.pts, f.radius)
+  ctx.fillStyle = `rgba(0,0,0,${f.opacity * 0.4})`
+  ctx.fill()
+  ctx.restore()
+
+  ctx.save()
+  ctx.translate(f.x, f.y)
+  ctx.rotate(f.rotation)
+  drawPath(ctx, f.pts, f.radius)
   const b = f.brightness
-  draw(0, 0, `rgba(${b},${b + 5},${b + 12},${f.opacity})`)
+  ctx.fillStyle = `rgba(${b},${b + 5},${b + 12},${f.opacity})`
+  ctx.fill()
+  ctx.restore()
 }
 
 export default function PackIceCanvas() {
@@ -122,7 +150,7 @@ export default function PackIceCanvas() {
       const W = canvas.width, H = canvas.height
       floes.forEach((f) => {
         f.x += f.vx; f.y += f.vy; f.rotation += f.rotSpeed
-        const m = f.radius + 8
+        const m = f.radius + 10
         if (f.x < -m) f.x = W + m
         if (f.x > W + m) f.x = -m
         if (f.y < -m) f.y = H + m
