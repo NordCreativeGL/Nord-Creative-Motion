@@ -67,7 +67,6 @@ export default function WebPage() {
   return (
     <main style={{ background: '#060606' }}>
       <SideNav items={[
-        { label: 'The Proof', id: 'web-proof' },
         { label: 'The Offer', id: 'web-offer' },
         { label: 'Packages', id: 'web-packages' },
         { label: 'Work with us', id: 'web-cta' },
@@ -126,88 +125,6 @@ export default function WebPage() {
           marginTop: '24px',
         }}>
           We design and build high-performance websites for brands that take their visual identity seriously. No templates. No WordPress. Just code.
-        </p>
-      </section>
-
-      {/* ── Section 2: Proof ── */}
-      <section
-        id="web-proof"
-        style={{
-          minHeight: '100dvh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          background: '#060606',
-          padding: sectionPadding,
-        }}
-      >
-        <p style={{
-          fontSize: 'clamp(11px, 0.7vw, 13px)',
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.4)',
-          marginBottom: '20px',
-        }}>
-          THE PROOF
-        </p>
-        <h2 style={{
-          fontSize: 'clamp(36px, 4vw, 72px)',
-          fontWeight: 300,
-          letterSpacing: '-0.02em',
-          color: 'white',
-          marginBottom: '28px',
-        }}>
-          You're already on one
-        </h2>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%',
-          margin: '48px 0 48px 0',
-        }}>
-          <div style={{
-            width: 'clamp(320px, 60vw, 680px)',
-            height: '52px',
-            background: '#0a0a0a',
-            border: '1px solid #252525',
-            borderRadius: '999px',
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0 22px',
-            gap: '10px',
-          }}>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <rect x="2" y="5" width="8" height="6" rx="1" stroke="#444" strokeWidth="1.5"/>
-              <path d="M4 5V3.5a2 2 0 1 1 4 0V5" stroke="#444" strokeWidth="1.5"/>
-            </svg>
-            <span style={{
-              fontFamily: 'monospace',
-              fontSize: '13px',
-              color: '#666',
-              letterSpacing: '0.02em',
-              flexGrow: 1,
-            }}>
-              nordcreative.dk/web
-            </span>
-            <span className="url-cursor" style={{ color: '#444', fontSize: '13px' }}>|</span>
-          </div>
-        </div>
-        <p style={{
-          fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-          lineHeight: 1.65,
-          color: 'rgba(255,255,255,0.65)',
-          maxWidth: '640px',
-          marginBottom: '20px',
-        }}>
-          This site was built by us. Scroll-animated, cinematic, fast — built entirely from scratch on Next.js. That's the standard we hold every project to.
-        </p>
-        <p style={{
-          fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-          lineHeight: 1.65,
-          color: 'rgba(255,255,255,0.65)',
-          maxWidth: '640px',
-        }}>
-          No page builders. No themes. Every line of code written with purpose.
         </p>
       </section>
 
