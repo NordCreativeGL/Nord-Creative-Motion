@@ -38,9 +38,27 @@ function makeShape(r: () => number): [number, number][] {
 }
 
 function tracePath(ctx: CanvasRenderingContext2D, pts: [number, number][], radius: number) {
+  const ROUND = 0.35
+  const n = pts.length
   ctx.beginPath()
-  ctx.moveTo(pts[0][0] * radius, pts[0][1] * radius)
-  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0] * radius, pts[i][1] * radius)
+  for (let i = 0; i < n; i++) {
+    const prev = pts[(i - 1 + n) % n]
+    const curr = pts[i]
+    const next = pts[(i + 1) % n]
+    const currX = curr[0] * radius, currY = curr[1] * radius
+    const prevX = prev[0] * radius, prevY = prev[1] * radius
+    const nextX = next[0] * radius, nextY = next[1] * radius
+    const p1x = currX + (prevX - currX) * ROUND
+    const p1y = currY + (prevY - currY) * ROUND
+    const p2x = currX + (nextX - currX) * ROUND
+    const p2y = currY + (nextY - currY) * ROUND
+    if (i === 0) {
+      ctx.moveTo(p1x, p1y)
+    } else {
+      ctx.lineTo(p1x, p1y)
+    }
+    ctx.quadraticCurveTo(currX, currY, p2x, p2y)
+  }
   ctx.closePath()
 }
 
