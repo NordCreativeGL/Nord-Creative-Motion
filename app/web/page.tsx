@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import SideNav from '@/components/SideNav'
+import PackIceCanvas from '@/components/PackIceCanvas'
 
 const packages = [
   {
@@ -457,42 +458,48 @@ export default function WebPage() {
           background: '#000000',
           padding: sectionPadding,
           textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          minHeight: isMobile ? '100dvh' : '75vh',
         }}
       >
-        <h2 style={{
-          fontSize: 'clamp(36px, 4vw, 72px)',
-          fontWeight: 300,
-          letterSpacing: '-0.02em',
-          color: 'white',
-          marginBottom: '24px',
-        }}>
-          Ready to build something worth seeing?
-        </h2>
-        <p style={{
-          fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-          lineHeight: 1.65,
-          color: 'rgba(255,255,255,0.65)',
-        }}>
-          Tell us about your project. We'll take it from there.
-        </p>
-        <a
-          href="mailto:contact@nordcreative.dk"
-          className="text-white hover:bg-white hover:text-black transition-colors duration-200"
-          style={{
-            display: isMobile ? 'block' : 'inline-block',
-            border: '1px solid rgba(255,255,255,0.6)',
-            borderRadius: '999px',
-            padding: '14px 40px',
-            fontSize: 'clamp(15px, 0.9vw, 19px)',
+        <PackIceCanvas />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <h2 style={{
+            fontSize: 'clamp(36px, 4vw, 72px)',
             fontWeight: 300,
-            textDecoration: 'none',
-            marginTop: '40px',
-            width: isMobile ? '100%' : undefined,
-            textAlign: isMobile ? 'center' as const : undefined,
-          }}
-        >
-          Start your project
-        </a>
+            letterSpacing: '-0.02em',
+            color: 'white',
+            marginBottom: '24px',
+          }}>
+            Ready to build something worth seeing?
+          </h2>
+          <p style={{
+            fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+            lineHeight: 1.65,
+            color: 'rgba(255,255,255,0.65)',
+          }}>
+            Tell us about your project. We'll take it from there.
+          </p>
+          <a
+            href="mailto:contact@nordcreative.dk"
+            className="text-white hover:bg-white hover:text-black transition-colors duration-200"
+            style={{
+              display: isMobile ? 'block' : 'inline-block',
+              border: '1px solid rgba(255,255,255,0.6)',
+              borderRadius: '999px',
+              padding: '14px 40px',
+              fontSize: 'clamp(15px, 0.9vw, 19px)',
+              fontWeight: 300,
+              textDecoration: 'none',
+              marginTop: '40px',
+              width: isMobile ? '100%' : undefined,
+              textAlign: isMobile ? 'center' as const : undefined,
+            }}
+          >
+            Start your project
+          </a>
+        </div>
       </section>
 
       <Footer />
