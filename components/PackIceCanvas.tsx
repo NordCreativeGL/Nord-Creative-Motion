@@ -5,7 +5,7 @@ interface Floe {
   x: number; y: number; vx: number; vy: number
   radius: number; pts: [number, number][]
   rotation: number; rotSpeed: number
-  brightness: number; opacity: number; glow: boolean
+  brightness: number; opacity: number; glow: number
 }
 
 function seededRand(seed: number) {
@@ -14,13 +14,24 @@ function seededRand(seed: number) {
   return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646 }
 }
 
+// Generates a chunky, ice-like outline: radius walks smoothly between
+// neighbouring vertices so no sharp star-spikes, and angles are jittered
+// only slightly so edges stay flat-ish like broken ice.
 function makeShape(verts: number, r: () => number): [number, number][] {
+  const radii: number[] = []
+  let cur = 0.78 + r() * 0.18
+  for (let i = 0; i < verts; i++) {
+    cur += (r() - 0.5) * 0.22
+    cur = Math.max(0.62, Math.min(1.0, cur))
+    radii.push(cur)
+  }
+  // smooth the seam between last and first
+  radii[0] = (radii[0] + radii[verts - 1]) / 2
   const pts: [number, number][] = []
   const step = (2 * Math.PI) / verts
   for (let i = 0; i < verts; i++) {
-    const a = i * step + (r() - 0.5) * step * 0.55
-    const d = 0.62 + r() * 0.72
-    pts.push([Math.cos(a) * d, Math.sin(a) * d])
+    const a = i * step + (r() - 0.5) * step * 0.4
+    pts.push([Math.cos(a) * radii[i], Math.sin(a) * radii[i]])
   }
   return pts
 }
@@ -33,47 +44,51 @@ function tracePath(ctx: CanvasRenderingContext2D, pts: [number, number][], radiu
 }
 
 function initFloes(W: number, H: number): Floe[] {
-  const r = seededRand(73)
+  const r = seededRand(91)
   const placed: Floe[] = []
 
-  const spawn = (x: number, y: number, radius: number, verts: number, slow = false) => {
+  const spawn = (x: number, y: number, radius: number, verts: number, glow: number, slow = false) => {
     placed.push({
       x, y, radius,
-      vx: (r() - 0.5) * (slow ? 0.025 : 0.06),
-      vy: (r() - 0.5) * (slow ? 0.025 : 0.06),
+      vx: (r() - 0.5) * (slow ? 0.022 : 0.055),
+      vy: (r() - 0.5) * (slow ? 0.022 : 0.055),
       pts: makeShape(verts, r),
       rotation: r() * Math.PI * 2,
-      rotSpeed: (r() - 0.5) * 0.00008,
-      brightness: Math.floor(225 + r() * 28),
-      opacity: 0.82 + r() * 0.16,
-      glow: r() > 0.4,
+      rotSpeed: (r() - 0.5) * 0.00007,
+      brightness: Math.floor(224 + r() * 30),
+      opacity: 0.84 + r() * 0.14,
+      glow,
     })
   }
 
-  const tryPlace = (radius: number, verts: number, slow = false) => {
+  const tryPlace = (radius: number, verts: number, glow: number) => {
     for (let att = 0; att < 70; att++) {
       const x = r() * (W + 60) - 30
       const y = r() * (H + 60) - 30
       let clear = true
       for (const f of placed) {
         const dx = f.x - x, dy = f.y - y
-        const gap = f.radius + radius + 18 + r() * 40
+        const gap = f.radius + radius + 22 + r() * 46
         if (dx * dx + dy * dy < gap * gap) { clear = false; break }
       }
-      if (clear) { spawn(x, y, radius, verts, slow); return }
+      if (clear) { spawn(x, y, radius, verts, glow); return }
     }
   }
 
-  // 2 hero floes — large unique shapes
-  spawn(W * 0.16, H * 0.70, 150, 16, true)
-  spawn(W * 0.80, H * 0.32, 130, 17, true)
+  // 2 hero floes — large, unique, strong glow
+  spawn(W * 0.15, H * 0.70, 152, 15, 1.0, true)
+  spawn(W * 0.81, H * 0.31, 132, 16, 0.85, true)
 
-  // Medium floes (spread out, lots of dark water between)
-  for (let i = 0; i < 16; i++) tryPlace(34 + r() * 40, 11)
-  // Small floes
-  for (let i = 0; i < 26; i++) tryPlace(14 + r() * 18, 9)
-  // Tiny fragments
-  for (let i = 0; i < 40; i++) tryPlace(3 + r() * 8, 7)
+  // Medium floes — only ~1/3 get a subtle glow, varied vertex counts
+  for (let i = 0; i < 16; i++) {
+    const radius = 32 + r() * 44
+    const glow = radius > 56 ? 0.55 : (r() > 0.7 ? 0.4 : 0)
+    tryPlace(radius, Math.floor(9 + r() * 5), glow)
+  }
+  // Small floes — no glow
+  for (let i = 0; i < 24; i++) tryPlace(13 + r() * 16, Math.floor(8 + r() * 3), 0)
+  // Tiny fragments — no glow
+  for (let i = 0; i < 38; i++) tryPlace(3 + r() * 7, Math.floor(6 + r() * 3), 0)
 
   return placed
 }
@@ -84,7 +99,7 @@ function resolveCollisions(floes: Floe[]) {
       const a = floes[i], b = floes[j]
       const dx = b.x - a.x, dy = b.y - a.y
       const distSq = dx * dx + dy * dy
-      const minD = a.radius + b.radius + 14
+      const minD = a.radius + b.radius + 16
       if (distSq < minD * minD && distSq > 0.001) {
         const dist = Math.sqrt(distSq)
         const nx = dx / dist, ny = dy / dist
@@ -102,28 +117,29 @@ function resolveCollisions(floes: Floe[]) {
 }
 
 function drawFloe(ctx: CanvasRenderingContext2D, f: Floe) {
-  // Turquoise underwater glow (submerged ice)
-  if (f.glow) {
+  if (f.glow > 0) {
     ctx.save()
     ctx.translate(f.x, f.y)
     ctx.rotate(f.rotation)
-    tracePath(ctx, f.pts, f.radius * 1.5)
-    ctx.fillStyle = `rgba(64, 180, 190, ${f.opacity * 0.12})`
+    tracePath(ctx, f.pts, f.radius * 1.55)
+    ctx.fillStyle = `rgba(56, 168, 184, ${f.glow * 0.10})`
     ctx.fill()
-    tracePath(ctx, f.pts, f.radius * 1.22)
-    ctx.fillStyle = `rgba(90, 205, 210, ${f.opacity * 0.16})`
+    tracePath(ctx, f.pts, f.radius * 1.26)
+    ctx.fillStyle = `rgba(84, 198, 208, ${f.glow * 0.16})`
+    ctx.fill()
+    tracePath(ctx, f.pts, f.radius * 1.08)
+    ctx.fillStyle = `rgba(120, 216, 222, ${f.glow * 0.13})`
     ctx.fill()
     ctx.restore()
   }
-  // Soft shadow for depth
   ctx.save()
   ctx.translate(f.x + 2, f.y + 3)
   ctx.rotate(f.rotation)
   tracePath(ctx, f.pts, f.radius)
-  ctx.fillStyle = `rgba(0,0,0,0.35)`
+  ctx.fillStyle = `rgba(0,0,0,0.30)`
   ctx.fill()
   ctx.restore()
-  // Ice surface — bright white
+
   ctx.save()
   ctx.translate(f.x, f.y)
   ctx.rotate(f.rotation)
@@ -156,7 +172,6 @@ export default function PackIceCanvas() {
         if (f.y > H + m) f.y = -m
       })
       resolveCollisions(floes)
-      // Deep arctic water
       ctx.fillStyle = '#03070a'
       ctx.fillRect(0, 0, W, H)
       floes.forEach((f) => drawFloe(ctx, f))
