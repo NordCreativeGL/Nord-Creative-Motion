@@ -14,24 +14,25 @@ function seededRand(seed: number) {
   return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646 }
 }
 
-// Generates a chunky, ice-like outline: radius walks smoothly between
-// neighbouring vertices so no sharp star-spikes, and angles are jittered
-// only slightly so edges stay flat-ish like broken ice.
-function makeShape(verts: number, r: () => number): [number, number][] {
-  const radii: number[] = []
-  let cur = 0.78 + r() * 0.18
-  for (let i = 0; i < verts; i++) {
-    cur += (r() - 0.5) * 0.22
-    cur = Math.max(0.62, Math.min(1.0, cur))
-    radii.push(cur)
-  }
-  // smooth the seam between last and first
-  radii[0] = (radii[0] + radii[verts - 1]) / 2
+function makeShape(r: () => number): [number, number][] {
+  const verts = Math.floor(4 + r() * 4) // 4-7 corners — angular, never round
+  const stretchX = 0.7 + r() * 0.9      // some floes long, some compact
+  const stretchY = 0.7 + r() * 0.9
+  const rot = r() * Math.PI * 2
   const pts: [number, number][] = []
-  const step = (2 * Math.PI) / verts
+  const baseStep = (2 * Math.PI) / verts
+  let acc = 0
   for (let i = 0; i < verts; i++) {
-    const a = i * step + (r() - 0.5) * step * 0.4
-    pts.push([Math.cos(a) * radii[i], Math.sin(a) * radii[i]])
+    // uneven angular spacing -> irregular faces
+    acc += baseStep * (0.55 + r() * 0.9)
+    // strong radius variation -> jagged, broken-ice silhouette
+    const rad = 0.45 + r() * 0.75
+    const x = Math.cos(acc) * rad * stretchX
+    const y = Math.sin(acc) * rad * stretchY
+    // apply random orientation
+    const cx = x * Math.cos(rot) - y * Math.sin(rot)
+    const cy = x * Math.sin(rot) + y * Math.cos(rot)
+    pts.push([cx, cy])
   }
   return pts
 }
@@ -47,12 +48,12 @@ function initFloes(W: number, H: number): Floe[] {
   const r = seededRand(91)
   const placed: Floe[] = []
 
-  const spawn = (x: number, y: number, radius: number, verts: number, glow: number, slow = false) => {
+  const spawn = (x: number, y: number, radius: number, glow: number, slow = false) => {
     placed.push({
       x, y, radius,
       vx: (r() - 0.5) * (slow ? 0.022 : 0.055),
       vy: (r() - 0.5) * (slow ? 0.022 : 0.055),
-      pts: makeShape(verts, r),
+      pts: makeShape(r),
       rotation: r() * Math.PI * 2,
       rotSpeed: (r() - 0.5) * 0.00007,
       brightness: Math.floor(224 + r() * 30),
@@ -61,7 +62,7 @@ function initFloes(W: number, H: number): Floe[] {
     })
   }
 
-  const tryPlace = (radius: number, verts: number, glow: number) => {
+  const tryPlace = (radius: number, glow: number) => {
     for (let att = 0; att < 70; att++) {
       const x = r() * (W + 60) - 30
       const y = r() * (H + 60) - 30
@@ -71,24 +72,24 @@ function initFloes(W: number, H: number): Floe[] {
         const gap = f.radius + radius + 22 + r() * 46
         if (dx * dx + dy * dy < gap * gap) { clear = false; break }
       }
-      if (clear) { spawn(x, y, radius, verts, glow); return }
+      if (clear) { spawn(x, y, radius, glow); return }
     }
   }
 
   // 2 hero floes — large, unique, strong glow
-  spawn(W * 0.15, H * 0.70, 152, 15, 1.0, true)
-  spawn(W * 0.81, H * 0.31, 132, 16, 0.85, true)
+  spawn(W * 0.15, H * 0.70, 152, 1.0, true)
+  spawn(W * 0.81, H * 0.31, 132, 0.85, true)
 
   // Medium floes — only ~1/3 get a subtle glow, varied vertex counts
   for (let i = 0; i < 16; i++) {
     const radius = 32 + r() * 44
     const glow = radius > 56 ? 0.55 : (r() > 0.7 ? 0.4 : 0)
-    tryPlace(radius, Math.floor(9 + r() * 5), glow)
+    tryPlace(radius, glow)
   }
   // Small floes — no glow
-  for (let i = 0; i < 24; i++) tryPlace(13 + r() * 16, Math.floor(8 + r() * 3), 0)
+  for (let i = 0; i < 24; i++) tryPlace(13 + r() * 16, 0)
   // Tiny fragments — no glow
-  for (let i = 0; i < 38; i++) tryPlace(3 + r() * 7, Math.floor(6 + r() * 3), 0)
+  for (let i = 0; i < 38; i++) tryPlace(3 + r() * 7, 0)
 
   return placed
 }
