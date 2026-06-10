@@ -11,6 +11,9 @@ interface Floe {
 // Half-width and half-height of the exclusion ellipse around the "Start your project" button
 const BTN_ZONE = { rx: 160, ry: 60 }
 
+// Largest possible floe radius (hero floes), used as the size reference for fill color
+const MAX_RADIUS = 152
+
 function seededRand(seed: number) {
   let s = seed % 2147483647
   if (s <= 0) s += 2147483646
@@ -182,8 +185,8 @@ function drawFloe(ctx: CanvasRenderingContext2D, f: Floe) {
   ctx.translate(f.x, f.y)
   ctx.rotate(f.rotation)
   tracePath(ctx, f.pts, f.radius)
-  const b = f.brightness
-  ctx.fillStyle = `rgba(${b},${b + 2},${b + 4},${f.opacity})`
+  const fillRGB = f.radius >= MAX_RADIUS * 0.6 ? '200, 216, 222' : '248, 252, 255'
+  ctx.fillStyle = `rgba(${fillRGB}, ${f.opacity})`
   ctx.fill()
   ctx.restore()
 }
