@@ -157,24 +157,6 @@ function resolveCollisions(floes: Floe[]) {
   }
 }
 
-function drawShimmer(ctx: CanvasRenderingContext2D, w: number, h: number, t: number) {
-  for (let i = 0; i < 8; i++) {
-    const baseY = (h / 8) * i + (h / 16)
-    const y = baseY + Math.sin(t * 0.0003 + i * 1.7) * 6
-    const grad = ctx.createLinearGradient(0, y, w, y)
-    grad.addColorStop(0, 'rgba(180,210,230,0)')
-    grad.addColorStop(0.25 + Math.sin(i * 0.9) * 0.1, 'rgba(180,210,230,0.045)')
-    grad.addColorStop(0.6, 'rgba(180,210,230,0.025)')
-    grad.addColorStop(1, 'rgba(180,210,230,0)')
-    ctx.beginPath()
-    ctx.moveTo(0, y)
-    ctx.bezierCurveTo(w * 0.25, y - 4 + Math.sin(t * 0.0002 + i) * 3, w * 0.75, y + 4 + Math.cos(t * 0.00025 + i) * 3, w, y)
-    ctx.lineWidth = 1.5
-    ctx.strokeStyle = grad
-    ctx.stroke()
-  }
-}
-
 function drawFloe(ctx: CanvasRenderingContext2D, f: Floe) {
   if (f.glow > 0) {
     ctx.save()
@@ -240,9 +222,8 @@ export default function PackIceCanvas() {
         }
       })
       resolveCollisions(floes)
-      ctx.fillStyle = '#04111c'
+      ctx.fillStyle = '#020b14'
       ctx.fillRect(0, 0, W, H)
-      drawShimmer(ctx, W, H, t)
       floes.forEach((f) => drawFloe(ctx, f))
       animId = requestAnimationFrame(animate)
     }
