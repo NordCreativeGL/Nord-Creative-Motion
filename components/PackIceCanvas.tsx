@@ -8,6 +8,9 @@ interface Floe {
   brightness: number; opacity: number; glow: number
 }
 
+// Half-width and half-height of the exclusion ellipse around the "Start your project" button
+const BTN_ZONE = { rx: 160, ry: 60 }
+
 function seededRand(seed: number) {
   let s = seed % 2147483647
   if (s <= 0) s += 2147483646
@@ -80,15 +83,22 @@ function initFloes(W: number, H: number): Floe[] {
     })
   }
 
+  const cx = W / 2, cy = H * 0.56
+
   const tryPlace = (radius: number, glow: number) => {
     for (let att = 0; att < 70; att++) {
       const x = r() * (W + 60) - 30
       const y = r() * (H + 60) - 30
       let clear = true
-      for (const f of placed) {
-        const dx = f.x - x, dy = f.y - y
-        const gap = f.radius + radius + 22 + r() * 46
-        if (dx * dx + dy * dy < gap * gap) { clear = false; break }
+      const bx = x - cx, by = y - cy
+      const brx = BTN_ZONE.rx + radius, bry = BTN_ZONE.ry + radius
+      if ((bx * bx) / (brx * brx) + (by * by) / (bry * bry) < 1) { clear = false }
+      if (clear) {
+        for (const f of placed) {
+          const dx = f.x - x, dy = f.y - y
+          const gap = f.radius + radius + 22 + r() * 46
+          if (dx * dx + dy * dy < gap * gap) { clear = false; break }
+        }
       }
       if (clear) { spawn(x, y, radius, glow); return }
     }
@@ -110,6 +120,13 @@ function initFloes(W: number, H: number): Floe[] {
   for (let i = 0; i < 38; i++) tryPlace(13 + r() * 25, 0)
   // Tiny fragments — no glow
   for (let i = 0; i < 60; i++) tryPlace(3 + r() * 10, 0)
+
+  // Extra small-to-medium floes for added density
+  for (let i = 0; i < 20; i++) {
+    const radius = 99 * (0.3 + r() * 0.4)
+    const glow = radius > 56 ? 0.55 : (r() > 0.7 ? 0.4 : 0)
+    tryPlace(radius, glow)
+  }
 
   return placed
 }
@@ -191,6 +208,15 @@ export default function PackIceCanvas() {
         if (f.x > W + m) f.x = -m
         if (f.y < -m) f.y = H + m
         if (f.y > H + m) f.y = -m
+
+        const cx = W / 2, cy = H * 0.56
+        const dx = f.x - cx, dy = f.y - cy
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1
+        const rx = BTN_ZONE.rx + f.radius, ry = BTN_ZONE.ry + f.radius
+        if ((dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) < 1) {
+          f.vx += (dx / dist) * 0.05
+          f.vy += (dy / dist) * 0.05
+        }
       })
       resolveCollisions(floes)
       ctx.fillStyle = '#03070a'
