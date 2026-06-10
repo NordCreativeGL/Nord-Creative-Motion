@@ -27,18 +27,18 @@ const packages = [
 const mountainMarks = [
   {
     tier: 'I',
-    points: '10,55 50,10 90,55',
-    ground: '5,55 95,55'
+    points: '5,85 50,10 95,85',
+    ground: '5,85 95,85'
   },
   {
     tier: 'II',
-    points: '8,55 32,25 50,38 68,15 90,55',
-    ground: '5,55 95,55'
+    points: '5,85 28,32 50,48 70,18 95,85',
+    ground: '5,85 95,85'
   },
   {
     tier: 'III',
-    points: '5,55 18,38 30,46 42,20 54,34 68,12 80,38 92,55',
-    ground: '3,55 97,55'
+    points: '5,85 18,55 32,65 46,26 60,42 74,12 88,50 95,85',
+    ground: '5,85 95,85'
   }
 ]
 
@@ -374,73 +374,77 @@ export default function WebPage() {
         </h2>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
-          gap: '24px',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 0,
+          borderTop: '1px solid #1a1a1a',
+          borderBottom: '1px solid #1a1a1a',
         }}>
           {packages.map((pkg, i) => (
             <div
               key={pkg.title}
               style={{
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 4,
-                padding: isMobile ? '32px 24px' : '48px 40px',
-                background: 'transparent',
-                display: 'flex',
-                flexDirection: 'column',
+                position: 'relative',
+                borderRight: i < 2 ? '1px solid #1a1a1a' : 'none',
               }}
             >
-              <svg
-                width="80"
-                height="48"
-                viewBox="0 0 100 60"
-                fill="none"
-                style={{ marginBottom: '20px', display: 'block' }}
-              >
-                <polyline points={mountainMarks[i].ground} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.25" />
-                <polyline points={mountainMarks[i].points} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.6" />
-              </svg>
-              <span style={{ fontSize: '9px', letterSpacing: '0.2em', color: '#444', textTransform: 'uppercase' as const, marginBottom: '12px' }}>
-                {mountainMarks[i].tier}
-              </span>
-              <h3 style={{
-                fontSize: 'clamp(20px, 1.3vw, 28px)',
-                fontWeight: 300,
-                letterSpacing: '-0.01em',
-                color: 'white',
-                marginBottom: '12px',
-              }}>
-                {pkg.title}
-              </h3>
-              <p style={{
-                fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-                lineHeight: 1.65,
-                color: 'rgba(255,255,255,0.55)',
-                marginBottom: '28px',
-              }}>
-                {pkg.subtext}
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', flexGrow: 1 }}>
-                {pkg.bullets.map((bullet) => (
-                  <li key={bullet} style={{
-                    fontSize: '14px',
-                    color: 'rgba(255,255,255,0.6)',
-                    marginBottom: '10px',
-                  }}>
-                    — {bullet}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="mailto:contact@nordcreative.dk"
-                style={{
-                  fontSize: 'clamp(15px, 0.9vw, 19px)',
-                  fontWeight: 300,
-                  color: 'white',
-                  textDecoration: 'none',
-                }}
-              >
-                Get in touch →
-              </a>
+              <div style={{ paddingTop: '90%', position: 'relative' }}>
+                <svg
+                  viewBox="0 0 100 90"
+                  preserveAspectRatio="none"
+                  stroke="white"
+                  strokeWidth="0.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  opacity={0.2}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+                >
+                  <polyline points={mountainMarks[i].points} />
+                  <polyline points={mountainMarks[i].ground} opacity={0.12} />
+                </svg>
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  paddingBottom: '10%',
+                  paddingLeft: '8%',
+                  paddingRight: '8%',
+                  textAlign: 'center',
+                }}>
+                  <span style={{ fontSize: 'clamp(9px, 0.6vw, 11px)', letterSpacing: '0.3em', color: '#3a3a3a', marginBottom: 14 }}>
+                    {mountainMarks[i].tier}
+                  </span>
+                  <h3 style={{ fontSize: 'clamp(20px, 1.4vw, 28px)', fontWeight: 300, color: '#ffffff', letterSpacing: '-0.01em', marginBottom: 16 }}>
+                    {pkg.title}
+                  </h3>
+                  <p style={{ fontSize: 'clamp(12px, 0.75vw, 13px)', color: '#444', fontWeight: 300, lineHeight: 1.7, marginBottom: 20 }}>
+                    {pkg.subtext}
+                  </p>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {pkg.bullets.map((bullet) => (
+                      <li key={bullet} style={{ fontSize: 'clamp(10px, 0.65vw, 12px)', color: '#333', letterSpacing: '0.06em', lineHeight: 2.0 }}>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="mailto:contact@nordcreative.dk"
+                    style={{
+                      fontSize: 'clamp(11px, 0.7vw, 12px)',
+                      color: '#555',
+                      letterSpacing: '0.1em',
+                      marginTop: 20,
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Get in touch →
+                  </a>
+                </div>
+              </div>
             </div>
           ))}
         </div>
