@@ -78,7 +78,7 @@ export default function WebPage() {
       <section
         id="web-hero"
         style={{
-          minHeight: isMobile ? '100dvh' : '100vh',
+          minHeight: '100dvh',
           background: '#000000',
           display: 'flex',
           flexDirection: 'column',
@@ -133,6 +133,10 @@ export default function WebPage() {
       <section
         id="web-proof"
         style={{
+          minHeight: '100dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
           background: '#060606',
           padding: sectionPadding,
         }}
@@ -211,8 +215,13 @@ export default function WebPage() {
       <section
         id="web-offer"
         style={{
+          minHeight: '100dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
           background: '#000000',
           padding: sectionPadding,
+          paddingTop: isMobile ? '100px' : '120px',
         }}
       >
         <p style={{
@@ -351,8 +360,13 @@ export default function WebPage() {
       <section
         id="web-packages"
         style={{
+          minHeight: '100dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
           background: '#060606',
           padding: sectionPadding,
+          paddingTop: isMobile ? '100px' : '120px',
         }}
       >
         <p style={{
@@ -455,12 +469,15 @@ export default function WebPage() {
       <section
         id="web-cta"
         style={{
+          minHeight: '100dvh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
           background: '#000000',
           padding: sectionPadding,
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          minHeight: isMobile ? '100dvh' : '75vh',
         }}
       >
         <PackIceCanvas />
