@@ -115,7 +115,7 @@ export default function WebPage() {
           letterSpacing: '-0.02em',
           color: 'white',
         }}>
-          The web, built differently
+          We build websites that people remember
         </h1>
         <p style={{
           fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
