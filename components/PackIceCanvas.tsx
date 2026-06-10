@@ -94,20 +94,22 @@ function initFloes(W: number, H: number): Floe[] {
     }
   }
 
-  // 2 hero floes — large, unique, strong glow
+  // 4 hero floes — large, unique, strong glow
   spawn(W * 0.15, H * 0.70, 152, 1.0, true)
   spawn(W * 0.81, H * 0.31, 132, 0.85, true)
+  spawn(W * 0.45, H * 0.12, 140, 0.75, true)
+  spawn(W * 0.68, H * 0.82, 122, 0.65, true)
 
   // Medium floes — only ~1/3 get a subtle glow, varied vertex counts
-  for (let i = 0; i < 16; i++) {
-    const radius = 32 + r() * 44
+  for (let i = 0; i < 26; i++) {
+    const radius = 32 + r() * 67
     const glow = radius > 56 ? 0.55 : (r() > 0.7 ? 0.4 : 0)
     tryPlace(radius, glow)
   }
   // Small floes — no glow
-  for (let i = 0; i < 24; i++) tryPlace(13 + r() * 16, 0)
+  for (let i = 0; i < 38; i++) tryPlace(13 + r() * 25, 0)
   // Tiny fragments — no glow
-  for (let i = 0; i < 38; i++) tryPlace(3 + r() * 7, 0)
+  for (let i = 0; i < 60; i++) tryPlace(3 + r() * 10, 0)
 
   return placed
 }
