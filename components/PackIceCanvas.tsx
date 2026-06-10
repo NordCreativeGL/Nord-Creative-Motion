@@ -1,15 +1,11 @@
 'use client'
 import { useRef, useEffect } from 'react'
 
-const HORIZON = 0.28
-const DRIFT = 0.0006
-const COLS = 7
-const ROWS = 9
-
 interface Floe {
-  wx: number; wy: number; radius: number
-  pts: [number, number][]; driftX: number
-  rotation: number; rotSpeed: number; opacity: number
+  x: number; y: number; vx: number; vy: number
+  radius: number; pts: [number, number][]
+  rotation: number; rotSpeed: number
+  brightness: number; opacity: number
 }
 
 function seededRand(seed: number) {
@@ -29,35 +25,23 @@ function makeShape(verts: number, r: () => number): [number, number][] {
   return pts
 }
 
-function project(wx: number, wy: number, W: number, H: number) {
-  const hy = H * HORIZON
-  const spread = 0.7 + wy * 1.8
-  const sx = W / 2 + (wx - W / 2) * spread
-  const sy = hy + wy * (H - hy)
-  const scale = 0.06 + wy * 0.94
-  return { sx, sy, scale }
-}
-
-function initFloes(W: number): Floe[] {
+function initFloes(W: number, H: number): Floe[] {
   const r = seededRand(42)
   const floes: Floe[] = []
-  for (let row = 0; row < ROWS; row++) {
-    for (let col = 0; col < COLS; col++) {
-      const wy = Math.max(0.02, Math.min(0.98,
-        (row + 0.5) / ROWS + (r() - 0.5) * 0.07
-      ))
-      const wx = W * ((col + 0.5) / COLS) + (r() - 0.5) * (W / COLS * 0.55)
-      const radius = 16 + r() * 50
-      const verts = Math.floor(5 + r() * 4)
-      floes.push({
-        wx, wy, radius,
-        pts: makeShape(verts, r),
-        driftX: (r() - 0.5) * 0.12,
-        rotation: r() * Math.PI * 2,
-        rotSpeed: (r() - 0.5) * 0.0003,
-        opacity: 0.15 + r() * 0.22,
-      })
-    }
+  for (let i = 0; i < 90; i++) {
+    const radius = 12 + r() * 68
+    floes.push({
+      x: r() * (W + 200) - 100,
+      y: r() * (H + 200) - 100,
+      vx: (r() - 0.5) * 0.16,
+      vy: (r() - 0.5) * 0.16,
+      radius,
+      pts: makeShape(Math.floor(5 + r() * 4), r),
+      rotation: r() * Math.PI * 2,
+      rotSpeed: (r() - 0.5) * 0.00022,
+      brightness: Math.floor(168 + r() * 52),
+      opacity: 0.20 + r() * 0.32,
+    })
   }
   return floes
 }
@@ -74,70 +58,49 @@ export default function PackIceCanvas() {
     let floes: Floe[] = []
     let animId = 0
 
+    function drawFloe(f: Floe) {
+      if (!ctx) return
+      const draw = (ox: number, oy: number, fillStyle: string) => {
+        if (!ctx) return
+        ctx.save()
+        ctx.translate(f.x + ox, f.y + oy)
+        ctx.rotate(f.rotation)
+        ctx.beginPath()
+        ctx.moveTo(f.pts[0][0] * f.radius, f.pts[0][1] * f.radius)
+        for (let i = 1; i < f.pts.length; i++)
+          ctx.lineTo(f.pts[i][0] * f.radius, f.pts[i][1] * f.radius)
+        ctx.closePath()
+        ctx.fillStyle = fillStyle
+        ctx.fill()
+        ctx.restore()
+      }
+      // Shadow for 3D depth
+      draw(3, 4, `rgba(0,0,0,${f.opacity * 0.45})`)
+      // Ice face
+      const b = f.brightness
+      draw(0, 0, `rgba(${b},${b + 5},${b + 12},${f.opacity})`)
+    }
+
     function drawFrame() {
       if (!canvas || !ctx) return
-      const W = canvas.width
-      const H = canvas.height
-
       ctx.fillStyle = '#000000'
-      ctx.fillRect(0, 0, W, H)
-
-      // Atmosphere fade at horizon
-      const fog = ctx.createLinearGradient(0, 0, 0, H * HORIZON * 1.6)
-      fog.addColorStop(0, 'rgba(0,0,0,1)')
-      fog.addColorStop(1, 'rgba(0,0,0,0)')
-
-      // Draw floes far-to-near
-      const sorted = [...floes].sort((a, b) => a.wy - b.wy)
-      sorted.forEach((f) => {
-        if (!ctx || !canvas) return
-        const { sx, sy, scale } = project(f.wx, f.wy, W, H)
-        const rPx = f.radius * scale
-
-        ctx.save()
-        ctx.translate(sx, sy)
-        ctx.rotate(f.rotation)
-
-        ctx.beginPath()
-        ctx.moveTo(f.pts[0][0] * rPx, f.pts[0][1] * rPx)
-        for (let i = 1; i < f.pts.length; i++) {
-          ctx.lineTo(f.pts[i][0] * rPx, f.pts[i][1] * rPx)
-        }
-        ctx.closePath()
-
-        // Subtle 3D: offset shadow
-        ctx.shadowColor = 'rgba(0,0,0,0.5)'
-        ctx.shadowBlur = rPx * 0.3
-        ctx.shadowOffsetY = rPx * 0.15
-
-        const bright = Math.floor(185 + f.wy * 30)
-        ctx.fillStyle = `rgba(${bright},${bright + 6},${bright + 14},${f.opacity})`
-        ctx.fill()
-
-        ctx.shadowColor = 'transparent'
-        ctx.restore()
-      })
-
-      // Horizon fog overlay
-      ctx.fillStyle = fog
-      ctx.fillRect(0, 0, W, H * HORIZON * 1.6)
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      floes.forEach(drawFloe)
     }
 
     function animate() {
       if (!canvas) return
       const W = canvas.width
+      const H = canvas.height
       floes.forEach((f) => {
-        f.wy += DRIFT * (0.6 + f.wy * 0.8)
+        f.x += f.vx
+        f.y += f.vy
         f.rotation += f.rotSpeed
-        f.wx += f.driftX
-        if (f.wy > 1.2) {
-          f.wy = 0.02 + Math.random() * 0.04
-          f.wx = Math.random() * W
-          f.radius = 10 + Math.random() * 28
-          f.opacity = 0.08 + Math.random() * 0.12
-        }
-        if (f.wx < -W * 0.4) f.wx = W * 1.4
-        if (f.wx > W * 1.4) f.wx = -W * 0.4
+        const m = f.radius + 10
+        if (f.x < -m) f.x = W + m
+        if (f.x > W + m) f.x = -m
+        if (f.y < -m) f.y = H + m
+        if (f.y > H + m) f.y = -m
       })
       drawFrame()
       animId = requestAnimationFrame(animate)
@@ -148,7 +111,7 @@ export default function PackIceCanvas() {
       const rect = canvas.getBoundingClientRect()
       canvas.width = rect.width
       canvas.height = rect.height
-      floes = initFloes(rect.width)
+      floes = initFloes(rect.width, rect.height)
     }
 
     resize()
