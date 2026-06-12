@@ -183,7 +183,7 @@ export default function BasedInGreenland() {
       const drawLoop = () => {
         const p = scrollPRef.current
 
-        if (p >= 0.86) {
+        if (p >= 0.72) {
           ctx.clearRect(0, 0, W, H)
           if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
             const proj = d3.geoOrthographic()
