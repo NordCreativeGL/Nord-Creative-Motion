@@ -574,7 +574,7 @@ const TOTAL_EM = [13.2, 16.5, 14.9]
 
 const MONO_FONT = "'IBM Plex Mono', 'Courier New', monospace"
 
-export default function IcebergPackagesSection() {
+export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -656,7 +656,7 @@ export default function IcebergPackagesSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden', background: '#000507' }}>
+    <section id={id} ref={sectionRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden', background: '#000507' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
 
       <div style={{
