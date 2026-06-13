@@ -180,10 +180,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const rnd2 = rng(733)
     const floes = build(w, h)
     const [bgC, bg] = layer(w, h + 380, dpr)
-    let g = bg.createLinearGradient(0, 0, w * 0.3, h)
+    let g = bg.createLinearGradient(0, 0, 0, h)
     g.addColorStop(0, '#062633')
-    g.addColorStop(0.5, '#041c29')
-    g.addColorStop(1, '#02121d')
+    g.addColorStop(0.6, '#041c29')
+    g.addColorStop(1, '#041c29')
     bg.fillStyle = g; bg.fillRect(0, 0, w, h)
     for (let i = 0; i < 9; i++) {
       const mx = rnd2() * w, my = rnd2() * h, mr = (0.18 + rnd2() * 0.22) * Math.max(w, h)
