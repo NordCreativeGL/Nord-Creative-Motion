@@ -193,9 +193,9 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       g.addColorStop(1, 'rgba(0,0,0,0)')
       bg.fillStyle = g; bg.fillRect(mx - mr, my - mr, mr * 2, mr * 2)
     }
-    g = bg.createLinearGradient(0, h, w * 0.3, h + 380)
-    g.addColorStop(0, '#062633')
-    g.addColorStop(1, '#02121d')
+    g = bg.createLinearGradient(0, h, 0, h + 380)
+    g.addColorStop(0, '#041c29')
+    g.addColorStop(1, '#031520')
     bg.fillStyle = g; bg.fillRect(0, h, w, 380)
     for (const f of floes) {
       const pad = f.glow ? f.R * 1.0 + 30 : 18
@@ -311,7 +311,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 10 }}>
+    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
 
       <div style={{
