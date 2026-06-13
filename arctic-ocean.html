@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nord Creative — Packages &amp; CTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #000507; }
+  body { font-family: 'Archivo', sans-serif; color: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  ::selection { background: rgba(0,215,200,0.35); color: #fff; }
+
+  section { position: relative; min-height: 100dvh; overflow: hidden; }
+  section > canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* ---- Packages ---- */
+  #web-packages { background: #000507; }
+  .pk-head {
+    position: absolute; top: 6dvh; left: 0; right: 0; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 24px;
+  }
+  .pk-eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.38em;
+    color: rgba(0,215,200,0.85); margin-bottom: 18px;
+  }
+  .pk-title {
+    margin: 0; font-size: clamp(30px, 4.4vw, 56px); font-weight: 250; line-height: 1.08;
+    letter-spacing: -0.015em; text-wrap: balance;
+  }
+  .pk-tier {
+    position: absolute; z-index: 1; visibility: hidden; pointer-events: none;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    text-shadow: 0 1px 10px rgba(0,8,16,0.65);
+  }
+  .pk-tier .lbl {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.78em; letter-spacing: 0.3em;
+    color: rgba(140,235,225,0.9);
+  }
+  .pk-tier .name {
+    font-size: 1.65em; font-weight: 300; letter-spacing: 0.01em;
+    color: rgba(255,255,255,0.97); margin-top: 0.35em; white-space: nowrap;
+  }
+  .pk-tier .rule { width: 2.4em; height: 1px; background: rgba(140,235,225,0.4); margin: 0.8em 0 0.95em; }
+  .pk-tier .feats {
+    display: flex; flex-direction: column; gap: 0.78em;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.86em; line-height: 1.35;
+    color: rgba(232,250,252,0.85); letter-spacing: 0.02em; white-space: nowrap;
+  }
+
+  /* ---- CTA ---- */
+  .cta-wrap {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 0 24px; gap: 22px;
+  }
+  .cta-eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.38em;
+    color: rgba(0,215,200,0.85);
+  }
+  .cta-title {
+    margin: 0; font-size: clamp(32px, 4.8vw, 62px); font-weight: 250; line-height: 1.06;
+    letter-spacing: -0.015em; text-wrap: balance; max-width: 13em;
+  }
+  .cta-sub { margin: 0; font-size: clamp(15px, 1.5vw, 18px); font-weight: 300; color: rgba(255,255,255,0.55); max-width: 30em; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 12px; margin-top: 12px;
+    background: rgba(234,248,254,0.96); color: #042230; border-radius: 999px;
+    padding: 16px 38px; font-size: 15px; font-weight: 500; letter-spacing: 0.03em;
+    text-decoration: none; transition: box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .cta-btn:hover { box-shadow: 0 0 56px rgba(0,215,200,0.4); transform: translateY(-2px); }
+  .cta-btn .arr { font-family: 'IBM Plex Mono', monospace; font-size: 14px; }
+  .cta-foot {
+    position: absolute; bottom: 22px; left: 0; right: 0; display: flex; justify-content: center; z-index: 1;
+    font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.34em; color: rgba(255,255,255,0.28);
+  }
+</style>
+</head>
+<body>
+
+<section id="web-packages">
+  <canvas data-arctic="depth"></canvas>
+  <div class="pk-head">
+    <div class="pk-eyebrow">PACKAGES</div>
+    <h2 class="pk-title">Three ways to work with us</h2>
+  </div>
+  <div class="pk-tier" data-tier="0">
+    <div class="lbl">TIER&nbsp;I</div>
+    <div class="name">Starter</div>
+    <div class="rule"></div>
+    <div class="feats">
+      <span>Professional design</span>
+      <span>Up to 5 pages</span>
+      <span>Contact form</span>
+      <span>Mobile optimised</span>
+      <span>2 revision rounds</span>
+    </div>
+  </div>
+  <div class="pk-tier" data-tier="1">
+    <div class="lbl">TIER&nbsp;II</div>
+    <div class="name">Business</div>
+    <div class="rule"></div>
+    <div class="feats">
+      <span>Everything in Starter</span>
+      <span>SEO setup</span>
+      <span>Copywriting</span>
+      <span>Up to 10 pages</span>
+      <span>CMS integration</span>
+      <span>Google Analytics</span>
+      <span>3 revision rounds</span>
+    </div>
+  </div>
+  <div class="pk-tier" data-tier="2">
+    <div class="lbl">TIER&nbsp;III</div>
+    <div class="name">Full Production</div>
+    <div class="rule"></div>
+    <div class="feats">
+      <span>Everything in Business</span>
+      <span>Photo &amp; video production</span>
+      <span>Advanced animations</span>
+      <span>Custom functionality</span>
+      <span>Ongoing maintenance</span>
+      <span>Unlimited revisions</span>
+    </div>
+  </div>
+</section>
+
+<section id="web-cta">
+  <canvas data-arctic="packice"></canvas>
+  <div class="cta-wrap">
+    <div class="cta-eyebrow">START&nbsp;YOUR&nbsp;PROJECT</div>
+    <h2 class="cta-title">Ready to build something worth seeing?</h2>
+    <p class="cta-sub">Tell us about your project. We&rsquo;ll take it from there.</p>
+    <a class="cta-btn" href="mailto:hello@nordcreative.dk">Start your project<span class="arr">&rarr;</span></a>
+  </div>
+  <div class="cta-foot">NORD&nbsp;CREATIVE</div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  function rng(seed) {
+    let s = seed >>> 0;
+    return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+  }
+  function tracePoly(ctx, pts, round) {
+    const n = pts.length;
+    const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+    for (let i = 0; i < n; i++) {
+      const prev = pts[(i + n - 1) % n], cur = pts[i], next = pts[(i + 1) % n];
+      const a = lerp(cur, prev, round), b = lerp(cur, next, round);
+      if (i === 0) ctx.moveTo(a[0], a[1]); else ctx.lineTo(a[0], a[1]);
+      ctx.quadraticCurveTo(cur[0], cur[1], b[0], b[1]);
+    }
+    ctx.closePath();
+  }
+  function dims(canvas) {
+    const dpr = canvas._dpr || 1;
+    return [canvas.width / dpr, canvas.height / dpr, dpr];
+  }
+  function layer(w, h, dpr) {
+    const c = document.createElement('canvas');
+    c.width = Math.max(2, Math.round(w * dpr));
+    c.height = Math.max(2, Math.round(h * dpr));
+    const x = c.getContext('2d');
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return [c, x];
+  }
+  function vignette(ctx, w, h, strength) {
+    const g = ctx.createRadialGradient(w / 2, h * 0.55, Math.min(w, h) * 0.35, w / 2, h * 0.55, Math.max(w, h) * 0.78);
+    g.addColorStop(0, 'rgba(0,0,0,0)');
+    g.addColorStop(1, 'rgba(0,0,0,' + strength + ')');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  const DEPTH_BERGS = [
+    { phase: 0.0,
+      above: [[-52,0],[-46,-12],[-36,-26],[-24,-18],[-14,-44],[-4,-62],[4,-48],[14,-56],[24,-32],[34,-20],[44,-10],[52,0]] },
+    { phase: 1.9,
+      above: [[-60,0],[-56,-18],[-50,-30],[-46,-62],[-38,-76],[-28,-72],[-22,-56],[-14,-46],[-6,-50],[0,-42],[6,-68],[16,-86],[26,-78],[32,-58],[40,-36],[48,-20],[56,-8],[60,0]] },
+    { phase: 3.7,
+      above: [[-78,0],[-74,-14],[-66,-30],[-54,-42],[-40,-38],[-30,-48],[-18,-44],[-8,-58],[0,-52],[8,-80],[14,-108],[20,-126],[28,-96],[36,-68],[46,-50],[58,-32],[68,-16],[78,0]] },
+  ];
+
+  function genKeel(seed, topHalfW, depth, P) {
+    const rnd = rng(seed);
+    const N = 13;
+    const env = (t) => {
+      if (t < P.bulgeAt) { const u = t / P.bulgeAt; return 1 + (P.bulge - 1) * Math.sin(u * Math.PI / 2); }
+      const u = (t - P.bulgeAt) / (1 - P.bulgeAt); return P.bulge * Math.pow(1 - u, P.taper);
+    };
+    const tilt = P.tilt || 0;
+    const tMax = P.blunt ? 0.86 : 1;
+    const side = (dir) => {
+      const pts = []; let off = 0;
+      for (let i = 1; i <= N; i++) {
+        const t = (i / (N + 0.6)) * tMax;
+        const raw = (rnd() * 2 - 1) * P.rough + (rnd() * 2 - 1) * P.rough * 0.4;
+        off = off * 0.45 + raw * 0.55;
+        const x = dir * topHalfW * env(t) * (1 + off) + tilt * topHalfW * t;
+        const y = t * depth;
+        const r = rnd() < P.softP ? 0.4 + rnd() * 0.3 : 0;
+        pts.push([x, y, r]);
+      }
+      return pts;
+    };
+    const right = side(1), left = side(-1);
+    let bottom;
+    if (P.blunt) {
+      bottom = [];
+      const xr = right[right.length - 1][0] * 0.92, xl = left[left.length - 1][0] * 0.92, nb = 4;
+      for (let j = 0; j < nb; j++) {
+        const f = (j + 0.5) / nb;
+        const x = xr + (xl - xr) * f + (rnd() - 0.5) * topHalfW * 0.12;
+        const y = depth * (0.90 + rnd() * 0.10);
+        bottom.push([x, y, rnd() < 0.5 ? 0.4 : 0]);
+      }
+    } else {
+      bottom = [[(rnd() * 2 - 1) * topHalfW * 0.28 + tilt * topHalfW, depth, rnd() < 0.5 ? 0.45 : 0]];
+    }
+    return [[topHalfW * 1.02, 0, 0]].concat(right, bottom, left.reverse(), [[-topHalfW * 1.02, 0, 0]]);
+  }
+
+  DEPTH_BERGS[0].below = genKeel(317, 52, 112, { bulge: 1.52, bulgeAt: 0.50, taper: 0.42, rough: 0.15, softP: 0.62, blunt: true, tilt: 0.34 });
+  DEPTH_BERGS[1].below = genKeel(947, 60, 175, { bulge: 1.32, bulgeAt: 0.36, taper: 0.62, rough: 0.15, softP: 0.45 });
+  DEPTH_BERGS[2].below = genKeel(523, 78, 262, { bulge: 1.27, bulgeAt: 0.24, taper: 0.88, rough: 0.15, softP: 0.50, tilt: -0.12 });
+
+  const DEPTH_STARS = [
+    [0.08,0.35,0.8,0.5],[0.18,0.18,0.7,0.45],[0.30,0.45,0.8,0.55],[0.41,0.15,0.7,0.5],
+    [0.53,0.38,0.9,0.6],[0.66,0.22,0.7,0.45],[0.77,0.42,0.8,0.5],[0.88,0.16,0.8,0.55],
+    [0.95,0.40,0.7,0.4],[0.24,0.60,0.7,0.3],[0.60,0.58,0.7,0.35],
+  ];
+  const DEPTH_RAYS = [
+    { x: 0.22, drift: 0.012, wTop: 0.016, wBot: 0.06, a: 0.040 },
+    { x: 0.38, drift: -0.010, wTop: 0.011, wBot: 0.045, a: 0.030 },
+    { x: 0.55, drift: 0.014, wTop: 0.018, wBot: 0.07, a: 0.045 },
+    { x: 0.70, drift: -0.008, wTop: 0.010, wBot: 0.04, a: 0.028 },
+    { x: 0.88, drift: 0.010, wTop: 0.014, wBot: 0.055, a: 0.036 },
+  ];
+
+  const bMaxA = (bd) => Math.max(...bd.above.map((p) => -p[1]));
+  const bMaxB = (bd) => Math.max(...bd.below.map((p) => p[1]));
+  const bHalfW = (bd) => Math.max(...bd.above.concat(bd.below).map((p) => Math.abs(p[0])));
+  const bHalfWBelow = (bd) => Math.max(...bd.below.map((p) => Math.abs(p[0])));
+
+  function createDepth(canvas) {
+    const ctx = canvas.getContext('2d');
+    let L = null;
+    const hov = [0, 0, 0], hovT = [0, 0, 0];
+    let px = -1e4, py = -1e4;
+    let _dpr = 1;
+
+    function pathB(c, pts) {
+      c.beginPath();
+      const n = pts.length;
+      const mid = (a, b2) => [(a[0] + b2[0]) / 2, (a[1] + b2[1]) / 2];
+      const first = pts[0];
+      if (first[2]) {
+        const m0 = mid(pts[n - 1], first); c.moveTo(m0[0], m0[1]);
+        const m1 = mid(first, pts[1]); c.quadraticCurveTo(first[0], first[1], m1[0], m1[1]);
+      } else { c.moveTo(first[0], first[1]); }
+      for (let i = 1; i < n; i++) {
+        const cur = pts[i];
+        if (cur[2]) {
+          const prev = pts[i - 1], next = pts[(i + 1) % n];
+          const mIn = mid(prev, cur), mOut = mid(cur, next);
+          c.lineTo(mIn[0], mIn[1]); c.quadraticCurveTo(cur[0], cur[1], mOut[0], mOut[1]);
+        } else { c.lineTo(cur[0], cur[1]); }
+      }
+      c.closePath();
+    }
+
+    const STACK_HEADER = 170;
+    function plan(w, h) {
+      const stack = w < 1024;
+      const items = [], scenes = [];
+      if (!stack) {
+        const wl = h * 0.26;
+        const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA));
+        const maxBAll = Math.max(...DEPTH_BERGS.map(bMaxB));
+        const k = Math.min((wl - 30) / maxAAll, (h - wl - 36) / maxBAll, w * 0.00165);
+        const cxs = [0.17, 0.48, 0.80];
+        scenes.push({ y0: 0, y1: h, wl });
+        DEPTH_BERGS.forEach((bd, i) => items.push({ bd, i, cx: cxs[i] * w, wl, k }));
+      } else {
+        const sh = Math.max((h - STACK_HEADER) / 3, 200);
+        DEPTH_BERGS.forEach((bd, i) => {
+          const y0 = STACK_HEADER + i * sh, wl = y0 + sh * 0.30;
+          const k = Math.min((sh * 0.30 - 24) / bMaxA(bd), (sh * 0.70 - 40) / bMaxB(bd), w * 0.0042);
+          scenes.push({ y0, y1: y0 + sh, wl });
+          items.push({ bd, i, cx: 0.5 * w, wl, k });
+        });
+        scenes[0].y0 = 0;
+      }
+      return { stack, scenes, items };
+    }
+
+    function buildSprite(item, dpr) {
+      const { bd, k, i } = item;
+      const maxA = bMaxA(bd), maxB = bMaxB(bd), halfW = bHalfW(bd);
+      const pad = 30;
+      const bw = halfW * 2 * k + pad * 2, bh = (maxA + maxB) * k + pad * 2;
+      const [spC, sp] = layer(bw, bh, dpr);
+      const ax = bw / 2, ay = pad + maxA * k;
+      sp.translate(ax, ay); sp.scale(k, k);
+      const rs = rng(101 + i * 37);
+
+      pathB(sp, bd.below);
+      let g = sp.createLinearGradient(0, 0, 0, maxB);
+      g.addColorStop(0, 'rgba(170,248,240,0.55)');
+      g.addColorStop(0.25, 'rgba(70,190,192,0.36)');
+      g.addColorStop(0.6, 'rgba(18,95,120,0.24)');
+      g.addColorStop(1, 'rgba(4,36,58,0.15)');
+      sp.fillStyle = g; sp.fill();
+
+      sp.save(); pathB(sp, bd.below); sp.clip();
+      g = sp.createLinearGradient(0, 0, 0, 30);
+      g.addColorStop(0, 'rgba(215,255,250,0.55)');
+      g.addColorStop(1, 'rgba(215,255,250,0)');
+      sp.fillStyle = g; sp.fillRect(-halfW * 1.4, 0, halfW * 2.8, 32);
+      g = sp.createLinearGradient(-halfW, 0, halfW, 0);
+      g.addColorStop(0, 'rgba(0,18,36,0.20)');
+      g.addColorStop(0.32, 'rgba(0,18,36,0)');
+      g.addColorStop(0.68, 'rgba(0,18,36,0)');
+      g.addColorStop(1, 'rgba(0,18,36,0.15)');
+      sp.fillStyle = g; sp.fillRect(-halfW * 1.4, 0, halfW * 2.8, maxB);
+      g = sp.createLinearGradient(-halfW * 0.75, 0, halfW * 0.75, 0);
+      g.addColorStop(0, 'rgba(2,26,44,0)');
+      g.addColorStop(0.25, 'rgba(2,26,44,0.13)');
+      g.addColorStop(0.75, 'rgba(2,26,44,0.13)');
+      g.addColorStop(1, 'rgba(2,26,44,0)');
+      sp.fillStyle = g; sp.fillRect(-halfW * 0.75, 8, halfW * 1.5, maxB * 0.66);
+      g = sp.createLinearGradient(0, 8, 0, maxB * 0.74);
+      g.addColorStop(0, 'rgba(2,26,44,0)');
+      g.addColorStop(0.2, 'rgba(2,26,44,0.10)');
+      g.addColorStop(0.75, 'rgba(2,26,44,0.10)');
+      g.addColorStop(1, 'rgba(2,26,44,0)');
+      sp.fillStyle = g; sp.fillRect(-halfW * 0.62, 8, halfW * 1.24, maxB * 0.66);
+      const bp = bd.below;
+      for (let v = 1; v < bp.length - 2; v++) {
+        if (rs() < 0.3) continue;
+        const p1 = bp[v], p2 = bp[v + 1];
+        if (p1[1] < 34 && p2[1] < 34) continue;
+        const q2 = [p2[0] * (0.18 + rs() * 0.3), p2[1] * (0.55 + rs() * 0.25)];
+        const q1 = [p1[0] * (0.18 + rs() * 0.3), p1[1] * (0.55 + rs() * 0.25)];
+        sp.beginPath();
+        sp.moveTo(p1[0], p1[1]); sp.lineTo(p2[0], p2[1]); sp.lineTo(q2[0], q2[1]); sp.lineTo(q1[0], q1[1]);
+        sp.closePath();
+        const light = rs() < 0.45;
+        sp.fillStyle = light
+          ? 'rgba(195,252,246,' + (0.03 + rs() * 0.04).toFixed(3) + ')'
+          : 'rgba(2,28,48,' + (0.04 + rs() * 0.06).toFixed(3) + ')';
+        sp.fill();
+        if (rs() < 0.3) { sp.strokeStyle = 'rgba(185,248,242,0.06)'; sp.lineWidth = 0.7; sp.stroke(); }
+      }
+      const nStreak = 5 + i * 2;
+      for (let sIdx = 0; sIdx < nStreak; sIdx++) {
+        const x0 = (rs() * 2 - 1) * halfW * 0.8;
+        const y0 = 10 + rs() * maxB * 0.25;
+        const len = maxB * (0.25 + rs() * 0.45);
+        const drift = (rs() - 0.5) * halfW * 0.16;
+        sp.strokeStyle = sIdx % 3 === 0 ? 'rgba(195,250,244,0.10)' : 'rgba(3,34,56,0.13)';
+        sp.lineWidth = 0.8 + rs() * 0.9;
+        sp.beginPath(); sp.moveTo(x0, y0);
+        if (rs() < 0.5) sp.quadraticCurveTo(x0 + drift, y0 + len * 0.5, x0 + drift * 0.5, y0 + len);
+        else { sp.lineTo(x0 + drift * 0.4, y0 + len * 0.5); sp.lineTo(x0 + drift, y0 + len); }
+        sp.stroke();
+      }
+      sp.restore();
+
+      sp.save();
+      sp.lineJoin = 'round';
+      sp.shadowColor = 'rgba(0,215,200,0.45)'; sp.shadowBlur = 14;
+      pathB(sp, bd.below);
+      sp.strokeStyle = 'rgba(150,240,232,0.34)'; sp.lineWidth = 1.4 / k; sp.stroke();
+      sp.restore();
+
+      pathB(sp, bd.above);
+      g = sp.createLinearGradient(-halfW * 0.8, -maxA, halfW * 0.6, 0);
+      g.addColorStop(0, 'rgba(246,253,255,0.98)');
+      g.addColorStop(0.5, 'rgb(206,223,231)');
+      g.addColorStop(1, 'rgba(168,200,217,0.96)');
+      sp.fillStyle = g; sp.fill();
+
+      sp.save(); pathB(sp, bd.above); sp.clip();
+      g = sp.createLinearGradient(-halfW, 0, halfW, 0);
+      g.addColorStop(0, 'rgba(255,255,255,0.20)');
+      g.addColorStop(0.45, 'rgba(255,255,255,0)');
+      g.addColorStop(1, 'rgba(22,60,95,0.18)');
+      sp.fillStyle = g; sp.fillRect(-halfW, -maxA, halfW * 2, maxA + 4);
+      for (let f = 0; f < 16 + i * 6; f++) {
+        const x = (rs() * 2 - 1) * halfW * 0.85;
+        const y = -rs() * maxA * 0.9;
+        const len = 6 + rs() * maxA * 0.2;
+        sp.strokeStyle = f % 3 === 0 ? 'rgba(255,255,255,0.12)' : 'rgba(12,44,74,0.13)';
+        sp.lineWidth = 0.7 + rs() * 0.6;
+        sp.beginPath(); sp.moveTo(x, y); sp.lineTo(x + (rs() - 0.5) * 5, y + len); sp.stroke();
+      }
+      g = sp.createLinearGradient(0, 0, 0, -22);
+      g.addColorStop(0, 'rgba(60,205,196,0.25)');
+      g.addColorStop(1, 'rgba(60,205,196,0)');
+      sp.fillStyle = g; sp.fillRect(-halfW, -24, halfW * 2, 24);
+      sp.restore();
+
+      pathB(sp, bd.above);
+      sp.strokeStyle = 'rgba(255,255,255,0.22)'; sp.lineWidth = 1 / k; sp.stroke();
+
+      return { spC, bw, bh, ax, ay };
+    }
+
+    function resize(w, h) {
+      const dpr = _dpr;
+      const P = plan(w, h);
+      const [bgC, bg] = layer(w, h, dpr);
+      let g;
+      const starRng = rng(4801);
+      for (const sc of P.scenes) {
+        g = bg.createLinearGradient(0, sc.y0, 0, sc.wl);
+        g.addColorStop(0, '#01040a');
+        g.addColorStop(0.6, '#040f1d');
+        g.addColorStop(1, '#06182a');
+        bg.fillStyle = g; bg.fillRect(0, sc.y0, w, sc.wl - sc.y0 + 1);
+        const skyH = sc.wl - sc.y0;
+        const nStars = Math.round((w * skyH) / 5200);
+        for (let i = 0; i < nStars; i++) {
+          const sx = starRng() * w;
+          const sy = sc.y0 + Math.pow(starRng(), 1.35) * skyH * 0.96;
+          const big = starRng() < 0.12;
+          const rad = big ? 0.8 + starRng() * 0.7 : 0.35 + starRng() * 0.5;
+          const a = (big ? 0.55 : 0.28) + starRng() * 0.35;
+          bg.fillStyle = 'rgba(220,235,244,' + a.toFixed(3) + ')';
+          bg.beginPath(); bg.arc(sx, sy, rad, 0, Math.PI * 2); bg.fill();
+          if (big && starRng() < 0.5) {
+            bg.fillStyle = 'rgba(180,222,238,' + (a * 0.4).toFixed(3) + ')';
+            bg.beginPath(); bg.arc(sx, sy, rad * 2.4, 0, Math.PI * 2); bg.fill();
+          }
+        }
+        const hy = sc.y0 + skyH * (0.3 + starRng() * 0.3);
+        g = bg.createLinearGradient(0, hy - skyH * 0.18, 0, hy + skyH * 0.18);
+        g.addColorStop(0, 'rgba(60,110,150,0)');
+        g.addColorStop(0.5, 'rgba(60,110,150,0.05)');
+        g.addColorStop(1, 'rgba(60,110,150,0)');
+        bg.fillStyle = g; bg.fillRect(0, hy - skyH * 0.18, w, skyH * 0.36);
+        g = bg.createLinearGradient(0, sc.wl, 0, sc.y1);
+        g.addColorStop(0, '#07343f');
+        g.addColorStop(0.45, '#052733');
+        g.addColorStop(1, '#031b26');
+        bg.fillStyle = g; bg.fillRect(0, sc.wl, w, sc.y1 - sc.wl);
+      }
+      for (const it of P.items) {
+        const maxB = bMaxB(it.bd) * it.k;
+        const gy = it.wl + maxB * 0.42;
+        const gr = Math.max(bHalfWBelow(it.bd) * it.k * 2.0, 60);
+        g = bg.createRadialGradient(it.cx, gy, gr * 0.12, it.cx, gy, gr);
+        g.addColorStop(0, 'rgba(0,215,200,' + (0.07 + it.i * 0.025).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(0,215,200,0)');
+        bg.fillStyle = g; bg.fillRect(it.cx - gr, it.wl, gr * 2, gr * 2);
+      }
+      const sprites = P.items.map((it) => Object.assign({ it }, buildSprite(it, dpr)));
+      const [fgC, fg] = layer(w, h, dpr);
+      for (const sc of P.scenes) {
+        fg.fillStyle = 'rgba(190,230,238,0.45)'; fg.fillRect(0, sc.wl, w, 1);
+        g = fg.createLinearGradient(0, sc.wl - 16, 0, sc.wl + 14);
+        g.addColorStop(0, 'rgba(3,16,26,0)');
+        g.addColorStop(0.5, 'rgba(60,150,160,0.06)');
+        g.addColorStop(1, 'rgba(3,16,26,0)');
+        fg.fillStyle = g; fg.fillRect(0, sc.wl - 16, w, 30);
+      }
+      vignette(fg, w, h, 0.42);
+      const anchors = P.items.map((it) => ({
+        cx: it.cx, wl: it.wl,
+        halfW: bHalfWBelow(it.bd) * it.k,
+        depth: bMaxB(it.bd) * it.k,
+        topH: bMaxA(it.bd) * it.k,
+      }));
+      L = { bgC, fgC, sprites, scenes: P.scenes, stack: P.stack, anchors, w, h, key: w + 'x' + h + (P.stack ? 's' : 'r') };
+    }
+
+    function bobOf(i, t) { return Math.sin(t * 0.00045 + DEPTH_BERGS[i].phase) * 2.6; }
+
+    function draw(t) {
+      const w = canvas.width / _dpr, h = canvas.height / _dpr;
+      if (!L || L.w !== w || L.h !== h) resize(w, h);
+      ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0);
+      ctx.drawImage(L.bgC, 0, 0, w, h);
+      for (const sc of L.scenes) {
+        for (let i = 0; i < DEPTH_STARS.length; i++) {
+          const st = DEPTH_STARS[i];
+          const tw = 0.75 + 0.25 * Math.sin(t * 0.0006 + i * 2.1);
+          ctx.fillStyle = 'rgba(214,232,240,' + (st[3] * tw).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.arc(st[0] * w, sc.y0 + st[1] * (sc.wl - sc.y0) * 0.85, st[2], 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.save(); ctx.beginPath(); ctx.rect(0, sc.wl, w, sc.y1 - sc.wl); ctx.clip();
+        for (const r of DEPTH_RAYS) {
+          const sway = Math.sin(t * 0.0002 + r.x * 9) * w * r.drift;
+          const topX = r.x * w, botX = r.x * w + sway + w * 0.025;
+          const g = ctx.createLinearGradient(0, sc.wl, 0, sc.y1 - (sc.y1 - sc.wl) * 0.1);
+          g.addColorStop(0, 'rgba(140,230,235,' + r.a + ')');
+          g.addColorStop(1, 'rgba(140,230,235,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.moveTo(topX - w * r.wTop, sc.wl); ctx.lineTo(topX + w * r.wTop, sc.wl);
+          ctx.lineTo(botX + w * r.wBot, sc.y1); ctx.lineTo(botX - w * r.wBot, sc.y1);
+          ctx.closePath(); ctx.fill();
+        }
+        ctx.restore();
+      }
+      for (let i = 0; i < L.anchors.length; i++) {
+        const a = L.anchors[i];
+        const inside = px > a.cx - a.halfW * 1.08 && px < a.cx + a.halfW * 1.08 &&
+                       py > a.wl - a.topH - 14 && py < a.wl + a.depth + 14;
+        hovT[i] = inside ? 1 : 0;
+        hov[i] += (hovT[i] - hov[i]) * 0.10;
+        if (hov[i] < 0.004) hov[i] = 0;
+      }
+      canvas.style.cursor = hovT.some((v) => v) ? 'pointer' : '';
+      const ord = L.sprites.map((s, idx) => idx).sort((p, q) => hov[L.sprites[p].it.i] - hov[L.sprites[q].it.i]);
+      for (const idx of ord) {
+        const s = L.sprites[idx];
+        const i = s.it.i, b = bobOf(i, t), a = L.anchors[i], hv = hov[i];
+        if (hv > 0.01) {
+          const gr = a.halfW * 2.6, gy = a.wl + a.depth * 0.32;
+          const g2 = ctx.createRadialGradient(a.cx, gy, gr * 0.1, a.cx, gy, gr);
+          g2.addColorStop(0, 'rgba(0,215,200,' + (0.14 * hv).toFixed(3) + ')');
+          g2.addColorStop(1, 'rgba(0,215,200,0)');
+          ctx.fillStyle = g2; ctx.fillRect(a.cx - gr, a.wl - a.topH, gr * 2, gr * 2.6);
+        }
+        const scl = 1 + 0.50 * hv;
+        ctx.save();
+        ctx.translate(s.it.cx, s.it.wl + b); ctx.scale(scl, scl);
+        ctx.drawImage(s.spC, -s.ax, -s.ay, s.bw, s.bh);
+        ctx.restore();
+      }
+      ctx.drawImage(L.fgC, 0, 0, w, h);
+    }
+
+    function layout() {
+      if (!L) return null;
+      const wantH = L.stack ? Math.round(STACK_HEADER + 3 * Math.min(Math.max(520, L.w * 1.35), 680)) : 0;
+      return { key: L.key, stack: L.stack, wantH, items: L.anchors };
+    }
+    function setDpr(d) { _dpr = d; }
+    function pointer(x, y) { px = x; py = y; }
+    function hoverVal(i) { return hov[i]; }
+    return { draw, resize, layout, bob: bobOf, pointer, hoverVal, setDpr };
+  }
+
+  function makeFloe(r, rnd) {
+    const n = 5 + Math.floor(rnd() * 5);
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + (rnd() - 0.5) * 0.55;
+      const rad = r * (0.55 + rnd() * 0.45);
+      pts.push([Math.cos(a) * rad, Math.sin(a) * rad]);
+    }
+    const elong = rnd() < 0.3 ? 1.7 + rnd() * 0.9 : 1 + rnd() * 0.35;
+    for (const p of pts) p[0] *= elong;
+    const round = rnd() < 0.45 ? 0.06 + rnd() * 0.08 : 0.14 + rnd() * 0.07;
+    let R = 0;
+    for (const p of pts) R = Math.max(R, Math.hypot(p[0], p[1]));
+    const cracks = [];
+    const nc = 2 + Math.floor(rnd() * 2);
+    for (let c = 0; c < nc; c++) {
+      const a0 = rnd() * Math.PI * 2;
+      const seg = [];
+      let pxx = Math.cos(a0) * r * 0.15, pyy = Math.sin(a0) * r * 0.15;
+      let dir = a0 + Math.PI * (0.7 + rnd() * 0.6);
+      const steps = 3 + Math.floor(rnd() * 2);
+      seg.push([pxx, pyy]);
+      for (let sgi = 0; sgi < steps; sgi++) {
+        const len = r * (0.16 + rnd() * 0.16);
+        dir += (rnd() - 0.5) * 0.9;
+        pxx += Math.cos(dir) * len; pyy += Math.sin(dir) * len;
+        seg.push([pxx, pyy]);
+      }
+      cracks.push(seg);
+    }
+    return { pts, round, R, cracks };
+  }
+
+  function createPackIce(canvas) {
+    const ctx = canvas.getContext('2d');
+    const FILLS = ['rgb(200,216,222)', 'rgb(215,228,235)', 'rgb(238,248,252)'];
+    let L = null;
+    let _dpr = 1;
+
+    function build(w, h) {
+      const rnd = rng(1207);
+      const out = [];
+      const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) };
+      const exScale = [1.3, 1.0, 0.7];
+      const place = (R, tier) => {
+        const fx = exScale[tier];
+        for (let i = 0; i < 320; i++) {
+          const x = rnd() * w, y = rnd() * h;
+          if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
+              y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue;
+          let ok = true;
+          for (const f of out) {
+            const dx = f.x - x, dy = f.y - y;
+            const min = (f.R + R) * 1.04 + 24;
+            if (dx * dx + dy * dy < min * min) { ok = false; break; }
+          }
+          if (ok) return { x, y };
+        }
+        return null;
+      };
+      const mk = (rMin, rMax, tier) => {
+        const r = rMin + rnd() * (rMax - rMin);
+        const sh = makeFloe(r, rnd);
+        const pos = place(sh.R, tier);
+        if (!pos) return;
+        const glow = tier === 0 ? rnd() < 0.75 : tier === 1 ? rnd() < 0.3 : false;
+        out.push({
+          ...pos, ...sh, tier, glow,
+          phase: rnd() * 6.28, phase2: rnd() * 6.28,
+          rot: rnd() * 6.28, rotV: (rnd() - 0.5) * 0.000012,
+          driftR: tier === 0 ? 4 + rnd() * 4 : tier === 1 ? 6 + rnd() * 5 : 8 + rnd() * 7,
+          driftS: 0.000055 + rnd() * 0.00005,
+          amp: 0.7 + rnd() * 1.1,
+        });
+      };
+      const base = Math.min(w, 1500);
+      for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0);
+      for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1);
+      for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2);
+      return out;
+    }
+
+    function resize(w, h) {
+      const dpr = _dpr;
+      const rnd2 = rng(733);
+      const floes = build(w, h);
+      const [bgC, bg] = layer(w, h, dpr);
+      let g = bg.createLinearGradient(0, 0, w * 0.3, h);
+      g.addColorStop(0, '#062633');
+      g.addColorStop(0.5, '#041c29');
+      g.addColorStop(1, '#02121d');
+      bg.fillStyle = g; bg.fillRect(0, 0, w, h);
+      for (let i = 0; i < 9; i++) {
+        const mx = rnd2() * w, my = rnd2() * h, mr = (0.18 + rnd2() * 0.22) * Math.max(w, h);
+        g = bg.createRadialGradient(mx, my, mr * 0.2, mx, my, mr);
+        const lighter = rnd2() < 0.55;
+        g.addColorStop(0, lighter ? 'rgba(20,90,105,0.055)' : 'rgba(1,8,14,0.10)');
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        bg.fillStyle = g; bg.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+      }
+      for (const f of floes) {
+        const pad = f.glow ? f.R * 1.0 + 30 : 18;
+        const half = f.R + pad;
+        const [spC, sp] = layer(half * 2, half * 2, dpr);
+        sp.translate(half, half);
+        if (f.glow) {
+          const oxp = f.R * 0.08, oyp = f.R * 0.14;
+          const gh = sp.createRadialGradient(oxp, oyp, f.R * 0.30, oxp, oyp, f.R * 2.0);
+          gh.addColorStop(0, 'rgba(0,215,200,0.34)');
+          gh.addColorStop(0.35, 'rgba(0,210,198,0.20)');
+          gh.addColorStop(0.65, 'rgba(0,200,192,0.08)');
+          gh.addColorStop(1, 'rgba(0,190,185,0)');
+          sp.fillStyle = gh; sp.fillRect(-half, -half, half * 2, half * 2);
+          sp.save(); sp.translate(oxp, oyp); sp.scale(1.55, 1.55);
+          sp.beginPath(); tracePoly(sp, f.pts, 0.35);
+          sp.fillStyle = 'rgba(0,215,200,0.07)'; sp.fill();
+          sp.restore();
+        }
+        if (f.tier < 2) {
+          sp.save(); sp.translate(2.5, 4);
+          sp.beginPath(); tracePoly(sp, f.pts, f.round);
+          sp.fillStyle = 'rgba(0,3,8,0.5)'; sp.fill();
+          sp.restore();
+        }
+        sp.beginPath(); tracePoly(sp, f.pts, f.round);
+        sp.fillStyle = FILLS[f.tier]; sp.fill();
+        if (f.tier === 0) {
+          sp.strokeStyle = 'rgba(0,18,50,0.22)'; sp.lineWidth = 0.9;
+          for (const seg of f.cracks) {
+            sp.beginPath();
+            seg.forEach((p, i) => { if (i === 0) sp.moveTo(p[0], p[1]); else sp.lineTo(p[0], p[1]); });
+            sp.stroke();
+          }
+        }
+        f.spC = spC; f.half = half;
+      }
+      const [fgC, fg] = layer(w, h, dpr);
+      vignette(fg, w, h, 0.5);
+      const rnd3 = rng(919);
+      const shimmers = Array.from({ length: 14 }, () => [rnd3(), rnd3(), 0.03 + rnd3() * 0.1, rnd3()]);
+      L = { bgC, fgC, floes, shimmers, w, h };
+    }
+
+    function draw(t) {
+      const w = canvas.width / _dpr, h = canvas.height / _dpr;
+      if (!L || L.w !== w || L.h !== h) resize(w, h);
+      ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0);
+      ctx.drawImage(L.bgC, 0, 0, w, h);
+      for (let i = 0; i < L.shimmers.length; i++) {
+        const sh = L.shimmers[i];
+        const x = ((sh[0] + t * 0.0000035 * (0.5 + sh[3])) % 1) * w;
+        const y = sh[1] * h, len = sh[2] * w;
+        ctx.fillStyle = 'rgba(120,200,210,' + (0.025 + sh[3] * 0.03).toFixed(3) + ')';
+        ctx.fillRect(x - len / 2, y, len, 1);
+      }
+      for (const f of L.floes) {
+        const dx = Math.sin(t * f.driftS + f.phase) * f.driftR + Math.sin(t * 0.00035 + f.phase) * f.amp * 0.5;
+        const dy = Math.cos(t * f.driftS * 0.8 + f.phase2) * f.driftR * 0.7 + Math.cos(t * 0.00028 + f.phase2) * f.amp * 0.4;
+        ctx.save();
+        ctx.translate(f.x + dx, f.y + dy);
+        ctx.rotate(f.rot + t * f.rotV);
+        ctx.drawImage(f.spC, -f.half, -f.half, f.half * 2, f.half * 2);
+        ctx.restore();
+      }
+      ctx.drawImage(L.fgC, 0, 0, w, h);
+    }
+
+    function setDpr(d) { _dpr = d; }
+    return { draw, resize, setDpr };
+  }
+
+  function fit(canvas, painter) {
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.max(2, Math.round(r.width * dpr));
+    canvas.height = Math.max(2, Math.round(r.height * dpr));
+    if (painter.setDpr) painter.setDpr(dpr);
+    if (painter.resize) painter.resize(r.width, r.height);
+  }
+
+  function start() {
+    const depthCanvas = document.querySelector('canvas[data-arctic="depth"]');
+    const iceCanvas = document.querySelector('canvas[data-arctic="packice"]');
+    const depth = createDepth(depthCanvas);
+    const ice = createPackIce(iceCanvas);
+    const pairs = [{ c: depthCanvas, p: depth }, { c: iceCanvas, p: ice }];
+    pairs.forEach(({ c, p }) => { fit(c, p); new ResizeObserver(() => fit(c, p)).observe(c); });
+    depthCanvas.addEventListener('mousemove', (e) => {
+      const r = depthCanvas.getBoundingClientRect();
+      depth.pointer(e.clientX - r.left, e.clientY - r.top);
+    });
+    depthCanvas.addEventListener('mouseleave', () => depth.pointer(-1e4, -1e4));
+    const tiers = [0, 1, 2].map((i) => document.querySelector('.pk-tier[data-tier="' + i + '"]'));
+    const pkSection = document.getElementById('web-packages');
+    const TOTAL_EM = [13.2, 16.5, 14.9];
+    let key = null;
+    function syncDepth(t) {
+      const lay = depth.layout();
+      if (!lay) return;
+      if (lay.key !== key) {
+        key = lay.key;
+        pkSection.style.minHeight = lay.stack ? lay.wantH + 'px' : '100dvh';
+        setTimeout(() => pairs.forEach(({ c, p }) => fit(c, p)), 60);
+        lay.items.forEach((b, i) => {
+          const el = tiers[i]; if (!el) return;
+          const wdt = Math.min(b.halfW * 1.08, 320);
+          const topOff = Math.max(16, b.depth * 0.06);
+          const avail = b.depth * 0.56 - topOff;
+          const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]));
+          el.style.left = (b.cx - wdt / 2) + 'px';
+          el.style.top = (b.wl + topOff) + 'px';
+          el.style.width = wdt + 'px';
+          el.style.fontSize = fs + 'px';
+          el.style.transformOrigin = '50% ' + (-topOff) + 'px';
+          el.style.visibility = 'visible';
+        });
+      }
+      lay.items.forEach((b, i) => {
+        const el = tiers[i]; if (!el) return;
+        const hv = depth.hoverVal(i);
+        const sc = 1 + 0.50 * hv;
+        el.style.transform = 'translateY(' + depth.bob(i, t).toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')';
+        el.style.zIndex = hv > 0.02 ? '3' : '1';
+      });
+    }
+    let rafId;
+    function loop(t) { depth.draw(t); ice.draw(t); syncDepth(t); rafId = requestAnimationFrame(loop); }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+</script>
+</body>
+</html>
