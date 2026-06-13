@@ -122,14 +122,18 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
   function build(w: number, h: number): Floe[] {
     const rnd = rng(1207)
     const out: Floe[] = []
+    const extH = h + 380
     const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
+    const footerEx = { x: w / 2, y: h + 160, hw: w * 0.38, hh: 120 }
     const exScale = [1.3, 1.0, 0.7]
-    const place = (R: number, tier: number): { x: number, y: number } | null => {
+    const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
       const fx = exScale[tier]
       for (let i = 0; i < 320; i++) {
-        const x = rnd() * w, y = rnd() * h
+        const x = rnd() * w, y = yMin + rnd() * (yMax - yMin)
         if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
             y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue
+        if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
+            y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
         let ok = true
         for (const f of out) {
           const dx = f.x - x, dy = f.y - y
@@ -140,10 +144,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       }
       return null
     }
-    const mk = (rMin: number, rMax: number, tier: number) => {
+    const mk = (rMin: number, rMax: number, tier: number, yMin: number, yMax: number) => {
       const r = rMin + rnd() * (rMax - rMin)
       const sh = makeFloe(r, rnd)
-      const pos = place(sh.R, tier)
+      const pos = place(sh.R, tier, yMin, yMax)
       if (!pos) return
       const glow = tier === 0 ? rnd() < 0.75 : tier === 1 ? rnd() < 0.3 : false
       out.push({
@@ -158,9 +162,11 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       })
     }
     const base = Math.min(w, 1500)
-    for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0)
-    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1)
-    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2)
+    for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
+    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
+    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
+    for (let i = 0; i < 8; i++) mk(base * 0.026, base * 0.052, 1, h + 20, extH - 20)
+    for (let i = 0; i < 20; i++) mk(base * 0.005, base * 0.013, 2, h + 20, extH - 20)
     return out
   }
 
@@ -226,11 +232,13 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
   }
 
   function draw(t: number) {
-    const w = canvas.width / _dpr, h = canvas.height / _dpr
+    const w = canvas.width / _dpr, fullH = canvas.height / _dpr
+    const h = fullH - 380
     if (!L || L.w !== w || L.h !== h) resize(w, h)
     if (!L) return
     const cur = L
     ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0)
+    ctx.clearRect(0, 0, w, fullH)
     ctx.drawImage(cur.bgC, 0, 0, w, h)
     for (let i = 0; i < cur.shimmers.length; i++) {
       const sh = cur.shimmers[i]
@@ -273,7 +281,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
       canvas!.width = Math.max(2, Math.round(r.width * dpr))
       canvas!.height = Math.max(2, Math.round(r.height * dpr))
       ice.setDpr(dpr)
-      ice.resize(r.width, r.height)
+      ice.resize(r.width, r.height - 380)
     }
 
     fit()
@@ -294,8 +302,8 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden' }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 10 }}>
+      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
 
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
