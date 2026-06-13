@@ -233,8 +233,8 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       }
       f.spC = spC; f.half = half
     }
-    const [fgC, fg] = layer(w, h, dpr)
-    vignette(fg, w, h, 0.5)
+    const [fgC, fg] = layer(w, h + 380, dpr)
+    vignette(fg, w, h + 380, 0.5)
     const rnd3 = rng(919)
     const shimmers = Array.from({ length: 14 }, () => [rnd3(), rnd3(), 0.03 + rnd3() * 0.1, rnd3()])
     L = { bgC, fgC, floes, shimmers, w, h }
@@ -265,7 +265,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       ctx.drawImage(f.spC, -f.half, -f.half, f.half * 2, f.half * 2)
       ctx.restore()
     }
-    ctx.drawImage(cur.fgC, 0, 0, w, h)
+    ctx.drawImage(cur.fgC, 0, 0, w, fullH)
   }
 
   function setDpr(d: number) { _dpr = d }
