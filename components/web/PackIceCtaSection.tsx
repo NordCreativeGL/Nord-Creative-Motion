@@ -124,10 +124,8 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const out: Floe[] = []
     const extH = h + 380
     const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
-    // Large/medium pieces (tier 0 + tier 1): exclude entire footer zone
-    const footerExLarge = { x: w / 2, y: h + 190, hw: w * 0.52, hh: 210 }
-    // Tiny pieces (tier 2): exclude the center column only, allow extreme edges
-    const footerExTiny = { x: w / 2, y: h + 190, hw: w * 0.44, hh: 210 }
+    const footerEx = { x: w / 2, y: h + 130, hw: w * 0.52, hh: 160 }
+    const contactEx = { x: w / 2, y: h + 280, hw: w * 0.28, hh: 80 }
     const exScale = [1.3, 1.0, 0.7]
     const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
       const fx = exScale[tier]
@@ -136,11 +134,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
         if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
             y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue
         if (tier < 2) {
-          if (x > footerExLarge.x - footerExLarge.hw - R && x < footerExLarge.x + footerExLarge.hw + R &&
-              y > footerExLarge.y - footerExLarge.hh - R && y < footerExLarge.y + footerExLarge.hh + R) continue
-        } else {
-          if (x > footerExTiny.x - footerExTiny.hw - R && x < footerExTiny.x + footerExTiny.hw + R &&
-              y > footerExTiny.y - footerExTiny.hh - R && y < footerExTiny.y + footerExTiny.hh + R) continue
+          if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
+              y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
+          if (x > contactEx.x - contactEx.hw * fx - R && x < contactEx.x + contactEx.hw * fx + R &&
+              y > contactEx.y - contactEx.hh * fx - R && y < contactEx.y + contactEx.hh * fx + R) continue
         }
         let ok = true
         for (const f of out) {
