@@ -16,7 +16,7 @@ export default function Footer() {
     <footer id="footer" data-snap="true" className="border-t border-white/10 pt-6 pb-16 min-h-[25vh] flex flex-col justify-center" style={{ position: 'relative', zIndex: 5 }}>
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 80,
-        background: 'linear-gradient(to bottom, transparent, #000000)',
+        background: 'transparent',
         pointerEvents: 'none', zIndex: 0,
       }} />
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center gap-6 max-[1024px]:gap-3 max-[1024px]:w-full">

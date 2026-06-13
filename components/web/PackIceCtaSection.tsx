@@ -124,7 +124,8 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const out: Floe[] = []
     const extH = h + 380
     const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
-    const footerEx = { x: w / 2, y: h + 160, hw: w * 0.38, hh: 120 }
+    const footerEx = { x: w / 2, y: h + 130, hw: w * 0.52, hh: 160 }
+    const contactEx = { x: w / 2, y: h + 280, hw: w * 0.28, hh: 80 }
     const exScale = [1.3, 1.0, 0.7]
     const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
       const fx = exScale[tier]
@@ -132,8 +133,12 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
         const x = rnd() * w, y = yMin + rnd() * (yMax - yMin)
         if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
             y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue
-        if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
-            y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
+        if (tier < 2) {
+          if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
+              y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
+          if (x > contactEx.x - contactEx.hw * fx - R && x < contactEx.x + contactEx.hw * fx + R &&
+              y > contactEx.y - contactEx.hh * fx - R && y < contactEx.y + contactEx.hh * fx + R) continue
+        }
         let ok = true
         for (const f of out) {
           const dx = f.x - x, dy = f.y - y
@@ -174,7 +179,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const dpr = _dpr
     const rnd2 = rng(733)
     const floes = build(w, h)
-    const [bgC, bg] = layer(w, h, dpr)
+    const [bgC, bg] = layer(w, h + 380, dpr)
     let g = bg.createLinearGradient(0, 0, w * 0.3, h)
     g.addColorStop(0, '#062633')
     g.addColorStop(0.5, '#041c29')
@@ -188,6 +193,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       g.addColorStop(1, 'rgba(0,0,0,0)')
       bg.fillStyle = g; bg.fillRect(mx - mr, my - mr, mr * 2, mr * 2)
     }
+    g = bg.createLinearGradient(0, h, w * 0.3, h + 380)
+    g.addColorStop(0, '#062633')
+    g.addColorStop(1, '#02121d')
+    bg.fillStyle = g; bg.fillRect(0, h, w, 380)
     for (const f of floes) {
       const pad = f.glow ? f.R * 1.0 + 30 : 18
       const half = f.R + pad
@@ -239,7 +248,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const cur = L
     ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0)
     ctx.clearRect(0, 0, w, fullH)
-    ctx.drawImage(cur.bgC, 0, 0, w, h)
+    ctx.drawImage(cur.bgC, 0, 0, w, fullH)
     for (let i = 0; i < cur.shimmers.length; i++) {
       const sh = cur.shimmers[i]
       const x = ((sh[0] + t * 0.0000035 * (0.5 + sh[3])) % 1) * w
