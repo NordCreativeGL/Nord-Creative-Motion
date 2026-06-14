@@ -703,6 +703,17 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           </div>
         </div>
       ))}
+
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '140px',
+        background: 'linear-gradient(to bottom, transparent, #062633)',
+        zIndex: 5,
+        pointerEvents: 'none',
+      }} />
     </section>
   )
 }
