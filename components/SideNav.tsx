@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type NavItem = { label: string; id: string };
 
@@ -30,25 +30,29 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const itemsRef = useRef(items);
+  itemsRef.current = items;
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: '-40% 0px -40% 0px',
-        threshold: 0,
-      }
-    );
-    items.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      const viewportCenter = window.scrollY + window.innerHeight / 2;
+      let closestId = '';
+      let closestDist = Infinity;
+      itemsRef.current.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const sectionCenter = el.offsetTop + el.offsetHeight / 2;
+        const dist = Math.abs(viewportCenter - sectionCenter);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestId = id;
+        }
+      });
+      setActive(closestId);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
