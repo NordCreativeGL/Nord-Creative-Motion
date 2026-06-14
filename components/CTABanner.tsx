@@ -88,6 +88,7 @@ export default function CTABanner() {
           overflow: 'hidden',
           position: 'relative',
           zIndex: 1,
+          backgroundColor: '#060606',
           boxShadow: '0 0 0 0.5px rgba(255,255,255,0.10), 0 20px 120px rgba(0,0,0,0.95), 0 0 140px rgba(0,0,0,0.8)',
         }}
       >
