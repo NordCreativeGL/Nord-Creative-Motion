@@ -253,6 +253,11 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0)
     ctx.clearRect(0, 0, w, fullH)
     ctx.drawImage(cur.bgC, 0, 0, w, fullH)
+    const fadeGrad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.18);
+    fadeGrad.addColorStop(0, '#031b26');
+    fadeGrad.addColorStop(1, 'rgba(3,27,38,0)');
+    ctx.fillStyle = fadeGrad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height * 0.18);
     for (const f of cur.floes) {
       const dx = Math.sin(t * f.driftS + f.phase) * f.driftR + Math.sin(t * 0.00035 + f.phase) * f.amp * 0.5
       const dy = Math.cos(t * f.driftS * 0.8 + f.phase2) * f.driftR * 0.7 + Math.cos(t * 0.00028 + f.phase2) * f.amp * 0.4
@@ -309,19 +314,6 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
 
   return (
     <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5 }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '180px',
-          background: 'linear-gradient(to bottom, #031b26, transparent)',
-          zIndex: 15,
-          pointerEvents: 'none',
-        }}
-      />
       <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
 
       <div style={{
