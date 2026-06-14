@@ -709,8 +709,8 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         bottom: 0,
         left: 0,
         right: 0,
-        height: '140px',
-        background: 'linear-gradient(to bottom, transparent, #062633)',
+        height: '200px',
+        background: 'linear-gradient(to bottom, transparent, #031b26)',
         zIndex: 5,
         pointerEvents: 'none',
       }} />
