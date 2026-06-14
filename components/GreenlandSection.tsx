@@ -154,7 +154,7 @@ export default function GreenlandSection() {
           </div>
 
           <div ref={bodyRef} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.625, marginBottom: 28 }}>
-            Commercial visuals and Arctic environments — and the websites that bring them to life. Created for companies and brands in Greenland.
+            Commercial visuals and Arctic environments — and the websites that bring them to life. We create photography, film, and digital experiences for companies and brands working across Greenland.
           </div>
 
           <div style={{
