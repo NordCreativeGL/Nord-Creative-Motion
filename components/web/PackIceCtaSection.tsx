@@ -253,13 +253,6 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     ctx.setTransform(_dpr, 0, 0, _dpr, 0, 0)
     ctx.clearRect(0, 0, w, fullH)
     ctx.drawImage(cur.bgC, 0, 0, w, fullH)
-    for (let i = 0; i < cur.shimmers.length; i++) {
-      const sh = cur.shimmers[i]
-      const x = ((sh[0] + t * 0.0000035 * (0.5 + sh[3])) % 1) * w
-      const y = sh[1] * h, len = sh[2] * w
-      ctx.fillStyle = 'rgba(120,200,210,' + (0.025 + sh[3] * 0.03).toFixed(3) + ')'
-      ctx.fillRect(x - len / 2, y, len, 1)
-    }
     for (const f of cur.floes) {
       const dx = Math.sin(t * f.driftS + f.phase) * f.driftR + Math.sin(t * 0.00035 + f.phase) * f.amp * 0.5
       const dy = Math.cos(t * f.driftS * 0.8 + f.phase2) * f.driftR * 0.7 + Math.cos(t * 0.00028 + f.phase2) * f.amp * 0.4
