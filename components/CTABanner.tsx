@@ -14,6 +14,7 @@ export default function CTABanner() {
   }, [])
   const sectionRef  = useRef<HTMLElement>(null);
   const cardRef     = useRef<HTMLDivElement>(null);
+  const coverRef    = useRef<HTMLDivElement>(null);
   const headingRef  = useRef<HTMLDivElement>(null);
   const bodyRef     = useRef<HTMLDivElement>(null);
   const btnRef      = useRef<HTMLDivElement>(null);
@@ -22,11 +23,12 @@ export default function CTABanner() {
 
     const ctx = gsap.context(() => {
       gsap.set(cardRef.current, {
-        opacity: 0,
         rotateY: -55,
         scale: 0.72,
         transformPerspective: 900,
       });
+
+      gsap.set(coverRef.current, { opacity: 1 });
 
       gsap.set([headingRef.current, bodyRef.current, btnRef.current], {
         opacity: 0,
@@ -34,7 +36,8 @@ export default function CTABanner() {
       });
 
       tl = gsap.timeline({ paused: true })
-        .to(cardRef.current, { opacity: 1, rotateY: 0, scale: 1, duration: 2.6, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' })
+        .to(cardRef.current, { rotateY: 0, scale: 1, duration: 2.6, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' })
+        .to(coverRef.current, { opacity: 0, duration: 2.6, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0)
         .to(headingRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 0.8)
         .to(bodyRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.0)
         .to(btnRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'cubic-bezier(0.25, 0.1, 0.15, 1)' }, 1.2)
@@ -149,6 +152,17 @@ export default function CTABanner() {
             Work with us
           </div>
         </div>
+        <div
+          ref={coverRef}
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundColor: '#060606',
+            zIndex: 5,
+            pointerEvents: 'none',
+          }}
+        />
       </div>
       </div>
     </section>
