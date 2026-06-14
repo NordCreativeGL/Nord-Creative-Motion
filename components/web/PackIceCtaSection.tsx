@@ -124,7 +124,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const out: Floe[] = []
     const extH = h + 380
     const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
-    const footerTextEx = { x: w / 2, y: h + 148, hw: w * 0.302 + 25, hh: 148 }
+    const footerTextEx = { x: w / 2, y: h + 148, hw: w * 0.195, hh: 148 }
     const privacyEx    = { x: w / 2, y: h + 318, hw: w * 0.10,       hh: 30  }
     const exScale = [1.3, 1.0, 0.7]
     const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
@@ -174,10 +174,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
     for (let i = 0; i < 5; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
     for (let i = 0; i < 18; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
-    mk(base * 0.038, base * 0.055, 1, h + 10,  h + 185, true)
-    mk(base * 0.038, base * 0.055, 1, h + 185, h + 370, true)
-    mk(base * 0.032, base * 0.048, 1, h + 10,  h + 185, true)
-    mk(base * 0.032, base * 0.048, 1, h + 185, h + 370, true)
+    for (let i = 0; i < 2; i++) mk(base * 0.038, base * 0.055, 1, h + 10, h + 370, true)
     return out
   }
 
