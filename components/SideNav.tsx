@@ -35,20 +35,27 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
 
   useEffect(() => {
     const handleScroll = () => {
-      const viewportCenter = window.scrollY + window.innerHeight / 2;
-      let closestId = '';
-      let closestDist = Infinity;
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      let maxVisible = 0;
+      let activeId = '';
+
       itemsRef.current.forEach(({ id }) => {
         const el = document.getElementById(id);
         if (!el) return;
-        const sectionCenter = el.offsetTop + el.offsetHeight / 2;
-        const dist = Math.abs(viewportCenter - sectionCenter);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closestId = id;
+        const elTop = el.offsetTop;
+        const elBottom = elTop + el.offsetHeight;
+        const visibleTop = Math.max(scrollY, elTop);
+        const visibleBottom = Math.min(scrollY + viewportHeight, elBottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        if (visibleHeight > maxVisible) {
+          maxVisible = visibleHeight;
+          activeId = id;
         }
       });
-      setActive(closestId);
+
+      if (activeId) setActive(activeId);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
