@@ -21,6 +21,7 @@ export default function GreenlandSection() {
   const line3Ref   = useRef<HTMLDivElement>(null);
   const bodyRef    = useRef<HTMLDivElement>(null);
   const linkRef    = useRef<HTMLAnchorElement>(null);
+  const linkRef2 = useRef<HTMLAnchorElement>(null);
   const video1Ref  = useRef<HTMLDivElement>(null);
   const video2Ref  = useRef<HTMLDivElement>(null);
 
@@ -35,7 +36,7 @@ export default function GreenlandSection() {
       gsap.set(line2Ref.current,  { opacity: 0, rotateY: 360,  y: 30  });
       gsap.set(line3Ref.current,  { opacity: 0, rotateY: -360, x: -40 });
       gsap.set(bodyRef.current,   { opacity: 0, y: 14 });
-      gsap.set(linkRef.current,   { opacity: 0 });
+      gsap.set([linkRef.current, linkRef2.current], { opacity: 0 });
       gsap.set(video1Ref.current, { opacity: 0, rotateY: -90, x: 0, transformOrigin: 'center center' });
       gsap.set(video2Ref.current, { opacity: 0, rotateY:  90, x: 0, transformOrigin: 'center center' });
 
@@ -47,7 +48,7 @@ export default function GreenlandSection() {
         .to(line2Ref.current,  { opacity: 1, rotateY: 0, y: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0.05 : 0.42)
         .to(line3Ref.current,  { opacity: 1, rotateY: 0, x: 0, duration: isMobileAnim ? 0.5 : 1.3, ease: 'power2.inOut' }, isMobileAnim ? 0.10 : 0.64)
         .to(bodyRef.current,   { opacity: 1, y: 0,             duration: isMobileAnim ? 0.5 : 0.9, ease: 'power2.inOut' }, isMobileAnim ? 0.15 : 1.00)
-        .to(linkRef.current,   { opacity: 1,                   duration: isMobileAnim ? 0.5 : 0.8, ease: 'power2.inOut' }, isMobileAnim ? 0.20 : 1.25);
+        .to([linkRef.current, linkRef2.current], { opacity: 1,                   duration: isMobileAnim ? 0.5 : 0.8, ease: 'power2.inOut' }, isMobileAnim ? 0.20 : 1.25);
 
       videoTl = gsap.timeline({ paused: true });
 
@@ -161,7 +162,7 @@ export default function GreenlandSection() {
             flexDirection: isMobile ? 'column' : 'row',
             gap: '12px',
             marginTop: '1.2rem',
-            alignItems: isMobile ? 'stretch' : 'center',
+            alignItems: isMobile ? 'stretch' : 'flex-start',
           }}>
           <Link
             ref={linkRef}
@@ -190,6 +191,7 @@ export default function GreenlandSection() {
             Explore our work in Greenland
           </Link>
           <Link
+            ref={linkRef2}
             href="/web"
             onMouseEnter={() => setBtnHover2(true)}
             onMouseLeave={() => setBtnHover2(false)}
