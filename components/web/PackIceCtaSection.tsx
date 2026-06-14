@@ -349,12 +349,6 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         </a>
       </div>
 
-      <div style={{
-        position: 'absolute', bottom: 22, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 1,
-        fontFamily: PRIMARY_FONT, fontSize: 9, letterSpacing: '0.34em', color: 'rgba(255,255,255,0.28)',
-      }}>
-        {'NORD CREATIVE'}
-      </div>
     </section>
   )
 }
