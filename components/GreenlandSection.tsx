@@ -6,6 +6,7 @@ import gsap from "gsap";
 
 export default function GreenlandSection() {
   const [btnHover, setBtnHover] = useState(false);
+  const [btnHover2, setBtnHover2] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
@@ -152,9 +153,16 @@ export default function GreenlandSection() {
           </div>
 
           <div ref={bodyRef} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.625, marginBottom: 28 }}>
-            Commercial visuals and Arctic environments, created for companies and brands in Greenland.
+            Commercial visuals and Arctic environments — and the websites that bring them to life. Created for companies and brands in Greenland.
           </div>
 
+          <div style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: '12px',
+            marginTop: '1.2rem',
+            alignItems: isMobile ? 'stretch' : 'center',
+          }}>
           <Link
             ref={linkRef}
             href="/greenland"
@@ -166,7 +174,6 @@ export default function GreenlandSection() {
               justifyContent: 'center',
               alignSelf: isMobile ? undefined : 'flex-start',
               width: isMobile ? '100%' : 'fit-content',
-              marginTop: '1.2rem',
               padding: '14px 36px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.18)',
@@ -182,6 +189,32 @@ export default function GreenlandSection() {
           >
             Explore our work in Greenland
           </Link>
+          <Link
+            href="/web"
+            onMouseEnter={() => setBtnHover2(true)}
+            onMouseLeave={() => setBtnHover2(false)}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: isMobile ? undefined : 'flex-start',
+              width: isMobile ? '100%' : 'fit-content',
+              padding: '14px 36px',
+              borderRadius: '999px',
+              border: '1px solid rgba(255,255,255,0.18)',
+              background: btnHover2 ? '#ffffff' : 'transparent',
+              color: btnHover2 ? '#000000' : 'rgba(255,255,255,0.85)',
+              fontSize: 'clamp(15px, 0.9vw, 19px)',
+              fontWeight: 400,
+              letterSpacing: '0.01em',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              transition: 'background 0.25s ease, color 0.25s ease',
+            }}
+          >
+            See our website production
+          </Link>
+          </div>
           </div>
         </div>
 
