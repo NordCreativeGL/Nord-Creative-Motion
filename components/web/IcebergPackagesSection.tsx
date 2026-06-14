@@ -687,16 +687,16 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             textShadow: '0 1px 10px rgba(0,8,16,0.65)',
           }}
         >
-          <span style={{ fontFamily: PRIMARY_FONT, fontSize: '0.78em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+          <span style={{ fontFamily: PRIMARY_FONT, fontSize: '1.17em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
             {tier.lbl}
           </span>
-          <span style={{ fontSize: '1.65em', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+          <span style={{ fontSize: '2.31em', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
             {tier.name}
           </span>
           <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
           <div style={{
             display: 'flex', flexDirection: 'column', gap: '0.78em',
-            fontFamily: PRIMARY_FONT, fontSize: '0.86em', lineHeight: 1.35,
+            fontFamily: PRIMARY_FONT, fontSize: '1.38em', lineHeight: 1.5,
             color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
           }}>
             {tier.feats.map((f) => <span key={f}>{f}</span>)}
