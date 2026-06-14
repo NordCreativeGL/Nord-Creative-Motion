@@ -170,9 +170,9 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     }
     const base = Math.min(w, 1500)
     for (let i = 0; i < 10; i++) mk(base * 0.006, base * 0.022, 2, 10, 140)
-    for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 150, h)
-    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 150, h)
-    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 150, h)
+    for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 165, h)
+    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 165, h)
+    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 165, h)
     for (let i = 0; i < 8; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
     for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
     for (let i = 0; i < 2; i++) mk(base * 0.038, base * 0.055, 1, h + 10, h + 370, true)
@@ -318,7 +318,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5 }}>
+    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5, marginTop: '-2px' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', top: '-150px', left: 0, width: '100%', height: 'calc(100% + 530px)', display: 'block' }} />
 
       <div style={{
