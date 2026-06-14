@@ -171,10 +171,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const base = Math.min(w, 1500)
     for (let i = 0; i < 10; i++) mk(base * 0.006, base * 0.022, 2, 10, 140)
     for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
-    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
-    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
-    for (let i = 0; i < 8; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
-    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
+    for (let i = 0; i < 14; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
+    for (let i = 0; i < 27; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
+    for (let i = 0; i < 7; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
+    for (let i = 0; i < 27; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
     for (let i = 0; i < 2; i++) mk(base * 0.038, base * 0.055, 1, h + 10, h + 370, true)
     return out
   }
