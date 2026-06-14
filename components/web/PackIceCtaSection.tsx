@@ -147,12 +147,12 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       }
       return null
     }
-    const mk = (rMin: number, rMax: number, tier: number, yMin: number, yMax: number) => {
+    const mk = (rMin: number, rMax: number, tier: number, yMin: number, yMax: number, forceGlow?: boolean) => {
       const r = rMin + rnd() * (rMax - rMin)
       const sh = makeFloe(r, rnd)
       const pos = place(sh.R, tier, yMin, yMax)
       if (!pos) return
-      const glow = tier === 0 ? rnd() < 0.75 : tier === 1 ? rnd() < 0.3 : false
+      const glow = forceGlow !== undefined ? forceGlow : (tier === 0 ? rnd() < 0.75 : tier === 1 ? rnd() < 0.3 : false)
       out.push({
         ...pos, ...sh, tier, glow,
         phase: rnd() * 6.28, phase2: rnd() * 6.28,
@@ -168,8 +168,9 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
     for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
     for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
-    for (let i = 0; i < 8; i++) mk(base * 0.026, base * 0.052, 1, h + 20, extH - 20)
-    for (let i = 0; i < 20; i++) mk(base * 0.005, base * 0.013, 2, h + 20, extH - 20)
+    for (let i = 0; i < 18; i++) mk(base * 0.026, base * 0.052, 1, h + 20, extH - 20)
+    for (let i = 0; i < 45; i++) mk(base * 0.005, base * 0.013, 2, h + 20, extH - 20)
+    for (let i = 0; i < 5; i++) mk(base * 0.038, base * 0.058, 1, h + 20, extH - 20, true)
     return out
   }
 
