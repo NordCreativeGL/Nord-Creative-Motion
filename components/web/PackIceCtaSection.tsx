@@ -309,6 +309,19 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
 
   return (
     <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5 }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '180px',
+          background: 'linear-gradient(to bottom, #031b26, transparent)',
+          zIndex: 15,
+          pointerEvents: 'none',
+        }}
+      />
       <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
 
       <div style={{
