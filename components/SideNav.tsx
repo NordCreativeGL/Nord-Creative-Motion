@@ -35,7 +35,6 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
       const viewportHeight = window.innerHeight;
 
       let maxVisible = 0;
@@ -44,10 +43,9 @@ export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }
       itemsRef.current.forEach(({ id }) => {
         const el = document.getElementById(id);
         if (!el) return;
-        const elTop = el.offsetTop;
-        const elBottom = elTop + el.offsetHeight;
-        const visibleTop = Math.max(scrollY, elTop);
-        const visibleBottom = Math.min(scrollY + viewportHeight, elBottom);
+        const rect = el.getBoundingClientRect();
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(viewportHeight, rect.bottom);
         const visibleHeight = Math.max(0, visibleBottom - visibleTop);
         if (visibleHeight > maxVisible) {
           maxVisible = visibleHeight;
