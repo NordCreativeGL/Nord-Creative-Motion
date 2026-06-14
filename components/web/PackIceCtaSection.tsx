@@ -322,7 +322,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         textAlign: 'center', padding: '0 24px', gap: 22,
       }}>
         <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)' }}>
-          {'START YOUR PROJECT'}
+          {'WORK WITH US'}
         </div>
         <h2 style={{
           margin: 0, fontSize: 'clamp(32px, 4.8vw, 62px)', fontWeight: 250, lineHeight: 1.06,
