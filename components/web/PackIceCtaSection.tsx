@@ -241,6 +241,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     }
     const [fgC, fg] = layer(w, h + 380, dpr)
     vignette(fg, w, h + 380, 0.5)
+    fg.clearRect(0, 0, w, OVERLAP)
     const rnd3 = rng(919)
     const shimmers = Array.from({ length: 14 }, () => [rnd3(), rnd3(), 0.03 + rnd3() * 0.1, rnd3()])
     L = { bgC, fgC, floes, shimmers, w, h }
