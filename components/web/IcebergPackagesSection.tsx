@@ -528,13 +528,6 @@ function createDepth(canvas: HTMLCanvasElement): DepthPainter {
     for (const idx of ord) {
       const s = cur.sprites[idx]
       const i = s.it.i, b = bobOf(i, t), a = cur.anchors[i], hv = hov[i]
-      if (hv > 0.01) {
-        const gr = a.halfW * 2.6, gy = a.wl + a.depth * 0.32
-        const g2 = ctx.createRadialGradient(a.cx, gy, gr * 0.1, a.cx, gy, gr)
-        g2.addColorStop(0, 'rgba(0,215,200,' + (0.14 * hv).toFixed(3) + ')')
-        g2.addColorStop(1, 'rgba(0,215,200,0)')
-        ctx.fillStyle = g2; ctx.fillRect(a.cx - gr, a.wl - a.topH, gr * 2, gr * 2.6)
-      }
       const scl = 1 + 0.50 * hv
       ctx.save()
       ctx.translate(s.it.cx, s.it.wl + b); ctx.scale(scl, scl)
