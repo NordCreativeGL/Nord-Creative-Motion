@@ -656,7 +656,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} ref={sectionRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden', background: '#000507' }}>
+    <section id={id} ref={sectionRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden', background: '#031b26' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
 
       <div style={{

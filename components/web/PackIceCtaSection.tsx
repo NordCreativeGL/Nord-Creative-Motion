@@ -170,9 +170,9 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     }
     const base = Math.min(w, 1500)
     for (let i = 0; i < 10; i++) mk(base * 0.006, base * 0.022, 2, 10, 140)
-    for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 165, h)
-    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 165, h)
-    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 165, h)
+    for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
+    for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
+    for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
     for (let i = 0; i < 8; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
     for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
     for (let i = 0; i < 2; i++) mk(base * 0.038, base * 0.055, 1, h + 10, h + 370, true)
@@ -184,11 +184,9 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const rnd2 = rng(733)
     const floes = build(w, h)
     const [bgC, bg] = layer(w, h + 380, dpr)
-    const OVERLAP = 150
     let g = bg.createLinearGradient(0, 0, 0, h)
-    g.addColorStop(0, 'rgba(6,38,51,0)')
-    g.addColorStop(OVERLAP / h, '#031b26')
-    g.addColorStop(0.6, '#041c29')
+    g.addColorStop(0, '#031b26')
+    g.addColorStop(0.4, '#041c29')
     g.addColorStop(1, '#041c29')
     bg.fillStyle = g; bg.fillRect(0, 0, w, h)
     for (let i = 0; i < 9; i++) {
@@ -241,7 +239,6 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     }
     const [fgC, fg] = layer(w, h + 380, dpr)
     vignette(fg, w, h + 380, 0.5)
-    fg.clearRect(0, 0, w, OVERLAP)
     const rnd3 = rng(919)
     const shimmers = Array.from({ length: 14 }, () => [rnd3(), rnd3(), 0.03 + rnd3() * 0.1, rnd3()])
     L = { bgC, fgC, floes, shimmers, w, h }
@@ -318,8 +315,8 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5, marginTop: '-2px' }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', top: '-150px', left: 0, width: '100%', height: 'calc(100% + 530px)', display: 'block' }} />
+    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5 }}>
+      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
 
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
