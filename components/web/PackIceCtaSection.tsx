@@ -271,7 +271,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
 
 // ---------- component ----------
 
-const MONO_FONT = "'IBM Plex Mono', 'Courier New', monospace"
+const PRIMARY_FONT = "var(--font-geist-sans), sans-serif"
 
 export default function PackIceCtaSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -316,7 +316,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         textAlign: 'center', padding: '0 24px', gap: 22,
       }}>
-        <div style={{ fontFamily: MONO_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)' }}>
+        <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)' }}>
           {'START YOUR PROJECT'}
         </div>
         <h2 style={{
@@ -340,13 +340,13 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
             textDecoration: 'none',
           }}
         >
-          Start your project<span style={{ fontFamily: MONO_FONT, fontSize: 14 }}>{'→'}</span>
+          Start your project<span style={{ fontFamily: PRIMARY_FONT, fontSize: 14 }}>{'→'}</span>
         </a>
       </div>
 
       <div style={{
         position: 'absolute', bottom: 22, left: 0, right: 0, display: 'flex', justifyContent: 'center', zIndex: 1,
-        fontFamily: MONO_FONT, fontSize: 9, letterSpacing: '0.34em', color: 'rgba(255,255,255,0.28)',
+        fontFamily: PRIMARY_FONT, fontSize: 9, letterSpacing: '0.34em', color: 'rgba(255,255,255,0.28)',
       }}>
         {'NORD CREATIVE'}
       </div>

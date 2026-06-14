@@ -572,7 +572,7 @@ const TIERS = [
 
 const TOTAL_EM = [13.2, 16.5, 14.9]
 
-const MONO_FONT = "'IBM Plex Mono', 'Courier New', monospace"
+const PRIMARY_FONT = "var(--font-geist-sans), sans-serif"
 
 export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -664,7 +664,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
       }}>
         <div style={{
-          fontFamily: MONO_FONT, fontSize: 11, letterSpacing: '0.38em',
+          fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em',
           color: 'rgba(0,215,200,0.85)', marginBottom: 18,
         }}>
           PACKAGES
@@ -687,7 +687,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             textShadow: '0 1px 10px rgba(0,8,16,0.65)',
           }}
         >
-          <span style={{ fontFamily: MONO_FONT, fontSize: '0.78em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+          <span style={{ fontFamily: PRIMARY_FONT, fontSize: '0.78em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
             {tier.lbl}
           </span>
           <span style={{ fontSize: '1.65em', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
@@ -696,7 +696,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
           <div style={{
             display: 'flex', flexDirection: 'column', gap: '0.78em',
-            fontFamily: MONO_FONT, fontSize: '0.86em', lineHeight: 1.35,
+            fontFamily: PRIMARY_FONT, fontSize: '0.86em', lineHeight: 1.35,
             color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
           }}>
             {tier.feats.map((f) => <span key={f}>{f}</span>)}
