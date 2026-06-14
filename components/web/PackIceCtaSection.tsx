@@ -317,8 +317,8 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', marginTop: '-150px', zIndex: 5 }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
+    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', zIndex: 5 }}>
+      <canvas ref={canvasRef} style={{ position: 'absolute', top: '-150px', left: 0, width: '100%', height: 'calc(100% + 530px)', display: 'block' }} />
 
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
