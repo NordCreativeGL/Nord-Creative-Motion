@@ -240,18 +240,6 @@ export default function WebPage() {
 
       <IcebergPackagesSection id="web-packages" />
 
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'relative',
-          height: '200px',
-          marginTop: '-200px',
-          background: 'linear-gradient(to bottom, transparent, #020f15)',
-          zIndex: 5,
-          pointerEvents: 'none',
-        }}
-      />
-
       <PackIceCtaSection id="web-cta" />
 
       <Footer />
