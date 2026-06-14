@@ -133,12 +133,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
         const x = rnd() * w, y = yMin + rnd() * (yMax - yMin)
         if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
             y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue
-        if (tier < 2) {
-          if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
-              y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
-          if (x > contactEx.x - contactEx.hw * fx - R && x < contactEx.x + contactEx.hw * fx + R &&
-              y > contactEx.y - contactEx.hh * fx - R && y < contactEx.y + contactEx.hh * fx + R) continue
-        }
+        if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
+            y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
+        if (x > contactEx.x - contactEx.hw * fx - R && x < contactEx.x + contactEx.hw * fx + R &&
+            y > contactEx.y - contactEx.hh * fx - R && y < contactEx.y + contactEx.hh * fx + R) continue
         let ok = true
         for (const f of out) {
           const dx = f.x - x, dy = f.y - y
