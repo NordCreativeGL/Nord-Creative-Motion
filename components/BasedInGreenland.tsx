@@ -183,7 +183,7 @@ export default function BasedInGreenland() {
       const drawLoop = () => {
         const p = scrollPRef.current
 
-        if (p >= 0.72) {
+        if (p >= 0.86) {
           ctx.clearRect(0, 0, W, H)
           if (glFeature && videoRef.current && videoRef.current.readyState >= 2) {
             const proj = d3.geoOrthographic()
@@ -203,9 +203,7 @@ export default function BasedInGreenland() {
               ctx.restore()
             }
           }
-          if (!textFired) { textFired = true; animateText() }
         } else {
-          if (textFired) { textFired = false; hideText() }
           let scale: number, rotLon: number, rotLat: number
           let cx = W / 2, cy = isMobileNow ? 0.42 * H : H / 2
           let countriesAlpha = 1
@@ -232,6 +230,9 @@ export default function BasedInGreenland() {
 
           drawFrame(scale, rotLon, rotLat, cx, cy, 1, countriesAlpha)
         }
+
+        if (p >= 0.72 && !textFired) { textFired = true; animateText() }
+        if (p < 0.72 && textFired) { textFired = false; hideText() }
 
         animIdRef.current = requestAnimationFrame(drawLoop)
       }
