@@ -270,7 +270,7 @@ function createDepth(canvas: HTMLCanvasElement): DepthPainter {
   }
 
   const STACK_HEADER = 170
-  const ICEBERG_SCALE = 1.10
+  const ICEBERG_SCALE = 1.0
   const TIER_SCALE = [1.15, 1.15, 1.10] // per-tier extra scale; Tier I and II need a wider keel to fit their feature lists
 
   function plan(w: number, h: number): Plan {
@@ -278,7 +278,7 @@ function createDepth(canvas: HTMLCanvasElement): DepthPainter {
     const items: Item[] = []
     const scenes: Scene[] = []
     if (!stack) {
-      const wl = h * 0.41
+      const wl = h * 0.26
       const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA))
       const maxBAll = Math.max(...DEPTH_BERGS.map(bMaxB))
       const k = Math.min((wl - 30) / maxAAll, (h - wl - 36) / maxBAll, w * 0.00165) * ICEBERG_SCALE
@@ -288,7 +288,7 @@ function createDepth(canvas: HTMLCanvasElement): DepthPainter {
     } else {
       const sh = Math.max((h - STACK_HEADER) / 3, 200)
       DEPTH_BERGS.forEach((bd, i) => {
-        const y0 = STACK_HEADER + i * sh, wl = y0 + sh * 0.45
+        const y0 = STACK_HEADER + i * sh, wl = y0 + sh * 0.30
         const k = Math.min((sh * 0.30 - 24) / bMaxA(bd), (sh * 0.70 - 40) / bMaxB(bd), w * 0.0042) * ICEBERG_SCALE
         scenes.push({ y0, y1: y0 + sh, wl })
         items.push({ bd, i, cx: 0.5 * w, wl, k: k * TIER_SCALE[i] })
