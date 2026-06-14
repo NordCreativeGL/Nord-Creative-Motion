@@ -169,6 +169,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
       })
     }
     const base = Math.min(w, 1500)
+    for (let i = 0; i < 10; i++) mk(base * 0.006, base * 0.022, 2, 10, 140)
     for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
     for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
     for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
@@ -183,8 +184,10 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const rnd2 = rng(733)
     const floes = build(w, h)
     const [bgC, bg] = layer(w, h + 380, dpr)
+    const OVERLAP = 150
     let g = bg.createLinearGradient(0, 0, 0, h)
-    g.addColorStop(0, '#062633')
+    g.addColorStop(0, 'rgba(6,38,51,0)')
+    g.addColorStop(OVERLAP / h, '#062633')
     g.addColorStop(0.6, '#041c29')
     g.addColorStop(1, '#041c29')
     bg.fillStyle = g; bg.fillRect(0, 0, w, h)
@@ -314,17 +317,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   }, [])
 
   return (
-    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible' }}>
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '120px',
-        background: 'linear-gradient(to bottom, #031b26, transparent)',
-        zIndex: 2,
-        pointerEvents: 'none',
-      }} />
+    <section id={id} style={{ position: 'relative', minHeight: '100dvh', overflow: 'visible', marginTop: '-150px', zIndex: 5 }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'calc(100% + 380px)', display: 'block' }} />
 
       <div style={{
