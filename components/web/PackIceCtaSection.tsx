@@ -124,8 +124,6 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const out: Floe[] = []
     const extH = h + 380
     const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
-    const footerEx = { x: w / 2, y: h + 190, hw: w * 0.31, hh: 190 }
-    const contactEx = { x: w / 2, y: h + 280, hw: w * 0.28, hh: 80 }
     const exScale = [1.3, 1.0, 0.7]
     const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
       const fx = exScale[tier]
@@ -133,10 +131,6 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
         const x = rnd() * w, y = yMin + rnd() * (yMax - yMin)
         if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
             y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue
-        if (x > footerEx.x - footerEx.hw * fx - R && x < footerEx.x + footerEx.hw * fx + R &&
-            y > footerEx.y - footerEx.hh * fx - R && y < footerEx.y + footerEx.hh * fx + R) continue
-        if (x > contactEx.x - contactEx.hw * fx - R && x < contactEx.x + contactEx.hw * fx + R &&
-            y > contactEx.y - contactEx.hh * fx - R && y < contactEx.y + contactEx.hh * fx + R) continue
         let ok = true
         for (const f of out) {
           const dx = f.x - x, dy = f.y - y
@@ -168,9 +162,6 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
     for (let i = 0; i < 16; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
     for (let i = 0; i < 30; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
-    for (let i = 0; i < 18; i++) mk(base * 0.026, base * 0.052, 1, h + 20, extH - 20)
-    for (let i = 0; i < 45; i++) mk(base * 0.005, base * 0.013, 2, h + 20, extH - 20)
-    for (let i = 0; i < 5; i++) mk(base * 0.038, base * 0.058, 1, h + 20, extH - 20, true)
     return out
   }
 
