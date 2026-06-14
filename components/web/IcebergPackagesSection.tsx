@@ -271,7 +271,7 @@ function createDepth(canvas: HTMLCanvasElement): DepthPainter {
 
   const STACK_HEADER = 170
   const ICEBERG_SCALE = 1.10
-  const TIER_SCALE = [1.15, 1, 1] // per-tier extra scale; Tier I needs a wider keel to fit its feature list
+  const TIER_SCALE = [1.15, 1.15, 1] // per-tier extra scale; Tier I and II need a wider keel to fit their feature lists
 
   function plan(w: number, h: number): Plan {
     const stack = w < 1024
