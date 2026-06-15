@@ -591,6 +591,8 @@ export default function FjordHeroScene() {
             firstFrameDone = true
             const copy = document.getElementById('fj-copy')
             if (copy) copy.style.opacity = '1'
+            const drag = document.getElementById('fj-drag')
+            if (drag) drag.style.opacity = '1'
           }
         } catch (err) {}
         schedule()
@@ -681,7 +683,7 @@ export default function FjordHeroScene() {
       </div>
 
       <div style={{ position: 'absolute', left: '50%', bottom: '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
-        <div id="fj-drag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', transition: 'opacity 1s ease' }}>
+        <div id="fj-drag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', transition: 'opacity 1s ease', opacity: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px', color: 'rgba(160,205,215,0.85)' }}>
             <span style={{ fontSize: '18px', opacity: 0.55 }}>‹</span>
             <span style={{ display: 'inline-flex', animation: 'fjNudge 2.6s ease-in-out infinite' }}>
