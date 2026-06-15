@@ -514,6 +514,7 @@ export default function FjordHeroScene() {
       const R_ORBIT = 64, CH = 11
       let target = 0, angle = 0
       let scrollRevealed = false
+      let firstFrameDone = false
 
       ;(window as any).__fjSet = (deg: number) => { target = deg * Math.PI / 180 }
       ;(window as any).__fjPause = (deg?: number) => {
@@ -584,6 +585,11 @@ export default function FjordHeroScene() {
           if (needle) needle.style.transform = 'rotate(' + deg + 'deg)'
           updateSections(deg)
           renderer.render(scene, camera)
+          if (!firstFrameDone) {
+            firstFrameDone = true
+            const copy = document.getElementById('fj-copy')
+            if (copy) copy.style.opacity = '1'
+          }
         } catch (err) {}
         schedule()
       }
@@ -632,7 +638,7 @@ export default function FjordHeroScene() {
 
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '52%', zIndex: 3, pointerEvents: 'none', background: 'linear-gradient(180deg,rgba(6,20,32,0.92) 0%,rgba(6,20,32,0.7) 32%,rgba(6,20,32,0.32) 62%,rgba(6,20,32,0) 100%)' }} />
 
-      <div style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none' }}>
+      <div id="fj-copy" style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.6s ease' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
           <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>We build websites that people remember</h1>
           <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.</p>
