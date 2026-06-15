@@ -642,6 +642,8 @@ export default function FjordHeroScene() {
       scene.fog = new T.Fog('#081826', 320, 1550)
 
       const camera = new T.PerspectiveCamera(44, W() / H(), 0.1, 3200)
+      ;(window as any).__fjScene = scene
+      ;(window as any).__fjCamera = camera
 
       scene.add(new T.HemisphereLight('#9fc4da', '#06141f', 0.72))
       const moon = new T.DirectionalLight('#cfe2f2', 0.8); moon.position.set(-40, 55, 35); scene.add(moon)
