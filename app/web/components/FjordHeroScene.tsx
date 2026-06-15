@@ -623,7 +623,7 @@ export default function FjordHeroScene() {
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#081826', fontFamily: "'IBM Plex Mono', monospace", marginLeft: '50%', transform: 'translateX(-50%)' }}>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');@keyframes fjNudge{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}`}</style>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@300&display=swap');@keyframes fjNudge{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}`}</style>
 
       <div id="fj-stage" style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'grab' }} />
 
@@ -635,17 +635,14 @@ export default function FjordHeroScene() {
 
       <div style={{ position: 'absolute', left: 0, right: 0, top: '5%', zIndex: 4, pointerEvents: 'none' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', letterSpacing: '0.42em', color: '#5fded0', textTransform: 'uppercase', marginBottom: '20px' }}>Website Production</div>
           <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(32px,4.8vw,76px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>We build websites that people remember</h1>
           <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(15px,1.2vw,18px)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.</p>
         </div>
         <div id="fj-sec-1" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', letterSpacing: '0.42em', color: '#5fded0', textTransform: 'uppercase', marginBottom: '20px' }}>What we offer</div>
           <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(30px,4.2vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>A website — or everything it needs</h2>
           <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(15px,1.2vw,18px)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>Design · Copywriting · SEO · Photo &amp; video · Development · Maintenance. One team, one brief, one result.</p>
         </div>
         <div id="fj-sec-2" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', letterSpacing: '0.42em', color: '#5fded0', textTransform: 'uppercase', marginBottom: '20px' }}>Packages</div>
           <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(30px,4.2vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>Three ways to work with us</h2>
           <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(15px,1.2vw,18px)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.</p>
         </div>
