@@ -586,6 +586,46 @@ export default function FjordHeroScene() {
       })
     }
 
+    function buildMilkyWay(scene: THREE.Scene) {
+      const cv = document.createElement('canvas'); cv.width = 64; cv.height = 64
+      const g = cv.getContext('2d')!
+      const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32)
+      grd.addColorStop(0, 'rgba(255,255,255,1)')
+      grd.addColorStop(0.5, 'rgba(220,230,255,0.4)')
+      grd.addColorStop(1, 'rgba(220,230,255,0)')
+      g.fillStyle = grd; g.fillRect(0, 0, 64, 64)
+      const tex = new T.CanvasTexture(cv)
+      const R = 1700
+      const n = new T.Vector3(0.42, 0.86, 0.28).normalize()
+      const width = 0.16
+      const COUNT = 1500
+      const positions: number[] = []
+      const colors: number[] = []
+      let made = 0, guard = 0
+      while (made < COUNT && guard < COUNT * 40) {
+        guard++
+        const az = Math.random() * Math.PI * 2
+        const elev = -0.05 + Math.random() * (Math.PI * 0.52)
+        const ce = Math.cos(elev)
+        const dir = new T.Vector3(ce * Math.sin(az), Math.sin(elev), ce * Math.cos(az))
+        const d = Math.abs(dir.dot(n))
+        const w = Math.exp(-(d * d) / (width * width))
+        if (Math.random() > w) continue
+        positions.push(dir.x * R, dir.y * R + 40, dir.z * R)
+        const b = 0.2 + Math.random() * 0.3
+        colors.push(0.63 * b, 0.73 * b, 1.0 * b)
+        made++
+      }
+      const geo = new T.BufferGeometry()
+      geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3))
+      geo.setAttribute('color', new T.Float32BufferAttribute(colors, 3))
+      scene.add(new T.Points(geo, new T.PointsMaterial({
+        map: tex, size: 5, sizeAttenuation: true, vertexColors: true,
+        transparent: true, opacity: 0.6, depthWrite: false,
+        blending: T.AdditiveBlending, fog: false
+      })))
+    }
+
     function init3d() {
       const stage = document.getElementById('fj-stage')
       if (!stage) return
@@ -610,6 +650,7 @@ export default function FjordHeroScene() {
       buildSky(scene)
       buildStars(scene)
       buildConstellations(scene)
+      buildMilkyWay(scene)
       buildEnclosure(scene)
       buildFarRange(scene)
       buildDistantBergs(scene)
@@ -705,6 +746,64 @@ export default function FjordHeroScene() {
         }
       }
 
+      const ssMake = () => {
+        const geo = new T.BufferGeometry()
+        geo.setAttribute('position', new T.Float32BufferAttribute(new Float32Array(6), 3))
+        geo.setAttribute('color', new T.Float32BufferAttribute(new Float32Array(6), 3))
+        const mat = new T.LineBasicMaterial({ vertexColors: true, transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false })
+        const line = new T.Line(geo, mat)
+        line.frustumCulled = false
+        line.visible = false
+        scene.add(line)
+        return line
+      }
+      const ssLines = [ssMake(), ssMake()]
+      const ssState = ssLines.map((_, i) => ({
+        active: false, life: 0, maxLife: 0,
+        head: new T.Vector3(), vel: new T.Vector3(),
+        next: performance.now() + 4000 + i * 5000 + Math.random() * 5000
+      }))
+      const updateShooting = (now: number) => {
+        for (let i = 0; i < ssLines.length; i++) {
+          const s = ssState[i], line = ssLines[i]
+          if (!s.active && now >= s.next) {
+            const baseAz = angle + Math.PI + (Math.random() - 0.5) * 1.4
+            const elev = 0.6 + Math.random() * 0.5
+            const ce = Math.cos(elev)
+            const Rs = 1500
+            s.head.set(Rs * ce * Math.sin(baseAz), Rs * Math.sin(elev) + 40, Rs * ce * Math.cos(baseAz))
+            const dir = s.head.clone().normalize()
+            const right = new T.Vector3().crossVectors(new T.Vector3(0, 1, 0), dir).normalize()
+            const dn = new T.Vector3().crossVectors(dir, right).normalize()
+            const a = Math.PI * (0.14 + Math.random() * 0.22)
+            const sp = 34 + Math.random() * 14
+            s.vel.copy(right.multiplyScalar(Math.cos(a) * sp * (Math.random() > 0.5 ? 1 : -1)))
+              .add(dn.multiplyScalar(-Math.sin(a) * sp))
+            s.life = 0
+            s.maxLife = 22 + Math.floor(Math.random() * 14)
+            s.active = true
+            s.next = now + 9000 + Math.random() * 9000
+            line.visible = true
+          }
+          if (s.active) {
+            s.life++
+            s.head.add(s.vel)
+            const t2 = s.life / s.maxLife
+            const al = Math.sin(t2 * Math.PI) * 0.9
+            const tail = s.head.clone().addScaledVector(s.vel, -6)
+            const pos = line.geometry.attributes.position as THREE.BufferAttribute
+            pos.setXYZ(0, tail.x, tail.y, tail.z)
+            pos.setXYZ(1, s.head.x, s.head.y, s.head.z)
+            pos.needsUpdate = true
+            const col = line.geometry.attributes.color as THREE.BufferAttribute
+            col.setXYZ(0, 0, 0, 0)
+            col.setXYZ(1, al, al, al)
+            col.needsUpdate = true
+            if (s.life >= s.maxLife) { s.active = false; line.visible = false }
+          }
+        }
+      }
+
       const tick = (t: number) => {
         if (dead) return
         try {
@@ -714,6 +813,7 @@ export default function FjordHeroScene() {
           berg.position.y = Math.sin(t * 0.0005) * 0.4
           glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
+          updateShooting(t)
           const deg = ((angle * 180 / Math.PI) % 360 + 360) % 360
           if (!scrollRevealed && deg >= 238 && deg < 320) {
             scrollRevealed = true
