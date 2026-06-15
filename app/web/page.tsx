@@ -40,19 +40,7 @@ export default function WebPage() {
       <Header />
 
       {/* ── Section 1: Hero ── */}
-      <section
-        id="web-hero"
-        style={{
-          minHeight: '100dvh',
-          background: '#000000',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: isMobile ? '120px 24px 80px' : 'clamp(140px, 14vw, 200px) clamp(160px, 16vw, 220px)',
-        }}
-      >
-        <FjordHeroScene />
-      </section>
+      <FjordHeroScene />
 
       {/* ── Section 3: The Offer ── */}
       <section

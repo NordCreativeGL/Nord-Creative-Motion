@@ -622,7 +622,7 @@ export default function FjordHeroScene() {
   }, [])
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden', background: '#081826', fontFamily: "'IBM Plex Mono', monospace" }}>
+    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#081826', fontFamily: "'IBM Plex Mono', monospace", marginLeft: '50%', transform: 'translateX(-50%)' }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');@keyframes fjNudge{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}`}</style>
 
       <div id="fj-stage" style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'grab' }} />
