@@ -449,6 +449,32 @@ export default function FjordHeroScene() {
       scene.add(cyl)
     }
 
+    function buildStars(scene: THREE.Scene) {
+      const COUNT = 520
+      const positions = new Float32Array(COUNT * 3)
+      const colors = new Float32Array(COUNT * 3)
+      for (let i = 0; i < COUNT; i++) {
+        const theta = Math.random() * Math.PI * 2
+        const phi = Math.random() * Math.PI * 0.48
+        const r = 1720 + Math.random() * 120
+        positions[i * 3]     = r * Math.cos(phi) * Math.sin(theta)
+        positions[i * 3 + 1] = r * Math.sin(phi) + 60
+        positions[i * 3 + 2] = r * Math.cos(phi) * Math.cos(theta)
+        const b = 0.65 + Math.random() * 0.35
+        const cool = Math.random() * 0.12
+        colors[i * 3]     = b - cool * 0.4
+        colors[i * 3 + 1] = b - cool * 0.1
+        colors[i * 3 + 2] = b + cool
+      }
+      const geo = new T.BufferGeometry()
+      geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3))
+      geo.setAttribute('color', new T.Float32BufferAttribute(colors, 3))
+      scene.add(new T.Points(geo, new T.PointsMaterial({
+        size: 1.6, sizeAttenuation: false, vertexColors: true,
+        transparent: true, opacity: 0.88, fog: false, depthWrite: false
+      })))
+    }
+
     function init3d() {
       const stage = document.getElementById('fj-stage')
       if (!stage) return
@@ -471,6 +497,7 @@ export default function FjordHeroScene() {
       const rim = new T.DirectionalLight('#3fded0', 0.32); rim.position.set(45, 16, -45); scene.add(rim)
 
       buildSky(scene)
+      buildStars(scene)
       buildEnclosure(scene)
       buildFarRange(scene)
       buildDistantBergs(scene)
