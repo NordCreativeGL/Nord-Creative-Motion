@@ -450,29 +450,53 @@ export default function FjordHeroScene() {
     }
 
     function buildStars(scene: THREE.Scene) {
-      const COUNT = 520
-      const positions = new Float32Array(COUNT * 3)
-      const colors = new Float32Array(COUNT * 3)
-      for (let i = 0; i < COUNT; i++) {
-        const theta = Math.random() * Math.PI * 2
-        const phi = Math.random() * Math.PI * 0.48
-        const r = 1720 + Math.random() * 120
-        positions[i * 3]     = r * Math.cos(phi) * Math.sin(theta)
-        positions[i * 3 + 1] = r * Math.sin(phi) + 60
-        positions[i * 3 + 2] = r * Math.cos(phi) * Math.cos(theta)
-        const b = 0.65 + Math.random() * 0.35
-        const cool = Math.random() * 0.12
-        colors[i * 3]     = b - cool * 0.4
-        colors[i * 3 + 1] = b - cool * 0.1
-        colors[i * 3 + 2] = b + cool
+      const cv = document.createElement('canvas'); cv.width = 64; cv.height = 64
+      const g = cv.getContext('2d')!
+      const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32)
+      grd.addColorStop(0, 'rgba(255,255,255,1)')
+      grd.addColorStop(0.22, 'rgba(255,255,255,0.85)')
+      grd.addColorStop(0.5, 'rgba(255,255,255,0.22)')
+      grd.addColorStop(1, 'rgba(255,255,255,0)')
+      g.fillStyle = grd; g.fillRect(0, 0, 64, 64)
+      const tex = new T.CanvasTexture(cv)
+
+      const R = 1680
+      const starColor = (): [number, number, number] => {
+        const r = Math.random()
+        if (r < 0.04) return [1.0, 0.824, 0.588]
+        if (r < 0.16) return [1.0, 0.973, 0.784]
+        return [0.843, 0.894, 1.0]
       }
-      const geo = new T.BufferGeometry()
-      geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3))
-      geo.setAttribute('color', new T.Float32BufferAttribute(colors, 3))
-      scene.add(new T.Points(geo, new T.PointsMaterial({
-        size: 1.6, sizeAttenuation: false, vertexColors: true,
-        transparent: true, opacity: 0.88, fog: false, depthWrite: false
-      })))
+      const tiers = [
+        { count: 2800, size: 5,  opacity: 0.5,  bMin: 0.30, bMax: 0.55 },
+        { count: 820,  size: 10, opacity: 0.75, bMin: 0.55, bMax: 0.85 },
+        { count: 210,  size: 18, opacity: 1.0,  bMin: 0.80, bMax: 1.0  },
+      ]
+      tiers.forEach((tier) => {
+        const positions = new Float32Array(tier.count * 3)
+        const colors = new Float32Array(tier.count * 3)
+        for (let i = 0; i < tier.count; i++) {
+          const az = Math.random() * Math.PI * 2
+          const elev = -0.06 + Math.random() * (Math.PI * 0.52)
+          const ce = Math.cos(elev)
+          positions[i * 3] = R * ce * Math.sin(az)
+          positions[i * 3 + 1] = R * Math.sin(elev) + 40
+          positions[i * 3 + 2] = R * ce * Math.cos(az)
+          const c = starColor()
+          const b = tier.bMin + Math.random() * (tier.bMax - tier.bMin)
+          colors[i * 3] = c[0] * b
+          colors[i * 3 + 1] = c[1] * b
+          colors[i * 3 + 2] = c[2] * b
+        }
+        const geo = new T.BufferGeometry()
+        geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3))
+        geo.setAttribute('color', new T.Float32BufferAttribute(colors, 3))
+        scene.add(new T.Points(geo, new T.PointsMaterial({
+          map: tex, size: tier.size, sizeAttenuation: true, vertexColors: true,
+          transparent: true, opacity: tier.opacity, depthWrite: false,
+          blending: T.AdditiveBlending, fog: false
+        })))
+      })
     }
 
     function init3d() {
