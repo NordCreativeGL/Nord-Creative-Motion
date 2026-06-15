@@ -593,6 +593,8 @@ export default function FjordHeroScene() {
             if (copy) copy.style.opacity = '1'
             const drag = document.getElementById('fj-drag')
             if (drag) drag.style.opacity = '1'
+            const comp2 = document.getElementById('fj-compass')
+            if (comp2) comp2.style.opacity = '1'
           }
         } catch (err) {}
         schedule()
@@ -696,7 +698,7 @@ export default function FjordHeroScene() {
           </div>
           <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>Drag to rotate the iceberg</div>
         </div>
-        <div id="fj-compass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'opacity 0.6s ease' }}>
+        <div id="fj-compass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'opacity 0.6s ease', opacity: 0 }}>
           <span style={{ display: 'inline-flex', width: '30px', height: '30px', border: '1px solid rgba(95,222,208,0.4)', borderRadius: '50%', alignItems: 'center', justifyContent: 'center' }}>
             <span id="fj-needle" style={{ display: 'block', width: '2px', height: '11px', background: '#5fded0', borderRadius: '2px', transformOrigin: '50% 100%', marginTop: '-9px' }} />
           </span>
