@@ -477,7 +477,7 @@ export default function FjordHeroScene() {
         const colors = new Float32Array(tier.count * 3)
         for (let i = 0; i < tier.count; i++) {
           const az = Math.random() * Math.PI * 2
-          const elev = -0.06 + Math.random() * (Math.PI * 0.52)
+          const elev = -0.05 + Math.pow(Math.random(), 1.7) * 0.95
           const ce = Math.cos(elev)
           positions[i * 3] = R * ce * Math.sin(az)
           positions[i * 3 + 1] = R * Math.sin(elev) + 40
@@ -542,8 +542,8 @@ export default function FjordHeroScene() {
         { stars:[[0,-45,2.5,.74],[-35,0,2.2,.68],[-35,35,2.0,.63],[35,35,1.9,.60],[35,0,2.3,.70]] },
       ]
       const placements: [number, number][] = [
-        [0.0,0.55],[0.5,0.85],[1.05,0.40],[1.6,0.70],[2.1,0.92],[2.6,0.50],[3.15,0.78],
-        [3.7,0.42],[4.2,0.88],[4.75,0.58],[5.25,0.72],[5.7,0.45],[6.0,0.90],
+        [0.0,0.20],[0.5,0.30],[1.05,0.14],[1.6,0.26],[2.1,0.32],[2.6,0.16],[3.15,0.28],
+        [3.7,0.13],[4.2,0.30],[4.75,0.21],[5.25,0.25],[5.7,0.15],[6.0,0.30],
       ]
 
       const Rc = 1620, SC = 1.6, yOff = 40
@@ -596,7 +596,7 @@ export default function FjordHeroScene() {
       g.fillStyle = grd; g.fillRect(0, 0, 64, 64)
       const tex = new T.CanvasTexture(cv)
       const R = 1700
-      const n = new T.Vector3(0.42, 0.86, 0.28).normalize()
+      const n = new T.Vector3(0.62, 0.40, 0.68).normalize()
       const width = 0.11
       const COUNT = 2600
       const positions: number[] = []
@@ -605,7 +605,7 @@ export default function FjordHeroScene() {
       while (made < COUNT && guard < COUNT * 40) {
         guard++
         const az = Math.random() * Math.PI * 2
-        const elev = -0.05 + Math.random() * (Math.PI * 0.52)
+        const elev = -0.05 + Math.pow(Math.random(), 1.5) * 0.95
         const ce = Math.cos(elev)
         const dir = new T.Vector3(ce * Math.sin(az), Math.sin(elev), ce * Math.cos(az))
         const d = Math.abs(dir.dot(n))
