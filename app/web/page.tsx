@@ -7,6 +7,7 @@ import BackToTop from "@/components/BackToTop";
 import SideNav from '@/components/SideNav'
 import IcebergPackagesSection from '@/components/web/IcebergPackagesSection'
 import PackIceCtaSection from '@/components/web/PackIceCtaSection'
+import FjordHeroScene from './components/FjordHeroScene'
 
 export default function WebPage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -50,47 +51,7 @@ export default function WebPage() {
           padding: isMobile ? '120px 24px 80px' : 'clamp(140px, 14vw, 200px) clamp(160px, 16vw, 220px)',
         }}
       >
-        <p style={{
-          fontSize: 'clamp(11px, 0.7vw, 13px)',
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.4)',
-        }}>
-          WEBSITE PRODUCTION
-        </p>
-        <div style={{
-          display: 'inline-flex',
-          border: '1px solid #333',
-          borderRadius: '999px',
-          padding: '6px 16px',
-          marginBottom: '24px',
-        }}>
-          <span style={{
-            fontSize: 'clamp(10px, 0.7vw, 12px)',
-            letterSpacing: '0.15em',
-            fontWeight: 300,
-            color: '#888',
-          }}>
-            UNDER CONSTRUCTION
-          </span>
-        </div>
-        <h1 style={{
-          fontSize: 'clamp(36px, 4vw, 72px)',
-          fontWeight: 300,
-          letterSpacing: '-0.02em',
-          color: 'white',
-        }}>
-          We build websites that people remember
-        </h1>
-        <p style={{
-          fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-          lineHeight: 1.65,
-          color: 'rgba(255,255,255,0.55)',
-          maxWidth: '560px',
-          marginTop: '24px',
-        }}>
-          We design and build high-performance websites for brands that take their visual identity seriously. No templates. No WordPress. Just code.
-        </p>
+        <FjordHeroScene />
       </section>
 
       {/* ── Section 3: The Offer ── */}
