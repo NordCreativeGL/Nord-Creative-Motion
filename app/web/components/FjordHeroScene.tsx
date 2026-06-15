@@ -513,6 +513,7 @@ export default function FjordHeroScene() {
 
       const R_ORBIT = 64, CH = 11
       let target = 0, angle = 0
+      let scrollRevealed = false
 
       ;(window as any).__fjSet = (deg: number) => { target = deg * Math.PI / 180 }
       ;(window as any).__fjPause = (deg?: number) => {
@@ -577,6 +578,11 @@ export default function FjordHeroScene() {
           glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           const deg = ((angle * 180 / Math.PI) % 360 + 360) % 360
+          if (!scrollRevealed && deg >= 238 && deg < 320) {
+            scrollRevealed = true
+            const sc = document.getElementById('fj-scroll')
+            if (sc) sc.style.opacity = '1'
+          }
           if (degEl) degEl.textContent = Math.round(deg) + '°'
           if (needle) needle.style.transform = 'rotate(' + deg + 'deg)'
           updateSections(deg)
@@ -646,6 +652,31 @@ export default function FjordHeroScene() {
           <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>Three ways to work with us</h2>
           <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.</p>
         </div>
+      </div>
+
+      <div
+        id="fj-scroll"
+        className="flex flex-col items-center gap-2"
+        style={{ position: 'absolute', left: '50%', bottom: '96px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
+      >
+        <div className="w-px h-10 bg-white/50" />
+        <svg
+          width="12"
+          height="7"
+          viewBox="0 0 12 7"
+          fill="none"
+          aria-hidden="true"
+          className="animate-bounce"
+        >
+          <path
+            d="M1 1L6 6L11 1"
+            stroke="white"
+            strokeOpacity="0.5"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
 
       <div style={{ position: 'absolute', left: '50%', bottom: '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
