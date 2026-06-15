@@ -564,14 +564,14 @@ export default function FjordHeroScene() {
           const dotMat = new T.SpriteMaterial({ map: dotTex, color: new T.Color(0.85, 0.91, 1.0), transparent: true, opacity: Math.min(1, s[3] * 1.05), blending: T.AdditiveBlending, depthWrite: false, fog: false })
           const dot = new T.Sprite(dotMat)
           dot.position.copy(p)
-          const sz = s[2] * 7
+          const sz = s[2] * 11
           dot.scale.set(sz, sz, 1)
           scene.add(dot)
-          if (s[2] >= 2.6 && s[3] >= 0.7) {
-            const spMat = new T.SpriteMaterial({ map: spikeTex, color: new T.Color(0.96, 0.98, 1.0), transparent: true, opacity: s[3] * 0.5, blending: T.AdditiveBlending, depthWrite: false, fog: false })
+          if (s[2] >= 2.2 && s[3] >= 0.6) {
+            const spMat = new T.SpriteMaterial({ map: spikeTex, color: new T.Color(0.96, 0.98, 1.0), transparent: true, opacity: s[3] * 0.8, blending: T.AdditiveBlending, depthWrite: false, fog: false })
             const sp = new T.Sprite(spMat)
             sp.position.copy(p)
-            const ss = s[2] * 30
+            const ss = s[2] * 38
             sp.scale.set(ss, ss, 1)
             scene.add(sp)
           }
@@ -581,7 +581,7 @@ export default function FjordHeroScene() {
           c.lines.forEach(([a, b]) => { lpos.push(pts[a].x, pts[a].y, pts[a].z, pts[b].x, pts[b].y, pts[b].z) })
           const lg = new T.BufferGeometry()
           lg.setAttribute('position', new T.Float32BufferAttribute(lpos, 3))
-          scene.add(new T.LineSegments(lg, new T.LineBasicMaterial({ color: 0x9fc0d8, transparent: true, opacity: 0.22, fog: false, depthWrite: false })))
+          scene.add(new T.LineSegments(lg, new T.LineBasicMaterial({ color: 0xbcd8ec, transparent: true, opacity: 0.55, fog: false, depthWrite: false })))
         }
       })
     }
@@ -597,8 +597,8 @@ export default function FjordHeroScene() {
       const tex = new T.CanvasTexture(cv)
       const R = 1700
       const n = new T.Vector3(0.42, 0.86, 0.28).normalize()
-      const width = 0.16
-      const COUNT = 1500
+      const width = 0.11
+      const COUNT = 2600
       const positions: number[] = []
       const colors: number[] = []
       let made = 0, guard = 0
@@ -612,7 +612,7 @@ export default function FjordHeroScene() {
         const w = Math.exp(-(d * d) / (width * width))
         if (Math.random() > w) continue
         positions.push(dir.x * R, dir.y * R + 40, dir.z * R)
-        const b = 0.2 + Math.random() * 0.3
+        const b = 0.28 + Math.random() * 0.35
         colors.push(0.63 * b, 0.73 * b, 1.0 * b)
         made++
       }
@@ -620,8 +620,8 @@ export default function FjordHeroScene() {
       geo.setAttribute('position', new T.Float32BufferAttribute(positions, 3))
       geo.setAttribute('color', new T.Float32BufferAttribute(colors, 3))
       scene.add(new T.Points(geo, new T.PointsMaterial({
-        map: tex, size: 5, sizeAttenuation: true, vertexColors: true,
-        transparent: true, opacity: 0.6, depthWrite: false,
+        map: tex, size: 6, sizeAttenuation: true, vertexColors: true,
+        transparent: true, opacity: 0.9, depthWrite: false,
         blending: T.AdditiveBlending, fog: false
       })))
     }
