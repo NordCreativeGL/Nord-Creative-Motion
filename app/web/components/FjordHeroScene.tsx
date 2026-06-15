@@ -633,18 +633,18 @@ export default function FjordHeroScene() {
 
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '52%', zIndex: 3, pointerEvents: 'none', background: 'linear-gradient(180deg,rgba(6,20,32,0.92) 0%,rgba(6,20,32,0.7) 32%,rgba(6,20,32,0.32) 62%,rgba(6,20,32,0) 100%)' }} />
 
-      <div style={{ position: 'absolute', left: 0, right: 0, top: '5%', zIndex: 4, pointerEvents: 'none' }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
-          <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(32px,4.8vw,76px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>We build websites that people remember</h1>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(15px,1.2vw,18px)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.</p>
+          <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>We build websites that people remember</h1>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.</p>
         </div>
         <div id="fj-sec-1" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(30px,4.2vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>A website — or everything it needs</h2>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(15px,1.2vw,18px)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>Design · Copywriting · SEO · Photo &amp; video · Development · Maintenance. One team, one brief, one result.</p>
+          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>A website — or everything it needs</h2>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>Design · Copywriting · SEO · Photo &amp; video · Development · Maintenance. One team, one brief, one result.</p>
         </div>
         <div id="fj-sec-2" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(30px,4.2vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>Three ways to work with us</h2>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(15px,1.2vw,18px)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.</p>
+          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>Three ways to work with us</h2>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.</p>
         </div>
       </div>
 
