@@ -454,8 +454,8 @@ export default function FjordHeroScene() {
       const g = cv.getContext('2d')!
       const grd = g.createRadialGradient(32, 32, 0, 32, 32, 32)
       grd.addColorStop(0, 'rgba(255,255,255,1)')
-      grd.addColorStop(0.22, 'rgba(255,255,255,0.85)')
-      grd.addColorStop(0.5, 'rgba(255,255,255,0.22)')
+      grd.addColorStop(0.4, 'rgba(255,255,255,1)')
+      grd.addColorStop(0.7, 'rgba(255,255,255,0.45)')
       grd.addColorStop(1, 'rgba(255,255,255,0)')
       g.fillStyle = grd; g.fillRect(0, 0, 64, 64)
       const tex = new T.CanvasTexture(cv)
@@ -468,9 +468,9 @@ export default function FjordHeroScene() {
         return [0.843, 0.894, 1.0]
       }
       const tiers = [
-        { count: 2800, size: 5,  opacity: 0.5,  bMin: 0.30, bMax: 0.55 },
-        { count: 820,  size: 10, opacity: 0.75, bMin: 0.55, bMax: 0.85 },
-        { count: 210,  size: 18, opacity: 1.0,  bMin: 0.80, bMax: 1.0  },
+        { count: 2800, size: 6,  opacity: 0.85, bMin: 0.45, bMax: 0.70 },
+        { count: 820,  size: 11, opacity: 0.95, bMin: 0.70, bMax: 0.95 },
+        { count: 210,  size: 19, opacity: 1.0,  bMin: 0.90, bMax: 1.0  },
       ]
       tiers.forEach((tier) => {
         const positions = new Float32Array(tier.count * 3)
