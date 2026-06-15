@@ -510,22 +510,6 @@ export default function FjordHeroScene() {
       dg.fillStyle = dgrd; dg.fillRect(0, 0, 64, 64)
       const dotTex = new T.CanvasTexture(dotCv)
 
-      const spCv = document.createElement('canvas'); spCv.width = 64; spCv.height = 64
-      const sg = spCv.getContext('2d')!
-      const ray = (x0: number, y0: number, x1: number, y1: number) => {
-        const gr = sg.createLinearGradient(x0, y0, x1, y1)
-        gr.addColorStop(0, 'rgba(255,255,255,0)')
-        gr.addColorStop(0.5, 'rgba(255,255,255,0.85)')
-        gr.addColorStop(1, 'rgba(255,255,255,0)')
-        sg.strokeStyle = gr; sg.lineWidth = 1.6
-        sg.beginPath(); sg.moveTo(x0, y0); sg.lineTo(x1, y1); sg.stroke()
-      }
-      ray(2, 32, 62, 32); ray(32, 2, 32, 62)
-      const cgr = sg.createRadialGradient(32, 32, 0, 32, 32, 10)
-      cgr.addColorStop(0, 'rgba(255,255,255,0.9)'); cgr.addColorStop(1, 'rgba(255,255,255,0)')
-      sg.fillStyle = cgr; sg.beginPath(); sg.arc(32, 32, 10, 0, Math.PI * 2); sg.fill()
-      const spikeTex = new T.CanvasTexture(spCv)
-
       const CONST: { stars: [number, number, number, number][]; lines?: [number, number][] }[] = [
         { stars:[[50,-35,2.2,.80],[-40,10,1.8,.60],[-32,30,1.6,.50],[0,42,1.4,.42],[15,24,1.4,.40],[28,3,1.4,.38]] },
         { stars:[[0,-60,2.3,.74],[55,-5,2.0,.63],[5,50,1.7,.55],[-50,10,2.1,.68]] },
@@ -561,27 +545,19 @@ export default function FjordHeroScene() {
             .add(lUp.clone().multiplyScalar(-s[1] * SC))
           p.y += yOff
           pts.push(p)
-          const dotMat = new T.SpriteMaterial({ map: dotTex, color: new T.Color(0.85, 0.91, 1.0), transparent: true, opacity: Math.min(1, s[3] * 1.05), blending: T.AdditiveBlending, depthWrite: false, fog: false })
+          const dotMat = new T.SpriteMaterial({ map: dotTex, color: new T.Color(0.85, 0.91, 1.0), transparent: true, opacity: Math.min(0.85, s[3] * 0.75), blending: T.AdditiveBlending, depthWrite: false, fog: false })
           const dot = new T.Sprite(dotMat)
           dot.position.copy(p)
-          const sz = s[2] * 11
+          const sz = s[2] * 6.5
           dot.scale.set(sz, sz, 1)
           scene.add(dot)
-          if (s[2] >= 2.2 && s[3] >= 0.6) {
-            const spMat = new T.SpriteMaterial({ map: spikeTex, color: new T.Color(0.96, 0.98, 1.0), transparent: true, opacity: s[3] * 0.8, blending: T.AdditiveBlending, depthWrite: false, fog: false })
-            const sp = new T.Sprite(spMat)
-            sp.position.copy(p)
-            const ss = s[2] * 38
-            sp.scale.set(ss, ss, 1)
-            scene.add(sp)
-          }
         })
         if (c.lines) {
           const lpos: number[] = []
           c.lines.forEach(([a, b]) => { lpos.push(pts[a].x, pts[a].y, pts[a].z, pts[b].x, pts[b].y, pts[b].z) })
           const lg = new T.BufferGeometry()
           lg.setAttribute('position', new T.Float32BufferAttribute(lpos, 3))
-          scene.add(new T.LineSegments(lg, new T.LineBasicMaterial({ color: 0xbcd8ec, transparent: true, opacity: 0.55, fog: false, depthWrite: false })))
+          scene.add(new T.LineSegments(lg, new T.LineBasicMaterial({ color: 0xbcd8ec, transparent: true, opacity: 0.42, fog: false, depthWrite: false })))
         }
       })
     }
