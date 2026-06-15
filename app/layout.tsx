@@ -23,6 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geist.variable} antialiased`}>
+      <head>
+        <link rel="prefetch" href="/mtn-front.json" />
+        <link rel="prefetch" href="/mtn-sea.json" />
+        <link rel="prefetch" href="/mtn-fjord.json" />
+      </head>
       <body className="bg-black text-white"><Header />{children}<BackToTop /></body>
     </html>
   );
