@@ -499,6 +499,93 @@ export default function FjordHeroScene() {
       })
     }
 
+    function buildConstellations(scene: THREE.Scene) {
+      const dotCv = document.createElement('canvas'); dotCv.width = 64; dotCv.height = 64
+      const dg = dotCv.getContext('2d')!
+      const dgrd = dg.createRadialGradient(32, 32, 0, 32, 32, 32)
+      dgrd.addColorStop(0, 'rgba(255,255,255,1)')
+      dgrd.addColorStop(0.3, 'rgba(255,255,255,0.95)')
+      dgrd.addColorStop(0.55, 'rgba(210,228,255,0.35)')
+      dgrd.addColorStop(1, 'rgba(210,228,255,0)')
+      dg.fillStyle = dgrd; dg.fillRect(0, 0, 64, 64)
+      const dotTex = new T.CanvasTexture(dotCv)
+
+      const spCv = document.createElement('canvas'); spCv.width = 64; spCv.height = 64
+      const sg = spCv.getContext('2d')!
+      const ray = (x0: number, y0: number, x1: number, y1: number) => {
+        const gr = sg.createLinearGradient(x0, y0, x1, y1)
+        gr.addColorStop(0, 'rgba(255,255,255,0)')
+        gr.addColorStop(0.5, 'rgba(255,255,255,0.85)')
+        gr.addColorStop(1, 'rgba(255,255,255,0)')
+        sg.strokeStyle = gr; sg.lineWidth = 1.6
+        sg.beginPath(); sg.moveTo(x0, y0); sg.lineTo(x1, y1); sg.stroke()
+      }
+      ray(2, 32, 62, 32); ray(32, 2, 32, 62)
+      const cgr = sg.createRadialGradient(32, 32, 0, 32, 32, 10)
+      cgr.addColorStop(0, 'rgba(255,255,255,0.9)'); cgr.addColorStop(1, 'rgba(255,255,255,0)')
+      sg.fillStyle = cgr; sg.beginPath(); sg.arc(32, 32, 10, 0, Math.PI * 2); sg.fill()
+      const spikeTex = new T.CanvasTexture(spCv)
+
+      const CONST: { stars: [number, number, number, number][]; lines?: [number, number][] }[] = [
+        { stars:[[50,-35,2.2,.80],[-40,10,1.8,.60],[-32,30,1.6,.50],[0,42,1.4,.42],[15,24,1.4,.40],[28,3,1.4,.38]] },
+        { stars:[[0,-60,2.3,.74],[55,-5,2.0,.63],[5,50,1.7,.55],[-50,10,2.1,.68]] },
+        { stars:[[30,18,2.5,.76],[8,28,1.7,.64],[-18,-8,1.5,.48],[-35,-26,1.4,.45],[-10,-40,1.5,.44],[15,-20,1.3,.40]] },
+        { lines:[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]], stars:[[55,-42,2.8,.82],[52,22,2.4,.72],[-18,30,2.2,.68],[-18,-32,1.8,.55],[-65,-48,2.6,.80],[-108,-43,2.3,.74],[-145,-12,2.4,.76]] },
+        { stars:[[30,22,2.0,.68],[12,-9,1.8,.60],[-18,-28,1.7,.55],[-33,4,1.8,.60],[-14,30,1.5,.48]] },
+        { stars:[[0,-42,2.8,.82],[0,0,2.0,.66],[0,58,1.8,.60],[-35,-7,1.7,.56],[35,-7,1.8,.62]] },
+        { stars:[[0,-3,3.2,.88],[18,14,1.7,.54],[24,25,1.7,.54],[-4,18,1.4,.42]] },
+        { stars:[[0,0,2.5,.78],[-28,24,2.0,.66],[18,-18,1.8,.60],[-9,-28,1.7,.56],[28,20,1.8,.60]] },
+        { stars:[[-48,-40,3.5,.86],[42,-44,2.8,.80],[-18,4,2.2,.70],[0,7,2.4,.74],[18,10,2.2,.70],[38,55,4.0,.88],[-29,52,2.0,.64]] },
+        { stars:[[0,0,3.5,.92],[28,28,2.0,.62],[18,55,1.8,.55],[-18,55,1.9,.58],[-28,28,2.1,.65]] },
+        { stars:[[-50,0,3.0,.85],[-25,15,2.2,.68],[0,10,2.0,.62],[25,-5,2.3,.70],[48,-20,2.5,.74],[60,10,1.8,.56],[55,35,1.9,.60]] },
+        { stars:[[0,0,2.8,.80],[30,-20,2.4,.72],[60,-30,2.0,.63],[85,-15,2.6,.76],[100,10,1.9,.58],[-30,20,2.2,.67]] },
+        { stars:[[0,-45,2.5,.74],[-35,0,2.2,.68],[-35,35,2.0,.63],[35,35,1.9,.60],[35,0,2.3,.70]] },
+      ]
+      const placements: [number, number][] = [
+        [0.0,0.55],[0.5,0.85],[1.05,0.40],[1.6,0.70],[2.1,0.92],[2.6,0.50],[3.15,0.78],
+        [3.7,0.42],[4.2,0.88],[4.75,0.58],[5.25,0.72],[5.7,0.45],[6.0,0.90],
+      ]
+
+      const Rc = 1620, SC = 1.6, yOff = 40
+      CONST.forEach((c, ci) => {
+        const az = placements[ci][0], elev = placements[ci][1]
+        const ce = Math.cos(elev), se = Math.sin(elev)
+        const dir = new T.Vector3(ce * Math.sin(az), se, ce * Math.cos(az))
+        const right = new T.Vector3().crossVectors(new T.Vector3(0, 1, 0), dir).normalize()
+        const lUp = new T.Vector3().crossVectors(dir, right).normalize()
+        const center = dir.clone().multiplyScalar(Rc)
+        const pts: THREE.Vector3[] = []
+        c.stars.forEach((s) => {
+          const p = center.clone()
+            .add(right.clone().multiplyScalar(s[0] * SC))
+            .add(lUp.clone().multiplyScalar(-s[1] * SC))
+          p.y += yOff
+          pts.push(p)
+          const dotMat = new T.SpriteMaterial({ map: dotTex, color: new T.Color(0.85, 0.91, 1.0), transparent: true, opacity: Math.min(1, s[3] * 1.05), blending: T.AdditiveBlending, depthWrite: false, fog: false })
+          const dot = new T.Sprite(dotMat)
+          dot.position.copy(p)
+          const sz = s[2] * 7
+          dot.scale.set(sz, sz, 1)
+          scene.add(dot)
+          if (s[2] >= 2.6 && s[3] >= 0.7) {
+            const spMat = new T.SpriteMaterial({ map: spikeTex, color: new T.Color(0.96, 0.98, 1.0), transparent: true, opacity: s[3] * 0.5, blending: T.AdditiveBlending, depthWrite: false, fog: false })
+            const sp = new T.Sprite(spMat)
+            sp.position.copy(p)
+            const ss = s[2] * 30
+            sp.scale.set(ss, ss, 1)
+            scene.add(sp)
+          }
+        })
+        if (c.lines) {
+          const lpos: number[] = []
+          c.lines.forEach(([a, b]) => { lpos.push(pts[a].x, pts[a].y, pts[a].z, pts[b].x, pts[b].y, pts[b].z) })
+          const lg = new T.BufferGeometry()
+          lg.setAttribute('position', new T.Float32BufferAttribute(lpos, 3))
+          scene.add(new T.LineSegments(lg, new T.LineBasicMaterial({ color: 0x9fc0d8, transparent: true, opacity: 0.22, fog: false, depthWrite: false })))
+        }
+      })
+    }
+
     function init3d() {
       const stage = document.getElementById('fj-stage')
       if (!stage) return
@@ -522,6 +609,7 @@ export default function FjordHeroScene() {
 
       buildSky(scene)
       buildStars(scene)
+      buildConstellations(scene)
       buildEnclosure(scene)
       buildFarRange(scene)
       buildDistantBergs(scene)
