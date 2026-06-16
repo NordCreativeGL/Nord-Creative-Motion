@@ -143,13 +143,12 @@ export default function GreenlandSection() {
 
           <div style={{ marginBottom: 24 }}>
             <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
-              For the
+              We're already
             </div>
             <div ref={line2Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
-              companies
+              here.
             </div>
             <div ref={line3Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
-              working here.
             </div>
           </div>
 
