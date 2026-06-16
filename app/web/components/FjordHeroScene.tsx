@@ -231,6 +231,17 @@ export default function FjordHeroScene() {
         return g
       })()
       const keel = new T.Mesh(keelGeo, keelMat); keel.renderOrder = -1; berg.add(keel)
+      const keelBackMesh = keel.clone()
+      keelBackMesh.material = keel.material.clone()
+      keelBackMesh.material.side = T.BackSide
+      keelBackMesh.material.depthWrite = true
+      keelBackMesh.material.needsUpdate = true
+      keelBackMesh.renderOrder = 1
+      berg.add(keelBackMesh)
+      keel.material = keel.material.clone()
+      keel.material.side = T.FrontSide
+      keel.material.needsUpdate = true
+      keel.renderOrder = 2
 
       {
         const stops2: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.18,[0.22,0.62,0.60]],[0.45,[0.07,0.34,0.39]],[0.74,[0.04,0.14,0.20]],[1.00,[0.02,0.06,0.10]]]
@@ -255,6 +266,17 @@ export default function FjordHeroScene() {
         }
         g.setAttribute('color', new T.BufferAttribute(cols2, 3)); g.computeVertexNormals()
         const spikeKeel = new T.Mesh(g, keelMat); spikeKeel.renderOrder = -1; berg.add(spikeKeel)
+        const spikeKeelBackMesh = spikeKeel.clone()
+        spikeKeelBackMesh.material = spikeKeel.material.clone()
+        spikeKeelBackMesh.material.side = T.BackSide
+        spikeKeelBackMesh.material.depthWrite = true
+        spikeKeelBackMesh.material.needsUpdate = true
+        spikeKeelBackMesh.renderOrder = 1
+        berg.add(spikeKeelBackMesh)
+        spikeKeel.material = spikeKeel.material.clone()
+        spikeKeel.material.side = T.FrontSide
+        spikeKeel.material.needsUpdate = true
+        spikeKeel.renderOrder = 2
       }
 
       return berg
