@@ -235,20 +235,20 @@ export default function GreenlandPage() {
                 }}>
                   Tell us about your project — we'll help define what's possible and how to approach it.
                 </p>
-                <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <a
                     href="mailto:contact@nordcreative.dk"
                     className="text-white hover:bg-white hover:text-black transition-colors duration-200"
                     style={{
-                      display: isMobile ? 'block' : 'inline-block',
+                      display: 'block',
                       border: '1px solid rgba(255,255,255,0.6)',
                       padding: '14px 32px',
                       borderRadius: '999px',
                       fontSize: 'clamp(15px, 0.9vw, 19px)',
                       fontWeight: 300,
                       textDecoration: 'none',
-                      width: isMobile ? '100%' : undefined,
-                      textAlign: isMobile ? 'center' as const : undefined,
+                      width: '100%',
+                      textAlign: 'center' as const,
                     }}
                   >
                     Start your project
@@ -257,15 +257,15 @@ export default function GreenlandPage() {
                     href="/web"
                     className="text-white hover:bg-white hover:text-black transition-colors duration-200"
                     style={{
-                      display: isMobile ? 'block' : 'inline-block',
-                      border: '1px solid rgba(255,255,255,0.6)',
+                      display: 'block',
+                      border: '1px dashed rgba(255,255,255,0.6)',
                       padding: '14px 32px',
                       borderRadius: '999px',
                       fontSize: 'clamp(15px, 0.9vw, 19px)',
                       fontWeight: 300,
                       textDecoration: 'none',
-                      width: isMobile ? '100%' : undefined,
-                      textAlign: isMobile ? 'center' as const : undefined,
+                      width: '100%',
+                      textAlign: 'center' as const,
                     }}
                   >
                     See our website production
