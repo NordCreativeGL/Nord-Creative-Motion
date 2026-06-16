@@ -128,7 +128,7 @@ export default function CTABanner() {
             Planning a project<br />in Greenland?
           </div>
           <div ref={bodyRef} style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
-            Tell us about your project — we'll help define what's possible and how to approach it.
+            Tell us about your project — we'll come back with a plan.
           </div>
           <div
             ref={btnRef}

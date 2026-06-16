@@ -145,16 +145,13 @@ export default function ServicesSection() {
               What we offer
             </div>
             <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(48px,3vw,68px)] font-light text-white mb-4 leading-tight">
-              <div ref={line1Ref}>Visual work for brands,</div>
-              <div ref={line2Ref}>companies and projects</div>
+              <div ref={line1Ref}>Photography, video, and websites</div>
+              <div ref={line2Ref}>— for businesses in Greenland.</div>
             </h2>
             <div ref={accentRef} className="text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] text-white/40 font-light mb-8">
-              — with a story to tell or a product to sell
             </div>
             <div ref={bodyRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white/60 leading-relaxed">
-              We create visual content for companies working in environments where
-              access, logistics, and conditions require planning and flexibility —
-              helping businesses stand out and gain visibility with customers and investors.
+              We produce photography, video, drone footage, and websites for businesses — with a team based in South Greenland.
             </div>
           </div>
 
