@@ -196,7 +196,7 @@ export default function FjordHeroScene() {
       geoNub.translate(-6, 0, 8)
       const nub = new T.Mesh(geoNub, ice); addCracks(nub, '#6f9fb6', 0.3, 16); berg.add(nub)
 
-      const keelMat = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, transparent: true, opacity: 0.82, depthWrite: false, side: T.FrontSide })
+      const keelMat = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, transparent: false, opacity: 1, depthWrite: true, side: T.DoubleSide })
       const keelGeo = (() => {
         const fp: [number, number][] = [[-26,0],[-21,-6],[-10,-9],[0,-11],[6,-19],[13,-12],[23,-9],[32,-4],[35,1],[31,6],[20,10],[7,11],[-6,10],[-17,8],[-24,4]]
         const K = fp.length, M = 12, cx = 4, cz = -2, topY = -1.2, deep = 52
