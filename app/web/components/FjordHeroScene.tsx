@@ -215,7 +215,7 @@ export default function FjordHeroScene() {
             const damp = 1 - t * 0.55
             px += (hash(Math.round(px * 3), j * 7, k) - 0.5) * 2.2 * damp
             pz += (hash(j * 5, k, Math.round(pz * 3)) - 0.5) * 2.2 * damp
-            const noiseAmp = j === 0 ? 4.0 : 1.6
+            const noiseAmp = j === 0 ? 6.0 : 1.6
             const yy = y + (hash(k, j, 3) - 0.5) * noiseAmp
             verts.push(px, yy, pz); const c = colAt(t); cols.push(c[0], c[1], c[2])
           }
@@ -240,7 +240,7 @@ export default function FjordHeroScene() {
         const g = new T.IcosahedronGeometry(1, 3)
         const p2 = g.attributes.position as THREE.BufferAttribute
         const cols2 = new Float32Array(p2.count * 3)
-        const top = -1.5, deep = 60, rxT = 17, rzT = 15, originX = 4, originZ = -9
+        const top = 3, deep = 60, rxT = 17, rzT = 15, originX = 4, originZ = -9
         for (let i = 0; i < p2.count; i++) {
           let x = p2.getX(i), y = p2.getY(i), z = p2.getZ(i)
           const dn = (1 - y) / 2, rf = 1 - Math.pow(dn, 1.3) * 0.92
@@ -248,7 +248,6 @@ export default function FjordHeroScene() {
           px += (hash(Math.round(px*3), Math.round(py*3), Math.round(pz*3)) - 0.5) * 2.6
           py += (hash(Math.round(py*3), Math.round(pz*3), Math.round(px*3)) - 0.5) * 2.6
           pz += (hash(Math.round(pz*3), Math.round(px*3), Math.round(py*3)) - 0.5) * 2.6
-          if (py > top) py = top
           p2.setXYZ(i, px, py, pz)
           const c = colAt2(Math.min(dn, 1)); cols2[i*3]=c[0]; cols2[i*3+1]=c[1]; cols2[i*3+2]=c[2]
         }
