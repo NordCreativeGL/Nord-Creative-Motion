@@ -199,7 +199,7 @@ export default function FjordHeroScene() {
       const keelMat = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, transparent: false, opacity: 1, depthWrite: true, side: T.DoubleSide })
       const keelGeo = (() => {
         const fp: [number, number][] = [[-26,0],[-21,-6],[-10,-9],[0,-11],[6,-19],[13,-12],[23,-9],[32,-4],[35,1],[31,6],[20,10],[7,11],[-6,10],[-17,8],[-24,4]]
-        const K = fp.length, M = 12, cx = 4, cz = -2, topY = 0, deep = 52
+        const K = fp.length, M = 12, cx = 4, cz = -2, topY = -1.2, deep = 52
         const stops: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.16,[0.26,0.72,0.68]],[0.42,[0.08,0.38,0.42]],[0.72,[0.04,0.15,0.21]],[1.00,[0.02,0.06,0.10]]]
         const colAt = (t: number): [number, number, number] => {
           for (let s = 0; s < stops.length - 1; s++) {
@@ -220,10 +220,8 @@ export default function FjordHeroScene() {
           }
         }
         const bi = (M + 1) * K; verts.push(cx, topY - deep * 1.05, cz); { const c = colAt(1); cols.push(c[0], c[1], c[2]) }
-        const ti = bi + 1; verts.push(cx, topY, cz); { const c = colAt(0); cols.push(c[0], c[1], c[2]) }
         for (let j = 0; j < M; j++) for (let k = 0; k < K; k++) { const a = j*K+k, b = j*K+(k+1)%K, c2 = (j+1)*K+k, d = (j+1)*K+(k+1)%K; idx.push(a, c2, b, b, c2, d) }
         for (let k = 0; k < K; k++) idx.push(M * K + k, bi, M * K + (k + 1) % K)
-        for (let k = 0; k < K; k++) idx.push(ti, (k + 1) % K, k)
         const g = new T.BufferGeometry()
         g.setAttribute('position', new T.Float32BufferAttribute(verts, 3))
         g.setAttribute('color', new T.Float32BufferAttribute(cols, 3))
