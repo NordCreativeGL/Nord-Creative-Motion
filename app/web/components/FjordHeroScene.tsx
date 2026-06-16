@@ -200,7 +200,7 @@ export default function FjordHeroScene() {
       keelMat.clippingPlanes = [new T.Plane(new T.Vector3(0, -1, 0), 0)]
       const keelGeo = (() => {
         const fp: [number, number][] = [[-26,0],[-21,-6],[-10,-9],[0,-11],[6,-19],[13,-12],[23,-9],[32,-4],[35,1],[31,6],[20,10],[7,11],[-6,10],[-17,8],[-24,4]]
-        const K = fp.length, M = 12, cx = 4, cz = -2, topY = -1.2, deep = 52
+        const K = fp.length, M = 12, cx = 4, cz = -2, topY = 3.0, deep = 52
         const stops: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.16,[0.26,0.72,0.68]],[0.42,[0.08,0.38,0.42]],[0.72,[0.04,0.15,0.21]],[1.00,[0.02,0.06,0.10]]]
         const colAt = (t: number): [number, number, number] => {
           for (let s = 0; s < stops.length - 1; s++) {
