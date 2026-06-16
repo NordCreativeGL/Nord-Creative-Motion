@@ -142,11 +142,10 @@ export default function GreenlandSection() {
           </div>
 
           <div style={{ marginBottom: 24 }}>
-            <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
-              We're already
+            <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25, whiteSpace: 'nowrap' }}>
+              We're already here.
             </div>
             <div ref={line2Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
-              here.
             </div>
             <div ref={line3Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
             </div>

@@ -145,8 +145,8 @@ export default function ServicesSection() {
               What we offer
             </div>
             <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(48px,3vw,68px)] font-light text-white mb-4 leading-tight">
-              <div ref={line1Ref}>Photography, video, and websites.</div>
-              <div ref={line2Ref}>Produced in Greenland.</div>
+              <div ref={line1Ref}>Photography, video, and websites.<br />Produced in Greenland.</div>
+              <div ref={line2Ref}></div>
             </h2>
             <div ref={accentRef} className="text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] text-white/40 font-light mb-8">
             </div>
