@@ -199,7 +199,7 @@ export default function FjordHeroScene() {
       const keelMat = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, transparent: false, opacity: 1, depthWrite: true, side: T.DoubleSide })
       const keelGeo = (() => {
         const fp: [number, number][] = [[-26,0],[-21,-6],[-10,-9],[0,-11],[6,-19],[13,-12],[23,-9],[32,-4],[35,1],[31,6],[20,10],[7,11],[-6,10],[-17,8],[-24,4]]
-        const K = fp.length, M = 12, cx = 4, cz = -2, topY = -1.2, deep = 52
+        const K = fp.length, M = 12, cx = 4, cz = -2, topY = 0, deep = 52
         const stops: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.16,[0.26,0.72,0.68]],[0.42,[0.08,0.38,0.42]],[0.72,[0.04,0.15,0.21]],[1.00,[0.02,0.06,0.10]]]
         const colAt = (t: number): [number, number, number] => {
           for (let s = 0; s < stops.length - 1; s++) {
@@ -215,7 +215,7 @@ export default function FjordHeroScene() {
             const damp = 1 - t * 0.55
             px += (hash(Math.round(px * 3), j * 7, k) - 0.5) * 2.2 * damp
             pz += (hash(j * 5, k, Math.round(pz * 3)) - 0.5) * 2.2 * damp
-            const yy = (j === 0) ? topY : Math.min(y + (hash(k, j, 3) - 0.5) * 1.6, -1.2)
+            const yy = y + (hash(k, j, 3) - 0.5) * 1.6
             verts.push(px, yy, pz); const c = colAt(t); cols.push(c[0], c[1], c[2])
           }
         }
