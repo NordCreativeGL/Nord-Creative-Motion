@@ -199,7 +199,7 @@ export default function FjordHeroScene() {
       const keelMat = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, transparent: false, opacity: 1, depthWrite: true, side: T.DoubleSide })
       const keelGeo = (() => {
         const fp: [number, number][] = [[-26,0],[-21,-6],[-10,-9],[0,-11],[6,-19],[13,-12],[23,-9],[32,-4],[35,1],[31,6],[20,10],[7,11],[-6,10],[-17,8],[-24,4]]
-        const K = fp.length, M = 12, cx = 4, cz = -2, topY = 4, deep = 52
+        const K = fp.length, M = 12, cx = 4, cz = -2, topY = -1.2, deep = 52
         const stops: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.16,[0.26,0.72,0.68]],[0.42,[0.08,0.38,0.42]],[0.72,[0.04,0.15,0.21]],[1.00,[0.02,0.06,0.10]]]
         const colAt = (t: number): [number, number, number] => {
           for (let s = 0; s < stops.length - 1; s++) {
@@ -209,13 +209,14 @@ export default function FjordHeroScene() {
         }
         const verts: number[] = [], cols: number[] = [], idx: number[] = []
         for (let j = 0; j <= M; j++) {
-          const t = j / M, rf = (1.1 - Math.pow(t, 1.25)) * Math.min(t * 12, 1), y = topY - deep * t
+          const t = j / M, rf = 1.1 - Math.pow(t, 1.25), y = topY - deep * t
           for (let k = 0; k < K; k++) {
             let px = cx + (fp[k][0] - cx) * rf, pz = cz + (fp[k][1] - cz) * rf
             const damp = 1 - t * 0.55
             px += (hash(Math.round(px * 3), j * 7, k) - 0.5) * 2.2 * damp
             pz += (hash(j * 5, k, Math.round(pz * 3)) - 0.5) * 2.2 * damp
-            const yy = y + (hash(k, j, 3) - 0.5) * 1.6
+            const noiseAmp = j === 0 ? 4.0 : 1.6
+            const yy = y + (hash(k, j, 3) - 0.5) * noiseAmp
             verts.push(px, yy, pz); const c = colAt(t); cols.push(c[0], c[1], c[2])
           }
         }
@@ -228,18 +229,7 @@ export default function FjordHeroScene() {
         g.setIndex(idx); g.computeVertexNormals()
         return g
       })()
-      const keel = new T.Mesh(keelGeo, keelMat); keel.renderOrder = -1; berg.add(keel)
-      const keelBackMesh = keel.clone()
-      keelBackMesh.material = keel.material.clone()
-      keelBackMesh.material.side = T.BackSide
-      keelBackMesh.material.depthWrite = true
-      keelBackMesh.material.needsUpdate = true
-      keelBackMesh.renderOrder = 1
-      berg.add(keelBackMesh)
-      keel.material = keel.material.clone()
-      keel.material.side = T.FrontSide
-      keel.material.needsUpdate = true
-      keel.renderOrder = 2
+      const keel = new T.Mesh(keelGeo, keelMat); berg.add(keel)
 
       {
         const stops2: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.18,[0.22,0.62,0.60]],[0.45,[0.07,0.34,0.39]],[0.74,[0.04,0.14,0.20]],[1.00,[0.02,0.06,0.10]]]
@@ -263,18 +253,7 @@ export default function FjordHeroScene() {
           const c = colAt2(Math.min(dn, 1)); cols2[i*3]=c[0]; cols2[i*3+1]=c[1]; cols2[i*3+2]=c[2]
         }
         g.setAttribute('color', new T.BufferAttribute(cols2, 3)); g.computeVertexNormals()
-        const spikeKeel = new T.Mesh(g, keelMat); spikeKeel.renderOrder = -1; berg.add(spikeKeel)
-        const spikeKeelBackMesh = spikeKeel.clone()
-        spikeKeelBackMesh.material = spikeKeel.material.clone()
-        spikeKeelBackMesh.material.side = T.BackSide
-        spikeKeelBackMesh.material.depthWrite = true
-        spikeKeelBackMesh.material.needsUpdate = true
-        spikeKeelBackMesh.renderOrder = 1
-        berg.add(spikeKeelBackMesh)
-        spikeKeel.material = spikeKeel.material.clone()
-        spikeKeel.material.side = T.FrontSide
-        spikeKeel.material.needsUpdate = true
-        spikeKeel.renderOrder = 2
+        const spikeKeel = new T.Mesh(g, keelMat); berg.add(spikeKeel)
       }
 
       return berg
