@@ -209,7 +209,7 @@ export default function FjordHeroScene() {
         }
         const verts: number[] = [], cols: number[] = [], idx: number[] = []
         for (let j = 0; j <= M; j++) {
-          const t = j / M, rf = (1.1 - Math.pow(t, 1.25)) * Math.min(t * 5, 1), y = topY - deep * t
+          const t = j / M, rf = 1.1 - Math.pow(t, 1.25), y = topY - deep * t
           for (let k = 0; k < K; k++) {
             let px = cx + (fp[k][0] - cx) * rf, pz = cz + (fp[k][1] - cz) * rf
             const damp = 1 - t * 0.55
