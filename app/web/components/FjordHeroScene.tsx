@@ -199,7 +199,7 @@ export default function FjordHeroScene() {
       const keelMat = new T.MeshStandardMaterial({ vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, transparent: false, opacity: 1, depthWrite: true, side: T.DoubleSide })
       const keelGeo = (() => {
         const fp: [number, number][] = [[-26,0],[-21,-6],[-10,-9],[0,-11],[6,-19],[13,-12],[23,-9],[32,-4],[35,1],[31,6],[20,10],[7,11],[-6,10],[-17,8],[-24,4]]
-        const K = fp.length, M = 12, cx = 4, cz = -2, topY = 0, deep = 52
+        const K = fp.length, M = 12, cx = 4, cz = -2, topY = 4, deep = 52
         const stops: [number, [number, number, number]][] = [[0.00,[0.07,0.22,0.26]],[0.16,[0.26,0.72,0.68]],[0.42,[0.08,0.38,0.42]],[0.72,[0.04,0.15,0.21]],[1.00,[0.02,0.06,0.10]]]
         const colAt = (t: number): [number, number, number] => {
           for (let s = 0; s < stops.length - 1; s++) {
@@ -209,7 +209,7 @@ export default function FjordHeroScene() {
         }
         const verts: number[] = [], cols: number[] = [], idx: number[] = []
         for (let j = 0; j <= M; j++) {
-          const t = j / M, rf = 1.1 - Math.pow(t, 1.25) * 1.0, y = topY - deep * t
+          const t = j / M, rf = (1.1 - Math.pow(t, 1.25)) * Math.min(t * 5, 1), y = topY - deep * t
           for (let k = 0; k < K; k++) {
             let px = cx + (fp[k][0] - cx) * rf, pz = cz + (fp[k][1] - cz) * rf
             const damp = 1 - t * 0.55
