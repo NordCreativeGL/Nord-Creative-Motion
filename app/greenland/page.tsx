@@ -59,16 +59,8 @@ export default function GreenlandPage() {
                 fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
                 lineHeight: 1.65,
                 color: 'rgba(255,255,255,0.65)',
-                marginBottom: '20px',
               }}>
-                Distances are long, weather changes quickly, and access to locations often requires careful planning and flexibility.
-              </p>
-              <p style={{
-                fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-                lineHeight: 1.65,
-                color: 'rgba(255,255,255,0.65)',
-              }}>
-                We produce video and photography in Greenland under these conditions — making it possible to document projects where logistics and environment would otherwise limit production.
+                Distances are long. Weather changes fast. Getting to the right location often takes planning, the right contacts, and flexibility. We've worked in these conditions long enough that they're part of how we plan — not something we work around.
               </p>
             </div>
             <div style={{ display: 'flex' }}>
@@ -152,16 +144,8 @@ export default function GreenlandPage() {
                 fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
                 lineHeight: 1.65,
                 color: 'rgba(255,255,255,0.65)',
-                marginBottom: '20px',
               }}>
-                Each production is planned around access, weather, and timing. We define a realistic setup from the start — allowing production to move efficiently in remote environments.
-              </p>
-              <p style={{
-                fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-                lineHeight: 1.65,
-                color: 'rgba(255,255,255,0.65)',
-              }}>
-                Getting to the right location is often the most demanding part. Access can involve boats, helicopters, or long distances without infrastructure. We adapt each production to the conditions and logistics available — ensuring reliable execution in both urban and remote Arctic environments.
+                Every production starts with the practical questions: which locations, what time of year, and what the conditions are likely to be. We know the terrain and the seasonal patterns — which means we can plan accurately and adapt when needed. Whether it's a town centre or a remote location, the preparation is the same.
               </p>
             </div>
           </div>
@@ -220,33 +204,15 @@ export default function GreenlandPage() {
                   marginBottom: isMobile ? '16px' : '28px',
                   maxWidth: '640px',
                 }}>
-                  Why choose us for projects in Greenland
+                  What you get when you work with us
                 </h2>
                 <p style={{
                   fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
                   lineHeight: 1.65,
                   color: 'rgba(255,255,255,0.65)',
-                  marginBottom: isMobile ? '12px' : '20px',
                   maxWidth: '560px',
                 }}>
-                  We combine visual storytelling with real experience working in Greenland's conditions.
-                </p>
-                <p style={{
-                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
-                  lineHeight: 1.65,
-                  color: 'rgba(255,255,255,0.65)',
-                  marginBottom: isMobile ? '12px' : '20px',
-                  maxWidth: '560px',
-                }}>
-                  We understand the logistics, the unpredictability, and what it takes to execute production in remote environments — without compromising quality.
-                </p>
-                <p style={{
-                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
-                  lineHeight: 1.65,
-                  color: 'rgba(255,255,255,0.65)',
-                  maxWidth: '560px',
-                }}>
-                  For companies operating in Greenland, this means fewer uncertainties, better planning, and content that reflects the reality of the environment.
+                  A team that knows Greenland — the locations, the light, the seasons, and the realities of working here. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context. We also build websites for companies in Greenland — if you need both production and a website, it can be handled as one project.
                 </p>
               </div>
 
@@ -269,23 +235,42 @@ export default function GreenlandPage() {
                 }}>
                   Tell us about your project — we'll help define what's possible and how to approach it.
                 </p>
-                <a
-                  href="mailto:contact@nordcreative.dk"
-                  className="text-white hover:bg-white hover:text-black transition-colors duration-200"
-                  style={{
-                    display: isMobile ? 'block' : 'inline-block',
-                    border: '1px solid rgba(255,255,255,0.6)',
-                    padding: '14px 32px',
-                    borderRadius: '999px',
-                    fontSize: 'clamp(15px, 0.9vw, 19px)',
-                    fontWeight: 300,
-                    textDecoration: 'none',
-                    width: isMobile ? '100%' : undefined,
-                    textAlign: isMobile ? 'center' as const : undefined,
-                  }}
-                >
-                  Start your project
-                </a>
+                <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '12px' }}>
+                  <a
+                    href="mailto:contact@nordcreative.dk"
+                    className="text-white hover:bg-white hover:text-black transition-colors duration-200"
+                    style={{
+                      display: isMobile ? 'block' : 'inline-block',
+                      border: '1px solid rgba(255,255,255,0.6)',
+                      padding: '14px 32px',
+                      borderRadius: '999px',
+                      fontSize: 'clamp(15px, 0.9vw, 19px)',
+                      fontWeight: 300,
+                      textDecoration: 'none',
+                      width: isMobile ? '100%' : undefined,
+                      textAlign: isMobile ? 'center' as const : undefined,
+                    }}
+                  >
+                    Start your project
+                  </a>
+                  <a
+                    href="/web"
+                    className="text-white hover:bg-white hover:text-black transition-colors duration-200"
+                    style={{
+                      display: isMobile ? 'block' : 'inline-block',
+                      border: '1px solid rgba(255,255,255,0.6)',
+                      padding: '14px 32px',
+                      borderRadius: '999px',
+                      fontSize: 'clamp(15px, 0.9vw, 19px)',
+                      fontWeight: 300,
+                      textDecoration: 'none',
+                      width: isMobile ? '100%' : undefined,
+                      textAlign: isMobile ? 'center' as const : undefined,
+                    }}
+                  >
+                    See our website production
+                  </a>
+                </div>
               </div>
             </div>
           </div>

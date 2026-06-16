@@ -45,8 +45,8 @@ export default function ScrollExpandHero() {
       >
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
           <p style={{ fontSize: '13px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>GREENLAND</p>
-          <h1 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', marginBottom: '20px', maxWidth: '800px' }}>Video production in Greenland</h1>
-          <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.65, color: 'rgba(255,255,255,0.7)', maxWidth: '560px' }}>Video and photography production across Greenland's diverse landscapes and environments.</p>
+          <h1 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', marginBottom: '20px', maxWidth: '800px' }}>Production in Greenland</h1>
+          <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.65, color: 'rgba(255,255,255,0.7)', maxWidth: '560px' }}>Photography and film, produced across Greenland.</p>
         </div>
       </div>
     </section>
