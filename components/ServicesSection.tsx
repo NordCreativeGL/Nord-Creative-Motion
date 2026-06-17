@@ -136,6 +136,7 @@ export default function ServicesSection() {
 
   const t = {
     en: {
+      eyebrow: 'What we offer',
       h1: 'Photography, video, and websites.', h2: 'Produced in Greenland.',
       body: 'We produce photography, video, drone footage, and websites for businesses — with a team based in South Greenland.',
       c1t: 'Photography', c1d: 'Professional photography that showcases your product, project, or business through strong visual storytelling.',
@@ -143,6 +144,7 @@ export default function ServicesSection() {
       c3t: 'Video production', c3d: 'Cinematic shots that communicate your story and present your business, product, or project in a compelling way.',
     },
     da: {
+      eyebrow: 'Hvad vi tilbyder',
       h1: 'Fotografering, video og websites.', h2: 'Produceret i Grønland.',
       body: 'Vi producerer fotografering, video, dronefilm og websites til virksomheder — med et team baseret i Sydgrønland.',
       c1t: 'Fotografering', c1d: 'Professionel fotografering der præsenterer dit produkt, projekt eller virksomhed gennem stærk visuel historiefortælling.',
@@ -162,7 +164,7 @@ export default function ServicesSection() {
           {/* Left: text */}
           <div>
             <div ref={labelRef} className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
-              What we offer
+              {t[lang].eyebrow}
             </div>
             <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(48px,3vw,68px)] font-light text-white mb-4 leading-tight">
               <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h2}</span></div>
