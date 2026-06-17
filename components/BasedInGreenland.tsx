@@ -278,14 +278,20 @@ export default function BasedInGreenland() {
 
   const t = {
     en: {
+      label: 'Based in Greenland',
       h1: 'We live here', h2: 'We work here',
       b1: "We're based in Qaqortoq, South Greenland — close to the environments and the companies we work with. That familiarity shapes how we plan and approach every production.",
       b2: 'We work across all of Greenland, from town centres to remote sites — producing photography, film, and websites for businesses that want to present what they do professionally.',
+      para: 'This allows us to operate efficiently in locations where production is often limited by logistics and conditions.',
+      readMore: 'Read more about us',
     },
     da: {
+      label: 'Sydgrønland',
       h1: 'Vi bor her', h2: 'Vi arbejder her',
       b1: 'Vi er baseret i Qaqortoq, Sydgrønland — tæt på de miljøer og de virksomheder vi arbejder med. Det kendskab præger, hvordan vi planlægger og griber enhver produktion an.',
       b2: 'Vi arbejder i hele Grønland, fra bycentre til afsides lokaliteter — og producerer fotografering, film og websites til virksomheder, der vil præsentere deres arbejde professionelt.',
+      para: 'Det betyder, at vi kan arbejde effektivt selv der, hvor logistik og vejrforhold ellers sætter grænser.',
+      readMore: 'Læs mere om os',
     }
   }
 
@@ -341,17 +347,17 @@ export default function BasedInGreenland() {
             pointerEvents: 'none',
           }}
         >
-          Based in Greenland
+          {t[lang].label}
         </div>
       )}
 
       <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: isMobile ? 'none' : 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '46dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
-        <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
+        <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>{t[lang].label}</div>
         <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>{t[lang].h1}</div>
         <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>{t[lang].h2}</div>
         <p ref={body1Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>{t[lang].b1}</p>
         <p ref={body2Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>{t[lang].b2}</p>
-        <p ref={body3Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
+        <p ref={body3Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>{t[lang].para}</p>
         <a
           ref={readMoreRef}
           href="/about"
@@ -378,7 +384,7 @@ export default function BasedInGreenland() {
             (e.currentTarget as HTMLAnchorElement).style.color = 'white';
           }}
         >
-          Read more about us
+          {t[lang].readMore}
         </a>
       </div>
       </div>
@@ -397,7 +403,7 @@ export default function BasedInGreenland() {
           }}
         >
           <div style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>
-            Based in Greenland
+            {t[lang].label}
           </div>
           <div style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>
             {t[lang].h1}
@@ -412,7 +418,7 @@ export default function BasedInGreenland() {
             {t[lang].b2}
           </p>
           <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 2rem 0' }}>
-            This allows us to operate efficiently in locations where production is often limited by logistics and conditions.
+            {t[lang].para}
           </p>
           <a
             href="/about"
@@ -429,7 +435,7 @@ export default function BasedInGreenland() {
               transition: 'background 0.3s ease, color 0.3s ease',
             }}
           >
-            Read more about us
+            {t[lang].readMore}
           </a>
         </div>
       )}
