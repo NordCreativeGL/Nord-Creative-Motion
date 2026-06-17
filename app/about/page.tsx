@@ -70,7 +70,7 @@ export default function About() {
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
               <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white mb-6">Planning a project in Greenland?</h2>
               <p className="text-lg min-[1900px]:text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/70 leading-relaxed mb-8 max-w-xl min-[1900px]:max-w-2xl">Tell us about your project — we'll find a practical way to approach it.</p>
-              <a href="mailto:contact@nordcreative.dk" className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-white/20 text-white text-sm tracking-widest uppercase hover:bg-white/10 transition-colors">Work with us</a>
+              <a href="mailto:contact@nordcreative.dk" className="inline-flex items-center justify-center px-11 py-5 rounded-full border border-white/20 text-white text-[17px] hover:bg-white/10 transition-colors">Work with us</a>
             </div>
           </div>
         </div>
