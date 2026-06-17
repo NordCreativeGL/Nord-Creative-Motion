@@ -880,7 +880,7 @@ export default function FjordHeroScene() {
       <div
         id="fj-scroll"
         className="flex flex-col items-center gap-2"
-        style={{ position: 'absolute', left: '50%', bottom: '96px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
+        style={{ position: 'absolute', left: '50%', bottom: '40px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
       >
         <div className="w-px h-10 bg-white/50" />
         <svg
