@@ -788,6 +788,7 @@ export default function FjordHeroScene() {
           angle += (target - angle) * 0.07
           camera.position.set(Math.sin(angle) * R_ORBIT, CH + Math.sin(t * 0.0004) * 0.5, Math.cos(angle) * R_ORBIT)
           camera.lookAt(0, 5, 0)
+          berg.rotation.y = angle + (160 * Math.PI / 180)
           berg.position.y = Math.sin(t * 0.0005) * 0.4
           glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
