@@ -7,6 +7,7 @@ import BackToTop from "@/components/BackToTop";
 import SideNav from "@/components/SideNav";
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLang } from '@/contexts/LanguageContext'
 gsap.registerPlugin(ScrollTrigger)
 
 const GRID_VIDEOS = [
@@ -187,6 +188,25 @@ export default function BeyondTheArcticPage() {
     return () => observer.disconnect()
   }, [isStudio, isMobile])
 
+  const { lang } = useLang()
+
+  const t = {
+    en: {
+      heroBody: 'While Greenland is at the core of our work, we also collaborate with companies and organizations on projects in other locations.',
+      s2eye: 'OUR WORK', s2h: 'Productions beyond Greenland',
+      s2b: 'While Greenland is at the core of our work, we also collaborate with companies and organizations on projects in other locations. This portfolio presents a selection of photography and film productions created beyond Greenland.',
+      quote: 'Strong visuals capture attention and enhance understanding. Good storytelling starts with observation.',
+      s4h: 'Adventure is in our DNA', s4b: 'Attention to detail, subtle nuances, and layered storytelling define our work.',
+    },
+    da: {
+      heroBody: 'Selvom Grønland er kernen i vores arbejde, samarbejder vi også med virksomheder og organisationer om projekter på andre lokationer.',
+      s2eye: 'VORES ARBEJDE', s2h: 'Produktioner uden for Grønland',
+      s2b: 'Selvom Grønland er kernen i vores arbejde, samarbejder vi også med virksomheder og organisationer om projekter på andre lokationer. Dette portfolio præsenterer et udvalg af foto- og filmproduktioner skabt uden for Grønland.',
+      quote: 'Stærke visuals fanger opmærksomhed og styrker forståelsen. God historiefortælling starter med observation.',
+      s4h: 'Eventyr er en del af vores DNA', s4b: 'Opmærksomhed på detaljen, subtile nuancer og lagdelt historiefortælling definerer vores arbejde.',
+    }
+  }
+
   const togglePlay = (index: number) => {
     const video = videoRefs.current[index];
     if (!video) return;
@@ -256,7 +276,7 @@ export default function BeyondTheArcticPage() {
               color: 'rgba(255,255,255,0.7)',
               maxWidth: '600px',
             }}>
-              While Greenland is at the core of our work, we also collaborate with companies and organizations on projects in other locations.
+              {t[lang].heroBody}
             </p>
           </div>
         </div>
@@ -281,7 +301,7 @@ export default function BeyondTheArcticPage() {
             color: 'rgba(255,255,255,0.4)',
             marginBottom: '16px',
           }}>
-            OUR WORK
+            {t[lang].s2eye}
           </p>
 
           {/* H2 + body two-column grid */}
@@ -299,14 +319,14 @@ export default function BeyondTheArcticPage() {
               color: 'white',
               marginBottom: 0,
             }}>
-              Productions beyond Greenland
+              {t[lang].s2h}
             </h2>
             <p style={{
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
               lineHeight: 1.625,
               color: 'rgba(255,255,255,0.65)',
             }}>
-              While Greenland is at the core of our work, we also collaborate with companies and organizations on projects in other locations. This portfolio presents a selection of photography and film productions created beyond Greenland.
+              {t[lang].s2b}
             </p>
           </div>
 
@@ -455,7 +475,7 @@ export default function BeyondTheArcticPage() {
                 marginBottom: isMobile ? 0 : '1.5rem',
                 fontStyle: 'italic',
               }}>
-                "Strong visuals capture attention and enhance understanding. Good storytelling starts with observation."
+                "{t[lang].quote}"
               </p>
               <div style={{
                 width: '100%',
@@ -521,8 +541,8 @@ export default function BeyondTheArcticPage() {
               style={{ paddingTop: '80px', paddingBottom: '2rem' }}
             >
               <p style={{ fontSize: '13px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '10px' }}>ADVENTURE</p>
-              <h2 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', lineHeight: 1.1, marginBottom: '1rem' }}>Adventure is in our DNA</h2>
-              <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>Attention to detail, subtle nuances, and layered storytelling define our work.</p>
+              <h2 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', lineHeight: 1.1, marginBottom: '1rem' }}>{t[lang].s4h}</h2>
+              <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>{t[lang].s4b}</p>
             </div>
             <div style={{ display: 'flex', overflowX: 'scroll', scrollSnapType: 'x mandatory', gap: '12px', paddingLeft: '24px', paddingRight: '24px', paddingBottom: '60px' }}>
               {[
@@ -567,8 +587,8 @@ export default function BeyondTheArcticPage() {
               </div>
               <div style={{ flex: '0 0 28%', paddingLeft: '2rem', zIndex: 300, position: 'relative' }}>
                 <p style={{ fontSize: '13px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '10px' }}>ADVENTURE</p>
-                <h2 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', lineHeight: 1.1, marginBottom: '1.5rem' }}>Adventure is in our DNA</h2>
-                <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>Attention to detail, subtle nuances, and layered storytelling define our work.</p>
+                <h2 style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, letterSpacing: '-0.02em', color: 'white', lineHeight: 1.1, marginBottom: '1.5rem' }}>{t[lang].s4h}</h2>
+                <p style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>{t[lang].s4b}</p>
               </div>
             </div>
           </div>
