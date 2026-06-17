@@ -143,8 +143,8 @@ export default function CTABanner() {
             onMouseLeave={() => setBtnHover(false)}
             style={{
               display: 'inline-flex',
-              width: isMobile ? '100%' : 'fit-content',
-              justifyContent: isMobile ? 'center' : undefined,
+              width: '100%',
+              justifyContent: 'center',
               padding: '16px 40px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.22)',
