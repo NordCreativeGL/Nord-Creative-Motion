@@ -3,8 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLang } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
+  const { lang } = useLang();
+
+  const t = {
+    en: { tagline: "VIDEO PRODUCTION · PHOTOGRAPHY · WEBSITE PRODUCTION", l1: "Video Production", l2: "Photography", l3: "Website Production" },
+    da: { tagline: "VIDEOPRODUKTION · FOTOGRAFI · WEBSITE-PRODUKTION", l1: "Videoproduktion", l2: "Fotografi", l3: "Website-produktion" },
+  };
+
   const sectionRef      = useRef<HTMLElement>(null);
   const videoRef        = useRef<HTMLVideoElement>(null);
   const contentRef      = useRef<HTMLDivElement>(null);
@@ -194,9 +202,9 @@ export default function HeroSection() {
           style={{ opacity: 0 }}
         >
           <>
-            <span className="max-[1024px]:hidden">Video Production · Photography · Website Production</span>
+            <span className="max-[1024px]:hidden">{t[lang].tagline}</span>
             <span className="hidden max-[1024px]:block">
-              Video Production<br />Photography<br />Website Production
+              {t[lang].l1}<br />{t[lang].l2}<br />{t[lang].l3}
             </span>
           </>
         </p>
