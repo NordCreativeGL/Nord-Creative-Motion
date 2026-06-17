@@ -164,11 +164,11 @@ export default function GreenlandSection() {
 
           <div style={{
             display: 'flex',
-            flexDirection: isMobile ? 'column' : 'row',
+            flexDirection: 'row',
             flexWrap: 'wrap',
             gap: '12px',
             marginTop: '1.2rem',
-            alignItems: isMobile ? 'stretch' : 'flex-start',
+            alignItems: 'flex-start',
           }}>
           <Link
             ref={linkRef}
@@ -180,7 +180,7 @@ export default function GreenlandSection() {
               alignItems: 'center',
               justifyContent: 'center',
               alignSelf: isMobile ? undefined : 'flex-start',
-              width: isMobile ? '100%' : 'fit-content',
+              width: 'fit-content',
               padding: '14px 36px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.18)',
@@ -207,7 +207,7 @@ export default function GreenlandSection() {
               alignItems: 'center',
               justifyContent: 'center',
               alignSelf: isMobile ? undefined : 'flex-start',
-              width: isMobile ? '100%' : 'fit-content',
+              width: 'fit-content',
               padding: '14px 36px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.18)',
