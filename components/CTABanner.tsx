@@ -66,8 +66,8 @@ export default function CTABanner() {
   }, []);
 
   const t = {
-    en: { heading: 'Planning a project in Greenland?', body: "Tell us about your project — we'll come back with a plan." },
-    da: { heading: 'Planlægger du et projekt i Grønland?', body: 'Fortæl os om dit projekt — vi vender tilbage med en plan.' }
+    en: { heading: 'Planning a project in Greenland?', body: "Tell us about your project — we'll come back with a plan.", btn: 'Work with us' },
+    da: { heading: 'Planlægger du et projekt i Grønland?', body: 'Fortæl os om dit projekt — vi vender tilbage med en plan.', btn: 'Arbejd med os' }
   }
 
   return (
@@ -156,7 +156,7 @@ export default function CTABanner() {
               transition: 'background 0.25s ease, color 0.25s ease',
             }}
           >
-            Work with us
+            {t[lang].btn}
           </div>
         </div>
         <div
