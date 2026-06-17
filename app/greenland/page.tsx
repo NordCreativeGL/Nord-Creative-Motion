@@ -30,6 +30,12 @@ export default function GreenlandPage() {
       cta1: 'Start your project', cta2: 'See our website production',
       ctaHeading: "Planning a project in Greenland?",
       ctaBody: "Tell us about your project — we'll help define what's possible and how to approach it.",
+      nav1: 'Working in Greenland',
+      nav2: 'How we work',
+      nav3: 'Why choose us',
+      eyebrow1: 'WORKING IN GREENLAND',
+      eyebrow2: 'PROCESS',
+      eyebrow3: 'WHY US',
     },
     da: {
       working: 'Afstandene er lange. Vejret skifter hurtigt. At komme til de rette lokaliteter kræver planlægning, de rette kontakter og fleksibilitet. Vi har arbejdet under disse forhold længe nok til at de er en del af, hvordan vi planlægger — ikke noget vi arbejder udenom.',
@@ -39,15 +45,21 @@ export default function GreenlandPage() {
       cta1: 'Start dit projekt', cta2: 'Se vores webproduktion',
       ctaHeading: "Planlægger du et projekt i Grønland?",
       ctaBody: "Fortæl os om dit projekt — vi vender tilbage med en plan.",
+      nav1: 'At arbejde i Grønland',
+      nav2: 'Sådan arbejder vi',
+      nav3: 'Hvorfor os',
+      eyebrow1: 'AT ARBEJDE I GRØNLAND',
+      eyebrow2: 'PROCES',
+      eyebrow3: 'HVORFOR OS',
     }
   }
 
   return (
     <main style={{ background: '#000000' }}>
       {!isMobile && <SideNav items={[
-        { label: 'Working in Greenland', id: 'gl-working' },
-        { label: 'How we work', id: 'gl-process' },
-        { label: 'Why choose us', id: 'gl-why' },
+        { label: t[lang].nav1, id: 'gl-working' },
+        { label: t[lang].nav2, id: 'gl-process' },
+        { label: t[lang].nav3, id: 'gl-why' },
       ]} />}
       <Header />
       <NorthernLights />
@@ -68,7 +80,7 @@ export default function GreenlandPage() {
                 color: 'rgba(255,255,255,0.4)',
                 marginBottom: '20px',
               }}>
-                WORKING IN GREENLAND
+                {t[lang].eyebrow1}
               </p>
               <h2 style={{
                 fontSize: 'clamp(28px, 2.78vw, 68px)',
@@ -153,7 +165,7 @@ export default function GreenlandPage() {
                 color: 'rgba(255,255,255,0.4)',
                 marginBottom: '20px',
               }}>
-                PROCESS
+                {t[lang].eyebrow2}
               </p>
               <h2 style={{
                 fontSize: 'clamp(28px, 2.78vw, 68px)',
@@ -218,7 +230,7 @@ export default function GreenlandPage() {
                   color: 'rgba(255,255,255,0.4)',
                   marginBottom: '20px',
                 }}>
-                  WHY US
+                  {t[lang].eyebrow3}
                 </p>
                 <h2 style={{
                   fontSize: isMobile ? '20px' : 'clamp(28px, 2.78vw, 68px)',
