@@ -362,11 +362,13 @@ export default function BasedInGreenland() {
           ref={readMoreRef}
           href="/about"
           style={{
-            display: 'inline-block',
+            display: 'block',
             width: '100%',
             textAlign: isMobile ? 'center' : undefined,
             marginTop: '2rem',
-            padding: '14px 32px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            padding: '14px 36px',
             border: '1px solid rgba(255,255,255,0.6)',
             borderRadius: '999px',
             color: 'white',
