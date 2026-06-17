@@ -36,6 +36,8 @@ export default function GreenlandPage() {
       eyebrow1: 'WORKING IN GREENLAND',
       eyebrow2: 'PROCESS',
       eyebrow3: 'WHY US',
+      workH: 'Working in Greenland is different.',
+      processH: 'How we work',
     },
     da: {
       working: 'Afstandene er lange. Vejret skifter hurtigt. At komme til de rette lokaliteter kræver planlægning, de rette kontakter og fleksibilitet. Vi har arbejdet under disse forhold længe nok til at de er en del af, hvordan vi planlægger — ikke noget vi arbejder udenom.',
@@ -51,6 +53,8 @@ export default function GreenlandPage() {
       eyebrow1: 'AT ARBEJDE I GRØNLAND',
       eyebrow2: 'PROCES',
       eyebrow3: 'HVORFOR OS',
+      workH: 'Grønland stiller andre krav.',
+      processH: 'Sådan arbejder vi',
     }
   }
 
@@ -89,7 +93,7 @@ export default function GreenlandPage() {
                 color: 'white',
                 marginBottom: '28px',
               }}>
-                Working in Greenland is different.
+                {t[lang].workH}
               </h2>
               <p style={{
                 fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
@@ -174,7 +178,7 @@ export default function GreenlandPage() {
                 color: 'white',
                 marginBottom: '28px',
               }}>
-                How we work
+                {t[lang].processH}
               </h2>
               <p style={{
                 fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
