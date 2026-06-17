@@ -165,6 +165,7 @@ export default function GreenlandSection() {
           <div style={{
             display: 'flex',
             flexDirection: isMobile ? 'column' : 'row',
+            flexWrap: 'wrap',
             gap: '12px',
             marginTop: '1.2rem',
             alignItems: isMobile ? 'stretch' : 'flex-start',
@@ -190,6 +191,7 @@ export default function GreenlandSection() {
               letterSpacing: '0.01em',
               textDecoration: 'none',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
               transition: 'background 0.25s ease, color 0.25s ease',
             }}
           >
@@ -216,6 +218,7 @@ export default function GreenlandSection() {
               letterSpacing: '0.01em',
               textDecoration: 'none',
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
               transition: 'background 0.25s ease, color 0.25s ease',
             }}
           >
