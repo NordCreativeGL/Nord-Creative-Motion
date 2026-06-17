@@ -341,11 +341,11 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 12, marginTop: 12,
             background: 'rgba(234,248,254,0.96)', color: '#042230', borderRadius: 999,
-            padding: '16px 38px', fontSize: 15, fontWeight: 500, letterSpacing: '0.03em',
+            padding: '16px 38px', fontSize: 15, fontWeight: 400,
             textDecoration: 'none',
           }}
         >
-          Start your project<span style={{ fontFamily: PRIMARY_FONT, fontSize: 14 }}>{'→'}</span>
+          Start your project
         </a>
       </div>
 
