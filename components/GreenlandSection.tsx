@@ -167,7 +167,6 @@ export default function GreenlandSection() {
             flexDirection: 'row',
             flexWrap: 'wrap',
             gap: '12px',
-            marginTop: '1.2rem',
             alignItems: 'flex-start',
           }}>
           <Link
