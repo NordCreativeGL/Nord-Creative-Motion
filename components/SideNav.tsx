@@ -1,17 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLang } from "@/contexts/LanguageContext";
 
 type NavItem = { label: string; id: string };
 
-const DEFAULT_ITEMS: NavItem[] = [
-  { label: 'What we offer', id: 'services' },
-  { label: 'Greenland', id: 'greenland' },
-  { label: 'Based in Greenland', id: 'based' },
-  { label: 'Work with us', id: 'cta' },
+type DefaultItemKey = 'offer' | 'greenland' | 'based' | 'work';
+
+const DEFAULT_ITEMS: { key: DefaultItemKey; id: string }[] = [
+  { key: 'offer', id: 'services' },
+  { key: 'greenland', id: 'greenland' },
+  { key: 'based', id: 'based' },
+  { key: 'work', id: 'cta' },
 ];
 
-export default function SideNav({ items = DEFAULT_ITEMS }: { items?: NavItem[] }) {
+export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
+  const { lang } = useLang();
+
+  const t = {
+    en: { offer: "What we offer", greenland: "Greenland", based: "Based in Greenland", work: "Work with us" },
+    da: { offer: "Hvad vi tilbyder", greenland: "Grønland", based: "Sydgrønland", work: "Arbejd med os" },
+  };
+
+  const items = itemsProp ?? DEFAULT_ITEMS.map(({ key, id }) => ({ label: t[lang][key], id }));
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState('');
   const [hovered, setHovered] = useState('');
