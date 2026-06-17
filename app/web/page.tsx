@@ -8,6 +8,7 @@ import SideNav from '@/components/SideNav'
 import IcebergPackagesSection from '@/components/web/IcebergPackagesSection'
 import PackIceCtaSection from '@/components/web/PackIceCtaSection'
 import FjordHeroScene from './components/FjordHeroScene'
+import WebOfferCards from '@/components/web/WebOfferCards'
 import { useLang } from '@/contexts/LanguageContext'
 
 export default function WebPage() {
@@ -99,77 +100,7 @@ export default function WebPage() {
         }}>
           {t[lang].heading}
         </h2>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-          gap: '1px',
-          background: '#1a1a1a',
-          border: '1px solid #1a1a1a',
-          marginTop: '80px',
-        }}>
-          {[
-            {
-              label: 'WEBSITE DESIGN',
-              description: t[lang].d1,
-              lines: ['6,9 34,9', '6,9 6,31 34,31 34,9', '6,19 34,19', '20,19 20,31'],
-              dots: [[6,9],[34,9],[6,31],[34,31],[6,19],[34,19],[20,19],[20,31]]
-            },
-            {
-              label: 'COPYWRITING',
-              description: t[lang].d2,
-              lines: ['10,30 30,10', '14,26 24,16', '28,8 30,10 32,12'],
-              dots: [[10,30],[30,10],[14,26],[24,16],[28,8],[32,12]]
-            },
-            {
-              label: 'SEO',
-              description: t[lang].d3,
-              lines: ['14,10 26,10 30,20 26,30 14,30 10,20 14,10', '27,27 34,34'],
-              dots: [[14,10],[26,10],[30,20],[26,30],[14,30],[10,20],[27,27],[34,34]]
-            },
-            {
-              label: t[lang].l4,
-              description: t[lang].d4,
-              lines: ['20,6 34,20 20,34 6,20 20,6', '20,6 20,20', '34,20 20,20', '20,34 20,20', '6,20 20,20'],
-              dots: [[20,6],[34,20],[20,34],[6,20],[20,20]]
-            },
-            {
-              label: t[lang].l5,
-              description: t[lang].d5,
-              lines: ['16,8 8,20 16,32', '24,8 32,20 24,32'],
-              dots: [[16,8],[8,20],[16,32],[24,8],[32,20],[24,32]]
-            },
-            {
-              label: t[lang].l6,
-              description: t[lang].d6,
-              lines: ['20,6 29,9 34,18 32,28 24,34 14,33 7,26 6,16 10,9', '10,9 14,6', '10,9 7,13'],
-              dots: [[20,6],[29,9],[34,18],[32,28],[24,34],[14,33],[7,26],[6,16],[10,9]]
-            }
-          ].map((icon) => (
-            <div key={icon.label} style={{
-              background: '#000000',
-              padding: '40px 32px 36px 32px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '20px',
-            }}>
-              <svg width="56" height="56" viewBox="0 0 40 40" fill="none">
-                {icon.lines.map((pts, i) => (
-                  <polyline key={i} points={pts} stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                ))}
-                {icon.dots.map(([cx, cy], i) => (
-                  <circle key={i} cx={cx} cy={cy} r="2" fill="white" />
-                ))}
-              </svg>
-              <span style={{ fontSize: 'clamp(13px, 0.9vw, 15px)', letterSpacing: '0.1em', color: '#ffffff', fontWeight: 300, textTransform: 'uppercase' as const }}>
-                {icon.label}
-              </span>
-              <p style={{ fontSize: 'clamp(12px, 0.75vw, 13px)', color: '#444', fontWeight: 300, lineHeight: 1.6 }}>
-                {icon.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <WebOfferCards />
         <div style={{
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
