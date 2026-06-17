@@ -635,7 +635,7 @@ export default function FjordHeroScene() {
 
       const berg = buildIceberg()
       berg.scale.setScalar(0.9)
-      berg.rotation.y = 160 * Math.PI / 180
+      berg.rotation.y = -160 * Math.PI / 180
       scene.add(berg)
 
       const water = new T.Mesh(
