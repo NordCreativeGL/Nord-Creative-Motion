@@ -670,7 +670,7 @@ export default function FjordHeroScene() {
       })
 
       const R_ORBIT = 64, CH = 11
-      let target = 0, angle = 0
+      let target = 150 * (Math.PI / 180), angle = 150 * (Math.PI / 180)
       let scrollRevealed = false
       let firstFrameDone = false
 
