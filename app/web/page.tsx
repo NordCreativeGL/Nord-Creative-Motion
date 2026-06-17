@@ -8,6 +8,7 @@ import SideNav from '@/components/SideNav'
 import IcebergPackagesSection from '@/components/web/IcebergPackagesSection'
 import PackIceCtaSection from '@/components/web/PackIceCtaSection'
 import FjordHeroScene from './components/FjordHeroScene'
+import { useLang } from '@/contexts/LanguageContext'
 
 export default function WebPage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -25,6 +26,31 @@ export default function WebPage() {
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  const { lang } = useLang()
+
+  const t = {
+    en: {
+      eyebrow: 'WHAT WE OFFER', heading: 'A website — Or everything it needs',
+      d1: 'Designed from scratch. No templates.', d2: 'Words that match the visual.', d3: 'Found where it matters.',
+      l4: 'PHOTO & VIDEO', d4: 'Content from our own productions.',
+      l5: 'DEVELOPMENT', d5: 'Custom code. Fast and stable.',
+      l6: 'MAINTENANCE', d6: 'We keep it running.',
+      lb1: 'We build websites as a standalone service — designed, developed, and launched. Photography, drone footage, and video are not required.',
+      lb2: 'But if you need content to go with it, we produce that too. One team, one brief, one result.',
+      rh: 'Already working with us on content?', rb: 'Adding a website to an existing production is seamless — the visual direction is already set.',
+    },
+    da: {
+      eyebrow: 'HVAD VI TILBYDER', heading: 'Et website — eller alt det, det kræver',
+      d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der matcher det visuelle.', d3: 'Fundet, der hvor det gælder.',
+      l4: 'FOTO & VIDEO', d4: 'Indhold fra vores egne produktioner.',
+      l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
+      l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
+      lb1: 'Vi bygger websites som en selvstændig ydelse — designet, udviklet og lanceret. Fotografering, dronefilm og video er ikke påkrævet.',
+      lb2: 'Men har du brug for indhold til det, producerer vi det også. Ét team, ét brief, ét resultat.',
+      rh: 'Arbejder du allerede med os om indhold?', rb: 'At tilføje et website til en eksisterende produktion er gnidningsfrit — den visuelle retning er allerede fastlagt.',
+    }
+  }
 
   const sectionPadding = isMobile
     ? '80px 24px'
@@ -62,7 +88,7 @@ export default function WebPage() {
           color: 'rgba(255,255,255,0.4)',
           marginBottom: '20px',
         }}>
-          WHAT WE OFFER
+          {t[lang].eyebrow}
         </p>
         <h2 style={{
           fontSize: 'clamp(36px, 4vw, 72px)',
@@ -71,7 +97,7 @@ export default function WebPage() {
           color: 'white',
           marginBottom: '40px',
         }}>
-          A website — Or everything it needs
+          {t[lang].heading}
         </h2>
         <div style={{
           display: 'grid',
@@ -84,37 +110,37 @@ export default function WebPage() {
           {[
             {
               label: 'WEBSITE DESIGN',
-              description: 'Designed from scratch. No templates.',
+              description: t[lang].d1,
               lines: ['6,9 34,9', '6,9 6,31 34,31 34,9', '6,19 34,19', '20,19 20,31'],
               dots: [[6,9],[34,9],[6,31],[34,31],[6,19],[34,19],[20,19],[20,31]]
             },
             {
               label: 'COPYWRITING',
-              description: 'Words that match the visual.',
+              description: t[lang].d2,
               lines: ['10,30 30,10', '14,26 24,16', '28,8 30,10 32,12'],
               dots: [[10,30],[30,10],[14,26],[24,16],[28,8],[32,12]]
             },
             {
               label: 'SEO',
-              description: 'Found where it matters.',
+              description: t[lang].d3,
               lines: ['14,10 26,10 30,20 26,30 14,30 10,20 14,10', '27,27 34,34'],
               dots: [[14,10],[26,10],[30,20],[26,30],[14,30],[10,20],[27,27],[34,34]]
             },
             {
-              label: 'PHOTO & VIDEO',
-              description: 'Content from our own productions.',
+              label: t[lang].l4,
+              description: t[lang].d4,
               lines: ['20,6 34,20 20,34 6,20 20,6', '20,6 20,20', '34,20 20,20', '20,34 20,20', '6,20 20,20'],
               dots: [[20,6],[34,20],[20,34],[6,20],[20,20]]
             },
             {
-              label: 'DEVELOPMENT',
-              description: 'Custom code. Fast and stable.',
+              label: t[lang].l5,
+              description: t[lang].d5,
               lines: ['16,8 8,20 16,32', '24,8 32,20 24,32'],
               dots: [[16,8],[8,20],[16,32],[24,8],[32,20],[24,32]]
             },
             {
-              label: 'MAINTENANCE',
-              description: 'We keep it running.',
+              label: t[lang].l6,
+              description: t[lang].d6,
               lines: ['20,6 29,9 34,18 32,28 24,34 14,33 7,26 6,16 10,9', '10,9 14,6', '10,9 7,13'],
               dots: [[20,6],[29,9],[34,18],[32,28],[24,34],[14,33],[7,26],[6,16],[10,9]]
             }
@@ -156,14 +182,14 @@ export default function WebPage() {
               color: 'rgba(255,255,255,0.65)',
               marginBottom: '20px',
             }}>
-              We build websites as a standalone service — designed, developed, and launched. Photography, drone footage, and video are not required.
+              {t[lang].lb1}
             </p>
             <p style={{
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
               lineHeight: 1.65,
               color: 'rgba(255,255,255,0.65)',
             }}>
-              But if you need content to go with it, we produce that too. One team, one brief, one result.
+              {t[lang].lb2}
             </p>
           </div>
           <div style={{ width: isMobile ? '100%' : '33%' }}>
@@ -174,14 +200,14 @@ export default function WebPage() {
               color: 'white',
               marginBottom: '16px',
             }}>
-              Already working with us on content?
+              {t[lang].rh}
             </h3>
             <p style={{
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
               lineHeight: 1.65,
               color: 'rgba(255,255,255,0.65)',
             }}>
-              Adding a website to an existing production is seamless — the visual direction is already set.
+              {t[lang].rb}
             </p>
           </div>
         </div>

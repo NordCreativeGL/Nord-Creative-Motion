@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useLang } from '@/contexts/LanguageContext'
 
 // ---------- types ----------
 
@@ -281,6 +282,12 @@ const PRIMARY_FONT = "var(--font-geist-sans), sans-serif"
 export default function PackIceCtaSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [btnHover, setBtnHover] = useState(false)
+  const { lang } = useLang()
+
+  const t = {
+    en: { eyebrow: 'WORK WITH US', heading: 'Ready to build something worth seeing?', body: "Tell us about your project. We'll take it from there.", btn: 'Start your project' },
+    da: { eyebrow: 'ARBEJD MED OS', heading: 'Klar til at bygge noget værd at se?', body: 'Fortæl os om dit projekt. Vi tager det derfra.', btn: 'Start dit projekt' }
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -323,19 +330,19 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         textAlign: 'center', padding: '0 24px', gap: 22,
       }}>
         <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)' }}>
-          {'WORK WITH US'}
+          {t[lang].eyebrow}
         </div>
         <h2 style={{
           margin: 0, fontSize: 'clamp(32px, 4.8vw, 62px)', fontWeight: 250, lineHeight: 1.06,
           letterSpacing: '-0.015em', textWrap: 'balance', maxWidth: '13em',
         }}>
-          Ready to build something worth seeing?
+          {t[lang].heading}
         </h2>
         <p style={{
           margin: 0, fontSize: 'clamp(15px, 1.5vw, 18px)', fontWeight: 300,
           color: 'rgba(255,255,255,0.55)', maxWidth: '30em',
         }}>
-          {'Tell us about your project. We’ll take it from there.'}
+          {t[lang].body}
         </p>
         <a
           href="mailto:hello@nordcreative.dk"
@@ -352,7 +359,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
             transition: 'background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          Start your project
+          {t[lang].btn}
         </a>
       </div>
 

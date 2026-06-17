@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useLang } from '@/contexts/LanguageContext'
 
 // ---------- types ----------
 
@@ -581,6 +582,22 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
+  const { lang } = useLang()
+
+  const t = {
+    en: {
+      eyebrow: 'PACKAGES', heading: 'Three ways to work with us',
+      t1: ['Professional design','Up to 5 pages','Contact form','Mobile optimised','2 revision rounds'],
+      t2: ['Everything in Starter','SEO setup','Copywriting','Up to 10 pages','CMS integration','Google Analytics','3 revision rounds'],
+      t3: ['Everything in Business','Photo & video production','Advanced animations','Custom functionality','Ongoing maintenance','Unlimited revisions'],
+    },
+    da: {
+      eyebrow: 'PAKKER', heading: 'Tre måder at arbejde med os',
+      t1: ['Professionelt design','Op til 5 sider','Kontaktformular','Mobiloptimeret','2 revisionsrunder'],
+      t2: ['Alt i Starter','SEO-opsætning','Copywriting','Op til 10 sider','CMS-integration','Google Analytics','3 revisionsrunder'],
+      t3: ['Alt i Business','Foto & videoproduktion','Avancerede animationer','Tilpasset funktionalitet','Løbende vedligeholdelse','Ubegrænsede revisioner'],
+    }
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -670,13 +687,13 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em',
           color: 'rgba(0,215,200,0.85)', marginBottom: 18,
         }}>
-          PACKAGES
+          {t[lang].eyebrow}
         </div>
         <h2 style={{
           margin: 0, fontSize: 'clamp(30px, 4.4vw, 56px)', fontWeight: 250, lineHeight: 1.08,
           letterSpacing: '-0.015em', textWrap: 'balance',
         }}>
-          Three ways to work with us
+          {t[lang].heading}
         </h2>
       </div>
 
@@ -702,7 +719,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
             color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
           }}>
-            {tier.feats.map((f) => <span key={f}>{f}</span>)}
+            {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
           </div>
         </div>
       ))}

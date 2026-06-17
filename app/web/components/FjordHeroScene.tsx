@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react'
 import * as THREE from 'three'
+import { useLang } from '@/contexts/LanguageContext'
 
 export default function FjordHeroScene() {
+  const { lang } = useLang()
   useEffect(() => {
     let dead = false
     let raf = 0
@@ -854,6 +856,19 @@ export default function FjordHeroScene() {
     }
   }, [])
 
+  const t = {
+    en: {
+      s1h: 'We build websites that people remember', s1b: 'We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.',
+      s2h: 'A website — or everything it needs', s2b: 'Design · Copywriting · SEO · Photo & video · Development · Maintenance. One team, one brief, one result.',
+      s3h: 'Three ways to work with us', s3b: 'Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.',
+    },
+    da: {
+      s1h: 'Vi bygger websites folk husker', s1b: 'Vi designer og bygger højtydende websites til brands, der tager deres visuelle identitet alvorligt. Ingen skabeloner. Kun kode.',
+      s2h: 'Et website — eller alt det, det kræver', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse. Ét team, ét brief, ét resultat.',
+      s3h: 'Tre måder at arbejde med os', s3b: 'Starter · Business · Full Production — fra et kompakt single-page site til website plus foto, drone og video, leveret som ét samlet projekt.',
+    }
+  }
+
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#081826', fontFamily: "'IBM Plex Mono', monospace", marginLeft: '50%', transform: 'translateX(-50%)' }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@300&display=swap');@keyframes fjNudge{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}`}</style>
@@ -864,16 +879,16 @@ export default function FjordHeroScene() {
 
       <div id="fj-copy" style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.6s ease' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
-          <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>We build websites that people remember</h1>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.</p>
+          <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>{t[lang].s1h}</h1>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
         </div>
         <div id="fj-sec-1" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>A website — or everything it needs</h2>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>Design · Copywriting · SEO · Photo &amp; video · Development · Maintenance. One team, one brief, one result.</p>
+          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s2h}</h2>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>{t[lang].s2b}</p>
         </div>
         <div id="fj-sec-2" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>Three ways to work with us</h2>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.</p>
+          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s3h}</h2>
+          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>{t[lang].s3b}</p>
         </div>
       </div>
 
