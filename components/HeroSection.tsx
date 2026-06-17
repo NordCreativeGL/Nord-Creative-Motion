@@ -10,7 +10,7 @@ export default function HeroSection() {
 
   const t = {
     en: { tagline: "VIDEO PRODUCTION · PHOTOGRAPHY · WEBSITE PRODUCTION", l1: "Video Production", l2: "Photography", l3: "Website Production" },
-    da: { tagline: "VIDEOPRODUKTION · FOTOGRAFI · WEBSITE-PRODUKTION", l1: "Videoproduktion", l2: "Fotografi", l3: "Website-produktion" },
+    da: { tagline: "VIDEOPRODUKTION · FOTOGRAFI · WEBPRODUKTION", l1: "Videoproduktion", l2: "Fotografi", l3: "Website-produktion" },
   };
 
   const sectionRef      = useRef<HTMLElement>(null);
