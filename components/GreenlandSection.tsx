@@ -110,7 +110,7 @@ export default function GreenlandSection() {
 
   const t = {
     en: { eyebrow: 'Greenland', heading: "We're already here.", body: 'We know the locations, the seasons, and the conditions. That shows in how we plan productions — and in how the final work looks.', btnWork: 'Explore our work in Greenland', btnWeb: 'See our website production' },
-    da: { eyebrow: 'Grønland', heading: 'Vi er allerede her.', body: 'Vi kender lokaliteterne, årstiderne og forholdene. Det kan ses på, hvordan vi planlægger produktioner — og på det færdige arbejde.', btnWork: 'Se vores arbejde i Grønland', btnWeb: 'Se vores website-produktion' }
+    da: { eyebrow: 'Grønland', heading: 'Vi er allerede på plads.', body: 'Vi kender stederne, sæsonerne og betingelserne. Det mærkes i planlægningen — og i det vi leverer.', btnWork: 'Se vores arbejde i Grønland', btnWeb: 'Se vores website-produktion' }
   }
 
   return (
