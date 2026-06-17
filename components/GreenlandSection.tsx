@@ -109,8 +109,8 @@ export default function GreenlandSection() {
   }, []);
 
   const t = {
-    en: { heading: "We're already here.", body: 'We know the locations, the seasons, and the conditions. That shows in how we plan productions — and in how the final work looks.' },
-    da: { heading: 'Vi er allerede her.', body: 'Vi kender lokaliteterne, årstiderne og forholdene. Det kan ses på, hvordan vi planlægger produktioner — og på det færdige arbejde.' }
+    en: { eyebrow: 'Greenland', heading: "We're already here.", body: 'We know the locations, the seasons, and the conditions. That shows in how we plan productions — and in how the final work looks.', btnWork: 'Explore our work in Greenland', btnWeb: 'See our website production' },
+    da: { eyebrow: 'Grønland', heading: 'Vi er allerede her.', body: 'Vi kender lokaliteterne, årstiderne og forholdene. Det kan ses på, hvordan vi planlægger produktioner — og på det færdige arbejde.', btnWork: 'Se vores arbejde i Grønland', btnWeb: 'Se vores website-produktion' }
   }
 
   return (
@@ -145,7 +145,7 @@ export default function GreenlandSection() {
         >
           <div style={{ maxWidth: isMobile ? '100%' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
-            Greenland
+            {t[lang].eyebrow}
           </div>
 
           <div style={{ marginBottom: 24 }}>
@@ -193,7 +193,7 @@ export default function GreenlandSection() {
               transition: 'background 0.25s ease, color 0.25s ease',
             }}
           >
-            Explore our work in Greenland
+            {t[lang].btnWork}
           </Link>
           <Link
             ref={linkRef2}
@@ -219,7 +219,7 @@ export default function GreenlandSection() {
               transition: 'background 0.25s ease, color 0.25s ease',
             }}
           >
-            See our website production
+            {t[lang].btnWeb}
           </Link>
           </div>
           </div>
