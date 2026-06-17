@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // ---------- types ----------
 
@@ -280,6 +280,7 @@ const PRIMARY_FONT = "var(--font-geist-sans), sans-serif"
 
 export default function PackIceCtaSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [btnHover, setBtnHover] = useState(false)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -338,11 +339,17 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         </p>
         <a
           href="mailto:hello@nordcreative.dk"
+          onMouseEnter={() => setBtnHover(true)}
+          onMouseLeave={() => setBtnHover(false)}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 12, marginTop: 12,
-            background: 'rgba(234,248,254,0.96)', color: '#042230', borderRadius: 999,
-            padding: '16px 38px', fontSize: 15, fontWeight: 400,
+            background: btnHover ? '#ffffff' : 'transparent',
+            color: btnHover ? '#042230' : '#ffffff',
+            border: '1px solid rgba(255,255,255,0.6)',
+            borderRadius: 999,
+            padding: '20px 48px', fontSize: 18, fontWeight: 400,
             textDecoration: 'none',
+            transition: 'background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           Start your project
