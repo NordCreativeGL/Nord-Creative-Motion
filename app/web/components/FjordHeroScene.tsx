@@ -786,7 +786,7 @@ export default function FjordHeroScene() {
         if (dead) return
         try {
           angle += (target - angle) * 0.07
-          camera.position.set(Math.sin(angle + (150 * Math.PI / 180)) * R_ORBIT, CH + Math.sin(t * 0.0004) * 0.5, Math.cos(angle + (150 * Math.PI / 180)) * R_ORBIT)
+          camera.position.set(Math.sin(angle - (150 * Math.PI / 180)) * R_ORBIT, CH + Math.sin(t * 0.0004) * 0.5, Math.cos(angle - (150 * Math.PI / 180)) * R_ORBIT)
           camera.lookAt(0, 5, 0)
           berg.position.y = Math.sin(t * 0.0005) * 0.4
           glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
