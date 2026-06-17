@@ -28,6 +28,8 @@ export default function GreenlandPage() {
       whyH: 'What you get when you work with us',
       whyB: 'A team that knows Greenland — the locations, the light, the seasons, and the realities of working here. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context. We also build websites for companies in Greenland — if you need both production and a website, it can be handled as one project.',
       cta1: 'Start your project', cta2: 'See our website production',
+      ctaHeading: "Planning a project in Greenland?",
+      ctaBody: "Tell us about your project — we'll help define what's possible and how to approach it.",
     },
     da: {
       working: 'Afstandene er lange. Vejret skifter hurtigt. At komme til de rette lokaliteter kræver planlægning, de rette kontakter og fleksibilitet. Vi har arbejdet under disse forhold længe nok til at de er en del af, hvordan vi planlægger — ikke noget vi arbejder udenom.',
@@ -35,6 +37,8 @@ export default function GreenlandPage() {
       whyH: 'Det får du, når du arbejder med os',
       whyB: 'Et team der kender Grønland — lokaliteterne, lyset, årstiderne og realiteterne ved at arbejde her. Det kan ses på, hvordan produktioner planlægges, og på det færdige arbejde. For virksomheder i Grønland betyder det at arbejde med nogen, der allerede forstår konteksten. Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan det håndteres som ét projekt.',
       cta1: 'Start dit projekt', cta2: 'Se vores webproduktion',
+      ctaHeading: "Planlægger du et projekt i Grønland?",
+      ctaBody: "Fortæl os om dit projekt — vi vender tilbage med en plan.",
     }
   }
 
@@ -245,7 +249,7 @@ export default function GreenlandPage() {
                   marginBottom: isMobile ? '12px' : '16px',
                   letterSpacing: '-0.01em',
                 }}>
-                  Planning a project in Greenland?
+                  {t[lang].ctaHeading}
                 </h3>
                 <p style={{
                   fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
@@ -253,7 +257,7 @@ export default function GreenlandPage() {
                   color: 'rgba(255,255,255,0.65)',
                   marginBottom: '32px',
                 }}>
-                  Tell us about your project — we'll help define what's possible and how to approach it.
+                  {t[lang].ctaBody}
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <a
