@@ -93,7 +93,7 @@ export default function GreenlandPage() {
                 color: 'white',
                 marginBottom: '28px',
               }}>
-                {t[lang].workH}
+                {lang === 'da' ? (<>Grønland stiller<br />andre krav.</>) : t[lang].workH}
               </h2>
               <p style={{
                 fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
