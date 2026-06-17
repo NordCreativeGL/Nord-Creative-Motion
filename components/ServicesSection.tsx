@@ -145,7 +145,7 @@ export default function ServicesSection() {
     },
     da: {
       eyebrow: 'Hvad vi tilbyder',
-      h1: 'Fotografering, video og websites.', h2: 'Produceret i Grønland.',
+      h1: 'Foto, video og websites', h2: 'Produceret i Grønland.',
       body: 'Vi producerer fotografering, video, dronefilm og websites til virksomheder — med et team baseret i Sydgrønland.',
       c1t: 'Fotografering', c1d: 'Professionel fotografering der præsenterer dit produkt, projekt eller virksomhed gennem stærk visuel historiefortælling.',
       c2t: 'Drone & Luftfoto', c2d: 'Luftoptagelser der viser landskaber, projekter og lokaliteter fra stærke nye vinkler.',
