@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
+import { Providers } from "@/components/Providers";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,7 @@ export default function RootLayout({
         <link rel="prefetch" href="/mtn-sea.json" />
         <link rel="prefetch" href="/mtn-fjord.json" />
       </head>
-      <body className="bg-black text-white"><Header />{children}<BackToTop /></body>
+      <body className="bg-black text-white"><Providers><Header />{children}<BackToTop /></Providers></body>
     </html>
   );
 }

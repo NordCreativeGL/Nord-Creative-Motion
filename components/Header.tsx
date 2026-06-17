@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLang } from "@/contexts/LanguageContext";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -11,6 +12,7 @@ export default function Header() {
   const lastScrollY = useRef(0);
   const [visible, setVisible] = React.useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lang, setLang } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -78,6 +80,11 @@ export default function Header() {
             <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link>
             <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>About</Link>
           </nav>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginRight: '16px' }}>
+            <button onClick={() => setLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: lang === 'en' ? '#ffffff' : 'rgba(255,255,255,0.32)', fontSize: 'clamp(11px, 0.72vw, 13px)', letterSpacing: '0.08em', fontWeight: 300, padding: '4px 2px', transition: 'color 0.2s ease', fontFamily: 'inherit' }}>EN</button>
+            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '11px', userSelect: 'none' }}>|</span>
+            <button onClick={() => setLang('da')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: lang === 'da' ? '#ffffff' : 'rgba(255,255,255,0.32)', fontSize: 'clamp(11px, 0.72vw, 13px)', letterSpacing: '0.08em', fontWeight: 300, padding: '4px 2px', transition: 'color 0.2s ease', fontFamily: 'inherit' }}>DA</button>
+          </div>
           <a
             href="mailto:contact@nordcreative.dk"
             className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white hover:text-black lg:block"
