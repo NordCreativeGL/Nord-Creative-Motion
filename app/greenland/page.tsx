@@ -8,6 +8,7 @@ import SideNav from "@/components/SideNav";
 import NorthernLights from "@/components/NorthernLights";
 import MountainSilhouette from "@/components/MountainSilhouette";
 import ScrollExpandHero from "@/components/ScrollExpandHero";
+import { useLang } from '@/contexts/LanguageContext'
 
 export default function GreenlandPage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -17,6 +18,25 @@ export default function GreenlandPage() {
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  const { lang } = useLang()
+
+  const t = {
+    en: {
+      working: "Distances are long. Weather changes fast. Getting to the right location often takes planning, the right contacts, and flexibility. We've worked in these conditions long enough that they're part of how we plan — not something we work around.",
+      process: "Every production starts with the practical questions: which locations, what time of year, and what the conditions are likely to be. We know the terrain and the seasonal patterns — which means we can plan accurately and adapt when needed. Whether it's a town centre or a remote location, the preparation is the same.",
+      whyH: 'What you get when you work with us',
+      whyB: 'A team that knows Greenland — the locations, the light, the seasons, and the realities of working here. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context. We also build websites for companies in Greenland — if you need both production and a website, it can be handled as one project.',
+      cta1: 'Start your project', cta2: 'See our website production',
+    },
+    da: {
+      working: 'Afstandene er lange. Vejret skifter hurtigt. At komme til de rette lokaliteter kræver planlægning, de rette kontakter og fleksibilitet. Vi har arbejdet under disse forhold længe nok til at de er en del af, hvordan vi planlægger — ikke noget vi arbejder udenom.',
+      process: 'Enhver produktion starter med de praktiske spørgsmål: hvilke lokaliteter, hvilken tid af året, og hvad forholdene sandsynligvis vil være. Vi kender terrænet og de sæsonmæssige mønstre — det betyder vi kan planlægge præcist og tilpasse os, når det er nødvendigt. Hvad enten det er et bycenter eller en afsides lokalitet, er forberedelsen den samme.',
+      whyH: 'Det får du, når du arbejder med os',
+      whyB: 'Et team der kender Grønland — lokaliteterne, lyset, årstiderne og realiteterne ved at arbejde her. Det kan ses på, hvordan produktioner planlægges, og på det færdige arbejde. For virksomheder i Grønland betyder det at arbejde med nogen, der allerede forstår konteksten. Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan det håndteres som ét projekt.',
+      cta1: 'Start dit projekt', cta2: 'Se vores webproduktion',
+    }
+  }
 
   return (
     <main style={{ background: '#000000' }}>
@@ -60,7 +80,7 @@ export default function GreenlandPage() {
                 lineHeight: 1.65,
                 color: 'rgba(255,255,255,0.65)',
               }}>
-                Distances are long. Weather changes fast. Getting to the right location often takes planning, the right contacts, and flexibility. We've worked in these conditions long enough that they're part of how we plan — not something we work around.
+                {t[lang].working}
               </p>
             </div>
             <div style={{ display: 'flex' }}>
@@ -145,7 +165,7 @@ export default function GreenlandPage() {
                 lineHeight: 1.65,
                 color: 'rgba(255,255,255,0.65)',
               }}>
-                Every production starts with the practical questions: which locations, what time of year, and what the conditions are likely to be. We know the terrain and the seasonal patterns — which means we can plan accurately and adapt when needed. Whether it's a town centre or a remote location, the preparation is the same.
+                {t[lang].process}
               </p>
             </div>
           </div>
@@ -204,7 +224,7 @@ export default function GreenlandPage() {
                   marginBottom: isMobile ? '16px' : '28px',
                   maxWidth: '640px',
                 }}>
-                  What you get when you work with us
+                  {t[lang].whyH}
                 </h2>
                 <p style={{
                   fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
@@ -212,7 +232,7 @@ export default function GreenlandPage() {
                   color: 'rgba(255,255,255,0.65)',
                   maxWidth: '560px',
                 }}>
-                  A team that knows Greenland — the locations, the light, the seasons, and the realities of working here. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context. We also build websites for companies in Greenland — if you need both production and a website, it can be handled as one project.
+                  {t[lang].whyB}
                 </p>
               </div>
 
@@ -251,7 +271,7 @@ export default function GreenlandPage() {
                       textAlign: 'center' as const,
                     }}
                   >
-                    Start your project
+                    {t[lang].cta1}
                   </a>
                   <a
                     href="/web"
@@ -268,7 +288,7 @@ export default function GreenlandPage() {
                       textAlign: 'center' as const,
                     }}
                   >
-                    See our website production
+                    {t[lang].cta2}
                   </a>
                 </div>
               </div>
