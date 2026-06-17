@@ -137,7 +137,7 @@ export default function ServicesSection() {
   const t = {
     en: {
       eyebrow: 'What we offer',
-      h1: 'Photography, video, and websites.', h2: 'Produced in Greenland.',
+      h1: 'Photo, video and websites', h2: 'Produced in Greenland.',
       body: 'We produce photography, video, drone footage, and websites for businesses — with a team based in South Greenland.',
       c1t: 'Photography', c1d: 'Professional photography that showcases your product, project, or business through strong visual storytelling.',
       c2t: 'Drone & Aerial', c2d: 'Aerial imagery that reveals landscapes, projects, and locations from powerful new perspectives.',
