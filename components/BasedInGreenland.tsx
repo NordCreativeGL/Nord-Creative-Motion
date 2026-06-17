@@ -367,8 +367,6 @@ export default function BasedInGreenland() {
             maxWidth: isStudio ? '560px' : '430px',
             textAlign: 'center',
             marginTop: '2rem',
-            marginLeft: 'auto',
-            marginRight: 'auto',
             padding: '14px 36px',
             border: '1px solid rgba(255,255,255,0.6)',
             borderRadius: '999px',
