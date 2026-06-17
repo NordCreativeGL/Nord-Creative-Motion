@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLang } from '@/contexts/LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,8 @@ export default function ServicesSection() {
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
+
+  const { lang } = useLang()
 
   const CARD_H = isMobile ? 'calc(88vw * 16 / 9)' : '84vh';
   const CARD_W = isMobile ? '88vw' : 'calc(84vh * 9 / 16)';
@@ -131,6 +134,23 @@ export default function ServicesSection() {
     return () => ctx.revert();
   }, []);
 
+  const t = {
+    en: {
+      h1: 'Photography, video, and websites.', h2: 'Produced in Greenland.',
+      body: 'We produce photography, video, drone footage, and websites for businesses — with a team based in South Greenland.',
+      c1t: 'Photography', c1d: 'Professional photography that showcases your product, project, or business through strong visual storytelling.',
+      c2t: 'Drone & Aerial', c2d: 'Aerial imagery that reveals landscapes, projects, and locations from powerful new perspectives.',
+      c3t: 'Video production', c3d: 'Cinematic shots that communicate your story and present your business, product, or project in a compelling way.',
+    },
+    da: {
+      h1: 'Fotografering, video og websites.', h2: 'Produceret i Grønland.',
+      body: 'Vi producerer fotografering, video, dronefilm og websites til virksomheder — med et team baseret i Sydgrønland.',
+      c1t: 'Fotografering', c1d: 'Professionel fotografering der præsenterer dit produkt, projekt eller virksomhed gennem stærk visuel historiefortælling.',
+      c2t: 'Drone & Luftfoto', c2d: 'Luftoptagelser der viser landskaber, projekter og lokaliteter fra stærke nye vinkler.',
+      c3t: 'Videoproduktion', c3d: 'Cinematiske optagelser der kommunikerer din fortælling og præsenterer din virksomhed, dit produkt eller projekt på en overbevisende måde.',
+    }
+  }
+
   return (
     <div id="services" ref={sectionRef} style={{ height: isMobile ? 'auto' : '400vh' }} className="max-[1024px]:pt-16">
       <div
@@ -145,13 +165,13 @@ export default function ServicesSection() {
               What we offer
             </div>
             <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(48px,3vw,68px)] font-light text-white mb-4 leading-tight">
-              <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: 'nowrap' }}>Photography, video, and websites.</span><span style={{ display: 'block', whiteSpace: 'nowrap' }}>Produced in Greenland.</span></div>
+              <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h2}</span></div>
               <div ref={line2Ref}></div>
             </h2>
             <div ref={accentRef} className="text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] text-white/40 font-light mb-8">
             </div>
             <div ref={bodyRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white/60 leading-relaxed">
-              We produce photography, video, drone footage, and websites for businesses — with a team based in South Greenland.
+              {t[lang].body}
             </div>
           </div>
 
@@ -185,8 +205,8 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{services[0].title}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{services[0].description}</p>
+                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{t[lang].c1t}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{t[lang].c1d}</p>
                 </div>
               </div>
 
@@ -217,8 +237,8 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{services[1].title}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{services[1].description}</p>
+                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{t[lang].c2t}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{t[lang].c2d}</p>
                 </div>
               </div>
 
@@ -249,8 +269,8 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{services[2].title}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{services[2].description}</p>
+                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{t[lang].c3t}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{t[lang].c3d}</p>
                 </div>
               </div>
 

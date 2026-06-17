@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { useLang } from '@/contexts/LanguageContext'
 
 export default function CTABanner() {
   const [btnHover, setBtnHover] = useState(false);
   const [isMobile, setIsMobile] = useState(false)
+  const { lang } = useLang()
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()
@@ -62,6 +64,11 @@ export default function CTABanner() {
       window.removeEventListener('scroll', onScroll)
     }
   }, []);
+
+  const t = {
+    en: { heading: 'Planning a project in Greenland?', body: "Tell us about your project — we'll come back with a plan." },
+    da: { heading: 'Planlægger du et projekt i Grønland?', body: 'Fortæl os om dit projekt — vi vender tilbage med en plan.' }
+  }
 
   return (
     <section
@@ -125,10 +132,10 @@ export default function CTABanner() {
           background: isMobile ? 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)' : undefined,
         }}>
           <div ref={headingRef} style={{ fontSize: 'clamp(28px,2.78vw,68px)', fontWeight: 300, color: '#fff', lineHeight: 1.2, marginBottom: '0.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.9)' }}>
-            Planning a project<br />in Greenland?
+            {t[lang].heading}
           </div>
           <div ref={bodyRef} style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', color: 'rgba(255,255,255,0.4)', marginBottom: '1rem', lineHeight: 1.6, textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
-            Tell us about your project — we'll come back with a plan.
+            {t[lang].body}
           </div>
           <div
             ref={btnRef}

@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { useLang } from '@/contexts/LanguageContext'
 
 export default function BasedInGreenland() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -32,6 +33,8 @@ export default function BasedInGreenland() {
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  const { lang } = useLang()
 
   useEffect(() => {
     const section = sectionRef.current
@@ -273,6 +276,19 @@ export default function BasedInGreenland() {
     }
   }, [])
 
+  const t = {
+    en: {
+      h1: 'We live here', h2: 'We work here',
+      b1: "We're based in Qaqortoq, South Greenland — close to the environments and the companies we work with. That familiarity shapes how we plan and approach every production.",
+      b2: 'We work across all of Greenland, from town centres to remote sites — producing photography, film, and websites for businesses that want to present what they do professionally.',
+    },
+    da: {
+      h1: 'Vi bor her', h2: 'Vi arbejder her',
+      b1: 'Vi er baseret i Qaqortoq, Sydgrønland — tæt på de miljøer og de virksomheder vi arbejder med. Det kendskab præger, hvordan vi planlægger og griber enhver produktion an.',
+      b2: 'Vi arbejder i hele Grønland, fra bycentre til afsides lokaliteter — og producerer fotografering, film og websites til virksomheder, der vil præsentere deres arbejde professionelt.',
+    }
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -331,10 +347,10 @@ export default function BasedInGreenland() {
 
       <div style={{ flex: isMobile ? '0 0 100%' : '0 0 50%', display: isMobile ? 'none' : 'flex', flexDirection: 'column', justifyContent: 'center', paddingLeft: isMobile ? '24px' : isStudio ? 'clamp(300px, 17vw, 400px)' : 'clamp(160px, 16vw, 220px)', paddingRight: isMobile ? '24px' : '1rem', zIndex: 2, transform: isMobile ? 'none' : 'translateX(150px)', paddingTop: isMobile ? '46dvh' : undefined, paddingBottom: isMobile ? '48px' : undefined }}>
         <div ref={labelRef} style={{ fontSize: '13px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem' }}>Based in Greenland</div>
-        <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>We live here</div>
-        <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>We work here</div>
-        <p ref={body1Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>We're based in Qaqortoq, South Greenland — close to the environments and the companies we work with. That familiarity shapes how we plan and approach every production.</p>
-        <p ref={body2Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>We work across all of Greenland, from town centres to remote sites — producing photography, film, and websites for businesses that want to present what they do professionally.</p>
+        <div ref={heading1Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>{t[lang].h1}</div>
+        <div ref={heading2Ref} style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem', display: 'block', width: '100%', paddingLeft: isMobile ? '0' : isStudio ? 'clamp(120px, 10vw, 180px)' : 'clamp(160px, 18vw, 240px)' }}>{t[lang].h2}</div>
+        <p ref={body1Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>{t[lang].b1}</p>
+        <p ref={body2Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', marginBottom: '1rem', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>{t[lang].b2}</p>
         <p ref={body3Ref} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', maxWidth: isMobile ? '100%' : isStudio ? '540px' : '510px' }}>This allows us to operate efficiently in locations where production is often limited by logistics and conditions.</p>
         <a
           ref={readMoreRef}
@@ -384,16 +400,16 @@ export default function BasedInGreenland() {
             Based in Greenland
           </div>
           <div style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em' }}>
-            We live here
+            {t[lang].h1}
           </div>
           <div style={{ fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 300, lineHeight: 1.05, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '2rem' }}>
-            We work here
+            {t[lang].h2}
           </div>
           <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 1rem 0' }}>
-            We're based in Qaqortoq, South Greenland — close to the environments and the companies we work with. That familiarity shapes how we plan and approach every production.
+            {t[lang].b1}
           </p>
           <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 1rem 0' }}>
-            We work across all of Greenland, from town centres to remote sites — producing photography, film, and websites for businesses that want to present what they do professionally.
+            {t[lang].b2}
           </p>
           <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.62)', margin: '0 0 2rem 0' }}>
             This allows us to operate efficiently in locations where production is often limited by logistics and conditions.

@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { useLang } from '@/contexts/LanguageContext'
 
 export default function GreenlandSection() {
   const [btnHover, setBtnHover] = useState(false);
   const [btnHover2, setBtnHover2] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const { lang } = useLang()
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()
@@ -106,6 +108,11 @@ export default function GreenlandSection() {
     };
   }, []);
 
+  const t = {
+    en: { heading: "We're already here.", body: 'We know the locations, the seasons, and the conditions. That shows in how we plan productions — and in how the final work looks.' },
+    da: { heading: 'Vi er allerede her.', body: 'Vi kender lokaliteterne, årstiderne og forholdene. Det kan ses på, hvordan vi planlægger produktioner — og på det færdige arbejde.' }
+  }
+
   return (
     <div
       id="greenland"
@@ -143,7 +150,7 @@ export default function GreenlandSection() {
 
           <div style={{ marginBottom: 24 }}>
             <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25, whiteSpace: 'nowrap' }}>
-              We're already here.
+              {t[lang].heading}
             </div>
             <div ref={line2Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
             </div>
@@ -152,7 +159,7 @@ export default function GreenlandSection() {
           </div>
 
           <div ref={bodyRef} style={{ fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.625, marginBottom: 28 }}>
-            We know the locations, the seasons, and the conditions. That shows in how we plan productions — and in how the final work looks.
+            {t[lang].body}
           </div>
 
           <div style={{
