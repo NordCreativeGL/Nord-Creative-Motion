@@ -363,7 +363,8 @@ export default function BasedInGreenland() {
           href="/about"
           style={{
             display: 'block',
-            width: 'fit-content',
+            width: '100%',
+            maxWidth: isStudio ? '560px' : '430px',
             textAlign: 'center',
             marginTop: '2rem',
             marginLeft: 'auto',
