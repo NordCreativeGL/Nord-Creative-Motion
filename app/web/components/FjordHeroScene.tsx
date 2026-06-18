@@ -619,7 +619,8 @@ export default function FjordHeroScene() {
       scene.background = new T.Color('#081826')
       scene.fog = new T.Fog('#081826', 320, 1550)
 
-      const camera = new T.PerspectiveCamera(44, W() / H(), 0.1, 3200)
+      const camera = new T.PerspectiveCamera(44, W() / window.innerHeight, 0.1, 3200)
+      camera.updateProjectionMatrix()
       ;(window as any).__fjScene = scene
       ;(window as any).__fjCamera = camera
 
@@ -695,6 +696,7 @@ export default function FjordHeroScene() {
 
       let dragging = false, lastX = 0
       const onDown = (e: PointerEvent) => {
+        if (e.clientY > window.innerHeight) return;
         dragging = true; lastX = e.clientX; stage.style.cursor = 'grabbing'
         const dh = document.getElementById('fj-drag'); if (dh) dh.style.opacity = '0'
       }
@@ -703,7 +705,7 @@ export default function FjordHeroScene() {
       stage.addEventListener('pointerdown', onDown)
       window.addEventListener('pointermove', onMove as EventListener)
       window.addEventListener('pointerup', onUp)
-      const onResize = () => { camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
+      const onResize = () => { camera.aspect = W() / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
       window.addEventListener('resize', onResize)
 
       const degEl = document.getElementById('fj-deg')
