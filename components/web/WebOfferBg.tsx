@@ -268,7 +268,6 @@ export default function WebOfferBg() {
     renderer.setSize(W(), H())
     renderer.setClearColor('#081826')
     renderer.localClippingEnabled = true
-    renderer.clippingPlanes = [new T.Plane(new T.Vector3(0, -1, 0), 0)]
     host.appendChild(renderer.domElement)
 
     const scene = new T.Scene()
@@ -301,8 +300,8 @@ export default function WebOfferBg() {
     const tick = () => {
       if (dead) return
       const angle = (window as any).__nordBergAngle ?? 0
-      camera.position.set(Math.sin(angle) * R_ORBIT, -8, Math.cos(angle) * R_ORBIT)
-      camera.lookAt(0, -20, 0)
+      camera.position.set(Math.sin(angle) * R_ORBIT, -20, Math.cos(angle) * R_ORBIT)
+      camera.lookAt(0, -26, 0)
       renderer.render(scene, camera)
       raf = requestAnimationFrame(tick)
     }
