@@ -79,7 +79,7 @@ export default function WebPage() {
 
   const t = {
     en: {
-      eyebrow: 'WHAT WE OFFER', heading: 'A website — Or everything it needs',
+      eyebrow: 'WHAT WE OFFER', heading: 'A website — and everything it needs',
       d1: 'Designed from scratch. No templates.', d2: 'Words that match the visual.', d3: 'Found where it matters.',
       l4: 'PHOTO & VIDEO', d4: 'Content from our own productions.',
       l5: 'DEVELOPMENT', d5: 'Custom code. Fast and stable.',
@@ -89,7 +89,7 @@ export default function WebPage() {
       rh: 'Already working with us on content?', rb: 'Adding a website to an existing production is seamless — the visual direction is already set.',
     },
     da: {
-      eyebrow: 'HVAD VI TILBYDER', heading: 'En hjemmeside — eller alt det, det kræver',
+      eyebrow: 'HVAD VI TILBYDER', heading: 'En hjemmeside — og alt der hører til',
       d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der matcher det visuelle.', d3: 'Fundet, der hvor det gælder.',
       l4: 'FOTO & VIDEO', d4: 'Indhold fra vores egne produktioner.',
       l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
