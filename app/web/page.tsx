@@ -77,7 +77,7 @@ export default function WebPage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
-          background: '#000000',
+          background: '#08202c',
           padding: sectionPadding,
           paddingTop: isMobile ? '100px' : '120px',
         }}
