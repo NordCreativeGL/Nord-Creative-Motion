@@ -859,12 +859,12 @@ export default function FjordHeroScene() {
 
   const t = {
     en: {
-      s1h: 'We build websites that people remember', s1b: 'We design and build high-performance websites for brands that take their visual identity seriously. No templates. Just code.',
+      s1h: 'We build websites that people remember', s1b: 'Custom websites for businesses that want to stand out. Designed and built from scratch — no shortcuts.',
       s2h: 'A website — and everything it needs', s2b: 'Design · Copywriting · SEO · Photo & video · Development · Maintenance. One team, one brief, one result.',
       s3h: 'Three ways to work with us', s3b: 'Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.',
     },
     da: {
-      s1h: 'Vi bygger hjemmesider folk husker', s1b: 'Vi designer og bygger højtydende hjemmesider til brands, der tager deres visuelle identitet alvorligt. Ingen skabeloner. Kun kode.',
+      s1h: 'Vi bygger hjemmesider folk husker', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra nul — ingen genveje.',
       s2h: 'En hjemmeside — og alt der hører til', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse. Ét team, ét brief, ét resultat.',
       s3h: 'Tre måder at arbejde med os', s3b: 'Starter · Business · Full Production — fra et kompakt single-page site til hjemmeside plus foto, drone og video, leveret som ét samlet projekt.',
     }
