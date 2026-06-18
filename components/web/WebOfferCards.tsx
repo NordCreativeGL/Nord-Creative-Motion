@@ -7,15 +7,17 @@ export default function WebOfferCards() {
 
   const t = {
     en: {
+      l1: 'WEBSITE DESIGN', l2: 'COPYWRITING', l3: 'SEO',
       d1: 'Designed from scratch. No templates.', d2: 'Words that match the visual.', d3: 'Found where it matters.',
       l4: 'PHOTO & VIDEO', d4: 'Content from our own productions.',
       l5: 'DEVELOPMENT', d5: 'Custom code. Fast and stable.',
       l6: 'MAINTENANCE', d6: 'We keep it running.',
     },
     da: {
-      d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der matcher det visuelle.', d3: 'Fundet, der hvor det gælder.',
+      l1: 'HJEMMESIDE DESIGN', l2: 'COPYWRITING', l3: 'SEO',
+      d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der matcher det visuelle.', d3: 'Synlig, der hvor det gælder.',
       l4: 'FOTO & VIDEO', d4: 'Indhold fra vores egne produktioner.',
-      l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
+      l5: 'UDVIKLING', d5: 'Skræddersyet kode. Hurtig og stabil.',
       l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
     }
   }
@@ -54,7 +56,7 @@ export default function WebOfferCards() {
           <div style={wellStyle}>
             <svg width="38" height="38" viewBox="0 0 48 48"><polygon points="14,8 24,9.5 23,38.5 12,37" fill="#e6f4f3"/><polygon points="24,9.5 34,11 36,40 23,38.5" fill="#8fc9c4"/><path d="M14,8 L34,11 L36,40 L12,37 Z M24,9.5 L23,38.5" fill="none" stroke="rgba(228,246,243,.6)" strokeWidth=".7" strokeLinejoin="round"/></svg>
           </div>
-          <h3 style={titleStyle}>WEBSITE DESIGN</h3>
+          <h3 style={titleStyle}>{t[lang].l1}</h3>
           <p style={descStyle}>{t[lang].d1}</p>
         </article>
 
@@ -63,7 +65,7 @@ export default function WebOfferCards() {
           <div style={wellStyle}>
             <svg width="38" height="38" viewBox="0 0 48 48"><polygon points="24,6 24,42 22,42 18,22" fill="#e6f4f3"/><polygon points="24,6 30,22 26,42 24,42" fill="#8fc9c4"/><path d="M24,6 L30,22 L26,42 L22,42 L18,22 Z M24,6 L24,42" fill="none" stroke="rgba(228,246,243,.6)" strokeWidth=".7" strokeLinejoin="round"/></svg>
           </div>
-          <h3 style={titleStyle}>COPYWRITING</h3>
+          <h3 style={titleStyle}>{t[lang].l2}</h3>
           <p style={descStyle}>{t[lang].d2}</p>
         </article>
 
@@ -72,7 +74,7 @@ export default function WebOfferCards() {
           <div style={wellStyle}>
             <svg width="38" height="38" viewBox="0 0 48 48"><polygon points="24,7 10,16 10,32 24,41" fill="#e6f4f3"/><polygon points="24,7 38,16 38,32 24,41" fill="#356f6d"/><path d="M24,7 L38,16 L38,32 L24,41 L10,32 L10,16 Z M24,7 L24,41" fill="none" stroke="rgba(228,246,243,.6)" strokeWidth=".7" strokeLinejoin="round"/></svg>
           </div>
-          <h3 style={titleStyle}>SEO</h3>
+          <h3 style={titleStyle}>{t[lang].l3}</h3>
           <p style={descStyle}>{t[lang].d3}</p>
         </article>
 
