@@ -9,6 +9,7 @@ import IcebergPackagesSection from '@/components/web/IcebergPackagesSection'
 import PackIceCtaSection from '@/components/web/PackIceCtaSection'
 import FjordHeroScene from './components/FjordHeroScene'
 import WebOfferCards from '@/components/web/WebOfferCards'
+import WebOfferBg from '@/components/web/WebOfferBg'
 import { useLang } from '@/contexts/LanguageContext'
 
 export default function WebPage() {
@@ -73,6 +74,7 @@ export default function WebPage() {
       <section
         id="web-offer"
         style={{
+          position: 'relative',
           minHeight: '100dvh',
           display: 'flex',
           flexDirection: 'column',
@@ -82,6 +84,7 @@ export default function WebPage() {
           paddingTop: isMobile ? '100px' : '120px',
         }}
       >
+        <WebOfferBg />
         <p style={{
           fontSize: 'clamp(11px, 0.7vw, 13px)',
           letterSpacing: '0.18em',
