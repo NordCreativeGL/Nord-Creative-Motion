@@ -13,6 +13,7 @@ import { useLang } from '@/contexts/LanguageContext'
 
 export default function WebPage() {
   const [isMobile, setIsMobile] = useState(false)
+  const [rhHovered, setRhHovered] = useState(false)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()
@@ -184,23 +185,48 @@ export default function WebPage() {
               {t[lang].lb2}
             </p>
           </div>
-          <div style={{ width: isMobile ? '100%' : '33%' }}>
-            <h3 style={{
-              fontSize: 'clamp(20px, 1.3vw, 28px)',
-              fontWeight: 300,
-              letterSpacing: '-0.01em',
-              color: 'white',
-              marginBottom: '16px',
-            }}>
+          <div style={{ width: isMobile ? '100%' : '33%', position: 'relative' }}>
+            <h3
+              onMouseEnter={() => setRhHovered(true)}
+              onMouseLeave={() => setRhHovered(false)}
+              style={{
+                fontSize: 'clamp(20px, 1.3vw, 28px)',
+                fontWeight: 300,
+                letterSpacing: '-0.01em',
+                color: 'white',
+                marginBottom: '16px',
+                cursor: 'default',
+              }}
+            >
               {t[lang].rh}
             </h3>
-            <p style={{
-              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-              lineHeight: 1.65,
-              color: 'rgba(255,255,255,0.65)',
-            }}>
-              {t[lang].rb}
-            </p>
+            <div
+              style={{
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                width: '100%',
+                marginTop: '12px',
+                padding: '20px 24px',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                backdropFilter: 'blur(10px)',
+                opacity: rhHovered ? 1 : 0,
+                transform: rhHovered ? 'translateX(0)' : 'translateX(16px)',
+                transition: 'opacity 0.3s ease, transform 0.3s ease',
+                pointerEvents: rhHovered ? 'auto' : 'none',
+              }}
+            >
+              <p style={{
+                fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+                lineHeight: 1.65,
+                color: 'rgba(255,255,255,0.65)',
+                margin: 0,
+              }}>
+                {t[lang].rb}
+              </p>
+            </div>
           </div>
         </div>
       </section>
