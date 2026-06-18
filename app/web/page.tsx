@@ -50,7 +50,7 @@ export default function WebPage() {
       const g = ctx!.createLinearGradient(0, 0, 0, h)
       g.addColorStop(0, '#01040a')
       g.addColorStop(0.6, '#040f1d')
-      g.addColorStop(1, '#06182a')
+      g.addColorStop(1, '#031b26')
       ctx!.fillStyle = g
       ctx!.fillRect(0, 0, w, h)
       const starRng = rng(4801)
