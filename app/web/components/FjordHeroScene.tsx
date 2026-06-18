@@ -619,7 +619,7 @@ export default function FjordHeroScene() {
       scene.background = new T.Color('#081826')
       scene.fog = new T.Fog('#081826', 320, 1550)
 
-      const camera = new T.PerspectiveCamera(44, W() / window.innerHeight, 0.1, 3200)
+      const camera = new T.PerspectiveCamera(44, W() / H(), 0.1, 3200)
       camera.updateProjectionMatrix()
       ;(window as any).__fjScene = scene
       ;(window as any).__fjCamera = camera
@@ -696,7 +696,6 @@ export default function FjordHeroScene() {
 
       let dragging = false, lastX = 0
       const onDown = (e: PointerEvent) => {
-        if (e.clientY > window.innerHeight) return;
         dragging = true; lastX = e.clientX; stage.style.cursor = 'grabbing'
         const dh = document.getElementById('fj-drag'); if (dh) dh.style.opacity = '0'
       }
@@ -705,7 +704,7 @@ export default function FjordHeroScene() {
       stage.addEventListener('pointerdown', onDown)
       window.addEventListener('pointermove', onMove as EventListener)
       window.addEventListener('pointerup', onUp)
-      const onResize = () => { camera.aspect = W() / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
+      const onResize = () => { camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
       window.addEventListener('resize', onResize)
 
       const degEl = document.getElementById('fj-deg')
@@ -872,10 +871,10 @@ export default function FjordHeroScene() {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'visible', background: '#081826', fontFamily: "'IBM Plex Mono', monospace", marginLeft: '50%', transform: 'translateX(-50%)' }}>
+    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#081826', fontFamily: "'IBM Plex Mono', monospace", marginLeft: '50%', transform: 'translateX(-50%)' }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@300&display=swap');@keyframes fjNudge{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}`}</style>
 
-      <div id="fj-stage" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 'calc(100vh + 320px)', zIndex: 1, cursor: 'grab' }} />
+      <div id="fj-stage" style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'grab' }} />
 
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '52%', zIndex: 3, pointerEvents: 'none', background: 'linear-gradient(180deg,rgba(6,20,32,0.92) 0%,rgba(6,20,32,0.7) 32%,rgba(6,20,32,0.32) 62%,rgba(6,20,32,0) 100%)' }} />
 

@@ -77,12 +77,9 @@ export default function WebPage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
-          background: 'transparent',
-          position: 'relative',
-          zIndex: 2,
-          marginTop: '-320px',
+          background: '#000000',
           padding: sectionPadding,
-          paddingTop: isMobile ? '420px' : '440px',
+          paddingTop: isMobile ? '100px' : '120px',
         }}
       >
         <p style={{
