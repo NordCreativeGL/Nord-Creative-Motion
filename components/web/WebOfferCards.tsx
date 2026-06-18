@@ -8,14 +8,14 @@ export default function WebOfferCards() {
   const t = {
     en: {
       l1: 'WEBSITE DESIGN', l2: 'COPYWRITING', l3: 'SEO',
-      d1: 'Designed from scratch. No templates.', d2: 'Words that match the visual.', d3: 'Found where it matters.',
+      d1: 'Designed from scratch. No templates.', d2: 'Written for your brand and your audience.', d3: 'Found where it matters.',
       l4: 'PHOTO & VIDEO', d4: 'Content from our own productions.',
       l5: 'DEVELOPMENT', d5: 'Custom code. Fast and stable.',
       l6: 'MAINTENANCE', d6: 'We keep it running.',
     },
     da: {
-      l1: 'HJEMMESIDE DESIGN', l2: 'COPYWRITING', l3: 'SEO',
-      d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der matcher det visuelle.', d3: 'Synlig, der hvor det gælder.',
+      l1: 'HJEMMESIDE DESIGN', l2: 'TEKST & INDHOLD', l3: 'SEO',
+      d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der arbejder for din virksomhed.', d3: 'Synlig, der hvor det gælder.',
       l4: 'FOTO & VIDEO', d4: 'Indhold fra vores egne produktioner.',
       l5: 'UDVIKLING', d5: 'Skræddersyet kode. Hurtig og stabil.',
       l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
