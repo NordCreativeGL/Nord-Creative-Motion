@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
@@ -26,6 +26,53 @@ export default function WebPage() {
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
+  }, [])
+
+  const starCanvasRef = useRef<HTMLCanvasElement>(null)
+  useEffect(() => {
+    const canvas = starCanvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    function rng(seed: number) {
+      let s = seed
+      return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 0xffffffff }
+    }
+
+    function paint() {
+      const dpr = window.devicePixelRatio || 1
+      const w = canvas!.offsetWidth
+      const h = canvas!.offsetHeight
+      canvas!.width = w * dpr
+      canvas!.height = h * dpr
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
+      const g = ctx!.createLinearGradient(0, 0, 0, h)
+      g.addColorStop(0, '#01040a')
+      g.addColorStop(0.6, '#040f1d')
+      g.addColorStop(1, '#06182a')
+      ctx!.fillStyle = g
+      ctx!.fillRect(0, 0, w, h)
+      const starRng = rng(4801)
+      const nStars = Math.round((w * h) / 5200)
+      for (let i = 0; i < nStars; i++) {
+        const sx = starRng() * w
+        const sy = Math.pow(starRng(), 1.35) * h * 0.96
+        const big = starRng() < 0.12
+        const rad = big ? 0.8 + starRng() * 0.7 : 0.35 + starRng() * 0.5
+        const a = (big ? 0.55 : 0.28) + starRng() * 0.35
+        ctx!.fillStyle = 'rgba(220,235,244,' + a.toFixed(3) + ')'
+        ctx!.beginPath(); ctx!.arc(sx, sy, rad, 0, Math.PI * 2); ctx!.fill()
+        if (big && starRng() < 0.5) {
+          ctx!.fillStyle = 'rgba(180,222,238,' + (a * 0.4).toFixed(3) + ')'
+          ctx!.beginPath(); ctx!.arc(sx, sy, rad * 2.4, 0, Math.PI * 2); ctx!.fill()
+        }
+      }
+    }
+
+    paint()
+    window.addEventListener('resize', paint)
+    return () => window.removeEventListener('resize', paint)
   }, [])
 
   const { lang } = useLang()
@@ -73,15 +120,29 @@ export default function WebPage() {
       <section
         id="web-offer"
         style={{
+          position: 'relative',
+          isolation: 'isolate',
           minHeight: '100dvh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
-          background: '#08202c',
+          background: 'transparent',
           padding: sectionPadding,
           paddingTop: isMobile ? '100px' : '120px',
         }}
       >
+        <canvas
+          ref={starCanvasRef}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            display: 'block',
+            pointerEvents: 'none',
+            zIndex: -1,
+          }}
+        />
         <p style={{
           fontSize: 'clamp(11px, 0.7vw, 13px)',
           letterSpacing: '0.18em',
