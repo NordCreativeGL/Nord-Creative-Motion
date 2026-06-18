@@ -84,8 +84,8 @@ export default function WebPage() {
       l4: 'PHOTO & VIDEO', d4: 'Content from our own productions.',
       l5: 'DEVELOPMENT', d5: 'Custom code. Fast and stable.',
       l6: 'MAINTENANCE', d6: 'We keep it running.',
-      lb1: 'We build websites as a standalone service — designed, developed, and launched. Photography, drone footage, and video are not required.',
-      lb2: 'But if you need content to go with it, we produce that too. One team, one brief, one result.',
+      lb1: 'We build websites as a standalone service — designed, developed, and launched.',
+      lb2: 'Need photo and video content for your site? We handle that too. One team, one brief, one result.',
       rh: 'Already working with us on content?', rb: 'Adding a website to an existing production is seamless — the visual direction is already set.',
     },
     da: {
@@ -94,8 +94,8 @@ export default function WebPage() {
       l4: 'FOTO & VIDEO', d4: 'Indhold fra vores egne produktioner.',
       l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
       l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
-      lb1: 'Vi bygger hjemmesider som en selvstændig ydelse — designet, udviklet og lanceret. Fotografering, dronefilm og video er ikke påkrævet.',
-      lb2: 'Men har du brug for indhold til det, producerer vi det også. Ét team, ét brief, ét resultat.',
+      lb1: 'Vi bygger hjemmesider som en selvstændig ydelse — designet, udviklet og lanceret.',
+      lb2: 'Har du brug for foto og video indhold til din hjemmeside, producerer vi det også. Ét team, ét brief, ét resultat.',
       rh: 'Arbejder du allerede med os om indhold?', rb: 'At tilføje en hjemmeside til en eksisterende produktion er gnidningsfrit — den visuelle retning er allerede fastlagt.',
     }
   }
