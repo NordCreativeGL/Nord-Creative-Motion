@@ -66,10 +66,11 @@ export default function WebPage() {
       ]} />
       <Header />
 
-      {/* ── Section 1: Hero ── */}
-      <FjordHeroScene />
-
-      {/* ── Section 3: The Offer ── */}
+      {/* ── Hero + Web Offer: shared sticky scroll section ── */}
+      <div style={{ position: 'relative' }}>
+        <div style={{ position: 'sticky', top: 0, height: '100vh', zIndex: 0 }}>
+          <FjordHeroScene />
+        </div>
       <section
         id="web-offer"
         style={{
@@ -77,7 +78,7 @@ export default function WebPage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
-          background: '#000000',
+          background: 'linear-gradient(to bottom, #08202c 0%, #060606 50%, #000000 100%)',
           padding: sectionPadding,
           paddingTop: isMobile ? '100px' : '120px',
         }}
@@ -143,6 +144,7 @@ export default function WebPage() {
           </div>
         </div>
       </section>
+      </div>
 
       <IcebergPackagesSection id="web-packages" />
 
