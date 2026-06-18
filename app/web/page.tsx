@@ -80,9 +80,9 @@ export default function WebPage() {
           background: 'transparent',
           position: 'relative',
           zIndex: 2,
-          marginTop: '-420px',
+          marginTop: '-320px',
           padding: sectionPadding,
-          paddingTop: isMobile ? '520px' : '540px',
+          paddingTop: isMobile ? '420px' : '440px',
         }}
       >
         <p style={{
