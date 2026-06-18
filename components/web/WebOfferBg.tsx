@@ -268,7 +268,6 @@ export default function WebOfferBg() {
     renderer.setSize(W(), H())
     renderer.setClearColor('#081826')
     renderer.localClippingEnabled = true
-    renderer.clippingPlanes = [new T.Plane(new T.Vector3(0, -1, 0), 0)]
     host.appendChild(renderer.domElement)
 
     const scene = new T.Scene()
