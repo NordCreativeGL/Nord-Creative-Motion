@@ -89,14 +89,14 @@ export default function WebPage() {
       rh: 'Already working with us on content?', rb: 'Adding a website to an existing production is seamless — the visual direction is already set.',
     },
     da: {
-      eyebrow: 'HVAD VI TILBYDER', heading: 'Et website — eller alt det, det kræver',
+      eyebrow: 'HVAD VI TILBYDER', heading: 'En hjemmeside — eller alt det, det kræver',
       d1: 'Designet fra bunden. Ingen skabeloner.', d2: 'Ord der matcher det visuelle.', d3: 'Fundet, der hvor det gælder.',
       l4: 'FOTO & VIDEO', d4: 'Indhold fra vores egne produktioner.',
       l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
       l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
-      lb1: 'Vi bygger websites som en selvstændig ydelse — designet, udviklet og lanceret. Fotografering, dronefilm og video er ikke påkrævet.',
+      lb1: 'Vi bygger hjemmesider som en selvstændig ydelse — designet, udviklet og lanceret. Fotografering, dronefilm og video er ikke påkrævet.',
       lb2: 'Men har du brug for indhold til det, producerer vi det også. Ét team, ét brief, ét resultat.',
-      rh: 'Arbejder du allerede med os om indhold?', rb: 'At tilføje et website til en eksisterende produktion er gnidningsfrit — den visuelle retning er allerede fastlagt.',
+      rh: 'Arbejder du allerede med os om indhold?', rb: 'At tilføje en hjemmeside til en eksisterende produktion er gnidningsfrit — den visuelle retning er allerede fastlagt.',
     }
   }
 
