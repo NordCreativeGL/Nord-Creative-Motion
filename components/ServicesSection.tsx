@@ -166,7 +166,7 @@ export default function ServicesSection() {
     en: {
       eyebrow: 'What we offer',
       h1: 'Photo, video and websites',
-      h2: 'Produced in Greenland.',
+      h2: 'Produced in Greenland',
       c1t: 'Photography',
       c1d: 'Photography for businesses in Greenland — for websites, annual reports, press materials, and documentation. We plan the shoot, know the locations, and deliver images that show what you actually do.',
       c2t: 'Drone & Aerial',
@@ -177,7 +177,7 @@ export default function ServicesSection() {
     da: {
       eyebrow: 'Hvad vi tilbyder',
       h1: 'Foto, video og websites',
-      h2: 'Produceret i Grønland.',
+      h2: 'Produceret i Grønland',
       c1t: 'Fotografering',
       c1d: 'Fotografering til virksomheder i Grønland — til websites, årsrapporter, pressemateriale og dokumentation. Vi planlægger optagelserne, kender lokaliteterne og leverer billeder der viser hvad I faktisk laver.',
       c2t: 'Drone & Luftfoto',
