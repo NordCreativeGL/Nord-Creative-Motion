@@ -164,39 +164,46 @@ export default function WebPage() {
           {t[lang].heading}
         </h2>
         <WebOfferCards />
-        <div style={{ maxWidth: '720px' }}>
-          <p style={{
-            fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-            lineHeight: 1.65,
-            color: 'rgba(255,255,255,0.65)',
-            marginBottom: '20px',
-          }}>
-            {t[lang].lb1}
-          </p>
-          <p style={{
-            fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-            lineHeight: 1.65,
-            color: 'rgba(255,255,255,0.65)',
-            marginBottom: '56px',
-          }}>
-            {t[lang].lb2}
-          </p>
-          <p style={{
-            fontSize: 'clamp(11px, 0.7vw, 13px)',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.4)',
-            marginBottom: '12px',
-          }}>
-            {t[lang].rh}
-          </p>
-          <p style={{
-            fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-            lineHeight: 1.65,
-            color: 'rgba(255,255,255,0.65)',
-          }}>
-            {t[lang].rb}
-          </p>
+        <div style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: '60px',
+        }}>
+          <div style={{ width: isMobile ? '100%' : '66%' }}>
+            <p style={{
+              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.65)',
+              marginBottom: '20px',
+            }}>
+              {t[lang].lb1}
+            </p>
+            <p style={{
+              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.65)',
+            }}>
+              {t[lang].lb2}
+            </p>
+          </div>
+          <div style={{ width: isMobile ? '100%' : '33%' }}>
+            <h3 style={{
+              fontSize: 'clamp(20px, 1.3vw, 28px)',
+              fontWeight: 300,
+              letterSpacing: '-0.01em',
+              color: 'white',
+              marginBottom: '16px',
+            }}>
+              {t[lang].rh}
+            </h3>
+            <p style={{
+              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.65)',
+            }}>
+              {t[lang].rb}
+            </p>
+          </div>
         </div>
       </section>
 
