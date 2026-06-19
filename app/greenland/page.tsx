@@ -252,7 +252,7 @@ export default function GreenlandPage() {
                   fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
                   lineHeight: 1.65,
                   color: 'rgba(255,255,255,0.65)',
-                  maxWidth: '560px',
+                  maxWidth: '640px',
                 }}>
                   {t[lang].whyB}
                 </p>
