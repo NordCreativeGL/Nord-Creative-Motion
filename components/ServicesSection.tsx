@@ -41,6 +41,7 @@ export default function ServicesSection() {
 
   const [isMobile, setIsMobile] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
+  const isFirstRender = useRef(true);
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
     check();
@@ -144,6 +145,19 @@ export default function ServicesSection() {
 
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+    if (!accentRef.current || !bodyRef.current) return
+    gsap.fromTo(
+      [accentRef.current, bodyRef.current],
+      { opacity: 0, y: 6 },
+      { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+    )
+  }, [activeCard])
 
   const t = {
     en: {
