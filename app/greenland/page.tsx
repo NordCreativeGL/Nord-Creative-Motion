@@ -23,7 +23,7 @@ export default function GreenlandPage() {
 
   const t = {
     en: {
-      working: "Distances are long. Weather changes fast. Getting to the right location often takes planning, the right contacts, and flexibility. We've worked in these conditions long enough that they're part of how we plan — not something we work around.",
+      working: "Distances are long. Weather changes fast. Getting to a location can take more planning than the shoot itself. We've worked in these conditions long enough that they're part of how we plan — not something we work around.",
       process: "Every production starts with the practical questions: which locations, what time of year, and what the conditions are likely to be. We know the terrain and the seasonal patterns — which means we can plan accurately and adapt when needed. Whether it's a town centre or a remote location, the preparation is the same.",
       whyH: 'What you get when you work with us',
       whyB: 'A team that knows Greenland — the locations, the light, the seasons, and the realities of working here. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context. We also build websites for companies in Greenland — if you need both production and a website, it can be handled as one project.',
@@ -40,7 +40,7 @@ export default function GreenlandPage() {
       processH: 'How we work',
     },
     da: {
-      working: 'Afstandene er lange. Vejret skifter hurtigt. At komme til de rette lokaliteter kræver planlægning, de rette kontakter og fleksibilitet. Vi har arbejdet under disse forhold længe nok til at de er en del af, hvordan vi planlægger — ikke noget vi arbejder udenom.',
+      working: 'Afstandene er lange. Vejret skifter hurtigt. At nå frem til en lokalitet kan kræve mere planlægning end selve optagelsen. Vi har arbejdet under disse vilkår længe nok til at de er en del af vores tilgang — ikke noget vi finder ud af undervejs.',
       process: 'Enhver produktion starter med de praktiske spørgsmål: hvilke lokaliteter, hvilken tid af året, og hvad forholdene sandsynligvis vil være. Vi kender terrænet og de sæsonmæssige mønstre — det betyder vi kan planlægge præcist og tilpasse os, når det er nødvendigt. Hvad enten det er et bycenter eller en afsides lokalitet, er forberedelsen den samme.',
       whyH: 'Det får du, når du arbejder med os',
       whyB: 'Et team der kender Grønland — lokaliteterne, lyset, årstiderne og realiteterne ved at arbejde her. Det kan ses på, hvordan produktioner planlægges, og på det færdige arbejde. For virksomheder i Grønland betyder det at arbejde med nogen, der allerede forstår konteksten. Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan det håndteres som ét projekt.',
