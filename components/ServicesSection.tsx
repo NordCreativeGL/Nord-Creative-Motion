@@ -207,8 +207,8 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{t[lang].c1t}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{t[lang].c1d}</p>
+                  <p className="text-white text-[26px] min-[1900px]:text-[clamp(26px,1.69vw,36px)] font-light mb-1">{t[lang].c1t}</p>
+                  <p className="text-white/60 text-lg leading-relaxed">{t[lang].c1d}</p>
                 </div>
               </div>
 
@@ -239,8 +239,8 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{t[lang].c2t}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{t[lang].c2d}</p>
+                  <p className="text-white text-[26px] min-[1900px]:text-[clamp(26px,1.69vw,36px)] font-light mb-1">{t[lang].c2t}</p>
+                  <p className="text-white/60 text-lg leading-relaxed">{t[lang].c2d}</p>
                 </div>
               </div>
 
@@ -271,8 +271,8 @@ export default function ServicesSection() {
                   padding: "28px 24px",
                   background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
                 }}>
-                  <p className="text-white text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] font-light mb-1">{t[lang].c3t}</p>
-                  <p className="text-white/60 text-sm leading-relaxed">{t[lang].c3d}</p>
+                  <p className="text-white text-[26px] min-[1900px]:text-[clamp(26px,1.69vw,36px)] font-light mb-1">{t[lang].c3t}</p>
+                  <p className="text-white/60 text-lg leading-relaxed">{t[lang].c3d}</p>
                 </div>
               </div>
 
