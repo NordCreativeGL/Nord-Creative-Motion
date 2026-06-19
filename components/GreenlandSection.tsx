@@ -109,8 +109,8 @@ export default function GreenlandSection() {
   }, []);
 
   const t = {
-    en: { eyebrow: 'Greenland', heading: "We're already here.", body: 'We know the locations, the seasons, and the conditions. That shows in how we plan productions — and in how the final work looks.', btnWork: 'Explore our work in Greenland', btnWeb: 'See our website production' },
-    da: { eyebrow: 'Grønland', heading: 'Vi er allerede på plads.', body: 'Vi kender stederne, sæsonerne og betingelserne. Det mærkes i planlægningen — og i det vi leverer.', btnWork: 'Se vores arbejde i Grønland', btnWeb: 'Se vores website-produktion' }
+    en: { eyebrow: 'Greenland', heading: "Production across Greenland.", body: "From town centres to remote sites only reachable by boat or helicopter — we've produced photography, film, and websites across all of Greenland. The distances are long and the weather doesn't always cooperate. We've learned to plan for both.", btnWork: 'Explore our work in Greenland', btnWeb: 'See our website production' },
+    da: { eyebrow: 'Grønland', heading: 'Produktion i Grønland.', body: 'Fra bycentre til afsides lokaliteter der kun kan nås med båd eller helikopter — vi har produceret fotografering, film og websites i hele Grønland. Afstandene er lange og vejret samarbejder ikke altid. Vi har lært at planlægge for begge dele.', btnWork: 'Se vores arbejde i Grønland', btnWeb: 'Se vores website-produktion' }
   }
 
   return (
