@@ -587,15 +587,15 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const t = {
     en: {
       eyebrow: 'PACKAGES', heading: 'Three ways to work with us',
-      t1: ['Professional design','Up to 5 pages','Contact form','Mobile optimised','2 revision rounds'],
-      t2: ['Everything in Starter','SEO setup','Copywriting','Up to 10 pages','CMS integration','Google Analytics','3 revision rounds'],
-      t3: ['Everything in Business','Photo & video production','Advanced animations','Custom functionality','Ongoing maintenance','Unlimited revisions'],
+      t1: ['Professional design','Up to 3 pages','Contact form','Mobile optimised','2 revision rounds'],
+      t2: ['Everything in Starter','Up to 7 pages','SEO setup','Copywriting','Multilingual (2 languages)','Priority support (email)','5 revision rounds'],
+      t3: ['Everything in Business','Up to 12 pages','Photo & video production','Advanced animations','Multilingual (3+ languages)','Advanced statistics','Priority support (dedicated)','10 revision rounds'],
     },
     da: {
       eyebrow: 'PAKKER', heading: 'Tre måder at arbejde med os',
-      t1: ['Professionelt design','Op til 5 sider','Kontaktformular','Mobiloptimeret','2 revisionsrunder'],
-      t2: ['Alt i Starter','SEO-opsætning','Copywriting','Op til 10 sider','CMS-integration','Google Analytics','3 revisionsrunder'],
-      t3: ['Alt i Business','Foto & videoproduktion','Avancerede animationer','Tilpasset funktionalitet','Løbende vedligeholdelse','Ubegrænsede revisioner'],
+      t1: ['Professionelt design','Op til 3 sider','Kontaktformular','Mobiloptimeret','2 revisionsrunder'],
+      t2: ['Alt i Starter','Op til 7 sider','SEO-opsætning','Tekst & indhold','Flersproget (2 sprog)','Prioriteret support (e-mail)','5 revisionsrunder'],
+      t3: ['Alt i Business','Op til 12 sider','Foto & videoproduktion','Avancerede animationer','Flersproget (3+ sprog)','Avanceret statistik','Prioriteret support (dedikeret)','10 revisionsrunder'],
     }
   }
 
