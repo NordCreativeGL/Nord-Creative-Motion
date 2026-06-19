@@ -87,6 +87,7 @@ export default function WebPage() {
       lb1: 'We build websites as a standalone service — designed, developed, and launched.',
       lb2: 'Need photo and video content for your site? We handle that too. One team, one brief, one result.',
       rh: 'Already working with us on content?', rb: 'Adding a website to an existing production is seamless — the visual direction is already set.',
+      nav1: 'The Offer', nav2: 'Packages', nav3: 'Work with us',
     },
     da: {
       eyebrow: 'HVAD VI TILBYDER', heading: 'En hjemmeside — og alt der hører til',
@@ -95,8 +96,9 @@ export default function WebPage() {
       l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
       l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
       lb1: 'Vi bygger hjemmesider som en selvstændig ydelse — designet, udviklet og lanceret.',
-      lb2: 'Har du brug for foto og video indhold til din hjemmeside, producerer vi det også. Ét team, ét brief, ét resultat.',
+      lb2: 'Har du brug for foto- og videoindhold til din hjemmeside, producerer vi det også. Ét team, ét brief, ét resultat.',
       rh: 'Arbejder du allerede med os om indhold?', rb: 'At tilføje en hjemmeside til en eksisterende produktion er gnidningsfrit — den visuelle retning er allerede fastlagt.',
+      nav1: 'Hvad vi tilbyder', nav2: 'Pakker', nav3: 'Arbejd med os',
     }
   }
 
@@ -107,9 +109,9 @@ export default function WebPage() {
   return (
     <main style={{ background: '#060606' }}>
       <SideNav items={[
-        { label: 'The Offer', id: 'web-offer' },
-        { label: 'Packages', id: 'web-packages' },
-        { label: 'Work with us', id: 'web-cta' },
+        { label: t[lang].nav1, id: 'web-offer' },
+        { label: t[lang].nav2, id: 'web-packages' },
+        { label: t[lang].nav3, id: 'web-cta' },
       ]} />
       <Header />
 
