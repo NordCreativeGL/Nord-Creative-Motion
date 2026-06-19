@@ -77,7 +77,7 @@ export default function Header() {
             <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>Home</Link>
             <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>Greenland</Link>
             <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>Website Production</Link>
-            <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link>
+            {/* <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link> */}
             <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>About</Link>
           </nav>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -133,7 +133,7 @@ export default function Header() {
           { label: 'Home', href: '/' },
           { label: 'Greenland', href: '/greenland' },
           { label: 'Website Production', href: '/web' },
-          { label: 'Beyond the Arctic', href: '/beyond-the-arctic' },
+          // { label: 'Beyond the Arctic', href: '/beyond-the-arctic' },
           { label: 'About', href: '/about' },
         ].map(({ label, href }) => (
           <a
