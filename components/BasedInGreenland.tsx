@@ -288,7 +288,7 @@ export default function BasedInGreenland() {
     da: {
       label: 'Sydgrønland',
       h1: 'Vi bor her', h2: 'Vi arbejder her',
-      b1: 'Vi er baseret i Qaqortoq, Sydgrønland — tæt på de miljøer og de virksomheder vi arbejder med. Det kendskab kan ses i alt fra planlægning til det færdige resultat.',
+      b1: 'Vi holder til i Qaqortoq, Sydgrønland — tæt på de miljøer og de virksomheder vi arbejder med. Det kendskab kan ses i alt fra planlægning til det færdige resultat.',
       b2: 'Vi arbejder i hele Grønland for virksomheder der har brug for at få deres arbejde dokumenteret og præsenteret professionelt — uanset hvor de befinder sig eller hvad det kræver at komme derhen.',
       para: 'Det betyder vi kan arbejde effektivt, selv der hvor logistik og vejr ellers sætter grænser.',
       readMore: 'Læs mere om os',
