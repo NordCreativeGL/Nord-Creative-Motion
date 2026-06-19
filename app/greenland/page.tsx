@@ -37,7 +37,7 @@ export default function GreenlandPage() {
       eyebrow1: 'WORKING IN GREENLAND',
       eyebrow2: 'PROCESS',
       eyebrow3: 'WHY US',
-      workH: 'Working in Greenland is different.',
+      workH: 'Working in Greenland is different',
       processH: 'How we work',
     },
     da: {
@@ -55,7 +55,7 @@ export default function GreenlandPage() {
       eyebrow1: 'AT ARBEJDE I GRØNLAND',
       eyebrow2: 'PROCES',
       eyebrow3: 'HVORFOR OS',
-      workH: 'Grønland stiller andre krav.',
+      workH: 'Grønland stiller andre krav',
       processH: 'Sådan arbejder vi',
     }
   }
@@ -95,7 +95,7 @@ export default function GreenlandPage() {
                 color: 'white',
                 marginBottom: '28px',
               }}>
-                {lang === 'da' ? (<>Grønland stiller<br />andre krav.</>) : t[lang].workH}
+                {lang === 'da' ? (<>Grønland stiller<br />andre krav</>) : t[lang].workH}
               </h2>
               <p style={{
                 fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
