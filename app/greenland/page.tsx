@@ -45,7 +45,7 @@ export default function GreenlandPage() {
       process: 'Enhver produktion starter med de samme spørgsmål: hvilke lokaliteter, hvordan vi kommer derhen og hvilken tid på året der giver mening. Vi kender terrænet og ved hvordan adgangen ændrer sig med årstiderne — så det praktiske er på plads, inden vi ankommer.',
       whyH: 'Det får du, når du arbejder med os',
       whyB: 'Et team der kender Grønland — lokaliteterne, lyset og hvordan forholdene påvirker hvad der er muligt. Det ses i, hvordan produktioner planlægges og i det færdige produkt. For virksomheder i Grønland betyder det at arbejde med nogen der allerede forstår konteksten.',
-      whyWebsite: 'Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan vi tage det som ét projekt.',
+      whyWebsite: 'Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan vi samle det i ét projekt.',
       cta1: 'Start dit projekt', cta2: 'Se vores webproduktion',
       ctaHeading: "Planlægger du et projekt i Grønland?",
       ctaBody: "Fortæl os hvad du ønsker — vi finder ud af hvordan.",
