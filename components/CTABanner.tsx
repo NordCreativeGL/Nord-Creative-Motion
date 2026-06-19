@@ -66,8 +66,8 @@ export default function CTABanner() {
   }, []);
 
   const t = {
-    en: { heading: 'Planning a project in Greenland?', body: "Tell us about your project — we'll come back with a plan.", btn: 'Work with us' },
-    da: { heading: 'Planlægger du et projekt i Grønland?', body: 'Fortæl os om dit projekt — vi vender tilbage med en plan.', btn: 'Arbejd med os' }
+    en: { heading: 'Planning a project in Greenland?', body: "Tell us what you need.", btn: 'Work with us' },
+    da: { heading: 'Planlægger du et projekt i Grønland?', body: 'Fortæl os hvad du har brug for.', btn: 'Kontakt os' }
   }
 
   return (
