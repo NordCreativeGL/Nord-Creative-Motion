@@ -96,8 +96,8 @@ export default function WebPage() {
       l5: 'UDVIKLING', d5: 'Egentilpasset kode. Hurtig og stabil.',
       l6: 'VEDLIGEHOLDELSE', d6: 'Vi sørger for at det kører.',
       lb1: 'Vi bygger hjemmesider som en selvstændig ydelse — designet, udviklet og lanceret.',
-      lb2: 'Har du brug for foto- og videoindhold til din hjemmeside, producerer vi det også. Ét team, ét brief, ét resultat.',
-      rh: 'Arbejder du allerede med os om indhold?', rb: 'At tilføje en hjemmeside til en eksisterende produktion er gnidningsfrit — den visuelle retning er allerede fastlagt.',
+      lb2: 'Har du brug for foto- og videoindhold til din hjemmeside? Det klarer vi også. Ét team, ét brief, ét resultat.',
+      rh: 'Er du allerede i gang med en produktion hos os?', rb: 'Tilføjer du en hjemmeside til en eksisterende produktion, er den visuelle retning allerede på plads.',
       nav1: 'Hvad vi tilbyder', nav2: 'Pakker', nav3: 'Arbejd med os',
     }
   }
