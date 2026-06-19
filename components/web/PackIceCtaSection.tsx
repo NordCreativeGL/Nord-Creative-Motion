@@ -286,7 +286,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
 
   const t = {
     en: { eyebrow: 'WORK WITH US', heading: 'Ready to build something worth seeing?', body: "Tell us about your project. We'll take it from there.", btn: 'Start your project' },
-    da: { eyebrow: 'ARBEJD MED OS', heading: 'Klar til at bygge noget værd at se?', body: 'Fortæl os om dit projekt. Vi tager det derfra.', btn: 'Start dit projekt' }
+    da: { eyebrow: 'ARBEJD MED OS', heading: 'Klar til at bygge noget der taler for sig selv?', body: 'Fortæl os om dit projekt. Vi tager det derfra.', btn: 'Start dit projekt' }
   }
 
   useEffect(() => {
