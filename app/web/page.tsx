@@ -164,12 +164,16 @@ export default function WebPage() {
           {t[lang].heading}
         </h2>
         <WebOfferCards />
-        <div style={{ maxWidth: '700px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: isMobile ? '20px' : '60px',
+        }}>
           <p style={{
             fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
             lineHeight: 1.65,
             color: 'rgba(255,255,255,0.65)',
-            marginBottom: '20px',
+            margin: 0,
           }}>
             {t[lang].lb1}
           </p>
@@ -177,6 +181,7 @@ export default function WebPage() {
             fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
             lineHeight: 1.65,
             color: 'rgba(255,255,255,0.65)',
+            margin: 0,
           }}>
             {t[lang].lb2}
           </p>
