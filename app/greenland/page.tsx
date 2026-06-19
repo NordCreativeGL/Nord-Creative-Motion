@@ -317,6 +317,7 @@ export default function GreenlandPage() {
                       textDecoration: 'none',
                       width: '100%',
                       textAlign: 'center' as const,
+                      marginTop: '48px',
                     }}
                   >
                     {t[lang].cta2}
