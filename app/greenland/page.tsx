@@ -41,7 +41,7 @@ export default function GreenlandPage() {
     },
     da: {
       working: 'Afstandene er lange. Vejret skifter hurtigt. At nå frem til en lokalitet kan kræve mere planlægning end selve optagelsen. Vi har arbejdet under disse vilkår længe nok til at de er en del af vores tilgang — ikke noget vi finder ud af undervejs.',
-      process: 'Enhver produktion starter med de samme spørgsmål: hvilke lokaliteter, hvordan vi kommer derhen og hvilken tid af året der giver mening. Vi kender terrænet og ved hvordan adgangen ændrer sig med årstiderne — så det praktiske er på plads, inden vi ankommer.',
+      process: 'Enhver produktion starter med de samme spørgsmål: hvilke lokaliteter, hvordan vi kommer derhen og hvilken tid på året der giver mening. Vi kender terrænet og ved hvordan adgangen ændrer sig med årstiderne — så det praktiske er på plads, inden vi ankommer.',
       whyH: 'Det får du, når du arbejder med os',
       whyB: 'Et team der kender Grønland — lokaliteterne, lyset, årstiderne og realiteterne ved at arbejde her. Det kan ses på, hvordan produktioner planlægges, og på det færdige arbejde. For virksomheder i Grønland betyder det at arbejde med nogen, der allerede forstår konteksten. Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan det håndteres som ét projekt.',
       cta1: 'Start dit projekt', cta2: 'Se vores webproduktion',
