@@ -53,7 +53,7 @@ export default function Header() {
           zIndex: 1001,
         }}
       >
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 relative">
           <Link
             href="/"
             style={{ display: 'block' }}
@@ -73,7 +73,7 @@ export default function Header() {
               priority
             />
           </Link>
-          <nav className="hidden items-center gap-8 text-sm text-zinc-300 lg:flex">
+          <nav className="hidden items-center gap-8 text-sm text-zinc-300 lg:flex absolute left-1/2 -translate-x-1/2">
             <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>Home</Link>
             <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>Greenland</Link>
             <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>Website Production</Link>
