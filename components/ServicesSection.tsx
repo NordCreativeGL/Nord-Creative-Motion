@@ -41,7 +41,6 @@ export default function ServicesSection() {
 
   const [isMobile, setIsMobile] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
-  const isFirstRender = useRef(true);
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
     check();
@@ -85,13 +84,30 @@ export default function ServicesSection() {
           .to(card2, { scale: 0.94, duration: 1 }, 1.5)
           .to(card3, { y: 0, duration: 1 }, 1.5);
 
+        let prevIdx = 0;
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
           end: "bottom bottom",
           onUpdate: (self) => {
             const idx = self.progress < 0.33 ? 0 : self.progress < 0.67 ? 1 : 2;
-            setActiveCard(idx);
+            if (idx !== prevIdx) {
+              prevIdx = idx;
+              gsap.to([accentRef.current, bodyRef.current], {
+                opacity: 0,
+                y: -8,
+                duration: 0.2,
+                ease: 'power2.in',
+                onComplete: () => {
+                  setActiveCard(idx);
+                  gsap.fromTo(
+                    [accentRef.current, bodyRef.current],
+                    { opacity: 0, y: 10 },
+                    { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+                  );
+                }
+              });
+            }
           },
         });
       }
@@ -145,19 +161,6 @@ export default function ServicesSection() {
 
     return () => ctx.revert();
   }, []);
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-    if (!accentRef.current || !bodyRef.current) return
-    gsap.fromTo(
-      [accentRef.current, bodyRef.current],
-      { opacity: 0, y: 6 },
-      { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
-    )
-  }, [activeCard])
 
   const t = {
     en: {
