@@ -26,7 +26,8 @@ export default function GreenlandPage() {
       working: "Distances are long. Weather changes fast. Getting to a location can take more planning than the shoot itself. We've worked in these conditions long enough that they're part of how we plan — not something we work around.",
       process: "Every production starts with the same questions: which locations, how to get there, and what time of year makes sense. We know the terrain and how access changes with the seasons — so the practical side is worked out before we arrive, not figured out on the day.",
       whyH: 'What you get when you work with us',
-      whyB: 'A team that knows Greenland — the locations, the light, the seasons, and the realities of working here. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context. We also build websites for companies in Greenland — if you need both production and a website, it can be handled as one project.',
+      whyB: "A team that knows Greenland — the locations, the light, and how conditions affect what's possible. That shows in how productions are planned and in the final work. For companies in Greenland, it means working with people who already understand the context.",
+      whyWebsite: 'We also build websites for companies in Greenland — if you need both production and a website, we can handle it as one project.',
       cta1: 'Start your project', cta2: 'See our website production',
       ctaHeading: "Planning a project in Greenland?",
       ctaBody: "Tell us about your project — we'll help define what's possible and how to approach it.",
@@ -43,7 +44,8 @@ export default function GreenlandPage() {
       working: 'Afstandene er lange. Vejret skifter hurtigt. At nå frem til en lokalitet kan kræve mere planlægning end selve optagelsen. Vi har arbejdet under disse vilkår længe nok til at de er en del af vores tilgang — ikke noget vi finder ud af undervejs.',
       process: 'Enhver produktion starter med de samme spørgsmål: hvilke lokaliteter, hvordan vi kommer derhen og hvilken tid på året der giver mening. Vi kender terrænet og ved hvordan adgangen ændrer sig med årstiderne — så det praktiske er på plads, inden vi ankommer.',
       whyH: 'Det får du, når du arbejder med os',
-      whyB: 'Et team der kender Grønland — lokaliteterne, lyset, årstiderne og realiteterne ved at arbejde her. Det kan ses på, hvordan produktioner planlægges, og på det færdige arbejde. For virksomheder i Grønland betyder det at arbejde med nogen, der allerede forstår konteksten. Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan det håndteres som ét projekt.',
+      whyB: 'Et team der kender Grønland — lokaliteterne, lyset og hvordan forholdene påvirker hvad der er muligt. Det ses i, hvordan produktioner planlægges og i det færdige produkt. For virksomheder i Grønland betyder det at arbejde med nogen der allerede forstår konteksten.',
+      whyWebsite: 'Vi bygger også websites til virksomheder i Grønland — har du brug for både produktion og et website, kan vi tage det som ét projekt.',
       cta1: 'Start dit projekt', cta2: 'Se vores webproduktion',
       ctaHeading: "Planlægger du et projekt i Grønland?",
       ctaBody: "Fortæl os om dit projekt — vi vender tilbage med en plan.",
@@ -253,6 +255,15 @@ export default function GreenlandPage() {
                   maxWidth: '560px',
                 }}>
                   {t[lang].whyB}
+                </p>
+                <p style={{
+                  fontSize: isMobile ? '14px' : 'clamp(1.125rem, 1.15vw, 1.5rem)',
+                  lineHeight: 1.65,
+                  color: 'rgba(255,255,255,0.65)',
+                  maxWidth: '560px',
+                  marginTop: '24px',
+                }}>
+                  {t[lang].whyWebsite}
                 </p>
               </div>
 
