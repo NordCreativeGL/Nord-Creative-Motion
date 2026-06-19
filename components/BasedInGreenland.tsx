@@ -281,16 +281,16 @@ export default function BasedInGreenland() {
       label: 'Based in Greenland',
       h1: 'We live here', h2: 'We work here',
       b1: "We're based in Qaqortoq, South Greenland — close to the environments and the companies we work with. That familiarity shapes how we plan and approach every production.",
-      b2: 'We work across all of Greenland, from town centres to remote sites — producing photography, film, and websites for businesses that want to present what they do professionally.',
+      b2: "We work across all of Greenland for businesses that need their work documented and presented professionally — regardless of where they're based or what it takes to get there.",
       para: 'This allows us to operate efficiently in locations where production is often limited by logistics and conditions.',
       readMore: 'Read more about us',
     },
     da: {
       label: 'Sydgrønland',
       h1: 'Vi bor her', h2: 'Vi arbejder her',
-      b1: 'Vi er baseret i Qaqortoq, Sydgrønland — tæt på de miljøer og de virksomheder vi arbejder med. Det kendskab præger, hvordan vi planlægger og griber enhver produktion an.',
-      b2: 'Vi arbejder i hele Grønland, fra bycentre til afsides lokaliteter — og producerer fotografering, film og websites til virksomheder, der vil præsentere deres arbejde professionelt.',
-      para: 'Det betyder, at vi kan arbejde effektivt selv der, hvor logistik og vejrforhold ellers sætter grænser.',
+      b1: 'Vi er baseret i Qaqortoq, Sydgrønland — tæt på de miljøer og de virksomheder vi arbejder med. Det kendskab kan ses i alt fra planlægning til det færdige resultat.',
+      b2: 'Vi arbejder i hele Grønland for virksomheder der har brug for at få deres arbejde dokumenteret og præsenteret professionelt — uanset hvor de befinder sig eller hvad det kræver at komme derhen.',
+      para: 'Det betyder vi kan arbejde effektivt, selv der hvor logistik og vejr ellers sætter grænser.',
       readMore: 'Læs mere om os',
     }
   }
