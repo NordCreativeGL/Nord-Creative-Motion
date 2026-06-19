@@ -10,6 +10,7 @@ import PackIceCtaSection from '@/components/web/PackIceCtaSection'
 import FjordHeroScene from './components/FjordHeroScene'
 import WebOfferCards from '@/components/web/WebOfferCards'
 import { useLang } from '@/contexts/LanguageContext'
+import KeelScene from '@/app/web/components/KeelScene'
 
 export default function WebPage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -128,23 +129,12 @@ export default function WebPage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
-          background: 'transparent',
+          background: '#04070d',
           padding: sectionPadding,
           paddingTop: isMobile ? '100px' : '120px',
         }}
       >
-        <canvas
-          ref={starCanvasRef}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            display: 'block',
-            pointerEvents: 'none',
-            zIndex: -1,
-          }}
-        />
+        <KeelScene />
         <p style={{
           fontSize: 'clamp(11px, 0.7vw, 13px)',
           letterSpacing: '0.18em',
