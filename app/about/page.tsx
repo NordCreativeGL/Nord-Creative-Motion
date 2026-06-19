@@ -10,10 +10,14 @@ export default function About() {
     en: {
       eyebrow: 'OUR STORY',
       p1: "Before Nord Creative, we had different careers — Oskar as a police officer, Johanna in real estate — and a growing interest in photography and video as a way of documenting what we experienced.",
-      p2: "That interest gradually became something more. Alongside our previous careers, we took on smaller projects — and at some point, the work became serious enough that we chose to follow it fully.",
+      p2: "That interest gradually became something more. Alongside our previous careers, we took on smaller projects — and at some point, the work became serious enough that we chose to pursue it full time.",
       p3: "That path brought us to Greenland. We are now based in Qaqortoq in the south of Greenland, where we live and work year-round. It's a place that continues to shape both how we live and how we work.",
       p4: "Working in Greenland has shaped how we approach production. The Arctic environment requires awareness, planning, and the ability to adapt — both creatively and in terms of safety. This is something we bring into every project. Today, we work with companies in Greenland — and with others who come here to produce.",
       ctaH: 'Planning a project in Greenland?', ctaB: "Tell us about your project — we'll find a practical way to approach it.", ctaBtn: 'Work with us',
+      heroEyebrow: 'About us',
+      heroH1: 'We are Oskar & Johanna',
+      nav1: 'Our story',
+      nav2: 'Contact',
     },
     da: {
       eyebrow: 'VORES HISTORIE',
@@ -22,14 +26,18 @@ export default function About() {
       p3: 'Den vej bragte os til Grønland. Vi er nu baseret i Qaqortoq i det sydlige Grønland, hvor vi bor og arbejder året rundt. Det er et sted, der fortsat præger både, hvordan vi lever og arbejder.',
       p4: 'At arbejde i Grønland har formet, hvordan vi griber produktioner an. Det arktiske miljø kræver opmærksomhed, planlægning og evnen til at tilpasse sig — både kreativt og sikkerhedsmæssigt. Det tager vi med ind i hvert projekt. I dag arbejder vi med virksomheder i Grønland — og med andre, der kommer hertil for at producere.',
       ctaH: 'Planlægger du et projekt i Grønland?', ctaB: 'Fortæl os om dit projekt — vi finder en praktisk måde at gribe det an på.', ctaBtn: 'Arbejd med os',
+      heroEyebrow: 'Om os',
+      heroH1: 'Vi er Oskar & Johanna',
+      nav1: 'Vores historie',
+      nav2: 'Kontakt',
     }
   }
 
   return (
     <main className="min-h-screen text-white">
       <SideNav items={[
-        { label: 'Our story', id: 'about-text' },
-        { label: 'Contact', id: 'about-cta' },
+        { label: t[lang].nav1, id: 'about-text' },
+        { label: t[lang].nav2, id: 'about-cta' },
       ]} />
       <section id="about-hero" data-snap="true" className="relative h-screen w-full overflow-hidden">
         <video
@@ -43,8 +51,8 @@ export default function About() {
         />
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pb-20">
-          <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-4">About us</p>
-          <h1 className="text-5xl md:text-6xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white">We are Oskar & Johanna</h1>
+          <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-4">{t[lang].heroEyebrow}</p>
+          <h1 className="text-5xl md:text-6xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white">{t[lang].heroH1}</h1>
         </div>
       </section>
 
