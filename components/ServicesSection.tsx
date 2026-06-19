@@ -187,7 +187,7 @@ export default function ServicesSection() {
               <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h2}</span></div>
               <div ref={line2Ref}></div>
             </h2>
-            <div ref={accentRef} className="text-sm tracking-[0.2em] uppercase text-white/60 font-light mb-3">
+            <div ref={accentRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white font-semibold mb-3">
               {activeCard === 0 ? t[lang].c1t : activeCard === 1 ? t[lang].c2t : t[lang].c3t}
             </div>
             <div ref={bodyRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white/60 leading-relaxed">
