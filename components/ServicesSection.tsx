@@ -40,6 +40,7 @@ export default function ServicesSection() {
   const bodyRef = useRef<HTMLDivElement>(null);
 
   const [isMobile, setIsMobile] = useState(false);
+  const [activeCard, setActiveCard] = useState(0);
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
     check();
@@ -82,6 +83,16 @@ export default function ServicesSection() {
           .to(card2, { y: 0, duration: 1 }, 0)
           .to(card2, { scale: 0.94, duration: 1 }, 1)
           .to(card3, { y: 0, duration: 1 }, 1);
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: "bottom bottom",
+          onUpdate: (self) => {
+            const idx = self.progress < 0.33 ? 0 : self.progress < 0.67 ? 1 : 2;
+            setActiveCard(idx);
+          },
+        });
       }
 
       if (window.innerWidth >= 1024) {
@@ -137,19 +148,25 @@ export default function ServicesSection() {
   const t = {
     en: {
       eyebrow: 'What we offer',
-      h1: 'Photo, video and websites', h2: 'Produced in Greenland.',
-      body: 'We produce photography, video, drone footage, and websites for businesses — with a team based in South Greenland.',
-      c1t: 'Photography', c1d: 'Professional photography that showcases your product, project, or business through strong visual storytelling.',
-      c2t: 'Drone & Aerial', c2d: 'Aerial imagery that reveals landscapes, projects, and locations from powerful new perspectives.',
-      c3t: 'Video production', c3d: 'Cinematic shots that communicate your story and present your business, product, or project in a compelling way.',
+      h1: 'Photo, video and websites',
+      h2: 'Produced in Greenland.',
+      c1t: 'Photography',
+      c1d: 'Photography for businesses in Greenland — for websites, annual reports, press materials, and documentation. We plan the shoot, know the locations, and deliver images that show what you actually do.',
+      c2t: 'Drone & Aerial',
+      c2d: 'Aerial footage is often what makes the final result stand out. We use drone for location overviews, project documentation, and landscape footage — and it\'s consistently what clients react to most.',
+      c3t: 'Video production',
+      c3d: 'Film for your website, social media, or presentations — planned, filmed, and edited by us. Because we\'re already here, we spend less time on logistics and more time on the actual production.',
     },
     da: {
       eyebrow: 'Hvad vi tilbyder',
-      h1: 'Foto, video og websites', h2: 'Produceret i Grønland.',
-      body: 'Vi producerer fotografering, video, dronefilm og websites til virksomheder — med et team baseret i Sydgrønland.',
-      c1t: 'Fotografering', c1d: 'Professionel fotografering der præsenterer dit produkt, projekt eller virksomhed gennem stærk visuel historiefortælling.',
-      c2t: 'Drone & Luftfoto', c2d: 'Luftoptagelser der viser landskaber, projekter og lokaliteter fra stærke nye vinkler.',
-      c3t: 'Videoproduktion', c3d: 'Cinematiske optagelser der kommunikerer din fortælling og præsenterer din virksomhed, dit produkt eller projekt på en overbevisende måde.',
+      h1: 'Foto, video og websites',
+      h2: 'Produceret i Grønland.',
+      c1t: 'Fotografering',
+      c1d: 'Fotografering til virksomheder i Grønland — til websites, årsrapporter, pressemateriale og dokumentation. Vi planlægger optagelserne, kender lokaliteterne og leverer billeder der viser hvad I faktisk laver.',
+      c2t: 'Drone & Luftfoto',
+      c2d: 'Luftoptagelser er ofte det der giver det færdige produkt sit wow-øjeblik. Vi bruger drone til overblik over lokaliteter, projektdokumentation og landskabsoptagelser — og det er konsekvent det kunder reagerer mest på.',
+      c3t: 'Videoproduktion',
+      c3d: 'Film til dit website, sociale medier eller præsentationer — planlagt, filmet og redigeret af os. Fordi vi allerede er her, bruger vi mindre tid på logistik og mere tid på selve produktionen.',
     }
   }
 
@@ -170,10 +187,11 @@ export default function ServicesSection() {
               <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h2}</span></div>
               <div ref={line2Ref}></div>
             </h2>
-            <div ref={accentRef} className="text-xl min-[1900px]:text-[clamp(20px,1.3vw,28px)] text-white/40 font-light mb-8">
+            <div ref={accentRef} className="text-sm tracking-[0.2em] uppercase text-white/60 font-light mb-3">
+              {activeCard === 0 ? t[lang].c1t : activeCard === 1 ? t[lang].c2t : t[lang].c3t}
             </div>
             <div ref={bodyRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white/60 leading-relaxed">
-              {t[lang].body}
+              {activeCard === 0 ? t[lang].c1d : activeCard === 1 ? t[lang].c2d : t[lang].c3d}
             </div>
           </div>
 
@@ -202,14 +220,6 @@ export default function ServicesSection() {
                   alt={services[0].title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  padding: "28px 24px",
-                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
-                }}>
-                  <p className="text-white text-[26px] min-[1900px]:text-[clamp(26px,1.69vw,36px)] font-light mb-1">{t[lang].c1t}</p>
-                  <p className="text-white/60 text-lg leading-relaxed">{t[lang].c1d}</p>
-                </div>
               </div>
 
               {/* Card 2 */}
@@ -234,14 +244,6 @@ export default function ServicesSection() {
                   autoPlay muted loop playsInline
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  padding: "28px 24px",
-                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
-                }}>
-                  <p className="text-white text-[26px] min-[1900px]:text-[clamp(26px,1.69vw,36px)] font-light mb-1">{t[lang].c2t}</p>
-                  <p className="text-white/60 text-lg leading-relaxed">{t[lang].c2d}</p>
-                </div>
               </div>
 
               {/* Card 3 */}
@@ -266,14 +268,6 @@ export default function ServicesSection() {
                   autoPlay muted loop playsInline
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <div style={{
-                  position: "absolute", bottom: 0, left: 0, right: 0,
-                  padding: "28px 24px",
-                  background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
-                }}>
-                  <p className="text-white text-[26px] min-[1900px]:text-[clamp(26px,1.69vw,36px)] font-light mb-1">{t[lang].c3t}</p>
-                  <p className="text-white/60 text-lg leading-relaxed">{t[lang].c3d}</p>
-                </div>
               </div>
 
             </div>
