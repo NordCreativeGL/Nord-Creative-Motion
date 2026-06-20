@@ -812,6 +812,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         }
       }
 
+      let fogFalseMats: Array<{ mat: THREE.Material; base: number }> | null = null
       const tick = (t: number) => {
         if (dead) return
         try {
@@ -832,12 +833,38 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           camera.lookAt(0, aimY, 0)
           berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
           const subT = Math.min(Math.max((-camY) / 8, 0), 1)
+          const sm = subT * subT * (3 - 2 * subT)
           ;(water.material as THREE.MeshStandardMaterial).opacity = subT > 0 ? 1.0 : 0.62
           ;(scene.background as THREE.Color).setRGB(
-            0.031 + (0.016 - 0.031) * subT,
-            0.094 + (0.027 - 0.094) * subT,
-            0.149 + (0.051 - 0.149) * subT
+            0.031 + (0.016 - 0.031) * sm,
+            0.094 + (0.027 - 0.094) * sm,
+            0.149 + (0.051 - 0.149) * sm
           )
+          if (scene.fog instanceof T.Fog) {
+            scene.fog.near = 320 + (34 - 320) * sm
+            scene.fog.far = 1550 + (230 - 1550) * sm
+            scene.fog.color.setRGB(
+              0.031 + (0.016 - 0.031) * sm,
+              0.094 + (0.027 - 0.094) * sm,
+              0.149 + (0.051 - 0.149) * sm
+            )
+          }
+          if (!fogFalseMats && subT > 0) {
+            fogFalseMats = []
+            scene.traverse((o: THREE.Object3D) => {
+              const mat = (o as any).material as THREE.Material | undefined
+              if (mat && (mat as any).fog === false) {
+                const base = mat.opacity ?? 1
+                fogFalseMats!.push({ mat, base })
+                mat.transparent = true
+              }
+            })
+          }
+          if (fogFalseMats) {
+            for (const { mat, base } of fogFalseMats) {
+              (mat as any).opacity = base * Math.max(0, 1 - sm)
+            }
+          }
           const offerEl = document.getElementById('fj-offer-overlay')
           if (offerEl) {
             const op = Math.min(Math.max((dive - 0.55) / 0.3, 0), 1)
