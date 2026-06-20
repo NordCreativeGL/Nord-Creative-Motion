@@ -837,6 +837,10 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             offerEl.style.opacity = String(op)
             ;(offerEl as HTMLElement).style.pointerEvents = op > 0.05 ? 'auto' : 'none'
           }
+          const copyEl = document.getElementById('fj-copy')
+          if (copyEl && firstFrameDone) {
+            copyEl.style.opacity = String(Math.max(0, 1 - dive * 2.5))
+          }
           glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           updateShooting(t)
@@ -920,7 +924,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       style={{
         position: 'relative',
         width: '100vw',
-        height: '220vh',
+        height: '160vh',
         background: '#04070d',
         marginLeft: '50%',
         transform: 'translateX(-50%)',
