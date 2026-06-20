@@ -812,6 +812,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         }
       }
 
+      let starMats: Array<[THREE.PointsMaterial, number]> | null = null
       const tick = (t: number) => {
         if (dead) return
         try {
@@ -831,6 +832,28 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           camera.position.set(Math.sin(angle) * diveR, camY, Math.cos(angle) * diveR)
           camera.lookAt(0, aimY, 0)
           berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
+          const subT = Math.min(Math.max((-camY) / 8, 0), 1)
+          if (scene.fog instanceof T.Fog) {
+            scene.fog.near = 320 - 318 * subT
+            scene.fog.far = 1550 - 1530 * subT
+          }
+          ;(scene.background as THREE.Color).setRGB(
+            0.031 + (0.016 - 0.031) * subT,
+            0.094 + (0.027 - 0.094) * subT,
+            0.149 + (0.051 - 0.149) * subT
+          )
+          if (!starMats) {
+            starMats = []
+            scene.traverse((o: THREE.Object3D) => {
+              if (o instanceof T.Points) {
+                const mat = (o as THREE.Points).material as THREE.PointsMaterial
+                starMats!.push([mat, mat.opacity])
+              }
+            })
+          }
+          for (const [mat, origOp] of (starMats ?? [])) {
+            mat.opacity = origOp * Math.max(0, 1 - subT * 2)
+          }
           const offerEl = document.getElementById('fj-offer-overlay')
           if (offerEl) {
             const op = Math.min(Math.max((dive - 0.55) / 0.3, 0), 1)
@@ -841,7 +864,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           if (copyEl && firstFrameDone) {
             copyEl.style.opacity = String(Math.max(0, 1 - dive * 2.5))
           }
-          glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
+          glowMat.opacity = (0.5 + Math.sin(t * 0.0008) * 0.16) * (1 - subT)
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           updateShooting(t)
           const deg = ((angle * 180 / Math.PI) % 360 + 360) % 360
