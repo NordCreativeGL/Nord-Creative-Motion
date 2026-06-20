@@ -826,7 +826,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           }
           const idle = (1 - dive) * Math.sin(t * 0.0004) * 0.5
           const diveR = R_ORBIT + (92 - R_ORBIT) * dive
-          const camY = CH + (-70 - CH) * dive + idle
+          const camY = CH + (-40 - CH) * dive + idle
           const aimY = camY - (11 + 3 * dive)
           camera.position.set(Math.sin(angle) * diveR, camY, Math.cos(angle) * diveR)
           camera.lookAt(0, aimY, 0)
@@ -924,7 +924,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       style={{
         position: 'relative',
         width: '100vw',
-        height: '160vh',
+        height: '130vh',
         background: '#04070d',
         marginLeft: '50%',
         transform: 'translateX(-50%)',
