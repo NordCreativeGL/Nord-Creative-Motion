@@ -10,7 +10,6 @@ import PackIceCtaSection from '@/components/web/PackIceCtaSection'
 import FjordHeroScene from './components/FjordHeroScene'
 import WebOfferCards from '@/components/web/WebOfferCards'
 import { useLang } from '@/contexts/LanguageContext'
-import KeelScene from '@/app/web/components/KeelScene'
 
 export default function WebPage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -117,66 +116,67 @@ export default function WebPage() {
       <Header />
 
       {/* ── Section 1: Hero ── */}
-      <FjordHeroScene />
-
-      {/* ── Section 3: The Offer ── */}
-      <section
-        id="web-offer"
-        style={{
-          position: 'relative',
-          isolation: 'isolate',
-          minHeight: '100dvh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          background: '#04070d',
-          padding: sectionPadding,
-          paddingTop: isMobile ? '100px' : '120px',
-        }}
-      >
-        <KeelScene />
-        <p style={{
-          fontSize: 'clamp(11px, 0.7vw, 13px)',
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.4)',
-          marginBottom: '20px',
-        }}>
-          {t[lang].eyebrow}
-        </p>
-        <h2 style={{
-          fontSize: 'clamp(36px, 4vw, 72px)',
-          fontWeight: 300,
-          letterSpacing: '-0.02em',
-          color: 'white',
-          marginBottom: '40px',
-        }}>
-          {t[lang].heading}
-        </h2>
-        <WebOfferCards />
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-          gap: isMobile ? '20px' : '60px',
-        }}>
+      <FjordHeroScene>
+        <div
+          id="fj-offer-overlay"
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 10,
+            opacity: 0,
+            pointerEvents: 'none',
+            padding: sectionPadding,
+            paddingTop: '80px',
+            paddingBottom: '80px',
+            background: 'linear-gradient(to top, rgba(4,7,13,0.96) 0%, rgba(4,7,13,0.7) 55%, rgba(4,7,13,0) 100%)',
+          }}
+        >
           <p style={{
-            fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-            lineHeight: 1.65,
-            color: 'rgba(255,255,255,0.65)',
-            margin: 0,
+            fontSize: 'clamp(11px, 0.7vw, 13px)',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.4)',
+            marginBottom: '20px',
           }}>
-            {t[lang].lb1}
+            {t[lang].eyebrow}
           </p>
-          <p style={{
-            fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-            lineHeight: 1.65,
-            color: 'rgba(255,255,255,0.65)',
-            margin: 0,
+          <h2 style={{
+            fontSize: 'clamp(36px, 4vw, 72px)',
+            fontWeight: 300,
+            letterSpacing: '-0.02em',
+            color: 'white',
+            marginBottom: '40px',
           }}>
-            {t[lang].lb2}
-          </p>
+            {t[lang].heading}
+          </h2>
+          <WebOfferCards />
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? '20px' : '60px',
+            marginTop: '40px',
+          }}>
+            <p style={{
+              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.65)',
+              margin: 0,
+            }}>
+              {t[lang].lb1}
+            </p>
+            <p style={{
+              fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.65)',
+              margin: 0,
+            }}>
+              {t[lang].lb2}
+            </p>
+          </div>
         </div>
-      </section>
+      </FjordHeroScene>
 
       <IcebergPackagesSection id="web-packages" />
 

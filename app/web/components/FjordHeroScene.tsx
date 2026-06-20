@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import * as THREE from 'three'
 import { useLang } from '@/contexts/LanguageContext'
 
-export default function FjordHeroScene() {
+export default function FjordHeroScene({ children }: { children?: React.ReactNode } = {}) {
   const { lang } = useLang()
   useEffect(() => {
     let dead = false
@@ -816,9 +816,27 @@ export default function FjordHeroScene() {
         if (dead) return
         try {
           angle += (target - angle) * 0.07
-          camera.position.set(Math.sin(angle) * R_ORBIT, CH + Math.sin(t * 0.0004) * 0.5, Math.cos(angle) * R_ORBIT)
-          camera.lookAt(0, 5, 0)
-          berg.position.y = Math.sin(t * 0.0005) * 0.4
+          const scrollerDiv = document.getElementById('fj-scroller')
+          let dive = 0
+          if (scrollerDiv) {
+            const rct = scrollerDiv.getBoundingClientRect()
+            const totalS = Math.max(scrollerDiv.offsetHeight - window.innerHeight, 1)
+            const rawP = Math.min(Math.max(-rct.top, 0), totalS) / totalS
+            dive = rawP * rawP * (3 - 2 * rawP)
+          }
+          const idle = (1 - dive) * Math.sin(t * 0.0004) * 0.5
+          const diveR = R_ORBIT + (92 - R_ORBIT) * dive
+          const camY = CH + (-70 - CH) * dive + idle
+          const aimY = camY - (11 + 3 * dive)
+          camera.position.set(Math.sin(angle) * diveR, camY, Math.cos(angle) * diveR)
+          camera.lookAt(0, aimY, 0)
+          berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
+          const offerEl = document.getElementById('fj-offer-overlay')
+          if (offerEl) {
+            const op = Math.min(Math.max((dive - 0.55) / 0.3, 0), 1)
+            offerEl.style.opacity = String(op)
+            ;(offerEl as HTMLElement).style.pointerEvents = op > 0.05 ? 'auto' : 'none'
+          }
           glowMat.opacity = 0.5 + Math.sin(t * 0.0008) * 0.16
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           updateShooting(t)
@@ -897,9 +915,30 @@ export default function FjordHeroScene() {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden', background: '#081826', fontFamily: "'IBM Plex Mono', monospace", marginLeft: '50%', transform: 'translateX(-50%)' }}>
+    <div
+      id="fj-scroller"
+      style={{
+        position: 'relative',
+        width: '100vw',
+        height: '220vh',
+        background: '#04070d',
+        marginLeft: '50%',
+        transform: 'translateX(-50%)',
+      }}
+    >
       <style>{`@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@300&display=swap');@keyframes fjNudge{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}`}</style>
-
+      <div
+        id="fj-pin"
+        style={{
+          position: 'sticky',
+          top: 0,
+          width: '100%',
+          height: '100vh',
+          overflow: 'hidden',
+          background: '#081826',
+          fontFamily: "'IBM Plex Mono', monospace",
+        }}
+      >
       <div id="fj-stage" style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'grab' }} />
 
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '52%', zIndex: 3, pointerEvents: 'none', background: 'linear-gradient(180deg,rgba(6,20,32,0.92) 0%,rgba(6,20,32,0.7) 32%,rgba(6,20,32,0.32) 62%,rgba(6,20,32,0) 100%)' }} />
@@ -964,6 +1003,8 @@ export default function FjordHeroScene() {
           </span>
           <span id="fj-deg" style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
         </div>
+      </div>
+      {children}
       </div>
     </div>
   )
