@@ -699,10 +699,12 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         scene.add(m); bits.push(m)
       })
 
+      const skyClip = new T.Plane(new T.Vector3(0, 1, 0), 0)
       const aboveMats: Array<{ mat: THREE.Material; baseOp: number; useVisible: boolean; obj: THREE.Object3D }> = []
       scene.traverse((o: THREE.Object3D) => {
         const mat = (o as any).material as THREE.Material | undefined
         if (!mat || (mat as any).fog !== false) return
+        mat.clippingPlanes = [skyClip]
         aboveMats.push({ mat, baseOp: mat.opacity ?? 1, useVisible: !mat.transparent, obj: o })
       })
 
@@ -840,7 +842,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
           const subT = Math.min(Math.max((-camY) / 8, 0), 1)
           const sm = subT * subT * (3 - 2 * subT)
-          ;(water.material as THREE.MeshStandardMaterial).opacity = 0.62 * (1 - sm)
+          ;(water.material as THREE.MeshStandardMaterial).opacity = subT > 0.01 ? 0 : 0.62
           ;(scene.background as THREE.Color).setRGB(
             0.031 + (0.016 - 0.031) * sm,
             0.094 + (0.027 - 0.094) * sm,
