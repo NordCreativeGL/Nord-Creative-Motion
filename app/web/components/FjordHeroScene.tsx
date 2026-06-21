@@ -954,7 +954,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       style={{
         position: 'relative',
         width: '100vw',
-        height: '130vh',
+        height: '200vh',
         background: '#04070d',
         marginLeft: '50%',
         transform: 'translateX(-50%)',
