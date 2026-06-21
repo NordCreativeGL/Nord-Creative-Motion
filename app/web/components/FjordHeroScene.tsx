@@ -845,7 +845,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
           const subT = Math.min(Math.max((-camY) / 8, 0), 1)
           const sm = subT * subT * (3 - 2 * subT)
-          ;(water.material as THREE.MeshStandardMaterial).opacity = 0.62 * Math.max(0, 1 - subT * 5)
+          ;(water.material as THREE.MeshStandardMaterial).opacity = subT > 0.01 ? 0 : 0.62
           ;(scene.background as THREE.Color).setRGB(0.031, 0.094, 0.149)
           if (scene.fog instanceof T.Fog) {
             scene.fog.near = 320 + (34 - 320) * sm
@@ -853,12 +853,12 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             scene.fog.color.setRGB(0.031, 0.094, 0.149)
           }
           deepLight.intensity = sm * 6
-          const skyFade = Math.max(0, 1 - subT * 3)
+          const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
-              obj.visible = subT < 0.3
+              obj.visible = showSky
             } else {
-              (mat as any).opacity = baseOp * skyFade
+              (mat as any).opacity = showSky ? baseOp : 0
             }
           }
           const offerEl = document.getElementById('fj-offer-overlay')
