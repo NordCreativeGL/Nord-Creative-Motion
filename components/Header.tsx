@@ -27,7 +27,7 @@ export default function Header() {
       const heroHeight = window.innerHeight;
       if (currentScrollY < lastScrollY.current) {
         setVisible(true);
-      } else if (currentScrollY > lastScrollY.current && currentScrollY > heroHeight * 0.5) {
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > (pathname === '/web' ? 10 : heroHeight * 0.5)) {
         setVisible(false);
       }
       lastScrollY.current = currentScrollY;
