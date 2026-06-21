@@ -871,6 +871,10 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           if (copyEl && firstFrameDone) {
             copyEl.style.opacity = String(Math.max(0, 1 - dive * 10))
           }
+          const dragEl = document.getElementById('fj-drag')
+          if (dragEl) dragEl.style.opacity = String(Math.max(0, 1 - dive * 10))
+          const compassEl = document.getElementById('fj-compass')
+          if (compassEl) compassEl.style.opacity = String(Math.max(0, 1 - dive * 10))
           glowMat.opacity = Math.min(0.95, 0.5 + Math.sin(t * 0.0008) * 0.16 * (1 - subT) + subT * 0.7)
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           updateShooting(t)
