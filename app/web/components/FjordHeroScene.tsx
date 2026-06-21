@@ -846,19 +846,11 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           const subT = Math.min(Math.max((-camY) / 8, 0), 1)
           const sm = subT * subT * (3 - 2 * subT)
           ;(water.material as THREE.MeshStandardMaterial).opacity = subT > 0.01 ? 0 : 0.62
-          ;(scene.background as THREE.Color).setRGB(
-            0.031 + (0.05 - 0.031) * sm,
-            0.094 + (0.12 - 0.094) * sm,
-            0.149 + (0.20 - 0.149) * sm
-          )
+          ;(scene.background as THREE.Color).setRGB(0.031, 0.094, 0.149)
           if (scene.fog instanceof T.Fog) {
             scene.fog.near = 320 + (34 - 320) * sm
             scene.fog.far = 1550 + (380 - 1550) * sm
-            scene.fog.color.setRGB(
-              0.031 + (0.05 - 0.031) * sm,
-              0.094 + (0.12 - 0.094) * sm,
-              0.149 + (0.20 - 0.149) * sm
-            )
+            scene.fog.color.setRGB(0.031, 0.094, 0.149)
           }
           deepLight.intensity = sm * 1.5
           const showSky = subT < 0.01
