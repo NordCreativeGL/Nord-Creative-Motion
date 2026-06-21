@@ -852,7 +852,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             scene.fog.far = 1550 + (380 - 1550) * sm
             scene.fog.color.setRGB(0.031, 0.094, 0.149)
           }
-          deepLight.intensity = sm * 1.5
+          deepLight.intensity = sm * 3
           const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
@@ -871,7 +871,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           if (copyEl && firstFrameDone) {
             copyEl.style.opacity = String(Math.max(0, 1 - dive * 2.5))
           }
-          glowMat.opacity = (0.5 + Math.sin(t * 0.0008) * 0.16) * (1 - subT)
+          glowMat.opacity = Math.min(0.95, 0.5 + Math.sin(t * 0.0008) * 0.16 * (1 - subT) + subT * 0.7)
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           updateShooting(t)
           const deg = ((angle * 180 / Math.PI) % 360 + 360) % 360
