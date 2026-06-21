@@ -863,7 +863,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           }
           const offerEl = document.getElementById('fj-offer-overlay')
           if (offerEl) {
-            const op = Math.min(Math.max((dive - 0.35) / 0.3, 0), 1)
+            const op = Math.min(Math.max((dive - 0.45) / 0.3, 0), 1)
             offerEl.style.opacity = String(op)
             ;(offerEl as HTMLElement).style.pointerEvents = op > 0.05 ? 'auto' : 'none'
           }
