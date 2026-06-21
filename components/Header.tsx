@@ -45,7 +45,7 @@ export default function Header() {
     <>
       <header
         className={`fixed left-0 top-0 z-50 w-full transition-colors duration-300 ${
-          (scrolled && pathname !== '/web') ? "bg-black/70 backdrop-blur-sm" : "bg-transparent"
+          scrolled ? "bg-black/70 backdrop-blur-sm" : "bg-transparent"
         }`}
         style={{
           transform: (!visible && !menuOpen) ? 'translateY(-100%)' : 'translateY(0)',
