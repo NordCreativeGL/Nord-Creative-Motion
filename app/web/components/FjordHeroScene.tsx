@@ -233,8 +233,8 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       })
       keelMat.clippingPlanes = [new T.Plane(new T.Vector3(0, -1, 0), 0)]
       const keelStops: [number, [number, number, number]][] = [
-        [0.00, [0.10, 0.30, 0.34]], [0.16, [0.26, 0.72, 0.68]],
-        [0.44, [0.08, 0.36, 0.41]], [0.72, [0.04, 0.15, 0.21]], [1.00, [0.02, 0.06, 0.10]],
+        [0.00, [0.10, 0.30, 0.34]], [0.74, [0.10, 0.30, 0.34]],
+        [0.82, [0.22, 0.64, 0.64]], [0.92, [0.09, 0.36, 0.44]], [1.00, [0.04, 0.16, 0.22]],
       ]
       const keelCol = (t: number): [number, number, number] => {
         for (let s = 0; s < keelStops.length - 1; s++) {
