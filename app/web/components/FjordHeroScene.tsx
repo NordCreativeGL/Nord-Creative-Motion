@@ -855,12 +855,12 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
               0.149 + (0.051 - 0.149) * sm
             )
           }
-          const skyAlpha = Math.max(0, 1 - sm)
+          const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
-              obj.visible = skyAlpha > 0.01
+              obj.visible = showSky
             } else {
-              (mat as any).opacity = baseOp * skyAlpha
+              (mat as any).opacity = showSky ? baseOp : 0
             }
           }
           const offerEl = document.getElementById('fj-offer-overlay')
