@@ -841,7 +841,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           const idle = (1 - dive) * Math.sin(t * 0.0004) * 0.5
           const diveR = R_ORBIT + (92 - R_ORBIT) * dive
           const camY = CH + (-40 - CH) * dive + idle
-          const aimY = camY - (6 + 8 * dive)
+          const aimY = camY - 6 + 16 * dive
           camera.position.set(Math.sin(angle) * diveR, camY, Math.cos(angle) * diveR)
           camera.lookAt(0, aimY, 0)
           berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
