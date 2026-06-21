@@ -656,6 +656,8 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       const deepLight = new T.PointLight('#3fded0', 0, 200)
       deepLight.position.set(0, -15, 0)
       scene.add(deepLight)
+      const underwaterHemi = new T.HemisphereLight('#3fded0', '#082030', 0)
+      scene.add(underwaterHemi)
 
       buildSky(scene)
       buildStars(scene)
@@ -853,6 +855,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             scene.fog.color.setRGB(0.031, 0.094, 0.149)
           }
           deepLight.intensity = sm * 3
+          underwaterHemi.intensity = sm * 1.5
           const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
