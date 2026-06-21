@@ -840,7 +840,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           berg.position.y = Math.sin(t * 0.0005) * 0.4 * (1 - dive)
           const subT = Math.min(Math.max((-camY) / 8, 0), 1)
           const sm = subT * subT * (3 - 2 * subT)
-          ;(water.material as THREE.MeshStandardMaterial).opacity = subT > 0 ? 1.0 : 0.62
+          ;(water.material as THREE.MeshStandardMaterial).opacity = 0.62 * (1 - sm)
           ;(scene.background as THREE.Color).setRGB(
             0.031 + (0.016 - 0.031) * sm,
             0.094 + (0.027 - 0.094) * sm,
@@ -855,7 +855,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
               0.149 + (0.051 - 0.149) * sm
             )
           }
-          const skyAlpha = Math.max(0, 1 - sm * 2)
+          const skyAlpha = Math.max(0, 1 - sm)
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
               obj.visible = skyAlpha > 0.01
