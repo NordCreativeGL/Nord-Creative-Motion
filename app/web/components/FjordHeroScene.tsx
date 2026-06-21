@@ -871,10 +871,8 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           if (copyEl && firstFrameDone) {
             copyEl.style.opacity = String(Math.max(0, 1 - dive * 10))
           }
-          const dragEl = document.getElementById('fj-drag')
-          if (dragEl) dragEl.style.opacity = String(Math.max(0, 1 - dive * 10))
-          const compassEl = document.getElementById('fj-compass')
-          if (compassEl) compassEl.style.opacity = String(Math.max(0, 1 - dive * 10))
+          const uiBottom = document.getElementById('fj-ui-bottom')
+          if (uiBottom) uiBottom.style.opacity = String(Math.max(0, 1 - dive * 10))
           glowMat.opacity = Math.min(0.95, 0.5 + Math.sin(t * 0.0008) * 0.16 * (1 - subT) + subT * 0.7)
           for (const b of bits) b.position.y = b.userData['baseY'] + Math.sin(t * 0.001 + b.userData['ph']) * b.userData['amp']
           updateShooting(t)
@@ -1021,7 +1019,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         </svg>
       </div>
 
-      <div style={{ position: 'absolute', left: '50%', bottom: '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
+      <div id="fj-ui-bottom" style={{ position: 'absolute', left: '50%', bottom: '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
         <div id="fj-drag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', transition: 'opacity 1s ease', opacity: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px', color: 'rgba(160,205,215,0.85)' }}>
             <span style={{ fontSize: '18px', opacity: 0.55 }}>‹</span>
