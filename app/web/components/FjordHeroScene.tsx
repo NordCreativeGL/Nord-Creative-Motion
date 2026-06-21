@@ -653,6 +653,9 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       scene.add(new T.HemisphereLight('#9fc4da', '#06141f', 0.72))
       const moon = new T.DirectionalLight('#cfe2f2', 0.8); moon.position.set(-40, 55, 35); scene.add(moon)
       const rim = new T.DirectionalLight('#3fded0', 0.32); rim.position.set(45, 16, -45); scene.add(rim)
+      const deepLight = new T.PointLight('#3fded0', 0, 200)
+      deepLight.position.set(0, -15, 0)
+      scene.add(deepLight)
 
       buildSky(scene)
       buildStars(scene)
@@ -844,19 +847,20 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           const sm = subT * subT * (3 - 2 * subT)
           ;(water.material as THREE.MeshStandardMaterial).opacity = subT > 0.01 ? 0 : 0.62
           ;(scene.background as THREE.Color).setRGB(
-            0.031 + (0.016 - 0.031) * sm,
-            0.094 + (0.027 - 0.094) * sm,
-            0.149 + (0.051 - 0.149) * sm
+            0.031 + (0.05 - 0.031) * sm,
+            0.094 + (0.12 - 0.094) * sm,
+            0.149 + (0.20 - 0.149) * sm
           )
           if (scene.fog instanceof T.Fog) {
             scene.fog.near = 320 + (34 - 320) * sm
-            scene.fog.far = 1550 + (230 - 1550) * sm
+            scene.fog.far = 1550 + (380 - 1550) * sm
             scene.fog.color.setRGB(
-              0.031 + (0.016 - 0.031) * sm,
-              0.094 + (0.027 - 0.094) * sm,
-              0.149 + (0.051 - 0.149) * sm
+              0.031 + (0.05 - 0.031) * sm,
+              0.094 + (0.12 - 0.094) * sm,
+              0.149 + (0.20 - 0.149) * sm
             )
           }
+          deepLight.intensity = sm * 1.5
           const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
