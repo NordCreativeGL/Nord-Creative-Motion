@@ -130,6 +130,7 @@ export default function WebPage() {
             padding: sectionPadding,
             paddingTop: '80px',
             paddingBottom: '80px',
+            fontFamily: "'Archivo', sans-serif",
             background: 'linear-gradient(to top, rgba(4,7,13,0.96) 0%, rgba(4,7,13,0.7) 55%, rgba(4,7,13,0) 100%)',
           }}
         >
