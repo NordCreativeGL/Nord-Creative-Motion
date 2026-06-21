@@ -838,7 +838,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           }
           const idle = (1 - dive) * Math.sin(t * 0.0004) * 0.5
           const diveR = R_ORBIT + (92 - R_ORBIT) * dive
-          const camY = CH + (-40 - CH) * dive + idle
+          const camY = CH + (-20 - CH) * dive + idle
           const aimY = camY - (6 + 8 * dive)
           camera.position.set(Math.sin(angle) * diveR, camY, Math.cos(angle) * diveR)
           camera.lookAt(0, aimY, 0)
@@ -852,7 +852,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             scene.fog.far = 1550 + (380 - 1550) * sm
             scene.fog.color.setRGB(0.031, 0.094, 0.149)
           }
-          deepLight.intensity = sm * 3
+          deepLight.intensity = sm * 6
           const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
