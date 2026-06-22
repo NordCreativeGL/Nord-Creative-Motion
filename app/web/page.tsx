@@ -128,7 +128,7 @@ export default function WebPage() {
             opacity: 0,
             pointerEvents: 'none',
             padding: sectionPadding,
-            paddingTop: '80px',
+            paddingTop: '40px',
             paddingBottom: '80px',
             fontFamily: "'Archivo', sans-serif",
             background: 'linear-gradient(to top, rgba(4,14,22,0.58) 0%, rgba(4,14,22,0.80) 50%, rgba(4,14,22,0) 100%)',
