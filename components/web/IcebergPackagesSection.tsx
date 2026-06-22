@@ -238,7 +238,7 @@ function makeFloe(r: number, rnd: () => number) {
 
 // ---------- createDepth ----------
 
-function createDepth(canvas: HTMLCanvasElement): DepthPainter {
+function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter {
   const ctx = canvas.getContext('2d')!
   let L: Layout | null = null
   const hov = [0, 0, 0]
@@ -518,7 +518,7 @@ function createDepth(canvas: HTMLCanvasElement): DepthPainter {
     }
     for (let i = 0; i < cur.anchors.length; i++) {
       const a = cur.anchors[i]
-      const inside = px > a.cx - a.halfW * 1.08 && px < a.cx + a.halfW * 1.08 &&
+      const inside = allowHover && px > a.cx - a.halfW * 1.08 && px < a.cx + a.halfW * 1.08 &&
                      py > a.wl - a.topH - 14 && py < a.wl + a.depth + 14
       hovT[i] = inside ? 1 : 0
       hov[i] += (hovT[i] - hov[i]) * 0.10
@@ -609,11 +609,11 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const depth = createDepth(canvas)
+    const depth = createDepth(canvas, !isMobile)
 
     function fit() {
       const r = canvas!.getBoundingClientRect()
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+      const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 1.5)
       canvas!.width = Math.max(2, Math.round(r.width * dpr))
       canvas!.height = Math.max(2, Math.round(r.height * dpr))
       depth.setDpr(dpr)
@@ -645,7 +645,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         lay.items.forEach((b, i) => {
           const el = tierRefs.current[i]
           if (!el) return
-          const wdt = Math.min(b.halfW * 1.08, 320)
+          const wdt = Math.min(b.halfW * (window.innerWidth < 768 ? 1.3 : 1.08), window.innerWidth < 768 ? 240 : 320)
           const topOff = Math.max(16, b.depth * 0.06)
           const avail = b.depth * 0.56 - topOff
           const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]))
@@ -694,13 +694,14 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           display: 'flex',
           position: 'relative',
           background: '#031b26',
+          willChange: 'scroll-position',
         }}
       >
         <section
           ref={sectionRef}
           style={{ position: 'absolute', top: 0, left: 0, width: '300vw', height: '100dvh', overflow: 'hidden' }}
         >
-          <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+          <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', transform: 'translateZ(0)', willChange: 'transform' }} />
           <div style={{
             position: 'absolute', top: '6dvh', left: 0, width: '100vw', zIndex: 2,
             display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
@@ -725,14 +726,15 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
                 {tier.lbl}
               </span>
-              <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: '18px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
                 {tier.name}
               </span>
               <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
               <div style={{
-                display: 'flex', flexDirection: 'column', gap: '0.78em',
-                fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
-                color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
+                display: 'flex', flexDirection: 'column', gap: '0.55em',
+                fontFamily: PRIMARY_FONT, fontSize: '11px', lineHeight: 1.45,
+                color: 'rgba(232,250,252,0.85)', letterSpacing: '0.01em', whiteSpace: 'normal',
+                textAlign: 'center', maxWidth: '220px',
               }}>
                 {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
               </div>
