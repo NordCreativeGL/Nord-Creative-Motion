@@ -948,11 +948,13 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       s1h: 'We build websites that people remember', s1b: 'Custom websites for businesses that want to stand out. Designed and built from scratch — no shortcuts.',
       s2h: 'A website — and everything it needs', s2b: 'Design · Copywriting · SEO · Photo & video · Development · Maintenance. Everything in one place — from idea to launch.',
       s3h: 'Three ways to work with us', s3b: 'Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.',
+      dragLabel: 'Drag to rotate the iceberg',
     },
     da: {
       s1h: 'Vi bygger hjemmesider folk husker', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra nul — ingen genveje.',
       s2h: 'En hjemmeside — og alt der hører til', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse. Alt samlet ét sted — fra idé til lancering.',
       s3h: 'Tre måder at arbejde med os', s3b: 'Starter · Business · Full Production — fra et kompakt single-page site til hjemmeside plus foto, drone og video, leveret som ét samlet projekt.',
+      dragLabel: 'Træk for at rotere isbjerget',
     }
   }
 
@@ -1029,22 +1031,22 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       <div id="fj-ui-bottom" style={{ position: 'absolute', left: '50%', bottom: '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
         <div id="fj-drag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', transition: 'opacity 1s ease', opacity: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px', color: 'rgba(160,205,215,0.85)' }}>
-            <span style={{ fontSize: '18px', opacity: 0.55 }}>‹</span>
+            <span style={{ fontSize: '22px', opacity: 0.55 }}>‹</span>
             <span style={{ display: 'inline-flex', animation: 'fjNudge 2.6s ease-in-out infinite' }}>
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(180,225,232,0.9)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(180,225,232,0.9)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 11V6.5a1.5 1.5 0 0 1 3 0V10" /><path d="M12 10V5.5a1.5 1.5 0 0 1 3 0V10" />
                 <path d="M15 10.5V7a1.5 1.5 0 0 1 3 0v6.5a6 6 0 0 1-6 6h-1.5a5 5 0 0 1-3.6-1.5L5 15.5a1.5 1.5 0 0 1 2.2-2L9 15.2V7a1.5 1.5 0 0 1 3 0" />
               </svg>
             </span>
-            <span style={{ fontSize: '18px', opacity: 0.55 }}>›</span>
+            <span style={{ fontSize: '22px', opacity: 0.55 }}>›</span>
           </div>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '10px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>Drag to rotate the iceberg</div>
+          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>{t[lang].dragLabel}</div>
         </div>
         <div id="fj-compass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'opacity 0.6s ease', opacity: 0 }}>
-          <span style={{ display: 'inline-flex', width: '30px', height: '30px', border: '1px solid rgba(95,222,208,0.4)', borderRadius: '50%', alignItems: 'center', justifyContent: 'center' }}>
-            <span id="fj-needle" style={{ display: 'block', width: '2px', height: '11px', background: '#5fded0', borderRadius: '2px', transformOrigin: '50% 100%', marginTop: '-9px' }} />
+          <span style={{ display: 'inline-flex', width: '36px', height: '36px', border: '1px solid rgba(95,222,208,0.4)', borderRadius: '50%', alignItems: 'center', justifyContent: 'center' }}>
+            <span id="fj-needle" style={{ display: 'block', width: '2px', height: '13px', background: '#5fded0', borderRadius: '2px', transformOrigin: '50% 100%', marginTop: '-11px' }} />
           </span>
-          <span id="fj-deg" style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
+          <span id="fj-deg" style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
         </div>
       </div>
       {children}
