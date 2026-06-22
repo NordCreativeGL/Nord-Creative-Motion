@@ -131,7 +131,7 @@ export default function WebPage() {
             paddingTop: '80px',
             paddingBottom: '80px',
             fontFamily: "'Archivo', sans-serif",
-            background: 'linear-gradient(to top, rgba(4,7,13,0.96) 0%, rgba(4,7,13,0.7) 55%, rgba(4,7,13,0) 100%)',
+            background: 'linear-gradient(to top, rgba(4,14,22,0.58) 0%, rgba(4,14,22,0.80) 50%, rgba(4,14,22,0) 100%)',
           }}
         >
           <p style={{
