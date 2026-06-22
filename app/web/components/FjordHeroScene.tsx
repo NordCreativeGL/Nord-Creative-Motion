@@ -579,7 +579,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           dot.scale.set(sz, sz, 1)
           scene.add(dot)
         })
-        if (c.lines) {
+        if (c.lines && window.innerWidth >= 768) {
           const lpos: number[] = []
           c.lines.forEach(([a, b]) => { lpos.push(pts[a].x, pts[a].y, pts[a].z, pts[b].x, pts[b].y, pts[b].z) })
           const lg = new T.BufferGeometry()
