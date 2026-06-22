@@ -1040,13 +1040,13 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             </span>
             <span style={{ fontSize: '22px', opacity: 0.55 }}>›</span>
           </div>
-          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>{t[lang].dragLabel}</div>
+          <div style={{ fontFamily: "'Archivo', sans-serif", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>{t[lang].dragLabel}</div>
         </div>
         <div id="fj-compass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'opacity 0.6s ease', opacity: 0 }}>
           <span style={{ display: 'inline-flex', width: '36px', height: '36px', border: '1px solid rgba(95,222,208,0.4)', borderRadius: '50%', alignItems: 'center', justifyContent: 'center' }}>
             <span id="fj-needle" style={{ display: 'block', width: '2px', height: '13px', background: '#5fded0', borderRadius: '2px', transformOrigin: '50% 100%', marginTop: '-11px' }} />
           </span>
-          <span id="fj-deg" style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
+          <span id="fj-deg" style={{ fontFamily: "'Archivo', sans-serif", fontSize: '13px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
         </div>
       </div>
       {children}
