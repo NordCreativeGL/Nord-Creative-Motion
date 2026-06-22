@@ -742,6 +742,30 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         {[0, 1, 2].map((panel) => (
           <div key={panel} style={{ width: '100vw', height: '100dvh', flexShrink: 0, scrollSnapAlign: 'start' }} />
         ))}
+        <div style={{
+          position: 'absolute', bottom: '10dvh', left: 0, right: 0, zIndex: 20,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+          pointerEvents: 'none',
+          animation: 'pkgHintFade 5s ease 1s both',
+        }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: '50%',
+            border: '1px solid rgba(0,215,200,0.45)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            animation: 'pkgSwipeX 1.2s ease-in-out infinite',
+          }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 8h8M9 5l3 3-3 3" stroke="rgba(0,215,200,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <span style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.3em', color: 'rgba(0,215,200,0.6)', textTransform: 'uppercase' }}>
+            Swipe
+          </span>
+        </div>
+        <style>{`
+          @keyframes pkgSwipeX { 0%,100% { transform: translateX(-5px); opacity: 0.5; } 50% { transform: translateX(5px); opacity: 1; } }
+          @keyframes pkgHintFade { 0%,55% { opacity: 1; } 100% { opacity: 0; } }
+        `}</style>
       </div>
     )
   }
