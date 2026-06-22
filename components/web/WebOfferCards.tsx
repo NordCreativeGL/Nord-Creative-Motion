@@ -1,9 +1,17 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useLang } from '@/contexts/LanguageContext'
 
 export default function WebOfferCards() {
   const { lang } = useLang()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const t = {
     en: {
@@ -47,7 +55,7 @@ export default function WebOfferCards() {
         position: 'relative',
         zIndex: 2,
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
         gap: '26px',
       }}>
 
