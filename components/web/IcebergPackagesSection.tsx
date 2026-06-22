@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLang } from '@/contexts/LanguageContext'
 
 // ---------- types ----------
@@ -583,6 +583,13 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const sectionRef = useRef<HTMLElement>(null)
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
   const { lang } = useLang()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const t = {
     en: {
@@ -673,7 +680,71 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       canvas.removeEventListener('mousemove', handleMouseMove)
       canvas.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [])
+  }, [isMobile])
+
+  if (isMobile) {
+    return (
+      <div
+        id={id}
+        style={{
+          width: '100vw',
+          height: '100dvh',
+          overflowX: 'scroll',
+          scrollSnapType: 'x mandatory',
+          display: 'flex',
+          position: 'relative',
+          background: '#031b26',
+        }}
+      >
+        <section
+          ref={sectionRef}
+          style={{ position: 'absolute', top: 0, left: 0, width: '300vw', height: '100dvh', overflow: 'hidden' }}
+        >
+          <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+          <div style={{
+            position: 'absolute', top: '6dvh', left: 0, width: '100vw', zIndex: 2,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
+          }}>
+            <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)', marginBottom: 18 }}>
+              {t[lang].eyebrow}
+            </div>
+            <h2 style={{ margin: 0, fontSize: 'clamp(24px, 6vw, 40px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em' }}>
+              {t[lang].heading}
+            </h2>
+          </div>
+          {TIERS.map((tier, i) => (
+            <div
+              key={tier.name}
+              ref={(el) => { tierRefs.current[i] = el }}
+              style={{
+                position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+                textShadow: '0 1px 10px rgba(0,8,16,0.65)',
+              }}
+            >
+              <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+                {tier.lbl}
+              </span>
+              <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+                {tier.name}
+              </span>
+              <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
+              <div style={{
+                display: 'flex', flexDirection: 'column', gap: '0.78em',
+                fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
+                color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
+              }}>
+                {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
+              </div>
+            </div>
+          ))}
+        </section>
+        {[0, 1, 2].map((panel) => (
+          <div key={panel} style={{ width: '100vw', height: '100dvh', flexShrink: 0, scrollSnapAlign: 'start' }} />
+        ))}
+      </div>
+    )
+  }
 
   return (
     <section id={id} ref={sectionRef} style={{ position: 'relative', minHeight: '100dvh', overflow: 'hidden', background: '#031b26' }}>
