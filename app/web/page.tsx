@@ -144,7 +144,7 @@ export default function WebPage() {
             {t[lang].eyebrow}
           </p>
           <h2 style={{
-            fontSize: 'clamp(36px, 4vw, 72px)',
+            fontSize: 'clamp(28px, 2.78vw, 68px)',
             fontWeight: 300,
             letterSpacing: '-0.02em',
             color: 'white',
