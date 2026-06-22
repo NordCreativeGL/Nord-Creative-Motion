@@ -40,7 +40,7 @@ export default function WebOfferCards() {
     <div style={{
       position: 'relative',
       background: 'transparent',
-      padding: '0 0 80px 0',
+      padding: '0 0 24px 0',
       overflow: 'hidden',
     }}>
       <div style={{
