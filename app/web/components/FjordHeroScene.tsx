@@ -980,7 +980,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
           height: '100vh',
           overflow: 'hidden',
           background: '#081826',
-          fontFamily: "'IBM Plex Mono', monospace",
+          fontFamily: "var(--font-geist-sans), sans-serif",
         }}
       >
       <div id="fj-stage" style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'grab' }} />
@@ -990,16 +990,16 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
 
       <div id="fj-copy" style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.6s ease' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
-          <h1 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>{t[lang].s1h}</h1>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
+          <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>{t[lang].s1h}</h1>
+          <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
         </div>
         <div id="fj-sec-1" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s2h}</h2>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>{t[lang].s2b}</p>
+          <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s2h}</h2>
+          <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>{t[lang].s2b}</p>
         </div>
         <div id="fj-sec-2" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s3h}</h2>
-          <p style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>{t[lang].s3b}</p>
+          <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s3h}</h2>
+          <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>{t[lang].s3b}</p>
         </div>
       </div>
 
@@ -1040,13 +1040,13 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             </span>
             <span style={{ fontSize: '22px', opacity: 0.55 }}>›</span>
           </div>
-          <div style={{ fontFamily: "'Archivo', sans-serif", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>{t[lang].dragLabel}</div>
+          <div style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>{t[lang].dragLabel}</div>
         </div>
         <div id="fj-compass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'opacity 0.6s ease', opacity: 0 }}>
           <span style={{ display: 'inline-flex', width: '36px', height: '36px', border: '1px solid rgba(95,222,208,0.4)', borderRadius: '50%', alignItems: 'center', justifyContent: 'center' }}>
             <span id="fj-needle" style={{ display: 'block', width: '2px', height: '13px', background: '#5fded0', borderRadius: '2px', transformOrigin: '50% 100%', marginTop: '-11px' }} />
           </span>
-          <span id="fj-deg" style={{ fontFamily: "'Archivo', sans-serif", fontSize: '13px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
+          <span id="fj-deg" style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontSize: '13px', letterSpacing: '0.24em', color: 'rgba(150,200,205,0.65)', textAlign: 'center' }}>0°</span>
         </div>
       </div>
       {children}
