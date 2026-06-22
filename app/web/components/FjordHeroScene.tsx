@@ -645,7 +645,8 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       scene.background = new T.Color('#081826')
       scene.fog = new T.Fog('#081826', 320, 1550)
 
-      const camera = new T.PerspectiveCamera(44, W() / H(), 0.1, 3200)
+      const fov = window.innerWidth < 768 ? 62 : 44
+      const camera = new T.PerspectiveCamera(fov, W() / H(), 0.1, 3200)
       camera.updateProjectionMatrix()
       ;(window as any).__fjScene = scene
       ;(window as any).__fjCamera = camera
@@ -742,7 +743,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       stage.addEventListener('pointerdown', onDown)
       window.addEventListener('pointermove', onMove as EventListener)
       window.addEventListener('pointerup', onUp)
-      const onResize = () => { camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
+      const onResize = () => { camera.fov = window.innerWidth < 768 ? 62 : 44; camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
       window.addEventListener('resize', onResize)
 
       const degEl = document.getElementById('fj-deg')
