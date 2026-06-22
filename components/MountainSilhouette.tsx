@@ -187,7 +187,16 @@ export default function MountainSilhouette() {
       if (!W || !H) return;
       ctx.clearRect(0, 0, W, H);
       const sc = window.scrollY;
-      BASE_LAYERS.forEach((l, li) => drawLayer(l, RPTS[li], MTEX[li], -sc*l.p, li));
+      const isMobileView = W < 768;
+      const virtualW = 900;
+      if (isMobileView) {
+        ctx.save();
+        ctx.transform(virtualW / W, 0, 0, 1, -(virtualW - W) / 2, 0);
+      }
+      BASE_LAYERS.forEach((l, li) => drawLayer(l, RPTS[li], MTEX[li], -sc * l.p, li));
+      if (isMobileView) {
+        ctx.restore();
+      }
     }
 
     // Visibility (identical logic to original)
