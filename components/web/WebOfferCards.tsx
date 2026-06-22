@@ -30,10 +30,10 @@ export default function WebOfferCards() {
     }
   }
 
-  const cardStyle: React.CSSProperties = { position: 'relative', borderRadius: 16, overflow: 'hidden', padding: '36px 32px 40px', background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))', border: '1px solid rgba(255,255,255,.1)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)', transition: 'all .45s ease' }
-  const wellStyle: React.CSSProperties = { width: 64, height: 64, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at 40% 35%, rgba(186,238,230,.18), rgba(10,40,42,.5))', boxShadow: 'inset 0 0 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18)' }
-  const titleStyle: React.CSSProperties = { margin: '26px 0 0', fontSize: 13, letterSpacing: '.16em', fontWeight: 300, fontFamily: "var(--font-geist-sans), sans-serif", color: '#eef2f4' }
-  const descStyle: React.CSSProperties = { margin: '12px 0 0', fontSize: 14, lineHeight: 1.5, fontFamily: "var(--font-geist-sans), sans-serif", color: 'rgba(238,242,244,.5)' }
+  const cardStyle: React.CSSProperties = { position: 'relative', borderRadius: 16, overflow: 'hidden', padding: isMobile ? '18px 14px 20px' : '36px 32px 40px', background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))', border: '1px solid rgba(255,255,255,.1)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)', transition: 'all .45s ease' }
+  const wellStyle: React.CSSProperties = { width: isMobile ? 40 : 64, height: isMobile ? 40 : 64, borderRadius: isMobile ? 10 : 14, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at 40% 35%, rgba(186,238,230,.18), rgba(10,40,42,.5))', boxShadow: 'inset 0 0 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18)' }
+  const titleStyle: React.CSSProperties = { margin: isMobile ? '12px 0 0' : '26px 0 0', fontSize: isMobile ? 10 : 13, letterSpacing: '.14em', fontWeight: 300, fontFamily: "var(--font-geist-sans), sans-serif", color: '#eef2f4' }
+  const descStyle: React.CSSProperties = { margin: isMobile ? '6px 0 0' : '12px 0 0', fontSize: isMobile ? 11 : 14, lineHeight: 1.45, fontFamily: "var(--font-geist-sans), sans-serif", color: 'rgba(238,242,244,.5)' }
 
   const onMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
     ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(143,227,216,.5)'
@@ -56,7 +56,7 @@ export default function WebOfferCards() {
         zIndex: 2,
         display: 'grid',
         gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-        gap: '26px',
+        gap: isMobile ? '10px' : '26px',
       }}>
 
         {/* WEBSITE DESIGN */}
