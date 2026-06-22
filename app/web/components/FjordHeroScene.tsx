@@ -853,6 +853,8 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             scene.fog.color.setRGB(0.031, 0.094, 0.149)
           }
           deepLight.intensity = sm * 6
+          const veilEl = document.getElementById('fj-water-veil')
+          if (veilEl) veilEl.style.opacity = String(Math.min(1, subT * 4))
           const showSky = subT < 0.01
           for (const { mat, baseOp, useVisible, obj } of aboveMats) {
             if (useVisible) {
@@ -980,6 +982,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         }}
       >
       <div id="fj-stage" style={{ position: 'absolute', inset: 0, zIndex: 1, cursor: 'grab' }} />
+      <div id="fj-water-veil" style={{ position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none', opacity: 0, background: 'linear-gradient(180deg, rgba(4,14,24,0.96) 0%, rgba(4,18,30,0.55) 30%, rgba(6,32,44,0.12) 55%, rgba(6,32,44,0) 72%)' }} />
 
       <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: '52%', zIndex: 3, pointerEvents: 'none', background: 'linear-gradient(180deg,rgba(6,20,32,0.92) 0%,rgba(6,20,32,0.7) 32%,rgba(6,20,32,0.32) 62%,rgba(6,20,32,0) 100%)' }} />
 
