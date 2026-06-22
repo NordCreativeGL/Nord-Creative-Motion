@@ -179,7 +179,8 @@ export default function NorthernLights() {
         const phY = (p as AuroraPatch).phY ?? 0;
         const spY = (p as AuroraPatch).spY ?? 0.4;
         const cy  = (p.yc + _scrollYOffset + 0.022 * Math.sin(tp * spY + phY)) * H;
-        const rx  = p.rxF * W;
+        const baseW = Math.max(W, 1200);
+        const rx  = p.rxF * baseW;
         const raw = 0.52 + 0.48 * Math.sin(tp * p.sp + p.ph);
         const xOsc = ((p as AuroraPatch).dxA ?? 0) * Math.sin(tp * ((p as AuroraPatch).spX ?? 0.2) + ((p as AuroraPatch).phX ?? 0));
         const shiftedX = ((p.x + xOsc + _sectionXShift) + 2) % 1;
