@@ -157,7 +157,7 @@ export default function WebPage() {
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
             gap: isMobile ? '20px' : '60px',
-            marginTop: '40px',
+            marginTop: '16px',
           }}>
             <p style={{
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
