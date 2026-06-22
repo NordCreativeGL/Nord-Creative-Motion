@@ -133,7 +133,7 @@ export default function WebPage() {
             pointerEvents: 'none',
             padding: sectionPadding,
             paddingTop: '40px',
-            paddingBottom: '80px',
+            paddingBottom: isMobile ? '32px' : '80px',
             fontFamily: "var(--font-geist-sans), sans-serif",
             background: 'linear-gradient(to top, rgba(4,14,22,0.58) 0%, rgba(4,14,22,0.80) 50%, rgba(4,14,22,0) 100%)',
           }}
@@ -143,7 +143,7 @@ export default function WebPage() {
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
             color: 'rgba(255,255,255,0.4)',
-            marginBottom: '20px',
+            marginBottom: isMobile ? '10px' : '20px',
           }}>
             {t[lang].eyebrow}
           </p>
@@ -152,7 +152,7 @@ export default function WebPage() {
             fontWeight: 300,
             letterSpacing: '-0.02em',
             color: 'white',
-            marginBottom: '40px',
+            marginBottom: isMobile ? '16px' : '40px',
           }}>
             {t[lang].heading}
           </h2>
