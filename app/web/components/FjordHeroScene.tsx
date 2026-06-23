@@ -1041,7 +1041,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         </svg>
       </div>
 
-      <div id="fj-ui-bottom" style={{ position: 'absolute', left: '50%', bottom: isMobile ? '110px' : '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
+      <div id="fj-ui-bottom" style={{ position: 'absolute', left: '50%', bottom: isMobile ? '168px' : '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
         <div id="fj-drag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', transition: 'opacity 1s ease', opacity: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px', color: 'rgba(160,205,215,0.85)' }}>
             <span style={{ fontSize: '22px', opacity: 0.55 }}>‹</span>
