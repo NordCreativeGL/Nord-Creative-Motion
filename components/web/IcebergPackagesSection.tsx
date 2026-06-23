@@ -735,7 +735,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         id={id}
         style={{
           width: '100vw',
-          height: '100dvh',
+          height: mobileImgs.h + 'px',
           overflowX: 'scroll',
           overflowY: 'hidden',
           overscrollBehaviorX: 'contain',
@@ -762,7 +762,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               key={i}
               style={{
                 width: '100vw',
-                height: '100dvh',
+                height: ch + 'px',
                 flexShrink: 0,
                 scrollSnapAlign: 'start',
                 position: 'relative',
