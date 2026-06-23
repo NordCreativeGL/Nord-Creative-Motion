@@ -87,7 +87,7 @@ export default function WebPage() {
       lb1: 'We build websites as a standalone service — designed from scratch, built on clean code, and launched ready to use.',
       lb2: 'Need photo and video content for your site? We handle that too. One team, one brief, one result.',
       rh: 'Already working with us on content?', rb: 'Adding a website to an existing production is seamless — the visual direction is already set.',
-      nav1: 'The Offer', nav2: 'Packages', nav3: 'Work with us',
+      nav1: 'What We Offer', nav2: 'Packages', nav3: 'Work with us',
     },
     da: {
       eyebrow: 'HVAD VI TILBYDER', heading: 'En hjemmeside — og alt der hører til',
