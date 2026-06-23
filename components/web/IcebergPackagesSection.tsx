@@ -588,6 +588,8 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const [mobileImgs, setMobileImgs] = useState<{
     urls: string[]
     anchors: { cx: number; wl: number; depth: number; topH: number; halfW: number }[]
+    w: number
+    h: number
   } | null>(null)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
@@ -636,7 +638,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       pctx.drawImage(offscreen, Math.round(i * w), 0, Math.round(w), Math.round(h), 0, 0, Math.round(w), Math.round(h))
       urls.push(panel.toDataURL('image/jpeg', 0.88))
     }
-    setMobileImgs({ urls, anchors: lay.items })
+    setMobileImgs({ urls, anchors: lay.items, w, h })
   }, [isMobile, mobileImgs])
 
   useEffect(() => {
@@ -733,8 +735,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         id={id}
         style={{
           width: '100vw',
-          height: '100svh',
+          height: mobileImgs.h + 'px',
           overflowX: 'scroll',
+          overflowY: 'hidden',
           overscrollBehaviorX: 'contain',
           scrollSnapType: 'x mandatory',
           WebkitOverflowScrolling: 'touch',
@@ -744,18 +747,22 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         {[0, 1, 2].map((i) => {
           const anch = mobileImgs.anchors[i]
           if (!anch) return null
-          const panelW = window.innerWidth
-          const localCx = anch.cx - i * panelW
+          const cw = mobileImgs.w
+          const ch = mobileImgs.h
+          const localCx = anch.cx - i * cw
           const wdt = Math.min(anch.halfW * 1.5, 260)
           const topOff = Math.max(16, anch.depth * 0.06)
           const avail = anch.depth * 0.80 - topOff
           const fs = Math.max(10, Math.min(14, wdt / 16, avail / TOTAL_EM[i]))
+          const topPct = ((anch.wl + topOff) / ch * 100).toFixed(2) + '%'
+          const leftPct = ((localCx - wdt / 2) / cw * 100).toFixed(2) + '%'
+          const widthPct = (wdt / cw * 100).toFixed(2) + '%'
           return (
             <div
               key={i}
               style={{
                 width: '100vw',
-                height: '100svh',
+                height: ch + 'px',
                 flexShrink: 0,
                 scrollSnapAlign: 'start',
                 position: 'relative',
@@ -782,9 +789,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               )}
               <div style={{
                 position: 'absolute',
-                left: (localCx - wdt / 2) + 'px',
-                top: (anch.wl + topOff) + 'px',
-                width: wdt + 'px',
+                left: leftPct,
+                top: topPct,
+                width: widthPct,
                 fontSize: fs + 'px',
                 zIndex: 3,
                 display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
