@@ -808,12 +808,12 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
                 <span style={{ fontFamily: PRIMARY_FONT, fontSize: '0.78em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
                   {tierLbls[i]}
                 </span>
-                <span style={{ fontFamily: PRIMARY_FONT, fontSize: '28px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+                <span style={{ fontFamily: PRIMARY_FONT, fontSize: '28px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.18em', whiteSpace: 'nowrap' }}>
                   {tierNames[i]}
                 </span>
-                <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
+                <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.5em 0 0.55em' }} />
                 <div style={{
-                  display: 'flex', flexDirection: 'column', gap: '0.78em',
+                  display: 'flex', flexDirection: 'column', gap: '0.5em',
                   fontFamily: PRIMARY_FONT, fontSize: '0.86em', lineHeight: 1.35,
                   color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em',
                 }}>
@@ -890,9 +890,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
             {tier.name}
           </span>
-          <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
+          <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.5em 0 0.55em' }} />
           <div style={{
-            display: 'flex', flexDirection: 'column', gap: '0.78em',
+            display: 'flex', flexDirection: 'column', gap: '0.5em',
             fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
             color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
           }}>
