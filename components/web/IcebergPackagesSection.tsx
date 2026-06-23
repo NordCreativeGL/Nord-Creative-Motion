@@ -688,6 +688,19 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   }, [isMobile])
 
   if (isMobile) {
+    const tierFeats = [t[lang].t1, t[lang].t2, t[lang].t3]
+    const tierNames = ['Starter', 'Business', 'Full Production']
+    const tierLbls = ['TIER I', 'TIER II', 'TIER III']
+    const abovePaths = [
+      'M 38 120 L 32 95 L 44 72 L 58 52 L 72 35 L 84 20 L 94 10 L 100 4 L 106 10 L 116 22 L 128 40 L 140 60 L 150 82 L 156 100 L 160 120 Z',
+      'M 22 120 L 16 96 L 26 72 L 40 50 L 54 32 L 66 16 L 76 6 L 83 14 L 90 32 L 98 48 L 108 30 L 118 10 L 128 20 L 138 40 L 150 62 L 160 88 L 168 110 L 174 120 Z',
+      'M 30 120 L 22 95 L 34 70 L 46 50 L 58 32 L 70 18 L 80 8 L 88 2 L 96 10 L 100 22 L 106 10 L 114 0 L 122 12 L 130 28 L 142 50 L 154 72 L 164 96 L 170 120 Z',
+    ]
+    const belowPaths = [
+      'M 38 120 Q 10 150 14 190 Q 22 245 100 265 Q 178 245 186 190 Q 190 150 162 120 Z',
+      'M 22 120 Q 2 158 8 200 Q 20 258 100 278 Q 180 258 192 200 Q 198 158 178 120 Z',
+      'M 30 120 Q 4 162 10 210 Q 22 272 100 292 Q 178 272 190 210 Q 196 162 170 120 Z',
+    ]
     return (
       <div
         id={id}
@@ -695,83 +708,120 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           width: '100vw',
           height: '100svh',
           overflowX: 'scroll',
+          overscrollBehaviorX: 'contain',
           scrollSnapType: 'x mandatory',
           display: 'flex',
-          position: 'relative',
-          background: '#031b26',
-          willChange: 'scroll-position',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
-        <section
-          ref={sectionRef}
-          style={{ position: 'absolute', top: 0, left: 0, width: '300vw', height: '100svh', overflow: 'hidden' }}
-        >
-          <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', transform: 'translateZ(0)', willChange: 'transform' }} />
-          <div style={{
-            position: 'absolute', top: '6dvh', left: 0, width: '100vw', zIndex: 2,
-            display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
-          }}>
-            <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)', marginBottom: 18 }}>
-              {t[lang].eyebrow}
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            style={{
+              width: '100vw',
+              height: '100svh',
+              flexShrink: 0,
+              scrollSnapAlign: 'start',
+              position: 'relative',
+              overflow: 'hidden',
+              background: 'linear-gradient(to bottom, #01040a 0%, #040f1d 42%, #06182a 44%, #07343f 45%, #052733 68%, #031b26 100%)',
+            }}
+          >
+            <div style={{
+              position: 'absolute', top: '44%', left: 0, right: 0,
+              height: '2px', background: 'rgba(190,230,238,0.5)', zIndex: 4,
+              boxShadow: '0 0 8px rgba(150,240,232,0.35)',
+            }} />
+            <div style={{
+              position: 'absolute', top: '44%', left: '50%',
+              transform: 'translateX(-50%) translateY(-40%)',
+              width: '78vw', zIndex: 3,
+            }}>
+              <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', display: 'block' }}>
+                <defs>
+                  <linearGradient id={`iceAbove${i}`} x1="60" y1="0" x2="150" y2="120" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="rgba(246,253,255,0.98)" />
+                    <stop offset="0.5" stopColor="rgb(206,223,231)" />
+                    <stop offset="1" stopColor="rgba(168,200,217,0.96)" />
+                  </linearGradient>
+                  <linearGradient id={`iceBelow${i}`} x1="100" y1="120" x2="100" y2="295" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="rgba(170,248,240,0.55)" />
+                    <stop offset="0.35" stopColor="rgba(70,190,192,0.36)" />
+                    <stop offset="0.72" stopColor="rgba(18,95,120,0.24)" />
+                    <stop offset="1" stopColor="rgba(4,36,58,0.15)" />
+                  </linearGradient>
+                </defs>
+                <path d={belowPaths[i]} fill={`url(#iceBelow${i})`} />
+                <path d={belowPaths[i]} fill="none" stroke="rgba(150,240,232,0.34)" strokeWidth="1.5" />
+                <line x1="90" y1="122" x2="78" y2="290" stroke="rgba(140,230,235,0.06)" strokeWidth="14" />
+                <line x1="110" y1="122" x2="118" y2="290" stroke="rgba(140,230,235,0.05)" strokeWidth="9" />
+                <path d={abovePaths[i]} fill={`url(#iceAbove${i})`} />
+                <path d={abovePaths[i]} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="0.8" />
+                <line x1="88" y1="8" x2="93" y2="60" stroke="rgba(12,44,74,0.18)" strokeWidth="0.7" />
+                <line x1="112" y1="10" x2="108" y2="58" stroke="rgba(255,255,255,0.10)" strokeWidth="0.7" />
+                <rect x="10" y="118" width="180" height="3" fill="rgba(60,205,196,0.18)" rx="1" />
+              </svg>
             </div>
-            <h2 style={{ margin: 0, fontSize: 'clamp(24px, 6vw, 40px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em' }}>
-              {t[lang].heading}
-            </h2>
-          </div>
-          {TIERS.map((tier, i) => (
-            <div
-              key={tier.name}
-              ref={(el) => { tierRefs.current[i] = el }}
-              style={{
-                position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
-                display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-                textShadow: '0 1px 10px rgba(0,8,16,0.65)',
-              }}
-            >
-              <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
-                {tier.lbl}
-              </span>
-              <span style={{ fontSize: '18px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
-                {tier.name}
-              </span>
-              <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
+            {i === 0 && (
               <div style={{
-                display: 'flex', flexDirection: 'column', gap: '0.55em',
-                fontFamily: PRIMARY_FONT, fontSize: '11px', lineHeight: 1.45,
-                color: 'rgba(232,250,252,0.85)', letterSpacing: '0.01em', whiteSpace: 'normal',
-                textAlign: 'center', maxWidth: '220px',
+                position: 'absolute', top: '5%', left: 0, right: 0, zIndex: 5,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
               }}>
-                {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
+                <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)', marginBottom: 14 }}>
+                  {t[lang].eyebrow}
+                </div>
+                <h2 style={{ margin: 0, fontSize: 'clamp(22px, 5.5vw, 36px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em', color: '#f4fbff' }}>
+                  {t[lang].heading}
+                </h2>
+              </div>
+            )}
+            <div style={{
+              position: 'absolute', top: '51%', left: 0, right: 0, zIndex: 5,
+              display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+              padding: '0 32px', textShadow: '0 1px 12px rgba(0,8,16,0.9)',
+            }}>
+              <span style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+                {tierLbls[i]}
+              </span>
+              <span style={{ fontFamily: PRIMARY_FONT, fontSize: 24, fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.3em' }}>
+                {tierNames[i]}
+              </span>
+              <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.7em 0 0.8em' }} />
+              <div style={{
+                display: 'flex', flexDirection: 'column', gap: '0.45em',
+                fontFamily: PRIMARY_FONT, fontSize: '12px', lineHeight: 1.45,
+                color: 'rgba(232,250,252,0.85)', letterSpacing: '0.01em',
+              }}>
+                {tierFeats[i].map((f) => <span key={f}>{f}</span>)}
               </div>
             </div>
-          ))}
-        </section>
-        {[0, 1, 2].map((panel) => (
-          <div key={panel} style={{ width: '100vw', height: '100svh', flexShrink: 0, scrollSnapAlign: 'start' }} />
-        ))}
-        <div style={{
-          position: 'absolute', bottom: '10dvh', left: 0, right: 0, zIndex: 20,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
-          pointerEvents: 'none',
-          animation: 'pkgHintFade 5s ease 1s both',
-        }}>
-          <div style={{
-            width: 44, height: 44, borderRadius: '50%',
-            border: '1px solid rgba(0,215,200,0.45)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            animation: 'pkgSwipeX 1.2s ease-in-out infinite',
-          }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 8h8M9 5l3 3-3 3" stroke="rgba(0,215,200,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            {i === 0 && (
+              <div style={{
+                position: 'absolute', bottom: '4%', left: 0, right: 0, zIndex: 10,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+                pointerEvents: 'none',
+                animation: 'pkgHintFade 5s ease 1.5s both',
+              }}>
+                <div style={{
+                  width: 40, height: 40, borderRadius: '50%',
+                  border: '1px solid rgba(0,215,200,0.45)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  animation: 'pkgSwipeX 1.2s ease-in-out infinite',
+                }}>
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 8h8M9 5l3 3-3 3" stroke="rgba(0,215,200,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <span style={{ fontFamily: PRIMARY_FONT, fontSize: 10, letterSpacing: '0.3em', color: 'rgba(0,215,200,0.6)', textTransform: 'uppercase' }}>
+                  Swipe
+                </span>
+              </div>
+            )}
           </div>
-          <span style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.3em', color: 'rgba(0,215,200,0.6)', textTransform: 'uppercase' }}>
-            Swipe
-          </span>
-        </div>
+        ))}
         <style>{`
-          @keyframes pkgSwipeX { 0%,100% { transform: translateX(-5px); opacity: 0.5; } 50% { transform: translateX(5px); opacity: 1; } }
-          @keyframes pkgHintFade { 0%,55% { opacity: 1; } 100% { opacity: 0; } }
+          @keyframes pkgSwipeX { 0%,100% { transform: translateX(-6px); opacity: 0.5; } 50% { transform: translateX(6px); opacity: 1; } }
+          @keyframes pkgHintFade { 0%,60% { opacity: 1; } 100% { opacity: 0; } }
         `}</style>
       </div>
     )
