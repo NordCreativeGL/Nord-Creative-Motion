@@ -285,7 +285,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA))
       const maxBAll = Math.max(...DEPTH_BERGS.map(bMaxB))
       const kCap = isMobileCanvas ? Infinity : w * 0.00165
-      const k = Math.min((wlAnchor - 30) / maxAAll, (h - wlAnchor - 36) / maxBAll, kCap) * ICEBERG_SCALE * (isMobileCanvas ? 1.07 : 1.0)
+      const k = Math.min((wlAnchor - 30) / maxAAll, (h - wlAnchor - 36) / maxBAll, kCap) * ICEBERG_SCALE
       const cxs = isMobileCanvas ? [1/6, 0.5, 5/6] : [0.17, 0.48, 0.80]
       const tScale = TIER_SCALE
       scenes.push({ y0: 0, y1: h, wl })
