@@ -279,16 +279,16 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     const items: Item[] = []
     const scenes: Scene[] = []
     if (!stack) {
-      const wl = h * 0.41
-      // Keel size is anchored to the original waterline fraction so icebergs
-      // don't grow/shrink when the visual waterline (wl) moves.
-      const wlAnchor = h * 0.26
+      const isMobileCanvas = w < 1400 && h > 700
+      const wl = isMobileCanvas ? h * 0.45 : h * 0.41
+      const wlAnchor = isMobileCanvas ? h * 0.45 : h * 0.26
       const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA))
       const maxBAll = Math.max(...DEPTH_BERGS.map(bMaxB))
       const k = Math.min((wlAnchor - 30) / maxAAll, (h - wlAnchor - 36) / maxBAll, w * 0.00165) * ICEBERG_SCALE
-      const cxs = [0.17, 0.48, 0.80]
+      const cxs = isMobileCanvas ? [1/6, 0.5, 5/6] : [0.17, 0.48, 0.80]
+      const tScale = isMobileCanvas ? [1.0, 1.0, 1.0] : TIER_SCALE
       scenes.push({ y0: 0, y1: h, wl })
-      DEPTH_BERGS.forEach((bd, i) => items.push({ bd, i, cx: cxs[i] * w, wl, k: k * TIER_SCALE[i] }))
+      DEPTH_BERGS.forEach((bd, i) => items.push({ bd, i, cx: cxs[i] * w, wl, k: k * tScale[i] }))
     } else {
       const sh = Math.max((h - STACK_HEADER) / 3, 200)
       DEPTH_BERGS.forEach((bd, i) => {
@@ -647,7 +647,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           if (!el) return
           const wdt = Math.min(b.halfW * (window.innerWidth < 768 ? 1.3 : 1.08), window.innerWidth < 768 ? 240 : 320)
           const topOff = Math.max(16, b.depth * 0.06)
-          const avail = b.depth * 0.56 - topOff
+          const avail = b.depth * (window.innerWidth < 768 ? 0.80 : 0.56) - topOff
           const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]))
           el.style.left = (b.cx - wdt / 2) + 'px'
           el.style.top = (b.wl + topOff) + 'px'
