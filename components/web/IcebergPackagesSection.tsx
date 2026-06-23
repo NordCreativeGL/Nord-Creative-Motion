@@ -734,7 +734,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       const a = mobileImgs.anchors[j]
       if (!a) return 14
       const w2 = Math.min(a.halfW * 1.5, 260)
-      const tO = Math.max(16, a.depth * 0.06)
+      const tO = Math.max(16, a.depth * 0.20)
       return Math.max(10, Math.min(16, (a.depth * 0.80 - tO) / TOTAL_EM[j]))
     })))
     return (
@@ -758,7 +758,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           const ch = mobileImgs.h
           const localCx = anch.cx - i * cw
           const wdt = Math.min(anch.halfW * 1.5, 260)
-          const topOff = Math.max(16, anch.depth * 0.06)
+          const topOff = Math.max(16, anch.depth * 0.20)
           const avail = anch.depth * 0.80 - topOff
           const fs = sharedFs
           const topPct = ((anch.wl + topOff) / ch * 100).toFixed(2) + '%'
@@ -807,7 +807,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
                 <span style={{ fontFamily: PRIMARY_FONT, fontSize: '0.78em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
                   {tierLbls[i]}
                 </span>
-                <span style={{ fontFamily: PRIMARY_FONT, fontSize: '1.65em', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+                <span style={{ fontFamily: PRIMARY_FONT, fontSize: '28px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
                   {tierNames[i]}
                 </span>
                 <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
