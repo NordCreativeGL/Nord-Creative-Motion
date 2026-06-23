@@ -585,6 +585,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
   const { lang } = useLang()
   const [isMobile, setIsMobile] = useState(false)
+  const [mobileImgs, setMobileImgs] = useState<{
+    urls: string[]
+    anchors: { cx: number; wl: number; depth: number; topH: number; halfW: number }[]
+  } | null>(null)
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
     check()
@@ -606,6 +610,34 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       t3: ['Alt i Business','Op til 12 sider','Foto & videoproduktion','Avancerede animationer','Flersproget (3+ sprog)','Avanceret statistik','Prioriteret support (dedikeret)','10 revisionsrunder'],
     }
   }
+
+  useEffect(() => {
+    if (!isMobile) return
+    if (mobileImgs) return
+    const w = window.innerWidth
+    const h = window.innerHeight
+    const fullW = w * 3
+    const offscreen = document.createElement('canvas')
+    offscreen.width = Math.round(fullW)
+    offscreen.height = Math.round(h)
+    const depth = createDepth(offscreen, false)
+    depth.setDpr(1)
+    depth.resize(fullW, h)
+    depth.draw(0)
+    const lay = depth.layout()
+    if (!lay || !lay.items.length) return
+    const urls: string[] = []
+    for (let i = 0; i < 3; i++) {
+      const panel = document.createElement('canvas')
+      panel.width = Math.round(w)
+      panel.height = Math.round(h)
+      const pctx = panel.getContext('2d')
+      if (!pctx) continue
+      pctx.drawImage(offscreen, Math.round(i * w), 0, Math.round(w), Math.round(h), 0, 0, Math.round(w), Math.round(h))
+      urls.push(panel.toDataURL('image/jpeg', 0.88))
+    }
+    setMobileImgs({ urls, anchors: lay.items })
+  }, [isMobile, mobileImgs])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -688,6 +720,14 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   }, [isMobile])
 
   if (isMobile) {
+    const tierFeats = [t[lang].t1, t[lang].t2, t[lang].t3]
+    const tierLbls = ['TIER I', 'TIER II', 'TIER III']
+    const tierNames = ['Starter', 'Business', 'Full Production']
+    if (!mobileImgs) {
+      return (
+        <div id={id} style={{ width: '100vw', height: '100svh', background: '#031b26' }} />
+      )
+    }
     return (
       <div
         id={id}
@@ -695,83 +735,104 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           width: '100vw',
           height: '100svh',
           overflowX: 'scroll',
+          overscrollBehaviorX: 'contain',
           scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
           display: 'flex',
-          position: 'relative',
-          background: '#031b26',
-          willChange: 'scroll-position',
         }}
       >
-        <section
-          ref={sectionRef}
-          style={{ position: 'absolute', top: 0, left: 0, width: '300vw', height: '100svh', overflow: 'hidden' }}
-        >
-          <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', transform: 'translateZ(0)', willChange: 'transform' }} />
-          <div style={{
-            position: 'absolute', top: '6dvh', left: 0, width: '100vw', zIndex: 2,
-            display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
-          }}>
-            <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)', marginBottom: 18 }}>
-              {t[lang].eyebrow}
-            </div>
-            <h2 style={{ margin: 0, fontSize: 'clamp(24px, 6vw, 40px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em' }}>
-              {t[lang].heading}
-            </h2>
-          </div>
-          {TIERS.map((tier, i) => (
+        {[0, 1, 2].map((i) => {
+          const anch = mobileImgs.anchors[i]
+          if (!anch) return null
+          const panelW = window.innerWidth
+          const localCx = anch.cx - i * panelW
+          const wdt = Math.min(anch.halfW * 1.5, 260)
+          const topOff = Math.max(16, anch.depth * 0.06)
+          const avail = anch.depth * 0.80 - topOff
+          const fs = Math.max(10, Math.min(14, wdt / 16, avail / TOTAL_EM[i]))
+          return (
             <div
-              key={tier.name}
-              ref={(el) => { tierRefs.current[i] = el }}
+              key={i}
               style={{
-                position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
-                display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-                textShadow: '0 1px 10px rgba(0,8,16,0.65)',
+                width: '100vw',
+                height: '100svh',
+                flexShrink: 0,
+                scrollSnapAlign: 'start',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
-                {tier.lbl}
-              </span>
-              <span style={{ fontSize: '18px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
-                {tier.name}
-              </span>
-              <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
+              <img
+                src={mobileImgs.urls[i]}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill', display: 'block' }}
+                alt=""
+              />
+              {i === 0 && (
+                <div style={{
+                  position: 'absolute', top: '6dvh', left: 0, right: 0, zIndex: 2,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 24px',
+                }}>
+                  <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)', marginBottom: 14 }}>
+                    {t[lang].eyebrow}
+                  </div>
+                  <h2 style={{ margin: 0, fontSize: 'clamp(22px, 5.5vw, 36px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em', color: '#f4fbff' }}>
+                    {t[lang].heading}
+                  </h2>
+                </div>
+              )}
               <div style={{
-                display: 'flex', flexDirection: 'column', gap: '0.55em',
-                fontFamily: PRIMARY_FONT, fontSize: '11px', lineHeight: 1.45,
-                color: 'rgba(232,250,252,0.85)', letterSpacing: '0.01em', whiteSpace: 'normal',
-                textAlign: 'center', maxWidth: '220px',
+                position: 'absolute',
+                left: (localCx - wdt / 2) + 'px',
+                top: (anch.wl + topOff) + 'px',
+                width: wdt + 'px',
+                fontSize: fs + 'px',
+                zIndex: 3,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+                textShadow: '0 1px 10px rgba(0,8,16,0.9)',
               }}>
-                {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
+                <span style={{ fontFamily: PRIMARY_FONT, fontSize: '0.78em', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+                  {tierLbls[i]}
+                </span>
+                <span style={{ fontFamily: PRIMARY_FONT, fontSize: '1.65em', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+                  {tierNames[i]}
+                </span>
+                <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.8em 0 0.95em' }} />
+                <div style={{
+                  display: 'flex', flexDirection: 'column', gap: '0.78em',
+                  fontFamily: PRIMARY_FONT, fontSize: '0.86em', lineHeight: 1.35,
+                  color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em',
+                }}>
+                  {tierFeats[i].map((f) => <span key={f}>{f}</span>)}
+                </div>
               </div>
+              {i === 0 && (
+                <div style={{
+                  position: 'absolute', bottom: '4dvh', left: 0, right: 0, zIndex: 10,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+                  pointerEvents: 'none',
+                  animation: 'pkgHintFade 5s ease 1.5s both',
+                }}>
+                  <div style={{
+                    width: 40, height: 40, borderRadius: '50%',
+                    border: '1px solid rgba(0,215,200,0.45)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    animation: 'pkgSwipeX 1.2s ease-in-out infinite',
+                  }}>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M4 8h8M9 5l3 3-3 3" stroke="rgba(0,215,200,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontFamily: PRIMARY_FONT, fontSize: 10, letterSpacing: '0.3em', color: 'rgba(0,215,200,0.6)', textTransform: 'uppercase' }}>
+                    Swipe
+                  </span>
+                </div>
+              )}
             </div>
-          ))}
-        </section>
-        {[0, 1, 2].map((panel) => (
-          <div key={panel} style={{ width: '100vw', height: '100svh', flexShrink: 0, scrollSnapAlign: 'start' }} />
-        ))}
-        <div style={{
-          position: 'absolute', bottom: '10dvh', left: 0, right: 0, zIndex: 20,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
-          pointerEvents: 'none',
-          animation: 'pkgHintFade 5s ease 1s both',
-        }}>
-          <div style={{
-            width: 44, height: 44, borderRadius: '50%',
-            border: '1px solid rgba(0,215,200,0.45)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            animation: 'pkgSwipeX 1.2s ease-in-out infinite',
-          }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 8h8M9 5l3 3-3 3" stroke="rgba(0,215,200,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <span style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.3em', color: 'rgba(0,215,200,0.6)', textTransform: 'uppercase' }}>
-            Swipe
-          </span>
-        </div>
+          )
+        })}
         <style>{`
-          @keyframes pkgSwipeX { 0%,100% { transform: translateX(-5px); opacity: 0.5; } 50% { transform: translateX(5px); opacity: 1; } }
-          @keyframes pkgHintFade { 0%,55% { opacity: 1; } 100% { opacity: 0; } }
+          @keyframes pkgSwipeX { 0%,100% { transform: translateX(-6px); opacity: 0.5; } 50% { transform: translateX(6px); opacity: 1; } }
+          @keyframes pkgHintFade { 0%,60% { opacity: 1; } 100% { opacity: 0; } }
         `}</style>
       </div>
     )
