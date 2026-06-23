@@ -743,7 +743,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       stage.addEventListener('pointerdown', onDown)
       window.addEventListener('pointermove', onMove as EventListener)
       window.addEventListener('pointerup', onUp)
-      const onResize = () => { camera.fov = window.innerWidth < 768 ? 62 : 44; camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()) }
+      const onResize = () => { camera.fov = window.innerWidth < 768 ? 62 : 44; camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()); updateScrollCache() }
       window.addEventListener('resize', onResize)
 
       const degEl = document.getElementById('fj-deg')
@@ -825,18 +825,23 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         }
       }
 
+      let cachedScrollerTop = 0
+      let cachedTotalScrollDist = 1
+      const updateScrollCache = () => {
+        const el = document.getElementById('fj-scroller')
+        if (!el) return
+        cachedScrollerTop = el.offsetTop
+        cachedTotalScrollDist = Math.max(el.offsetHeight - window.innerHeight, 1)
+      }
+      updateScrollCache()
+
       const tick = (t: number) => {
         if (dead) return
         try {
           angle += (target - angle) * 0.07
-          const scrollerDiv = document.getElementById('fj-scroller')
           let dive = 0
-          if (scrollerDiv) {
-            const rct = scrollerDiv.getBoundingClientRect()
-            const totalS = Math.max(scrollerDiv.offsetHeight - window.innerHeight, 1)
-            const rawP = Math.min(Math.max(-rct.top, 0), totalS) / totalS
-            dive = rawP * rawP * (3 - 2 * rawP)
-          }
+          const rawP = Math.min(Math.max(window.scrollY - cachedScrollerTop, 0), cachedTotalScrollDist) / cachedTotalScrollDist
+          dive = rawP * rawP * (3 - 2 * rawP)
           const idle = (1 - dive) * Math.sin(t * 0.0004) * 0.5
           const diveR = R_ORBIT + (92 - R_ORBIT) * dive
           const camY = CH + (-20 - CH) * dive + idle
