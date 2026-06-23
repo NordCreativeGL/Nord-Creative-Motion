@@ -294,8 +294,12 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
     if (!canvas) return
     const ice = createPackIce(canvas)
 
+    let lastFitW = 0, lastFitH = 0
     function fit() {
       const r = canvas!.getBoundingClientRect()
+      const newW = Math.round(r.width), newH = Math.round(r.height)
+      if (Math.abs(newW - lastFitW) < 2 && Math.abs(newH - lastFitH) < 100) return
+      lastFitW = newW; lastFitH = newH
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
       canvas!.width = Math.max(2, Math.round(r.width * dpr))
       canvas!.height = Math.max(2, Math.round(r.height * dpr))
