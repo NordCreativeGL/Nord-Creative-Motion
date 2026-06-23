@@ -612,8 +612,12 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     if (!canvas) return
     const depth = createDepth(canvas, !isMobile)
 
+    let lastFitW = 0, lastFitH = 0
     function fit() {
       const r = canvas!.getBoundingClientRect()
+      const newW = Math.round(r.width), newH = Math.round(r.height)
+      if (Math.abs(newW - lastFitW) < 2 && Math.abs(newH - lastFitH) < 100) return
+      lastFitW = newW; lastFitH = newH
       const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 1.5)
       canvas!.width = Math.max(2, Math.round(r.width * dpr))
       canvas!.height = Math.max(2, Math.round(r.height * dpr))
@@ -689,7 +693,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         id={id}
         style={{
           width: '100vw',
-          height: '100dvh',
+          height: '100svh',
           overflowX: 'scroll',
           scrollSnapType: 'x mandatory',
           display: 'flex',
@@ -700,7 +704,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       >
         <section
           ref={sectionRef}
-          style={{ position: 'absolute', top: 0, left: 0, width: '300vw', height: '100dvh', overflow: 'hidden' }}
+          style={{ position: 'absolute', top: 0, left: 0, width: '300vw', height: '100svh', overflow: 'hidden' }}
         >
           <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', transform: 'translateZ(0)', willChange: 'transform' }} />
           <div style={{
@@ -743,7 +747,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           ))}
         </section>
         {[0, 1, 2].map((panel) => (
-          <div key={panel} style={{ width: '100vw', height: '100dvh', flexShrink: 0, scrollSnapAlign: 'start' }} />
+          <div key={panel} style={{ width: '100vw', height: '100svh', flexShrink: 0, scrollSnapAlign: 'start' }} />
         ))}
         <div style={{
           position: 'absolute', bottom: '10dvh', left: 0, right: 0, zIndex: 20,
