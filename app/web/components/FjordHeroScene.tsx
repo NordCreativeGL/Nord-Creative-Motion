@@ -712,7 +712,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         aboveMats.push({ mat, baseOp: mat.opacity ?? 1, useVisible: !mat.transparent, obj: o })
       })
 
-      const R_ORBIT = 64, CH = 11
+      const R_ORBIT = window.innerWidth < 768 ? 88 : 64, CH = 11
       let target = 0, angle = 0
       let scrollRevealed = false
       let firstFrameDone = false
