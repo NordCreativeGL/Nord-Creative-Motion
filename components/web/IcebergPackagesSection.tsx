@@ -612,24 +612,22 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     if (!canvas) return
     const depth = createDepth(canvas, !isMobile)
 
-    const isMob = isMobile
-    const stableW = isMob ? window.innerWidth * 3 : 0
-    const stableH = isMob ? window.innerHeight : 0
-
+    let lastFitW = 0, lastFitH = 0
     function fit() {
-      const dpr = Math.min(window.devicePixelRatio || 1, isMob ? 1 : 1.5)
-      const w = isMob ? stableW : canvas!.getBoundingClientRect().width
-      const h = isMob ? stableH : canvas!.getBoundingClientRect().height
-      if (w < 2 || h < 2) return
-      canvas!.width = Math.max(2, Math.round(w * dpr))
-      canvas!.height = Math.max(2, Math.round(h * dpr))
+      const r = canvas!.getBoundingClientRect()
+      const newW = Math.round(r.width), newH = Math.round(r.height)
+      if (Math.abs(newW - lastFitW) < 2 && Math.abs(newH - lastFitH) < 100) return
+      lastFitW = newW; lastFitH = newH
+      const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 1.5)
+      canvas!.width = Math.max(2, Math.round(r.width * dpr))
+      canvas!.height = Math.max(2, Math.round(r.height * dpr))
       depth.setDpr(dpr)
-      depth.resize(w, h)
+      depth.resize(r.width, r.height)
     }
 
     fit()
     const ro = new ResizeObserver(fit)
-    if (!isMob) ro.observe(canvas)
+    ro.observe(canvas)
 
     const handleMouseMove = (e: MouseEvent) => {
       const r = canvas!.getBoundingClientRect()
