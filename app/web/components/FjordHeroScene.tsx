@@ -1019,7 +1019,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       <div
         id="fj-scroll"
         className="flex flex-col items-center gap-2"
-        style={{ position: 'absolute', left: '50%', bottom: isMobile ? '110px' : '40px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
+        style={{ position: 'absolute', left: '50%', bottom: isMobile ? '150px' : '40px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
       >
         <div className="w-px h-10 bg-white/50" />
         <svg
