@@ -737,6 +737,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       const tO = Math.max(16, a.depth * 0.20)
       return Math.max(10, Math.min(16, (a.depth * 0.80 - tO) / TOTAL_EM[j]))
     })))
+    const sharedTopOff = Math.min(...mobileImgs.anchors.map(a => Math.max(16, a.depth * 0.20)))
     return (
       <div
         id={id}
@@ -758,7 +759,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           const ch = mobileImgs.h
           const localCx = anch.cx - i * cw
           const wdt = Math.min(anch.halfW * 1.5, 260)
-          const topOff = Math.max(16, anch.depth * 0.20)
+          const topOff = sharedTopOff
           const avail = anch.depth * 0.80 - topOff
           const fs = sharedFs
           const topPct = ((anch.wl + topOff) / ch * 100).toFixed(2) + '%'
