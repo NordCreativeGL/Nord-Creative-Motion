@@ -279,7 +279,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     const items: Item[] = []
     const scenes: Scene[] = []
     if (!stack) {
-      const isMobileCanvas = w < 1400 && h > 700
+      const isMobileCanvas = w < 1400
       const wl = isMobileCanvas ? h * 0.45 : h * 0.41
       const wlAnchor = isMobileCanvas ? h * 0.35 : h * 0.26
       const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA))
@@ -617,7 +617,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     if (!isMobile) return
     if (mobileImgs) return
     const w = window.innerWidth
-    const h = window.innerHeight
+    const h = Math.max(window.innerHeight, 820)
     const fullW = w * 3
     const offscreen = document.createElement('canvas')
     offscreen.width = Math.round(fullW)
@@ -735,7 +735,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         id={id}
         style={{
           width: '100vw',
-          height: mobileImgs.h + 'px',
+          height: '100dvh',
           overflowX: 'scroll',
           overflowY: 'hidden',
           overscrollBehaviorX: 'contain',
@@ -762,7 +762,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               key={i}
               style={{
                 width: '100vw',
-                height: ch + 'px',
+                height: '100dvh',
                 flexShrink: 0,
                 scrollSnapAlign: 'start',
                 position: 'relative',
