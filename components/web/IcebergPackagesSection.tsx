@@ -789,7 +789,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
                   <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)', marginBottom: 14 }}>
                     {t[lang].eyebrow}
                   </div>
-                  <h2 style={{ margin: 0, fontSize: 'clamp(22px, 5.5vw, 36px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em', color: '#f4fbff' }}>
+                  <h2 style={{ margin: 0, fontSize: 'clamp(28px, 2.78vw, 68px)', fontWeight: 250, lineHeight: 1.08, letterSpacing: '-0.015em', color: '#f4fbff' }}>
                     {t[lang].heading}
                   </h2>
                 </div>
