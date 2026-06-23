@@ -730,6 +730,13 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         <div id={id} style={{ width: '100vw', height: '100svh', background: '#031b26' }} />
       )
     }
+    const sharedFs = Math.min(...([0, 1, 2].map((j) => {
+      const a = mobileImgs.anchors[j]
+      if (!a) return 14
+      const w2 = Math.min(a.halfW * 1.5, 260)
+      const tO = Math.max(16, a.depth * 0.06)
+      return Math.max(10, Math.min(14, w2 / 16, (a.depth * 0.80 - tO) / TOTAL_EM[j]))
+    })))
     return (
       <div
         id={id}
@@ -753,7 +760,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           const wdt = Math.min(anch.halfW * 1.5, 260)
           const topOff = Math.max(16, anch.depth * 0.06)
           const avail = anch.depth * 0.80 - topOff
-          const fs = Math.max(10, Math.min(14, wdt / 16, avail / TOTAL_EM[i]))
+          const fs = sharedFs
           const topPct = ((anch.wl + topOff) / ch * 100).toFixed(2) + '%'
           const leftPct = ((localCx - wdt / 2) / cw * 100).toFixed(2) + '%'
           const widthPct = (wdt / cw * 100).toFixed(2) + '%'
@@ -817,7 +824,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
                   position: 'absolute', bottom: '4dvh', left: 0, right: 0, zIndex: 10,
                   display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
                   pointerEvents: 'none',
-                  animation: 'pkgHintFade 5s ease 1.5s both',
                 }}>
                   <div style={{
                     width: 40, height: 40, borderRadius: '50%',
