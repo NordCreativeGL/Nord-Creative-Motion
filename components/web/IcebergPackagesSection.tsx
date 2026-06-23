@@ -281,10 +281,11 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     if (!stack) {
       const isMobileCanvas = w < 1400 && h > 700
       const wl = isMobileCanvas ? h * 0.45 : h * 0.41
-      const wlAnchor = isMobileCanvas ? h * 0.45 : h * 0.26
+      const wlAnchor = isMobileCanvas ? h * 0.35 : h * 0.26
       const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA))
       const maxBAll = Math.max(...DEPTH_BERGS.map(bMaxB))
-      const k = Math.min((wlAnchor - 30) / maxAAll, (h - wlAnchor - 36) / maxBAll, w * 0.00165) * ICEBERG_SCALE
+      const kCap = isMobileCanvas ? Infinity : w * 0.00165
+      const k = Math.min((wlAnchor - 30) / maxAAll, (h - wlAnchor - 36) / maxBAll, kCap) * ICEBERG_SCALE
       const cxs = isMobileCanvas ? [1/6, 0.5, 5/6] : [0.17, 0.48, 0.80]
       const tScale = isMobileCanvas ? [1.0, 1.0, 1.0] : TIER_SCALE
       scenes.push({ y0: 0, y1: h, wl })
@@ -645,7 +646,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         lay.items.forEach((b, i) => {
           const el = tierRefs.current[i]
           if (!el) return
-          const wdt = Math.min(b.halfW * (window.innerWidth < 768 ? 1.3 : 1.08), window.innerWidth < 768 ? 240 : 320)
+          const wdt = Math.min(b.halfW * (window.innerWidth < 768 ? 1.5 : 1.08), window.innerWidth < 768 ? 280 : 320)
           const topOff = Math.max(16, b.depth * 0.06)
           const avail = b.depth * (window.innerWidth < 768 ? 0.80 : 0.56) - topOff
           const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]))
