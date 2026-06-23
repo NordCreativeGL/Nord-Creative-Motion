@@ -1019,7 +1019,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       <div
         id="fj-scroll"
         className="flex flex-col items-center gap-2"
-        style={{ position: 'absolute', left: '50%', bottom: '40px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
+        style={{ position: 'absolute', left: '50%', bottom: isMobile ? '110px' : '40px', transform: 'translateX(-50%)', zIndex: 5, opacity: 0, transition: 'opacity 0.8s ease', pointerEvents: 'none' }}
       >
         <div className="w-px h-10 bg-white/50" />
         <svg
@@ -1053,7 +1053,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
             </span>
             <span style={{ fontSize: '22px', opacity: 0.55 }}>›</span>
           </div>
-          <div style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase' }}>{t[lang].dragLabel}</div>
+          <div style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontSize: '12px', letterSpacing: '0.34em', color: 'rgba(150,195,205,0.6)', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>{t[lang].dragLabel}</div>
         </div>
         <div id="fj-compass" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'opacity 0.6s ease', opacity: 0 }}>
           <span style={{ display: 'inline-flex', width: '36px', height: '36px', border: '1px solid rgba(95,222,208,0.4)', borderRadius: '50%', alignItems: 'center', justifyContent: 'center' }}>
