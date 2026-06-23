@@ -35,7 +35,14 @@ export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
   }, [])
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.8);
+    const onScroll = () => {
+      const offerEl = document.getElementById('fj-offer-overlay')
+      if (offerEl) {
+        setVisible(parseFloat(offerEl.style.opacity || '0') > 0.3)
+      } else {
+        setVisible(window.scrollY > window.innerHeight * 0.8)
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);

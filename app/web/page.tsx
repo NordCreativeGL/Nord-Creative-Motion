@@ -116,6 +116,7 @@ export default function WebPage() {
       <Header />
 
       {/* ── Section 1: Hero ── */}
+      <section id="web-offer">
       <FjordHeroScene>
         <div
           id="fj-offer-overlay"
@@ -182,6 +183,7 @@ export default function WebPage() {
           </div>
         </div>
       </FjordHeroScene>
+      </section>
 
       <IcebergPackagesSection id="web-packages" />
 
