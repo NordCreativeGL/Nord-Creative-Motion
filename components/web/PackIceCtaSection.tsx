@@ -125,7 +125,7 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     const out: Floe[] = []
     const extH = h + 380
     const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
-    const footerTextEx = { x: w / 2, y: h + 148, hw: w < 768 ? w * 0.44 : w * 0.095, hh: 148 }
+    const footerTextEx = { x: w / 2, y: h + 148, hw: w < 768 ? w * 0.30 : w * 0.095, hh: 148 }
     const privacyEx    = { x: w / 2, y: h + 318, hw: w * 0.10,       hh: 30  }
     const exScale = [1.3, 1.0, 0.7]
     const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
