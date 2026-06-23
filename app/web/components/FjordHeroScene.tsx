@@ -1,11 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { useLang } from '@/contexts/LanguageContext'
 
 export default function FjordHeroScene({ children }: { children?: React.ReactNode } = {}) {
   const { lang } = useLang()
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   useEffect(() => {
     let dead = false
     let raf = 0
@@ -1034,7 +1041,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         </svg>
       </div>
 
-      <div id="fj-ui-bottom" style={{ position: 'absolute', left: '50%', bottom: '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
+      <div id="fj-ui-bottom" style={{ position: 'absolute', left: '50%', bottom: isMobile ? '110px' : '28px', transform: 'translateX(-50%)', zIndex: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
         <div id="fj-drag" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', transition: 'opacity 1s ease', opacity: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px', color: 'rgba(160,205,215,0.85)' }}>
             <span style={{ fontSize: '22px', opacity: 0.55 }}>‹</span>
