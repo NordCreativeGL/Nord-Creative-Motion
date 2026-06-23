@@ -287,7 +287,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const kCap = isMobileCanvas ? Infinity : w * 0.00165
       const k = Math.min((wlAnchor - 30) / maxAAll, (h - wlAnchor - 36) / maxBAll, kCap) * ICEBERG_SCALE
       const cxs = isMobileCanvas ? [1/6, 0.5, 5/6] : [0.17, 0.48, 0.80]
-      const tScale = isMobileCanvas ? [1.0, 1.0, 1.0] : TIER_SCALE
+      const tScale = TIER_SCALE
       scenes.push({ y0: 0, y1: h, wl })
       DEPTH_BERGS.forEach((bd, i) => items.push({ bd, i, cx: cxs[i] * w, wl, k: k * tScale[i] }))
     } else {
@@ -735,7 +735,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       if (!a) return 14
       const w2 = Math.min(a.halfW * 1.5, 260)
       const tO = Math.max(16, a.depth * 0.06)
-      return Math.max(10, Math.min(14, w2 / 16, (a.depth * 0.80 - tO) / TOTAL_EM[j]))
+      return Math.max(10, Math.min(16, (a.depth * 0.80 - tO) / TOTAL_EM[j]))
     })))
     return (
       <div
