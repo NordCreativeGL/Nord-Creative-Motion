@@ -200,7 +200,7 @@ export default function ServicesSection() {
             <div ref={labelRef} className="text-sm tracking-[0.25em] uppercase text-white/50 mb-6">
               {t[lang].eyebrow}
             </div>
-            <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(48px,3vw,68px)] font-light text-white mb-4 leading-tight">
+            <h2 className="text-[clamp(28px,2.78vw,68px)] font-light text-white mb-4 leading-tight">
               <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>{t[lang].h2}</span></div>
               <div ref={line2Ref}></div>
             </h2>
