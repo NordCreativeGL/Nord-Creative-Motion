@@ -14,6 +14,13 @@ export default function ContactModal() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const overlayRef = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const t = {
     en: {
@@ -158,7 +165,7 @@ export default function ContactModal() {
             background: '#0a0a0a',
             border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: '16px',
-            padding: '40px',
+            padding: isMobile ? '24px' : '40px',
             position: 'relative',
             transform: isOpen ? 'translateY(0)' : 'translateY(16px)',
             transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.15, 1)',
@@ -225,7 +232,7 @@ export default function ContactModal() {
                 {t[lang].subtitle}
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? '14px' : '20px' }}>
                 <div>
                   <label style={labelStyle}>{t[lang].name} *</label>
                   <input
@@ -272,7 +279,7 @@ export default function ContactModal() {
                     value={message}
                     onChange={e => setMessage(e.target.value)}
                     placeholder={t[lang].messagePlaceholder}
-                    rows={4}
+                    rows={isMobile ? 3 : 4}
                     style={{ ...inputStyle, resize: 'none' }}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)')}
                     onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
