@@ -1003,15 +1003,15 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
 
       <div id="fj-copy" style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.6s ease' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
-          <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>{t[lang].s1h}</h1>
+          <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0 }}>{t[lang].s1h}</h1>
           <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
         </div>
         <div id="fj-sec-1" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s2h}</h2>
+          <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s2h}</h2>
           <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>{t[lang].s2b}</p>
         </div>
         <div id="fj-sec-2" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
-          <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,2.78vw,68px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s3h}</h2>
+          <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s3h}</h2>
           <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>{t[lang].s3b}</p>
         </div>
       </div>
