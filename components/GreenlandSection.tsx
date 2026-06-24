@@ -149,7 +149,7 @@ export default function GreenlandSection() {
           </div>
 
           <div style={{ marginBottom: 24 }}>
-            <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25, whiteSpace: 'nowrap' }}>
+            <div ref={line1Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25, whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
               {t[lang].heading}
             </div>
             <div ref={line2Ref} style={{ fontSize: 'clamp(2.25rem, 2.8vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.25 }}>
