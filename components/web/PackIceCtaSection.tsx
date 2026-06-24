@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useLang } from '@/contexts/LanguageContext'
+import { useContactModal } from '@/contexts/ContactModalContext'
 
 // ---------- types ----------
 
@@ -283,6 +284,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [btnHover, setBtnHover] = useState(false)
   const { lang } = useLang()
+  const { openModal } = useContactModal()
 
   const t = {
     en: { eyebrow: 'WORK WITH US', heading: 'Ready to build something worth seeing?', body: "Tell us what your business needs online. We'll take care of the rest.", btn: 'Start your project' },
@@ -348,8 +350,8 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         }}>
           {t[lang].body}
         </p>
-        <a
-          href="mailto:hello@nordcreative.dk"
+        <button
+          onClick={openModal}
           onMouseEnter={() => setBtnHover(true)}
           onMouseLeave={() => setBtnHover(false)}
           style={{
@@ -359,12 +361,13 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
             border: '1px solid rgba(255,255,255,0.6)',
             borderRadius: 999,
             padding: '20px 48px', fontSize: 18, fontWeight: 400,
-            textDecoration: 'none',
+            cursor: 'pointer',
+            fontFamily: 'var(--font-geist-sans), sans-serif',
             transition: 'background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           {t[lang].btn}
-        </a>
+        </button>
       </div>
 
     </section>
