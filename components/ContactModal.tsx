@@ -114,7 +114,7 @@ export default function ContactModal() {
     background: 'rgba(255,255,255,0.04)',
     border: '1px solid rgba(255,255,255,0.12)',
     borderRadius: '8px',
-    padding: '12px 16px',
+    padding: isMobile ? '10px 12px' : '12px 16px',
     color: '#ffffff',
     fontFamily: 'var(--font-geist-sans), sans-serif',
     fontSize: '15px',
@@ -214,10 +214,10 @@ export default function ContactModal() {
             <>
               <h2 style={{
                 fontFamily: 'var(--font-geist-sans), sans-serif',
-                fontSize: 'clamp(28px, 2.78vw, 68px)',
+                fontSize: isMobile ? '22px' : 'clamp(28px, 2.78vw, 68px)',
                 fontWeight: 300,
                 color: '#ffffff',
-                marginBottom: '8px',
+                marginBottom: isMobile ? '4px' : '8px',
                 lineHeight: 1.1,
               }}>
                 {t[lang].title}
@@ -227,7 +227,7 @@ export default function ContactModal() {
                 fontSize: '14px',
                 fontWeight: 300,
                 color: 'rgba(255,255,255,0.4)',
-                marginBottom: '32px',
+                marginBottom: isMobile ? '16px' : '32px',
               }}>
                 {t[lang].subtitle}
               </p>
@@ -301,7 +301,7 @@ export default function ContactModal() {
                   disabled={isDisabled}
                   style={{
                     width: '100%',
-                    padding: '14px 24px',
+                    padding: isMobile ? '11px 24px' : '14px 24px',
                     borderRadius: '999px',
                     border: '1px solid rgba(255,255,255,0.9)',
                     background: 'transparent',
