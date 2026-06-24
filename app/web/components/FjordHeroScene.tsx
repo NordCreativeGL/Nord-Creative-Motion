@@ -291,6 +291,25 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         berg.add(keel)
       }
 
+      // keel cap — seals the open cross-section at the waterline when camera is submerged
+      {
+        const capShape = new T.Shape()
+        capShape.absellipse(0, 0, 52, 32, 0, Math.PI * 2, false, 0)
+        const capGeo = new T.ShapeGeometry(capShape, 48)
+        capGeo.rotateX(Math.PI / 2)
+        const capPos = capGeo.attributes.position as THREE.BufferAttribute
+        const capCols = new Float32Array(capPos.count * 3)
+        for (let i = 0; i < capPos.count; i++) {
+          capCols[i * 3] = 0.10; capCols[i * 3 + 1] = 0.30; capCols[i * 3 + 2] = 0.34
+        }
+        capGeo.setAttribute('color', new T.BufferAttribute(capCols, 3))
+        const cap = new T.Mesh(capGeo, new T.MeshStandardMaterial({
+          vertexColors: true, flatShading: true, roughness: 0.9, metalness: 0, side: T.BackSide
+        }))
+        cap.position.set(5, -0.1, -2)
+        berg.add(cap)
+      }
+
       return berg
     }
 
