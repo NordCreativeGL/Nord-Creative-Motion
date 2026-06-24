@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLang } from "@/contexts/LanguageContext";
+import { useContactModal } from "@/contexts/ContactModalContext";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +14,7 @@ export default function Header() {
   const [visible, setVisible] = React.useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, setLang } = useLang();
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -86,12 +88,12 @@ export default function Header() {
               <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '11px', userSelect: 'none' }}>|</span>
               <button onClick={() => setLang('da')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: lang === 'da' ? '#ffffff' : 'rgba(255,255,255,0.32)', fontSize: 'clamp(11px, 0.72vw, 13px)', letterSpacing: '0.08em', fontWeight: 300, padding: '4px 2px', transition: 'color 0.2s ease', fontFamily: 'inherit' }}>DA</button>
             </div>
-            <a
-              href="mailto:contact@nordcreative.dk"
+            <button
+              onClick={openModal}
               className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white hover:text-black lg:block"
             >
               Work with us
-            </a>
+            </button>
           </div>
           <button
             className="lg:hidden flex flex-col justify-center items-center gap-[6px] w-10 h-10"
@@ -166,8 +168,11 @@ export default function Header() {
             {label}
           </a>
         ))}
-        <a
-          href="mailto:contact@nordcreative.dk"
+        <button
+          onClick={() => {
+            setMenuOpen(false);
+            openModal();
+          }}
           style={{
             textDecoration: 'none',
             color: 'rgba(255,255,255,0.6)',
@@ -178,10 +183,12 @@ export default function Header() {
             border: '1px solid rgba(255,255,255,0.4)',
             borderRadius: '999px',
             padding: '10px 24px',
+            background: 'none',
+            cursor: 'pointer',
           }}
         >
           Work with us
-        </a>
+        </button>
       </div>
     </>
   );
