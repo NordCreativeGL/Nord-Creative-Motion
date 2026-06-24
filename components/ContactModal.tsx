@@ -259,7 +259,7 @@ export default function ContactModal() {
                     type="tel"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
-                    placeholder={t[lang].phonePlaceholder}
+                    placeholder=""
                     style={inputStyle}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)')}
                     onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
