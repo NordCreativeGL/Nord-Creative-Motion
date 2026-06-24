@@ -84,9 +84,9 @@ export default function Header() {
           </nav>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <button onClick={() => setLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: lang === 'en' ? '#ffffff' : 'rgba(255,255,255,0.32)', fontSize: 'clamp(11px, 0.72vw, 13px)', letterSpacing: '0.08em', fontWeight: 300, padding: '4px 2px', transition: 'color 0.2s ease', fontFamily: 'inherit' }}>EN</button>
-              <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '11px', userSelect: 'none' }}>|</span>
               <button onClick={() => setLang('da')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: lang === 'da' ? '#ffffff' : 'rgba(255,255,255,0.32)', fontSize: 'clamp(11px, 0.72vw, 13px)', letterSpacing: '0.08em', fontWeight: 300, padding: '4px 2px', transition: 'color 0.2s ease', fontFamily: 'inherit' }}>DA</button>
+              <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '11px', userSelect: 'none' }}>|</span>
+              <button onClick={() => setLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: lang === 'en' ? '#ffffff' : 'rgba(255,255,255,0.32)', fontSize: 'clamp(11px, 0.72vw, 13px)', letterSpacing: '0.08em', fontWeight: 300, padding: '4px 2px', transition: 'color 0.2s ease', fontFamily: 'inherit' }}>EN</button>
             </div>
             <button
               onClick={openModal}
