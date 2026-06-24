@@ -101,9 +101,9 @@ export default function Header() {
           </div>
           <button
             className="lg:hidden flex flex-col justify-center items-center gap-[6px] w-10 h-10"
-            style={{ zIndex: 1001, position: 'relative' }}
+            style={{ zIndex: 1001, position: 'relative', opacity: menuOpen ? 0 : 1, pointerEvents: menuOpen ? 'none' : 'auto', transition: 'opacity 0.2s ease' }}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label="Åbn menu"
           >
             <>
               <span className="block w-5 h-px bg-white" />
