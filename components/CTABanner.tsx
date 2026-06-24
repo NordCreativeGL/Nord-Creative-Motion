@@ -151,7 +151,7 @@ export default function CTABanner() {
               padding: '16px 40px',
               borderRadius: '999px',
               border: '1px solid rgba(255,255,255,0.22)',
-              background: btnHover ? 'rgba(255,255,255,0.1)' : 'transparent',
+              background: btnHover ? 'rgba(255,255,255,0.2)' : 'transparent',
               color: 'rgba(255,255,255,0.88)',
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
               filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
