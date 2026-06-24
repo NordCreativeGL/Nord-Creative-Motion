@@ -295,7 +295,7 @@ export default function GreenlandPage() {
                     className="text-white bg-transparent hover:bg-white/20 transition-colors duration-200"
                     style={{
                       display: 'block',
-                      border: '1px solid rgba(255,255,255,0.6)',
+                      border: '1px solid rgba(255,255,255,0.2)',
                       padding: '14px 32px',
                       borderRadius: '999px',
                       fontSize: 'clamp(17px, 1.1vw, 20px)',
@@ -313,7 +313,7 @@ export default function GreenlandPage() {
                     className="text-white bg-transparent hover:bg-white/20 transition-colors duration-200"
                     style={{
                       display: 'block',
-                      border: '1px dashed rgba(255,255,255,0.6)',
+                      border: '1px dashed rgba(255,255,255,0.2)',
                       padding: '14px 32px',
                       borderRadius: '999px',
                       fontSize: 'clamp(17px, 1.1vw, 20px)',

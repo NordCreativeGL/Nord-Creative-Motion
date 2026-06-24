@@ -358,7 +358,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
             display: 'inline-flex', alignItems: 'center', gap: 12, marginTop: 12,
             background: btnHover ? 'rgba(255,255,255,0.2)' : 'transparent',
             color: '#ffffff',
-            border: '1px solid rgba(255,255,255,0.6)',
+            border: '1px solid rgba(255,255,255,0.2)',
             borderRadius: 999,
             padding: '20px 48px', fontSize: 18, fontWeight: 400,
             cursor: 'pointer',
