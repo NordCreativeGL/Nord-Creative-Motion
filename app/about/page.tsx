@@ -107,7 +107,7 @@ export default function About() {
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
               <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white mb-6">{t[lang].ctaH}</h2>
               <p className="text-lg min-[1900px]:text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/70 leading-relaxed mb-8 max-w-xl min-[1900px]:max-w-2xl">{t[lang].ctaB}</p>
-              <button onClick={openModal} className="inline-flex items-center justify-center px-11 py-5 rounded-full border border-white/20 text-white text-[17px] bg-transparent hover:bg-white hover:text-black transition-colors duration-200" style={{ textTransform: 'none', letterSpacing: 'normal', cursor: 'pointer', fontFamily: 'var(--font-geist-sans), sans-serif', fontWeight: 300 }}>{t[lang].ctaBtn}</button>
+              <button onClick={openModal} className="inline-flex items-center justify-center px-11 py-5 rounded-full border border-white/20 text-white text-[17px] bg-transparent hover:bg-white/10 transition-colors duration-200" style={{ textTransform: 'none', letterSpacing: 'normal', cursor: 'pointer', fontFamily: 'var(--font-geist-sans), sans-serif', fontWeight: 300 }}>{t[lang].ctaBtn}</button>
             </div>
           </div>
         </div>
