@@ -168,7 +168,7 @@ export default function ContactModal() {
               alt="Nord Creative"
               width={612}
               height={184}
-              style={{ width: '180px', height: 'auto', objectFit: 'contain', opacity: 0.85 }}
+              style={{ width: '220px', height: 'auto', objectFit: 'contain', opacity: 0.85 }}
             />
           </div>
 
@@ -327,6 +327,19 @@ export default function ContactModal() {
                 >
                   {status === 'sending' ? t[lang].sending : t[lang].send}
                 </button>
+
+                <p style={{
+                  textAlign: 'center',
+                  fontSize: '13px',
+                  color: 'rgba(255,255,255,0.3)',
+                  fontFamily: 'var(--font-geist-sans), sans-serif',
+                  fontWeight: 300,
+                  marginTop: '4px',
+                }}>
+                  <a href="mailto:contact@nordcreative.dk" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')} onMouseLeave={e => (e.currentTarget.style.color = 'inherit')}>contact@nordcreative.dk</a>
+                  {' · '}
+                  <a href="tel:+299245441" style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')} onMouseLeave={e => (e.currentTarget.style.color = 'inherit')}>+299 245441</a>
+                </p>
               </div>
             </>
           )}
