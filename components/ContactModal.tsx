@@ -168,7 +168,7 @@ export default function ContactModal() {
               alt="Nord Creative"
               width={612}
               height={184}
-              style={{ width: '220px', height: 'auto', objectFit: 'contain', opacity: 0.85 }}
+              style={{ width: '100%', height: 'auto', objectFit: 'contain', opacity: 0.85, marginTop: '-20px', marginBottom: '-24px' }}
             />
           </div>
 
