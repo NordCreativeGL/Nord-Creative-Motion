@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useLang } from '@/contexts/LanguageContext'
+import { useContactModal } from '@/contexts/ContactModalContext'
 
 export default function CTABanner() {
   const [btnHover, setBtnHover] = useState(false);
   const [isMobile, setIsMobile] = useState(false)
   const { lang } = useLang()
+  const { openModal } = useContactModal()
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024)
     check()
@@ -139,9 +141,10 @@ export default function CTABanner() {
           </div>
           <div
             ref={btnRef}
+            onClick={openModal}
             onMouseEnter={() => setBtnHover(true)}
             onMouseLeave={() => setBtnHover(false)}
-            style={{
+            style={{ cursor: 'pointer',
               display: 'inline-flex',
               width: '100%',
               justifyContent: 'center',
@@ -151,7 +154,6 @@ export default function CTABanner() {
               background: btnHover ? '#ffffff' : 'transparent',
               color: btnHover ? '#000000' : 'rgba(255,255,255,0.88)',
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-              cursor: 'pointer',
               filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
               transition: 'background 0.25s ease, color 0.25s ease',
             }}
