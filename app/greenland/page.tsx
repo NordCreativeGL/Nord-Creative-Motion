@@ -291,7 +291,7 @@ export default function GreenlandPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <button
                     onClick={openModal}
-                    className="text-white hover:bg-white hover:text-black transition-colors duration-200"
+                    className="text-white bg-transparent hover:bg-white hover:text-black transition-colors duration-200"
                     style={{
                       display: 'block',
                       border: '1px solid rgba(255,255,255,0.6)',
@@ -302,7 +302,6 @@ export default function GreenlandPage() {
                       width: '100%',
                       textAlign: 'center' as const,
                       cursor: 'pointer',
-                      background: 'transparent',
                       fontFamily: 'var(--font-geist-sans), sans-serif',
                     }}
                   >
