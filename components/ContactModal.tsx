@@ -162,15 +162,6 @@ export default function ContactModal() {
             transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.15, 1)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-            <Image
-              src="/logo-wordmark-transparent-kopi.png"
-              alt="Nord Creative"
-              width={612}
-              height={184}
-              style={{ width: '100%', height: 'auto', objectFit: 'contain', opacity: 0.9 }}
-            />
-          </div>
 
           <button
             onClick={closeModal}
@@ -327,6 +318,16 @@ export default function ContactModal() {
                 >
                   {status === 'sending' ? t[lang].sending : t[lang].send}
                 </button>
+
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px', marginBottom: '-4px' }}>
+                  <Image
+                    src="/logo-wordmark-transparent-kopi.png"
+                    alt="Nord Creative"
+                    width={612}
+                    height={184}
+                    style={{ width: '160px', height: 'auto', objectFit: 'contain', opacity: 0.35 }}
+                  />
+                </div>
 
                 <p style={{
                   textAlign: 'center',
