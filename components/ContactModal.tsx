@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { useContactModal } from '@/contexts/ContactModalContext'
 import { useLang } from '@/contexts/LanguageContext'
@@ -161,6 +162,16 @@ export default function ContactModal() {
             transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.15, 1)',
           }}
         >
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px', marginTop: '4px' }}>
+            <Image
+              src="/logo-wordmark-transparent.png"
+              alt="Nord Creative"
+              width={612}
+              height={184}
+              style={{ width: '180px', height: 'auto', objectFit: 'contain', opacity: 0.85 }}
+            />
+          </div>
+
           <button
             onClick={closeModal}
             aria-label={t[lang].close}
