@@ -241,7 +241,7 @@ export default function ServicesSection() {
                 />
                 {isMobile && (
                   <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '56px 20px 20px 20px', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)' }}>
-                    <div style={{ fontSize: '1.125rem', fontWeight: 600, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c1t}</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 300, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c1t}</div>
                     <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{t[lang].c1d}</div>
                   </div>
                 )}
@@ -271,7 +271,7 @@ export default function ServicesSection() {
                 />
                 {isMobile && (
                   <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '56px 20px 20px 20px', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)' }}>
-                    <div style={{ fontSize: '1.125rem', fontWeight: 600, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c2t}</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 300, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c2t}</div>
                     <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{t[lang].c2d}</div>
                   </div>
                 )}
@@ -301,7 +301,7 @@ export default function ServicesSection() {
                 />
                 {isMobile && (
                   <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '56px 20px 20px 20px', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)' }}>
-                    <div style={{ fontSize: '1.125rem', fontWeight: 600, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c3t}</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 300, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c3t}</div>
                     <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{t[lang].c3d}</div>
                   </div>
                 )}
