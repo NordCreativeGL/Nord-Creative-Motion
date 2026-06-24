@@ -356,8 +356,8 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
           onMouseLeave={() => setBtnHover(false)}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 12, marginTop: 12,
-            background: btnHover ? '#ffffff' : 'transparent',
-            color: btnHover ? '#042230' : '#ffffff',
+            background: btnHover ? 'rgba(255,255,255,0.1)' : 'transparent',
+            color: '#ffffff',
             border: '1px solid rgba(255,255,255,0.6)',
             borderRadius: 999,
             padding: '20px 48px', fontSize: 18, fontWeight: 400,
