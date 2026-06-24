@@ -162,13 +162,13 @@ export default function ContactModal() {
             transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.15, 1)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px', marginTop: '4px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
             <Image
-              src="/logo-wordmark-transparent.png"
+              src="/logo-wordmark-transparent-kopi.png"
               alt="Nord Creative"
               width={612}
               height={184}
-              style={{ width: '100%', height: 'auto', objectFit: 'contain', opacity: 0.85, marginTop: '-20px', marginBottom: '-24px' }}
+              style={{ width: '100%', height: 'auto', objectFit: 'contain', opacity: 0.9 }}
             />
           </div>
 
