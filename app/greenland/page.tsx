@@ -247,6 +247,7 @@ export default function GreenlandPage() {
                   color: 'white',
                   marginBottom: isMobile ? '16px' : '28px',
                   maxWidth: '640px',
+                  minHeight: isMobile ? 'auto' : '2.4em',
                 }}>
                   {t[lang].whyH}
                 </h2>
