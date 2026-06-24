@@ -201,7 +201,7 @@ export default function ServicesSection() {
               {t[lang].eyebrow}
             </div>
             <h2 className="text-4xl md:text-5xl min-[1900px]:text-[clamp(48px,3vw,68px)] font-light text-white mb-4 leading-tight">
-              <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: 'nowrap' }}>{t[lang].h2}</span></div>
+              <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>{t[lang].h2}</span></div>
               <div ref={line2Ref}></div>
             </h2>
             <div ref={accentRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white font-semibold mb-3">
