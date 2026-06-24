@@ -118,7 +118,7 @@ export default function Header() {
           position: 'fixed',
           inset: 0,
           backgroundColor: 'rgba(0,0,0,0.92)',
-          zIndex: 1000,
+          zIndex: 1002,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-end',
