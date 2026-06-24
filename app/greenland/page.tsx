@@ -241,7 +241,7 @@ export default function GreenlandPage() {
                   {t[lang].eyebrow3}
                 </p>
                 <h2 style={{
-                  fontSize: isMobile ? '20px' : 'clamp(28px, 2.78vw, 68px)',
+                  fontSize: isMobile ? '20px' : 'clamp(28px, 2.3vw, 68px)',
                   fontWeight: 300,
                   letterSpacing: '-0.02em',
                   color: 'white',
