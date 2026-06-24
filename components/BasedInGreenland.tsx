@@ -377,12 +377,10 @@ export default function BasedInGreenland() {
             transition: 'background 0.3s ease, color 0.3s ease',
           }}
           onMouseEnter={e => {
-            (e.currentTarget as HTMLAnchorElement).style.background = 'white';
-            (e.currentTarget as HTMLAnchorElement).style.color = '#000';
+            (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.1)';
           }}
           onMouseLeave={e => {
             (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
-            (e.currentTarget as HTMLAnchorElement).style.color = 'white';
           }}
         >
           {t[lang].readMore}
