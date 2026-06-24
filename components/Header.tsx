@@ -105,15 +105,11 @@ export default function Header() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            {menuOpen ? (
-              <span style={{ color: 'white', fontSize: '20px', fontWeight: 300, lineHeight: 1 }}>✕</span>
-            ) : (
-              <>
-                <span className="block w-5 h-px bg-white" />
-                <span className="block w-5 h-px bg-white" />
-                <span className="block w-5 h-px bg-white" />
-              </>
-            )}
+            <>
+              <span className="block w-5 h-px bg-white" />
+              <span className="block w-5 h-px bg-white" />
+              <span className="block w-5 h-px bg-white" />
+            </>
           </button>
         </div>
       </header>
@@ -135,6 +131,25 @@ export default function Header() {
           transition: 'opacity 0.3s ease',
         }}
       >
+        <button
+          onClick={() => setMenuOpen(false)}
+          aria-label="Luk menu"
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            background: 'none',
+            border: 'none',
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '20px',
+            fontWeight: 300,
+            lineHeight: 1,
+            cursor: 'pointer',
+            padding: '8px',
+          }}
+        >
+          ✕
+        </button>
         {[
           { label: 'Home', href: '/' },
           { label: 'Greenland', href: '/greenland' },
