@@ -750,6 +750,13 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       stage.addEventListener('pointerdown', onDown)
       window.addEventListener('pointermove', onMove as EventListener)
       window.addEventListener('pointerup', onUp)
+      const onWheel = (e: WheelEvent) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.4) {
+          e.preventDefault()
+          target -= e.deltaX * 0.004
+        }
+      }
+      stage.addEventListener('wheel', onWheel, { passive: false })
       const onResize = () => { camera.fov = window.innerWidth < 768 ? 62 : 44; camera.aspect = W() / H(); camera.updateProjectionMatrix(); renderer.setSize(W(), H()); updateScrollCache() }
       window.addEventListener('resize', onResize)
 
@@ -930,6 +937,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         stage.removeEventListener('pointerdown', onDown)
         window.removeEventListener('pointermove', onMove as EventListener)
         window.removeEventListener('pointerup', onUp)
+        stage.removeEventListener('wheel', onWheel)
         window.removeEventListener('resize', onResize)
         renderer.domElement.remove()
         renderer.dispose()
