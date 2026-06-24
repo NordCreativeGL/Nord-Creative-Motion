@@ -9,6 +9,7 @@ import NorthernLights from "@/components/NorthernLights";
 import MountainSilhouette from "@/components/MountainSilhouette";
 import ScrollExpandHero from "@/components/ScrollExpandHero";
 import { useLang } from '@/contexts/LanguageContext'
+import { useContactModal } from '@/contexts/ContactModalContext'
 
 export default function GreenlandPage() {
   const [isMobile, setIsMobile] = useState(false)
@@ -20,6 +21,7 @@ export default function GreenlandPage() {
   }, [])
 
   const { lang } = useLang()
+  const { openModal } = useContactModal()
 
   const t = {
     en: {
@@ -287,8 +289,8 @@ export default function GreenlandPage() {
                   {t[lang].ctaBody}
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <a
-                    href="mailto:contact@nordcreative.dk"
+                  <button
+                    onClick={openModal}
                     className="text-white hover:bg-white hover:text-black transition-colors duration-200"
                     style={{
                       display: 'block',
@@ -297,13 +299,15 @@ export default function GreenlandPage() {
                       borderRadius: '999px',
                       fontSize: 'clamp(17px, 1.1vw, 20px)',
                       fontWeight: 300,
-                      textDecoration: 'none',
                       width: '100%',
                       textAlign: 'center' as const,
+                      cursor: 'pointer',
+                      background: 'transparent',
+                      fontFamily: 'var(--font-geist-sans), sans-serif',
                     }}
                   >
                     {t[lang].cta1}
-                  </a>
+                  </button>
                   <a
                     href="/web"
                     className="text-white hover:bg-white hover:text-black transition-colors duration-200"
