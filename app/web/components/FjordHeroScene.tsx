@@ -296,7 +296,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         const capShape = new T.Shape()
         capShape.absellipse(0, 0, 65, 50, 0, Math.PI * 2, false, 0)
         const capGeo = new T.ShapeGeometry(capShape, 48)
-        capGeo.rotateX(Math.PI / 2)
+        capGeo.rotateX(-Math.PI / 2)
         const cap = new T.Mesh(capGeo, new T.MeshBasicMaterial({
           color: new T.Color(0.10, 0.30, 0.34)
         }))
