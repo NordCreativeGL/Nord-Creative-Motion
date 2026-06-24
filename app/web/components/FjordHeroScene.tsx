@@ -964,7 +964,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       dragLabel: 'Drag to rotate the iceberg',
     },
     da: {
-      s1h: 'Vi bygger hjemmesider folk husker', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra nul — ingen genveje.',
+      s1h: 'Vi bygger hjemmesider folk husker', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra bunden — uden kompromiser.',
       s2h: 'En hjemmeside — og alt der hører til', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse. Alt samlet ét sted — fra idé til lancering.',
       s3h: 'Tre måder at arbejde med os', s3b: 'Starter · Business · Full Production — fra et kompakt single-page site til hjemmeside plus foto, drone og video, leveret som ét samlet projekt.',
       dragLabel: 'Træk for at rotere isbjerget',
