@@ -753,7 +753,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       const onWheel = (e: WheelEvent) => {
         if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.4) {
           e.preventDefault()
-          target -= e.deltaX * 0.004
+          target -= e.deltaX * 0.002
         }
       }
       stage.addEventListener('wheel', onWheel, { passive: false })
