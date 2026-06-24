@@ -14,6 +14,10 @@ export default function Header() {
   const [visible, setVisible] = React.useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, setLang } = useLang();
+  const t = {
+    en: { home: 'Home', greenland: 'Greenland', web: 'Website Production', about: 'About', cta: 'Work with us' },
+    da: { home: 'Hjem', greenland: 'Grønland', web: 'Website Produktion', about: 'Om os', cta: 'Arbejd med os' },
+  }
   const { openModal } = useContactModal();
 
   useEffect(() => {
@@ -76,11 +80,11 @@ export default function Header() {
             />
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-zinc-300 lg:flex absolute left-1/2 -translate-x-1/2">
-            <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>Home</Link>
-            <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>Greenland</Link>
-            <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>Website Production</Link>
+            <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>{t[lang].home}</Link>
+            <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>{t[lang].greenland}</Link>
+            <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>{t[lang].web}</Link>
             {/* <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link> */}
-            <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>About</Link>
+            <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>{t[lang].about}</Link>
           </nav>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -90,9 +94,9 @@ export default function Header() {
             </div>
             <button
               onClick={openModal}
-              className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white hover:text-black lg:block"
+              className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white/20 lg:block"
             >
-              Work with us
+              {t[lang].cta}
             </button>
           </div>
           <button
@@ -180,14 +184,14 @@ export default function Header() {
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             marginTop: '4px',
-            border: '1px solid rgba(255,255,255,0.4)',
+            border: '1px solid rgba(255,255,255,0.2)',
             borderRadius: '999px',
             padding: '10px 24px',
             background: 'none',
             cursor: 'pointer',
           }}
         >
-          Work with us
+          {t[lang].cta}
         </button>
       </div>
     </>
