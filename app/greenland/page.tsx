@@ -309,7 +309,7 @@ export default function GreenlandPage() {
                   </button>
                   <a
                     href="/web"
-                    className="text-white hover:bg-white hover:text-black transition-colors duration-200"
+                    className="text-white bg-transparent hover:bg-white/10 transition-colors duration-200"
                     style={{
                       display: 'block',
                       border: '1px dashed rgba(255,255,255,0.6)',
