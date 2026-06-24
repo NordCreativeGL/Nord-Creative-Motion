@@ -153,6 +153,8 @@ export default function ContactModal() {
           style={{
             width: '100%',
             maxWidth: '480px',
+            maxHeight: 'calc(100dvh - 48px)',
+            overflowY: 'auto',
             background: '#0a0a0a',
             border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: '16px',
