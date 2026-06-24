@@ -745,7 +745,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         dragging = true; lastX = e.clientX; stage.style.cursor = 'grabbing'
         const dh = document.getElementById('fj-drag'); if (dh) dh.style.opacity = '0'
       }
-      const onMove = (e: PointerEvent) => { if (dragging) { target -= (e.clientX - lastX) * 0.006; lastX = e.clientX } }
+      const onMove = (e: PointerEvent) => { if (dragging) { const sens = window.innerWidth < 768 ? 0.012 : 0.006; target -= (e.clientX - lastX) * sens; lastX = e.clientX } }
       const onUp = () => { dragging = false; stage.style.cursor = 'grab' }
       stage.addEventListener('pointerdown', onDown)
       window.addEventListener('pointermove', onMove as EventListener)
