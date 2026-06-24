@@ -204,11 +204,13 @@ export default function ServicesSection() {
               <div ref={line1Ref}><span style={{ display: 'block', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>{t[lang].h1}</span><span style={{ display: 'block', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>{t[lang].h2}</span></div>
               <div ref={line2Ref}></div>
             </h2>
-            <div ref={accentRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white font-semibold mb-3">
-              {activeCard === 0 ? t[lang].c1t : activeCard === 1 ? t[lang].c2t : t[lang].c3t}
-            </div>
-            <div ref={bodyRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white/60 leading-relaxed">
-              {activeCard === 0 ? t[lang].c1d : activeCard === 1 ? t[lang].c2d : t[lang].c3d}
+            <div style={{ display: isMobile ? 'none' : 'block' }}>
+              <div ref={accentRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white font-semibold mb-3">
+                {activeCard === 0 ? t[lang].c1t : activeCard === 1 ? t[lang].c2t : t[lang].c3t}
+              </div>
+              <div ref={bodyRef} className="text-lg min-[1900px]:text-[clamp(18px,1.2vw,26px)] text-white/60 leading-relaxed">
+                {activeCard === 0 ? t[lang].c1d : activeCard === 1 ? t[lang].c2d : t[lang].c3d}
+              </div>
             </div>
           </div>
 
@@ -237,6 +239,12 @@ export default function ServicesSection() {
                   alt={services[0].title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
+                {isMobile && (
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '56px 20px 20px 20px', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)' }}>
+                    <div style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c1t}</div>
+                    <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{t[lang].c1d}</div>
+                  </div>
+                )}
               </div>
 
               {/* Card 2 */}
@@ -261,6 +269,12 @@ export default function ServicesSection() {
                   autoPlay muted loop playsInline
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
+                {isMobile && (
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '56px 20px 20px 20px', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)' }}>
+                    <div style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c2t}</div>
+                    <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{t[lang].c2d}</div>
+                  </div>
+                )}
               </div>
 
               {/* Card 3 */}
@@ -285,6 +299,12 @@ export default function ServicesSection() {
                   autoPlay muted loop playsInline
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
+                {isMobile && (
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '56px 20px 20px 20px', background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%)' }}>
+                    <div style={{ fontSize: '1rem', fontWeight: 600, color: '#ffffff', marginBottom: '6px' }}>{t[lang].c3t}</div>
+                    <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{t[lang].c3d}</div>
+                  </div>
+                )}
               </div>
 
             </div>
