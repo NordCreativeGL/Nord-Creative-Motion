@@ -15,7 +15,7 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Nord Creative - VIDEOPRODUKTION · FOTOGRAFI · WEBPRODUKTION",
   description:
-    "Professionel fotografi, dronefilm og videoproduktion i Grønland. Lokal viden, direkte kontakt og hurtig levering.",
+    "Nord Creative er et mediebureau i Qaqortoq, Sydgrønland. Vi specialiserer os i videoproduktion, fotografi, droneoptagelser og webudvikling for virksomheder i og omkring Grønland.",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
