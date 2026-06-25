@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geist.variable} antialiased`}>
+    <html lang="da" className={`${geist.variable} antialiased`}>
       <head>
         <link rel="prefetch" href="/mtn-front.json" />
         <link rel="prefetch" href="/mtn-sea.json" />
