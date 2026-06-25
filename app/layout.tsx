@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
   },
+  alternates: {
+    canonical: "https://nordcreative.dk",
+  },
 };
 
 export default function RootLayout({
