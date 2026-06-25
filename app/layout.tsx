@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "NordCreative — Visual Production from Greenland",
   description:
     "Video production, photography, and Arctic storytelling for brands and companies working in Greenland and beyond.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
