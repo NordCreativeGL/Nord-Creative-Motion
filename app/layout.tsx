@@ -13,9 +13,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "NordCreative — Visual Production from Greenland",
+  title: "Nord Creative - VIDEOPRODUKTION · FOTOGRAFI · WEBPRODUKTION",
   description:
-    "Video production, photography, and Arctic storytelling for brands and companies working in Greenland and beyond.",
+    "Professionel fotografi, dronefilm og videoproduktion i Grønland. Lokal viden, direkte kontakt og hurtig levering.",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
