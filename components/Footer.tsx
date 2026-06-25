@@ -42,6 +42,8 @@ export default function Footer() {
           <a href="mailto:contact@nordcreative.dk" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-white transition-colors">contact@nordcreative.dk</a>
           {' · '}
           <a href="tel:+299245441" style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-white transition-colors">+299 245441</a>
+          {' · '}
+          CVR: 46563077
         </p>
 
         <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
