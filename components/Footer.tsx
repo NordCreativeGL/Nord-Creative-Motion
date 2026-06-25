@@ -61,6 +61,10 @@ export default function Footer() {
         <a href="/privacy" style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', textDecoration: 'none' }}>
           Privacy Policy
         </a>
+
+        <p style={{ fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', fontFamily: 'var(--font-geist-sans), sans-serif', fontWeight: 300 }}>
+          © 2026 Nord Creative ApS
+        </p>
       </div>
     </footer>
   );
