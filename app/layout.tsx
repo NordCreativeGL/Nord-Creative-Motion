@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
 import { Providers } from "@/components/Providers";
 import ContactModal from "@/components/ContactModal";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 
 const geist = Geist({
   variable: "--font-geist-sans",
