@@ -10,6 +10,7 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "canvas": "^3.2.3",
     "d3": "^7.9.0",
     "framer-motion": "^12.40.0",
