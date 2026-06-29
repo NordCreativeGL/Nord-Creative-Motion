@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
 import { Providers } from "@/components/Providers";
 import ContactModal from "@/components/ContactModal";
+import { Analytics } from '@vercel/analytics/next';
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <link rel="prefetch" href="/mtn-fjord.json" />
       </head>
       <body className="bg-black text-white"><Providers><Header />{children}<BackToTop /><ContactModal /></Providers></body>
+      <Analytics />
     </html>
   );
 }
