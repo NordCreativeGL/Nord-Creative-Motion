@@ -16,11 +16,10 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Nord Creative - VIDEOPRODUKTION · FOTOGRAFI · WEBPRODUKTION",
   description:
-    "Nord Creative er et mediebureau i Qaqortoq, Sydgrønland. Videoproduktion, fotografi, droneoptagelser og webudvikling for virksomheder i Grønland.",
+    "Nord Creative er et mediebureau i Qaqortoq, Sydgrønland. Vi specialiserer os i videoproduktion, fotografi, droneoptagelser og webudvikling for virksomheder i og omkring Grønland.",
   icons: {
-    icon: "/logo-icon.png",
-    shortcut: "/logo-icon.png",
-    apple: "/logo-icon.png",
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
   },
   alternates: {
     canonical: "https://nordcreative.dk",
@@ -38,28 +37,6 @@ export default function RootLayout({
         <link rel="prefetch" href="/mtn-front.json" />
         <link rel="prefetch" href="/mtn-sea.json" />
         <link rel="prefetch" href="/mtn-fjord.json" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Nord Creative",
-              "description": "Mediebureau i Qaqortoq, Sydgrønland. Videoproduktion, fotografi, droneoptagelser og webudvikling.",
-              "url": "https://nordcreative.dk",
-              "telephone": "+299245441",
-              "email": "contact@nordcreative.dk",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Qaqortoq",
-                "addressRegion": "Sydgrønland",
-                "addressCountry": "GL"
-              },
-              "areaServed": "GL",
-              "image": "https://nordcreative.dk/logo-icon.png"
-            })
-          }}
-        />
       </head>
       <body className="bg-black text-white"><Providers><Header />{children}<BackToTop /><ContactModal /></Providers></body>
       <Analytics />
