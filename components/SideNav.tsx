@@ -28,7 +28,7 @@ export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
   const [hovered, setHovered] = useState('');
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024)
+    const check = () => setIsMobile(window.innerWidth < 1728)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
@@ -80,7 +80,7 @@ export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
 
   return (
     <div
-      className="max-[1024px]:hidden"
+      className="max-[1727px]:hidden"
       style={{
         position: 'fixed',
         left: '28px',
