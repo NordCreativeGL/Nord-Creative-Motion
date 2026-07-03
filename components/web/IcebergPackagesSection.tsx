@@ -279,7 +279,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     const items: Item[] = []
     const scenes: Scene[] = []
     if (!stack) {
-      const isMobileCanvas = w < 1400
+      const isMobileCanvas = w < 1728
       const wl = isMobileCanvas ? h * 0.45 : h * 0.41
       const wlAnchor = isMobileCanvas ? h * 0.35 : h * 0.26
       const maxAAll = Math.max(...DEPTH_BERGS.map(bMaxA))
