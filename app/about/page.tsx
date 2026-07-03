@@ -41,7 +41,7 @@ export default function About() {
 
   return (
     <main className="min-h-screen text-white">
-      <SideNav items={[
+      <SideNav hideOnMedium items={[
         { label: t[lang].nav1, id: 'about-text' },
         { label: t[lang].nav2, id: 'about-cta' },
       ]} />

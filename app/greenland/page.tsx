@@ -64,7 +64,7 @@ export default function GreenlandPage() {
 
   return (
     <main style={{ background: '#000000' }}>
-      {!isMobile && <SideNav items={[
+      {!isMobile && <SideNav hideOnMedium items={[
         { label: t[lang].nav1, id: 'gl-working' },
         { label: t[lang].nav2, id: 'gl-process' },
         { label: t[lang].nav3, id: 'gl-why' },

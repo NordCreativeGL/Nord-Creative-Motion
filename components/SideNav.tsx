@@ -14,7 +14,7 @@ const DEFAULT_ITEMS: { key: DefaultItemKey; id: string }[] = [
   { key: 'work', id: 'cta' },
 ];
 
-export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
+export default function SideNav({ items: itemsProp, hideOnMedium = false }: { items?: NavItem[]; hideOnMedium?: boolean }) {
   const { lang } = useLang();
 
   const t = {
@@ -28,11 +28,20 @@ export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
   const [hovered, setHovered] = useState('');
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1728)
+    const check = () => setIsMobile(window.innerWidth < 1024)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  const [isMediumHidden, setIsMediumHidden] = useState(false)
+  useEffect(() => {
+    if (!hideOnMedium) return
+    const check = () => setIsMediumHidden(window.innerWidth >= 1024 && window.innerWidth < 1728)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [hideOnMedium])
 
   useEffect(() => {
     const onScroll = () => {
@@ -88,7 +97,7 @@ export default function SideNav({ items: itemsProp }: { items?: NavItem[] }) {
         top: 'auto',
         transform: 'none',
         zIndex: 50,
-        display: isMobile ? 'none' : 'flex',
+        display: (isMobile || isMediumHidden) ? 'none' : 'flex',
         flexDirection: 'column',
         gap: '10px',
         opacity: visible ? 1 : 0,
