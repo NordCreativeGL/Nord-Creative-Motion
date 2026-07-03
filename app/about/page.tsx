@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import SideNav from "@/components/SideNav";
@@ -7,6 +8,13 @@ import { useContactModal } from '@/contexts/ContactModalContext'
 export default function About() {
   const { lang } = useLang()
   const { openModal } = useContactModal()
+  const [isMedium, setIsMedium] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1728)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const t = {
     en: {
@@ -41,7 +49,7 @@ export default function About() {
 
   return (
     <main className="min-h-screen text-white">
-      <SideNav hideOnMedium items={[
+      <SideNav items={[
         { label: t[lang].nav1, id: 'about-text' },
         { label: t[lang].nav2, id: 'about-cta' },
       ]} />
@@ -64,7 +72,7 @@ export default function About() {
 
       {/* Story */}
       <section id="about-text" data-snap="true" className="bg-black min-h-screen flex items-center">
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 min-[1024px]:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 min-[1024px]:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full" style={isMedium ? { paddingLeft: 'clamp(76px, calc(940px - 50vw), 300px)' } : undefined}>
           <div className="flex flex-col justify-between h-full">
             <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">{t[lang].eyebrow}</p>
             <Image
