@@ -16,6 +16,14 @@ export default function GreenlandSection() {
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  const [isMedium, setIsMedium] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1728)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const sectionRef = useRef<HTMLDivElement>(null);
   const labelRef   = useRef<HTMLDivElement>(null);
   const line1Ref   = useRef<HTMLDivElement>(null);
@@ -143,7 +151,7 @@ export default function GreenlandSection() {
             paddingBottom: isMobile ? '8px' : undefined,
           }}
         >
-          <div style={{ maxWidth: isMobile ? '100%' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
+          <div style={{ maxWidth: isMobile ? '100%' : isMedium ? 'calc(46vw - clamp(180px, 18vw, 260px) - 24px)' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             {t[lang].eyebrow}
           </div>
