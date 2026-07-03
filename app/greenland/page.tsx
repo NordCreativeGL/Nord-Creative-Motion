@@ -86,7 +86,7 @@ export default function GreenlandPage() {
 
       {/* ── Section 2: Working in Greenland ── */}
       <section id="gl-working" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', position: 'relative', zIndex: 1, paddingTop: isMobile ? '80px' : undefined, paddingBottom: isMobile ? '64px' : undefined }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={isMedium ? { paddingLeft: 'clamp(76px, calc(940px - 50vw), 300px)' } : undefined}>
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={isMedium ? { maxWidth: 'calc(100vw - 520px)' } : undefined}>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 3fr', gap: isMobile ? '28px' : '64px', alignItems: 'stretch' }}>
             <div>
               <p style={{
@@ -139,7 +139,7 @@ export default function GreenlandPage() {
 
       {/* ── Section 3: How we work ── */}
       <section id="gl-process" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', paddingTop: isMobile ? '80px' : '0', paddingBottom: isMobile ? '64px' : '0', position: 'relative', zIndex: 1 }}>
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: isMobile ? 'none' : '100vh', overflow: isMobile ? 'visible' : 'hidden', ...(isMedium ? { paddingLeft: 'clamp(76px, calc(940px - 50vw), 300px)' } : {}) }}>
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16" style={{ maxHeight: isMobile ? 'none' : '100vh', overflow: isMobile ? 'visible' : 'hidden', ...(isMedium ? { maxWidth: 'calc(100vw - 520px)' } : {}) }}>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '3fr 2fr', gap: isMobile ? '28px' : '2rem', alignItems: isMobile ? 'flex-start' : 'center', maxHeight: isMobile ? 'none' : '90vh', overflow: isMobile ? 'visible' : 'hidden' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               <video
@@ -206,7 +206,7 @@ export default function GreenlandPage() {
 
       {/* ── Section 4: Why choose us ── */}
       <section id="gl-why" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', position: 'relative', zIndex: 1, paddingTop: isMobile ? '60px' : undefined, paddingBottom: isMobile ? '60px' : undefined }}>
-        <div className="mx-auto max-w-7xl px-6 w-full" style={isMedium ? { paddingLeft: 'clamp(76px, calc(940px - 50vw), 300px)' } : undefined}>
+        <div className="mx-auto max-w-7xl px-6 w-full" style={isMedium ? { maxWidth: 'calc(100vw - 520px)' } : undefined}>
           <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: isMobile ? 'auto' : 500 }}>
             <video
               src="https://cdn.nordcreative.dk/P16.mp4"
