@@ -129,7 +129,8 @@ export default function GreenlandPage() {
                   borderRadius: 14,
                   maxHeight: '58vh',
                   width: '100%',
-                  height: '100%',
+                  height: 'auto',
+                  alignSelf: 'flex-start',
                 }}
               />
             </div>
@@ -207,7 +208,7 @@ export default function GreenlandPage() {
       {/* ── Section 4: Why choose us ── */}
       <section id="gl-why" data-snap="true" style={{ height: isMobile ? 'auto' : '100vh', minHeight: isMobile ? '100dvh' : undefined, background: 'transparent', display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', overflow: isMobile ? 'visible' : 'hidden', position: 'relative', zIndex: 1, paddingTop: isMobile ? '60px' : undefined, paddingBottom: isMobile ? '60px' : undefined }}>
         <div className="mx-auto max-w-7xl px-6 w-full" style={isMedium ? { maxWidth: 'calc(100vw - 480px)' } : undefined}>
-          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, minHeight: isMobile ? 'auto' : 500 }}>
+          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 14, aspectRatio: isMobile ? undefined : '16/9', minHeight: isMobile ? 'auto' : 500 }}>
             <video
               src="https://cdn.nordcreative.dk/P16.mp4"
               autoPlay
