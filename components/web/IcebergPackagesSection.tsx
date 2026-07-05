@@ -691,8 +691,28 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           el.style.left = (b.cx - wdt / 2) + 'px'
           el.style.top = (b.wl + topOff) + 'px'
           el.style.width = wdt + 'px'
-          el.style.fontSize = fs + 'px'
           el.style.transformOrigin = '50% ' + (-topOff) + 'px'
+          el.style.fontSize = fs + 'px'
+          const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
+          if (isMediumNow) {
+            const label = el.children[0] as HTMLElement | undefined
+            const name = el.children[1] as HTMLElement | undefined
+            const feats = el.children[3] as HTMLElement | undefined
+            if (label && name && feats) {
+              label.style.fontSize = FONT_TIER_LABEL + 'px'
+              name.style.fontSize = FONT_PACKAGE_NAME + 'px'
+              feats.style.fontSize = FONT_FEATURE_ITEM + 'px'
+              const availKeel = b.depth * 0.60 - topOff
+              const natural = el.scrollHeight
+              const fitScale = Math.max(0.66, Math.min(1, availKeel / natural))
+              if (fitScale < 1) {
+                el.style.fontSize = (fs * fitScale) + 'px'
+                label.style.fontSize = (FONT_TIER_LABEL * fitScale) + 'px'
+                name.style.fontSize = (FONT_PACKAGE_NAME * fitScale) + 'px'
+                feats.style.fontSize = (FONT_FEATURE_ITEM * fitScale) + 'px'
+              }
+            }
+          }
           el.style.visibility = 'visible'
         })
       }
