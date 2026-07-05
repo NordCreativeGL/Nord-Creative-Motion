@@ -137,8 +137,7 @@ export default function GreenlandPage() {
                   borderRadius: 14,
                   maxHeight: '58vh',
                   width: '100%',
-                  height: 'auto',
-                  alignSelf: 'flex-start',
+                  height: '100%',
                 }}
               />
             </div>
