@@ -136,7 +136,7 @@ export default function GreenlandPage() {
                   objectFit: 'cover',
                   borderRadius: 14,
                   maxHeight: '58vh',
-                  width: '100%',
+                  width: isMedium ? 'auto' : '100%',
                   height: '100%',
                 }}
               />
