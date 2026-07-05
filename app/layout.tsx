@@ -21,6 +21,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://nordcreative.dk",
   },
+
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+    shortcut: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
