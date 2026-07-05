@@ -133,10 +133,10 @@ export default function GreenlandPage() {
                 preload="none"
                 style={{
                   aspectRatio: '16/9',
-                  objectFit: 'cover',
+                  objectFit: isMedium ? 'contain' : 'cover',
                   borderRadius: 14,
                   maxHeight: '58vh',
-                  width: isMedium ? 'auto' : '100%',
+                  width: '100%',
                   height: '100%',
                 }}
               />
