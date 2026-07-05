@@ -167,8 +167,8 @@ export default function BasedInGreenland() {
 
       const finalCX = isMobileNow ? W * 0.50 : W * 0.74
       const finalCY = isMobileNow ? H * 0.50 : H * 0.51
-      const finalScale = isMobileNow ? Math.round(5800 * (window.innerWidth / 1728)) : Math.round(2050 * (Math.max(window.innerWidth, 1710) / 1728))
-      const midScale = isMobileNow ? 135 : Math.round(450 * (Math.min(window.innerWidth, 1710) / 1710))
+      const finalScale = isMobileNow ? Math.round(5800 * (window.innerWidth / 1728)) : Math.round(2050 * (window.innerWidth / 1728))
+      const midScale = isMobileNow ? 135 : window.innerWidth >= 1710 ? 450 : Math.round(450 * (window.innerWidth / 1710) * 0.75)
 
       let textFired = false
 
