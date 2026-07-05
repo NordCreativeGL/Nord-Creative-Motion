@@ -151,7 +151,7 @@ export default function GreenlandSection() {
             paddingBottom: isMobile ? '8px' : undefined,
           }}
         >
-          <div style={{ maxWidth: isMobile ? '100%' : isMedium ? 'calc(46vw - clamp(60px, 8vw, 140px) - 24px)' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : isMedium ? 'clamp(60px, 8vw, 140px)' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
+          <div style={{ maxWidth: isMobile ? '100%' : isMedium ? 'calc(46vw - clamp(210px, 15vw, 240px) - 8px)' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : isMedium ? 'clamp(210px, 15vw, 240px)' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             {t[lang].eyebrow}
           </div>
@@ -239,7 +239,7 @@ export default function GreenlandSection() {
           height: isMobile ? 'auto' : '100vh',
           display: 'flex',
           flexDirection: 'column',
-          padding: isMobile ? '0 24px 0 24px' : '2.5rem 2rem 2.5rem 6rem',
+          padding: isMobile ? '0 24px 0 24px' : isMedium ? '2.5rem 2rem 2.5rem 2.5rem' : '2.5rem 2rem 2.5rem 6rem',
           gap: '0.75rem',
         }}>
           <div ref={video1Ref} style={{
