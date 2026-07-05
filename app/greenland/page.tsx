@@ -305,9 +305,9 @@ export default function GreenlandPage() {
                     style={{
                       display: 'block',
                       border: '1px solid rgba(255,255,255,0.2)',
-                      padding: '14px 32px',
+                      padding: isMedium ? '14px 20px' : '14px 32px',
                       borderRadius: '999px',
-                      fontSize: 'clamp(17px, 1.1vw, 20px)',
+                      fontSize: isMedium ? '15px' : 'clamp(17px, 1.1vw, 20px)',
                       fontWeight: 300,
                       width: '100%',
                       textAlign: 'center' as const,
@@ -323,9 +323,9 @@ export default function GreenlandPage() {
                     style={{
                       display: 'block',
                       border: '1px dashed rgba(255,255,255,0.2)',
-                      padding: '14px 32px',
+                      padding: isMedium ? '14px 20px' : '14px 32px',
                       borderRadius: '999px',
-                      fontSize: 'clamp(17px, 1.1vw, 20px)',
+                      fontSize: isMedium ? '15px' : 'clamp(17px, 1.1vw, 20px)',
                       fontWeight: 300,
                       textDecoration: 'none',
                       width: '100%',
