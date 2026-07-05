@@ -151,7 +151,7 @@ export default function GreenlandSection() {
             paddingBottom: isMobile ? '8px' : undefined,
           }}
         >
-          <div style={{ maxWidth: isMobile ? '100%' : isMedium ? 'calc(46vw - clamp(210px, 15vw, 240px) - 8px)' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : isMedium ? 'clamp(210px, 15vw, 240px)' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
+          <div style={{ maxWidth: isMobile ? '100%' : isMedium ? 'calc(46vw - clamp(160px, 13vw, 200px) - 8px)' : 'clamp(680px, 40vw, 820px)', paddingLeft: isMobile ? '24px' : isMedium ? 'clamp(160px, 13vw, 200px)' : 'clamp(180px, 18vw, 260px)', paddingRight: isMobile ? '24px' : undefined }}>
           <div ref={labelRef} style={{ fontSize: '0.875rem', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 24 }}>
             {t[lang].eyebrow}
           </div>
