@@ -28,6 +28,14 @@ export default function GreenlandPage() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  const [isStudio, setIsStudio] = useState(false)
+  useEffect(() => {
+    const check = () => setIsStudio(window.innerWidth >= 1900)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   const { lang } = useLang()
   const { openModal } = useContactModal()
 
@@ -330,7 +338,7 @@ export default function GreenlandPage() {
                       textDecoration: 'none',
                       width: '100%',
                       textAlign: 'center' as const,
-                      marginTop: isMobile ? '0' : '72px',
+                      marginTop: isMobile ? '0' : isStudio ? '72px' : '27px',
                     }}
                   >
                     {t[lang].cta2}
