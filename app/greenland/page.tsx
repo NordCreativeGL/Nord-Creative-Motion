@@ -123,7 +123,7 @@ export default function GreenlandPage() {
                 {t[lang].working}
               </p>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', ...(isMedium ? { borderRadius: 14, overflow: 'hidden' } : {}) }}>
               <video
                 src="https://cdn.nordcreative.dk/P18K.mp4"
                 autoPlay
