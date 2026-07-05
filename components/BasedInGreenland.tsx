@@ -168,6 +168,7 @@ export default function BasedInGreenland() {
       const finalCX = isMobileNow ? W * 0.50 : W * 0.74
       const finalCY = isMobileNow ? H * 0.50 : H * 0.51
       const finalScale = isMobileNow ? Math.round(5800 * (window.innerWidth / 1728)) : Math.round(2050 * (Math.max(window.innerWidth, 1710) / 1728))
+      const midScale = isMobileNow ? 135 : Math.round(450 * (Math.min(window.innerWidth, 1710) / 1710))
 
       let textFired = false
 
@@ -213,17 +214,17 @@ export default function BasedInGreenland() {
 
           if (p < 0.22) {
             const q = eo(p / 0.22)
-            scale = lerp(70, isMobileNow ? 135 : 450, q)
+            scale = lerp(70, midScale, q)
             rotLon = lerp(-134, -80, q)
             rotLat = lerp(25, -18, q)
           } else if (p < 0.60) {
             const q = eio((p - 0.22) / 0.38)
-            scale = isMobileNow ? 135 : 450
+            scale = midScale
             rotLon = lerp(-80, 100, q)
             rotLat = -18
           } else {
             const q = eio((p - 0.60) / 0.26)
-            scale = lerp(isMobileNow ? 135 : 450, finalScale, q)
+            scale = lerp(midScale, finalScale, q)
             rotLon = lerp(100, 42, q)
             rotLat = lerp(-18, -72, q)
             cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
