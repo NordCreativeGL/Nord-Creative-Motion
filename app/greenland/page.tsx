@@ -338,7 +338,7 @@ export default function GreenlandPage() {
                       textDecoration: 'none',
                       width: '100%',
                       textAlign: 'center' as const,
-                      marginTop: isMobile ? '0' : isStudio ? '72px' : '27px',
+                      marginTop: isMobile ? '0' : isStudio ? '72px' : isMedium ? '48px' : '27px',
                     }}
                   >
                     {t[lang].cta2}
