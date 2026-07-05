@@ -28,6 +28,14 @@ export default function WebPage() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  const [isMedium, setIsMedium] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1710)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
   const starCanvasRef = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
     const canvas = starCanvasRef.current
@@ -134,7 +142,7 @@ export default function WebPage() {
             pointerEvents: 'none',
             padding: sectionPadding,
             paddingTop: isMobile ? '72px' : '40px',
-            paddingBottom: isMobile ? '32px' : '80px',
+            paddingBottom: isMobile ? '32px' : isMedium ? '24px' : '80px',
             fontFamily: "var(--font-geist-sans), sans-serif",
             background: 'linear-gradient(to top, rgba(4,14,22,0.58) 0%, rgba(4,14,22,0.80) 50%, rgba(4,14,22,0) 100%)',
           }}
