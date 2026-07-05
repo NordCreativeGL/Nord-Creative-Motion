@@ -19,7 +19,7 @@ export default function GreenlandSection() {
 
   const [isMedium, setIsMedium] = useState(false)
   useEffect(() => {
-    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1728)
+    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1710)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
