@@ -938,10 +938,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             style={{
               position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
               display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-              textShadow: '0 1px 12px rgba(0,8,16,0.85)',
+              textShadow: '0 1px 16px rgba(0,0,0,1), 0 0 28px rgba(0,0,0,0.95)',
             }}
           >
-            <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+            <span style={{ fontFamily: PRIMARY_FONT, fontSize: (FONT_TIER_LABEL + 2) + 'px', letterSpacing: '0.3em', color: 'rgba(180,245,235,1)' }}>
               {tier.lbl}
             </span>
             <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
@@ -956,7 +956,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               textShadow: '0 1px 10px rgba(0,8,16,0.65)',
             }}
           >
-            <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0 0 0.55em' }} />
             <div style={{
               display: 'flex', flexDirection: 'column', gap: '0.5em',
               fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
