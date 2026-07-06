@@ -72,7 +72,7 @@ export default function About() {
 
       {/* Story */}
       <section id="about-text" data-snap="true" className="bg-black min-h-screen flex items-center">
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 min-[1024px]:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full" style={isMedium ? { maxWidth: 'calc(100vw - 480px)' } : undefined}>
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 min-[1024px]:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full" style={isMedium ? { maxWidth: 'calc(100vw - 480px)', gap: '40px' } : undefined}>
           <div className="flex flex-col justify-between h-full">
             <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">{t[lang].eyebrow}</p>
             <Image
@@ -83,10 +83,10 @@ export default function About() {
               className="block self-start h-10 min-[1900px]:h-12 w-auto mb-4 opacity-90"
             />
             <div className="space-y-6">
-              <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">{t[lang].p1}</p>
-              <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">{t[lang].p2}</p>
-              <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">{t[lang].p3}</p>
-              <p className="text-[clamp(1.125rem,1.15vw,1.5rem)] text-white/60 leading-relaxed">{t[lang].p4}</p>
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p1}</p>
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p2}</p>
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p3}</p>
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p4}</p>
             </div>
           </div>
           <div className="relative rounded-2xl overflow-hidden aspect-[3/4] w-full">
