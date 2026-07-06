@@ -679,7 +679,8 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       if (!lay) return
       if (lay.key !== key) {
         key = lay.key
-        if (sectionRef.current) sectionRef.current.style.minHeight = lay.stack ? lay.wantH + 'px' : '100dvh'
+        const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
+        if (sectionRef.current) sectionRef.current.style.minHeight = lay.stack ? lay.wantH + 'px' : (isMediumNow ? '840px' : '100dvh')
         setTimeout(fit, 60)
         lay.items.forEach((b, i) => {
           const el = tierRefs.current[i]
@@ -693,7 +694,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           el.style.width = wdt + 'px'
           el.style.transformOrigin = '50% ' + (-topOff) + 'px'
           el.style.fontSize = fs + 'px'
-          const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
           if (isMediumNow) {
             const label = el.children[0] as HTMLElement | undefined
             const name = el.children[1] as HTMLElement | undefined
@@ -702,9 +702,13 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               label.style.fontSize = FONT_TIER_LABEL + 'px'
               name.style.fontSize = FONT_PACKAGE_NAME + 'px'
               feats.style.fontSize = FONT_FEATURE_ITEM + 'px'
-              const availKeel = b.depth * 0.60 - topOff
               const natural = el.scrollHeight
-              const fitScale = Math.max(0.66, Math.min(1, availKeel / natural))
+              const sectionH = sectionRef.current ? sectionRef.current.clientHeight : window.innerHeight
+              const HOVER = 1.5
+              const SAFE = 24
+              const containRoom = b.depth - topOff
+              const hoverRoom = (sectionH - SAFE - b.wl) / HOVER - topOff
+              const fitScale = Math.max(0.72, Math.min(1, containRoom / natural, hoverRoom / natural))
               if (fitScale < 1) {
                 el.style.fontSize = (fs * fitScale) + 'px'
                 label.style.fontSize = (FONT_TIER_LABEL * fitScale) + 'px'
