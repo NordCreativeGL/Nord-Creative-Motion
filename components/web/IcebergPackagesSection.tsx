@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLang } from '@/contexts/LanguageContext'
 
 // ---------- types ----------
@@ -583,6 +583,8 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
+  const headerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const featsRefs = useRef<(HTMLDivElement | null)[]>([])
   const { lang } = useLang()
   const [isMobile, setIsMobile] = useState(false)
   const [mobileImgs, setMobileImgs] = useState<{
@@ -689,11 +691,31 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           const topOff = Math.max(16, b.depth * 0.06)
           const avail = b.depth * (window.innerWidth < 768 ? 0.80 : 0.56) - topOff
           const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]))
-          el.style.left = (b.cx - wdt / 2) + 'px'
-          el.style.top = (b.wl + topOff) + 'px'
-          el.style.width = wdt + 'px'
-          el.style.transformOrigin = '50% ' + (-topOff) + 'px'
-          el.style.fontSize = fs + 'px'
+          const headerEl = headerRefs.current[i]
+          const featsEl = featsRefs.current[i]
+          const headerH = headerEl ? headerEl.offsetHeight : 0
+          const peakRoom = b.topH * 0.52
+          const headerTop = b.wl - Math.min(peakRoom, headerH + 8)
+          const featsTopOff = Math.max(10, b.depth * 0.05)
+          const featsAvail = b.depth * 0.78 - featsTopOff
+          const featsNatural = featsEl ? featsEl.scrollHeight : 1
+          const featsFs = Math.max(9, Math.min(FONT_FEATURE_ITEM, featsAvail / (featsNatural / FONT_FEATURE_ITEM)))
+          if (headerEl) {
+            headerEl.style.left = (b.cx - wdt / 2) + 'px'
+            headerEl.style.top = headerTop + 'px'
+            headerEl.style.width = wdt + 'px'
+            headerEl.style.transformOrigin = '50% ' + (b.wl - headerTop) + 'px'
+            headerEl.style.visibility = 'visible'
+          }
+          if (featsEl) {
+            featsEl.style.left = (b.cx - wdt / 2) + 'px'
+            featsEl.style.top = (b.wl + featsTopOff) + 'px'
+            featsEl.style.width = wdt + 'px'
+            featsEl.style.fontSize = featsFs + 'px'
+            featsEl.style.transformOrigin = '50% ' + (-featsTopOff) + 'px'
+            featsEl.style.visibility = 'visible'
+          }
+          el.style.visibility = 'hidden'
           if (isMediumNow) {
             const label = el.children[0] as HTMLElement | undefined
             const name = el.children[1] as HTMLElement | undefined
@@ -717,16 +739,23 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               }
             }
           }
-          el.style.visibility = 'visible'
+          el.style.visibility = 'hidden'
         })
       }
       lay.items.forEach((b, i) => {
-        const el = tierRefs.current[i]
-        if (!el) return
         const hv = depth.hoverVal(i)
         const sc = 1 + 0.50 * hv
-        el.style.transform = 'translateY(' + depth.bob(i, t).toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')'
-        el.style.zIndex = hv > 0.02 ? '3' : '1'
+        const bob = depth.bob(i, t)
+        const headerEl = headerRefs.current[i]
+        const featsEl = featsRefs.current[i]
+        if (headerEl) {
+          headerEl.style.transform = 'translateY(' + bob.toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')'
+          headerEl.style.zIndex = hv > 0.02 ? '3' : '1'
+        }
+        if (featsEl) {
+          featsEl.style.transform = 'translateY(' + bob.toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')'
+          featsEl.style.zIndex = hv > 0.02 ? '3' : '1'
+        }
       })
     }
 
@@ -899,30 +928,44 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       </div>
 
       {TIERS.map((tier, i) => (
-        <div
-          key={tier.name}
-          ref={(el) => { tierRefs.current[i] = el }}
-          style={{
-            position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
-            display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-            textShadow: '0 1px 10px rgba(0,8,16,0.65)',
-          }}
-        >
-          <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
-            {tier.lbl}
-          </span>
-          <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
-            {tier.name}
-          </span>
-          <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0.5em 0 0.55em' }} />
-          <div style={{
-            display: 'flex', flexDirection: 'column', gap: '0.5em',
-            fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
-            color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
-          }}>
-            {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
+        <React.Fragment key={tier.name}>
+          <div
+            ref={(el) => { tierRefs.current[i] = el }}
+            style={{ position: 'absolute', visibility: 'hidden', pointerEvents: 'none' }}
+          />
+          <div
+            ref={(el) => { headerRefs.current[i] = el }}
+            style={{
+              position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+              textShadow: '0 1px 12px rgba(0,8,16,0.85)',
+            }}
+          >
+            <span style={{ fontFamily: PRIMARY_FONT, fontSize: FONT_TIER_LABEL + 'px', letterSpacing: '0.3em', color: 'rgba(140,235,225,0.9)' }}>
+              {tier.lbl}
+            </span>
+            <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+              {tier.name}
+            </span>
           </div>
-        </div>
+          <div
+            ref={(el) => { featsRefs.current[i] = el }}
+            style={{
+              position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+              textShadow: '0 1px 10px rgba(0,8,16,0.65)',
+            }}
+          >
+            <div style={{ width: '2.4em', height: '1px', background: 'rgba(140,235,225,0.4)', margin: '0 0 0.55em' }} />
+            <div style={{
+              display: 'flex', flexDirection: 'column', gap: '0.5em',
+              fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
+              color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
+            }}>
+              {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
+            </div>
+          </div>
+        </React.Fragment>
       ))}
     </section>
   )
