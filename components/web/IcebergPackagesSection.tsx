@@ -576,8 +576,8 @@ const PRIMARY_FONT = "var(--font-geist-sans), sans-serif"
 
 // Fixed text sizes shared by all three icebergs (independent of per-tier keel geometry/scale)
 const FONT_TIER_LABEL = 11   // px — "TIER I / II / III" eyebrow
-const FONT_PACKAGE_NAME = 26 // px — "Starter / Business / Full Production"
-const FONT_FEATURE_ITEM = 14 // px — feature list lines
+const FONT_PACKAGE_NAME = 28 // px — "Starter / Business / Full Production"
+const FONT_FEATURE_ITEM = 16 // px — feature list lines
 
 export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
