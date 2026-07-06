@@ -706,7 +706,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
               const sectionH = sectionRef.current ? sectionRef.current.clientHeight : window.innerHeight
               const HOVER = 1.5
               const SAFE = 24
-              const containRoom = b.depth - topOff
+              const containRoom = b.depth * 0.78 - topOff
               const hoverRoom = (sectionH - SAFE - b.wl) / HOVER - topOff
               const fitScale = Math.max(0.72, Math.min(1, containRoom / natural, hoverRoom / natural))
               if (fitScale < 1) {
