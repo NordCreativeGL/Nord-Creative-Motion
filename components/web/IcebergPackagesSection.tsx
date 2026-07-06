@@ -684,6 +684,8 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
         if (sectionRef.current) sectionRef.current.style.minHeight = lay.stack ? lay.wantH + 'px' : (isMediumNow ? '840px' : '100dvh')
         setTimeout(fit, 60)
+        const fontPackageName = isMediumNow ? 26 : FONT_PACKAGE_NAME
+        const fontFeatureItem = isMediumNow ? 14 : FONT_FEATURE_ITEM
         lay.items.forEach((b, i) => {
           const el = tierRefs.current[i]
           if (!el) return
@@ -721,8 +723,8 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             const feats = el.children[3] as HTMLElement | undefined
             if (label && name && feats) {
               label.style.fontSize = FONT_TIER_LABEL + 'px'
-              name.style.fontSize = FONT_PACKAGE_NAME + 'px'
-              feats.style.fontSize = FONT_FEATURE_ITEM + 'px'
+              name.style.fontSize = fontPackageName + 'px'
+              feats.style.fontSize = fontFeatureItem + 'px'
               const natural = el.scrollHeight
               const sectionH = sectionRef.current ? sectionRef.current.clientHeight : window.innerHeight
               const HOVER = 1.5
@@ -943,7 +945,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             <span style={{ fontFamily: PRIMARY_FONT, fontSize: (FONT_TIER_LABEL + 2) + 'px', letterSpacing: '0.3em', color: 'rgba(180,245,235,1)' }}>
               {tier.lbl}
             </span>
-            <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap' }}>
+            <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap', fontFamily: PRIMARY_FONT }}>
               {tier.name}
             </span>
           </div>
