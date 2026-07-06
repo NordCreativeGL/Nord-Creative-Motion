@@ -575,7 +575,7 @@ const TOTAL_EM = [13.2, 16.5, 14.9]
 const PRIMARY_FONT = "var(--font-geist-sans), sans-serif"
 
 // Fixed text sizes shared by all three icebergs (independent of per-tier keel geometry/scale)
-const FONT_TIER_LABEL = 13   // px — "TIER I / II / III" eyebrow
+const FONT_TIER_LABEL = 11   // px — "TIER I / II / III" eyebrow
 const FONT_PACKAGE_NAME = 26 // px — "Starter / Business / Full Production"
 const FONT_FEATURE_ITEM = 14 // px — feature list lines
 
@@ -694,8 +694,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           const headerEl = headerRefs.current[i]
           const featsEl = featsRefs.current[i]
           const headerH = headerEl ? headerEl.offsetHeight : 0
-          const peakRoom = b.topH * 0.52
-          const headerTop = b.wl - Math.min(peakRoom, headerH + 8)
+          const headerTop = b.wl - headerH - 8
           const featsTopOff = Math.max(10, b.depth * 0.05)
           const featsAvail = b.depth * 0.78 - featsTopOff
           const featsNatural = featsEl ? featsEl.scrollHeight : 1
