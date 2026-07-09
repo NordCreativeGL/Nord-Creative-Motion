@@ -88,6 +88,7 @@ interface DepthPainter {
   hoverVal: (i: number) => number
   setDpr: (d: number) => void
   setFont: (family: string) => void
+  setFeatures: (feats: string[][]) => void
 }
 
 // ---------- pure helpers ----------
@@ -247,6 +248,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
   let px = -1e4, py = -1e4
   let _dpr = 1
   let _fontFamily = 'sans-serif'
+  let _features: string[][] = [[], [], []]
 
   function pathB(c: CanvasRenderingContext2D, pts: Point[]) {
     c.beginPath()
@@ -531,6 +533,60 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     }
   }
 
+  const FEATURE_LINE_HEIGHT_EM = 1.5
+  const FEATURE_MIN_SIZE = 9
+  const FEATURE_TOP_GAP_FACTOR = 0.05
+  const FEATURE_TOP_GAP_MIN = 10
+  const FEATURE_AVAIL_FACTOR = 0.78
+  const FEATURE_WIDTH_SAFETY = 0.84
+  const FEATURE_MEASURE_REF_SIZE = 100
+
+  function fitFeatureFontSize(feats: string[], availWidth: number, availDepthHeight: number): number {
+    const n = feats.length
+    const depthFit = availDepthHeight / (n * FEATURE_LINE_HEIGHT_EM)
+
+    ctx.font = '300 ' + FEATURE_MEASURE_REF_SIZE + 'px ' + _fontFamily
+    let maxRefWidth = 1
+    for (const line of feats) {
+      const w = ctx.measureText(line).width
+      if (w > maxRefWidth) maxRefWidth = w
+    }
+    const widthFit = (availWidth * FEATURE_MEASURE_REF_SIZE) / maxRefWidth
+
+    return Math.max(FEATURE_MIN_SIZE, Math.min(FONT_FEATURE_ITEM, depthFit, widthFit))
+  }
+
+  function drawFeaturesText(cur: Layout, t: number) {
+    for (let i = 0; i < cur.anchors.length; i++) {
+      const feats = _features[i]
+      if (!feats || !feats.length) continue
+      const a = cur.anchors[i]
+      const hv = hov[i]
+      const scl = 1 + 0.50 * hv
+      const bob = bobOf(i, t)
+
+      const topOff = Math.max(FEATURE_TOP_GAP_MIN, a.depth * FEATURE_TOP_GAP_FACTOR)
+      const availDepthHeight = a.depth * FEATURE_AVAIL_FACTOR - topOff
+      const availWidth = a.halfW * 2 * FEATURE_WIDTH_SAFETY
+      const fontSize = fitFeatureFontSize(feats, availWidth, availDepthHeight)
+      const lineH = fontSize * FEATURE_LINE_HEIGHT_EM
+
+      ctx.save()
+      ctx.translate(a.cx, a.wl + bob)
+      ctx.scale(scl, scl)
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'top'
+      ctx.shadowColor = 'rgba(0,8,16,0.65)'
+      ctx.shadowBlur = 6
+      ctx.font = '300 ' + fontSize.toFixed(2) + 'px ' + _fontFamily
+      ctx.fillStyle = 'rgba(232,250,252,0.85)'
+      feats.forEach((line, li) => {
+        ctx.fillText(line, 0, topOff + li * lineH)
+      })
+      ctx.restore()
+    }
+  }
+
   function draw(t: number) {
     const w = canvas.width / _dpr, h = canvas.height / _dpr
     if (!L || L.w !== w || L.h !== h) resize(w, h)
@@ -582,6 +638,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       ctx.restore()
     }
     drawHeaderText(cur, t)
+    drawFeaturesText(cur, t)
     ctx.drawImage(cur.fgC, 0, 0, w, h)
   }
 
@@ -592,9 +649,10 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
   }
   function setDpr(d: number) { _dpr = d }
   function setFont(family: string) { _fontFamily = family }
+  function setFeatures(feats: string[][]) { _features = feats }
   function pointer(x: number, y: number) { px = x; py = y }
   function hoverVal(i: number) { return hov[i] }
-  return { draw, resize, layout, bob: bobOf, pointer, hoverVal, setDpr, setFont }
+  return { draw, resize, layout, bob: bobOf, pointer, hoverVal, setDpr, setFont, setFeatures }
 }
 
 // ---------- tier content ----------
@@ -629,8 +687,8 @@ const FONT_FEATURE_ITEM = 16 // px — feature list lines
 export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
+  const depthRef = useRef<DepthPainter | null>(null)
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
-  const featsRefs = useRef<(HTMLDivElement | null)[]>([])
   const { lang } = useLang()
   const [isMobile, setIsMobile] = useState(false)
   const [mobileImgs, setMobileImgs] = useState<{
@@ -660,6 +718,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       t3: ['Alt i Business','Op til 12 sider','Foto & videoproduktion','Avancerede animationer','Flersproget (3+ sprog)','Avanceret statistik','Prioriteret support (dedikeret)','10 revisionsrunder'],
     }
   }
+
+  useEffect(() => {
+    depthRef.current?.setFeatures([t[lang].t1, t[lang].t2, t[lang].t3])
+  }, [lang, t])
 
   useEffect(() => {
     if (!isMobile) return
@@ -693,9 +755,11 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     const canvas = canvasRef.current
     if (!canvas) return
     const depth = createDepth(canvas, !isMobile)
+    depthRef.current = depth
     const fontFamily = getComputedStyle(document.documentElement)
       .getPropertyValue('--font-geist-sans').trim() || 'sans-serif'
     depth.setFont(fontFamily)
+    depth.setFeatures([t[lang].t1, t[lang].t2, t[lang].t3])
 
     let lastFitW = 0, lastFitH = 0
     function fit() {
@@ -734,43 +798,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         if (sectionRef.current) sectionRef.current.style.minHeight = lay.stack ? lay.wantH + 'px' : (isMediumNow ? '840px' : '100dvh')
         setTimeout(fit, 60)
       }
-      {
-        const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
-        const fontPackageName = isMediumNow ? 26 : FONT_PACKAGE_NAME
-        const fontFeatureItem = isMediumNow ? 14 : FONT_FEATURE_ITEM
-        lay.items.forEach((b, i) => {
-          const el = tierRefs.current[i]
-          if (!el) return
-          const wdt = Math.min(b.halfW * (window.innerWidth < 768 ? 1.5 : 1.08), window.innerWidth < 768 ? 280 : 320)
-          const topOff = Math.max(16, b.depth * 0.06)
-          const avail = b.depth * (window.innerWidth < 768 ? 0.80 : 0.56) - topOff
-          const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]))
-          const featsEl = featsRefs.current[i]
-          const featsTopOff = Math.max(10, b.depth * 0.05)
-          const featsAvail = b.depth * 0.78 - featsTopOff
-          const featsNatural = featsEl ? featsEl.scrollHeight : 1
-          const featsFs = Math.max(9, Math.min(FONT_FEATURE_ITEM, featsAvail / (featsNatural / FONT_FEATURE_ITEM)))
-          if (featsEl) {
-            featsEl.style.left = (b.cx - wdt / 2) + 'px'
-            featsEl.style.top = (b.wl + featsTopOff) + 'px'
-            featsEl.style.width = wdt + 'px'
-            featsEl.style.fontSize = featsFs + 'px'
-            featsEl.style.transformOrigin = '50% ' + (-featsTopOff) + 'px'
-            featsEl.style.visibility = 'visible'
-          }
-          el.style.visibility = 'hidden'
-        })
-      }
-      lay.items.forEach((b, i) => {
-        const hv = depth.hoverVal(i)
-        const sc = 1 + 0.50 * hv
-        const bob = depth.bob(i, t)
-        const featsEl = featsRefs.current[i]
-        if (featsEl) {
-          featsEl.style.transform = 'translateY(' + bob.toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')'
-          featsEl.style.zIndex = hv > 0.02 ? '3' : '1'
-        }
-      })
     }
 
     function loop(t: number) {
@@ -785,6 +812,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       ro.disconnect()
       canvas.removeEventListener('mousemove', handleMouseMove)
       canvas.removeEventListener('mouseleave', handleMouseLeave)
+      depthRef.current = null
     }
   }, [isMobile])
 
@@ -947,22 +975,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             ref={(el) => { tierRefs.current[i] = el }}
             style={{ position: 'absolute', visibility: 'hidden', pointerEvents: 'none' }}
           />
-          <div
-            ref={(el) => { featsRefs.current[i] = el }}
-            style={{
-              position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-              textShadow: '0 1px 10px rgba(0,8,16,0.65)',
-            }}
-          >
-            <div style={{
-              display: 'flex', flexDirection: 'column', gap: '0.5em',
-              fontFamily: PRIMARY_FONT, fontSize: FONT_FEATURE_ITEM + 'px', lineHeight: 1.5,
-              color: 'rgba(232,250,252,0.85)', letterSpacing: '0.02em', whiteSpace: 'nowrap',
-            }}>
-              {[t[lang].t1, t[lang].t2, t[lang].t3][i].map((f) => <span key={f}>{f}</span>)}
-            </div>
-          </div>
         </React.Fragment>
       ))}
     </section>
