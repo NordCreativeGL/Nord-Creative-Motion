@@ -684,6 +684,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
         if (sectionRef.current) sectionRef.current.style.minHeight = lay.stack ? lay.wantH + 'px' : (isMediumNow ? '840px' : '100dvh')
         setTimeout(fit, 60)
+      }
+      {
+        const isMediumNow = window.innerWidth >= 1024 && window.innerWidth < 1710
         const fontPackageName = isMediumNow ? 26 : FONT_PACKAGE_NAME
         const fontFeatureItem = isMediumNow ? 14 : FONT_FEATURE_ITEM
         lay.items.forEach((b, i) => {
