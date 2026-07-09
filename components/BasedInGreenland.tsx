@@ -215,12 +215,12 @@ export default function BasedInGreenland() {
           if (p < 0.22) {
             const q = eo(p / 0.22)
             scale = lerp(70, midScale, q)
-            rotLon = lerp(-134, -80, q)
+            rotLon = lerp(-10, 45, q)
             rotLat = lerp(25, -18, q)
           } else if (p < 0.60) {
             const q = eio((p - 0.22) / 0.38)
             scale = midScale
-            rotLon = lerp(-80, 100, q)
+            rotLon = lerp(45, 100, q)
             rotLat = -18
           } else {
             const q = eio((p - 0.60) / 0.26)
@@ -301,7 +301,7 @@ export default function BasedInGreenland() {
       ref={sectionRef}
       id="based"
       data-snap="true"
-      style={{ height: isMobile ? '900dvh' : '500vh' }}
+      style={{ height: isMobile ? '900dvh' : '350vh' }}
     >
       <div
         style={{
