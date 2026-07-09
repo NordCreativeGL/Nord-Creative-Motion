@@ -235,8 +235,8 @@ export default function BasedInGreenland() {
           drawFrame(scale, rotLon, rotLat, cx, cy, 1, countriesAlpha)
         }
 
-        if (p >= 0.64 && !textFired) { textFired = true; animateText() }
-        if (p < 0.64 && textFired) { textFired = false; hideText() }
+        if (p >= 0.72 && !textFired) { textFired = true; animateText() }
+        if (p < 0.72 && textFired) { textFired = false; hideText() }
 
         animIdRef.current = requestAnimationFrame(drawLoop)
       }
