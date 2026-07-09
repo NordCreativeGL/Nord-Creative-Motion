@@ -512,7 +512,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const nameY = headerBottomY - nameLH * 0.25
 
       ctx.save()
-      ctx.translate(a.cx, a.wl + bob)
+      ctx.translate(a.cx, Math.round(a.wl + bob))
       ctx.scale(scl, scl)
       ctx.textAlign = 'center'
       ctx.shadowColor = 'rgba(0,0,0,0.95)'
@@ -573,7 +573,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const { fontSize, lineH } = fitFeatureLayout(feats, availWidth, availDepthHeight)
 
       ctx.save()
-      ctx.translate(a.cx, a.wl + bob)
+      ctx.translate(a.cx, Math.round(a.wl + bob))
       ctx.scale(scl, scl)
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
