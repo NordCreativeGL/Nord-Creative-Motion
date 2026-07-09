@@ -217,15 +217,15 @@ export default function BasedInGreenland() {
             scale = lerp(70, midScale, q)
             rotLon = lerp(-10, 45, q)
             rotLat = lerp(25, -18, q)
-          } else if (p < 0.60) {
-            const q = eio((p - 0.22) / 0.38)
+          } else if (p < 0.40) {
+            const q = eio((p - 0.22) / 0.18)
             scale = midScale
-            rotLon = lerp(45, 100, q)
+            rotLon = lerp(45, 70, q)
             rotLat = -18
           } else {
-            const q = eio((p - 0.60) / 0.26)
+            const q = eio((p - 0.40) / 0.46)
             scale = lerp(midScale, finalScale, q)
-            rotLon = lerp(100, 42, q)
+            rotLon = lerp(70, 42, q)
             rotLat = lerp(-18, -72, q)
             cx = lerp(W / 2, isMobileNow ? W * 0.50 : W * 0.74, q)
             cy = lerp(isMobileNow ? 0.42 * H : H / 2, isMobileNow ? H * 0.50 : H * 0.51, q)
