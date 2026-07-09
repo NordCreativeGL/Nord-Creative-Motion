@@ -533,7 +533,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     }
   }
 
-  const FEATURE_LINE_HEIGHT_EM = 1.5
+  const FEATURE_LINE_HEIGHT_EM = 2.0
   const FEATURE_MIN_SIZE = 9
   const FEATURE_TOP_GAP_FACTOR = 0.05
   const FEATURE_TOP_GAP_MIN = 10
@@ -571,9 +571,6 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const availDepthHeight = a.depth * FEATURE_AVAIL_FACTOR - topOff
       const availWidth = a.halfW * 2 * FEATURE_WIDTH_SAFETY
       const { fontSize, lineH } = fitFeatureLayout(feats, availWidth, availDepthHeight)
-      const n = feats.length
-      const blockH = n * lineH
-      const startY = topOff + Math.max(0, (availDepthHeight - blockH) / 2)
 
       ctx.save()
       ctx.translate(a.cx, a.wl + bob)
@@ -585,7 +582,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       ctx.font = '300 ' + fontSize.toFixed(2) + 'px ' + _fontFamily
       ctx.fillStyle = 'rgba(232,250,252,0.85)'
       feats.forEach((line, li) => {
-        ctx.fillText(line, 0, startY + lineH * 0.5 + li * lineH)
+        ctx.fillText(line, 0, topOff + lineH * 0.5 + li * lineH)
       })
       ctx.restore()
     }
