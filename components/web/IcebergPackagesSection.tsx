@@ -488,7 +488,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     L = { bgC, fgC, sprites, scenes: P.scenes, stack: P.stack, anchors, w, h, key: w + 'x' + h + (P.stack ? 's' : 'r') }
   }
 
-  function bobOf(i: number, t: number) { return Math.sin(t * 0.00045 + DEPTH_BERGS[i].phase) * 2.6 }
+  function bobOf(i: number, t: number) { return 0 }
 
   const HEADER_TIER_LABEL_SIZE = 13
   const HEADER_PACKAGE_NAME_SIZE = 28
