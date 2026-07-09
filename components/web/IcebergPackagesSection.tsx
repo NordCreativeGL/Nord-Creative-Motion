@@ -652,7 +652,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     function fit() {
       const r = canvas!.getBoundingClientRect()
       const newW = Math.round(r.width), newH = Math.round(r.height)
-      if (Math.abs(newW - lastFitW) < 2 && Math.abs(newH - lastFitH) < 100) return
+      if (Math.abs(newW - lastFitW) < 2 && Math.abs(newH - lastFitH) < 2) return
       lastFitW = newW; lastFitH = newH
       const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 1.5)
       canvas!.width = Math.max(2, Math.round(r.width * dpr))
@@ -718,30 +718,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             featsEl.style.fontSize = featsFs + 'px'
             featsEl.style.transformOrigin = '50% ' + (-featsTopOff) + 'px'
             featsEl.style.visibility = 'visible'
-          }
-          el.style.visibility = 'hidden'
-          if (isMediumNow) {
-            const label = el.children[0] as HTMLElement | undefined
-            const name = el.children[1] as HTMLElement | undefined
-            const feats = el.children[3] as HTMLElement | undefined
-            if (label && name && feats) {
-              label.style.fontSize = FONT_TIER_LABEL + 'px'
-              name.style.fontSize = fontPackageName + 'px'
-              feats.style.fontSize = fontFeatureItem + 'px'
-              const natural = el.scrollHeight
-              const sectionH = sectionRef.current ? sectionRef.current.clientHeight : window.innerHeight
-              const HOVER = 1.5
-              const SAFE = 24
-              const containRoom = b.depth * 0.78 - topOff
-              const hoverRoom = (sectionH - SAFE - b.wl) / HOVER - topOff
-              const fitScale = Math.max(0.72, Math.min(1, containRoom / natural, hoverRoom / natural))
-              if (fitScale < 1) {
-                el.style.fontSize = (fs * fitScale) + 'px'
-                label.style.fontSize = (FONT_TIER_LABEL * fitScale) + 'px'
-                name.style.fontSize = (FONT_PACKAGE_NAME * fitScale) + 'px'
-                feats.style.fontSize = (FONT_FEATURE_ITEM * fitScale) + 'px'
-              }
-            }
           }
           el.style.visibility = 'hidden'
         })
