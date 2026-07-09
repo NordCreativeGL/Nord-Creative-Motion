@@ -533,17 +533,18 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     }
   }
 
-  const FEATURE_LINE_HEIGHT_EM = 1.5
+  const FEATURE_FONT_TO_LINE_RATIO = 0.62 // fontSize = lineH * this ratio, leaves comfortable space between lines
   const FEATURE_MIN_SIZE = 9
   const FEATURE_TOP_GAP_FACTOR = 0.05
   const FEATURE_TOP_GAP_MIN = 10
-  const FEATURE_AVAIL_FACTOR = 0.78
+  const FEATURE_AVAIL_FACTOR = 0.86
   const FEATURE_WIDTH_SAFETY = 0.84
   const FEATURE_MEASURE_REF_SIZE = 100
 
-  function fitFeatureFontSize(feats: string[], availWidth: number, availDepthHeight: number): number {
+  function fitFeatureLayout(feats: string[], availWidth: number, availDepthHeight: number): { fontSize: number; lineH: number } {
     const n = feats.length
-    const depthFit = availDepthHeight / (n * FEATURE_LINE_HEIGHT_EM)
+    const lineH = availDepthHeight / n
+    const depthFitFontSize = lineH * FEATURE_FONT_TO_LINE_RATIO
 
     ctx.font = '300 ' + FEATURE_MEASURE_REF_SIZE + 'px ' + _fontFamily
     let maxRefWidth = 1
@@ -551,9 +552,10 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const w = ctx.measureText(line).width
       if (w > maxRefWidth) maxRefWidth = w
     }
-    const widthFit = (availWidth * FEATURE_MEASURE_REF_SIZE) / maxRefWidth
+    const widthFitFontSize = (availWidth * FEATURE_MEASURE_REF_SIZE) / maxRefWidth
 
-    return Math.max(FEATURE_MIN_SIZE, Math.min(FONT_FEATURE_ITEM, depthFit, widthFit))
+    const fontSize = Math.max(FEATURE_MIN_SIZE, Math.min(FONT_FEATURE_ITEM, depthFitFontSize, widthFitFontSize))
+    return { fontSize, lineH }
   }
 
   function drawFeaturesText(cur: Layout, t: number) {
@@ -568,20 +570,19 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       const topOff = Math.max(FEATURE_TOP_GAP_MIN, a.depth * FEATURE_TOP_GAP_FACTOR)
       const availDepthHeight = a.depth * FEATURE_AVAIL_FACTOR - topOff
       const availWidth = a.halfW * 2 * FEATURE_WIDTH_SAFETY
-      const fontSize = fitFeatureFontSize(feats, availWidth, availDepthHeight)
-      const lineH = fontSize * FEATURE_LINE_HEIGHT_EM
+      const { fontSize, lineH } = fitFeatureLayout(feats, availWidth, availDepthHeight)
 
       ctx.save()
       ctx.translate(a.cx, a.wl + bob)
       ctx.scale(scl, scl)
       ctx.textAlign = 'center'
-      ctx.textBaseline = 'top'
+      ctx.textBaseline = 'middle'
       ctx.shadowColor = 'rgba(0,8,16,0.65)'
       ctx.shadowBlur = 6
       ctx.font = '300 ' + fontSize.toFixed(2) + 'px ' + _fontFamily
       ctx.fillStyle = 'rgba(232,250,252,0.85)'
       feats.forEach((line, li) => {
-        ctx.fillText(line, 0, topOff + li * lineH)
+        ctx.fillText(line, 0, topOff + lineH * 0.5 + li * lineH)
       })
       ctx.restore()
     }
