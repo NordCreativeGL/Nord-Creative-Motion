@@ -87,6 +87,7 @@ interface DepthPainter {
   pointer: (x: number, y: number) => void
   hoverVal: (i: number) => number
   setDpr: (d: number) => void
+  setFont: (family: string) => void
 }
 
 // ---------- pure helpers ----------
@@ -245,6 +246,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
   const hovT = [0, 0, 0]
   let px = -1e4, py = -1e4
   let _dpr = 1
+  let _fontFamily = 'sans-serif'
 
   function pathB(c: CanvasRenderingContext2D, pts: Point[]) {
     c.beginPath()
@@ -486,6 +488,49 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
 
   function bobOf(i: number, t: number) { return Math.sin(t * 0.00045 + DEPTH_BERGS[i].phase) * 2.6 }
 
+  const HEADER_TIER_LABEL_SIZE = 13
+  const HEADER_PACKAGE_NAME_SIZE = 28
+  const HEADER_NAME_GAP_EM = 0.35
+
+  function drawHeaderText(cur: Layout, t: number) {
+    for (let i = 0; i < cur.anchors.length; i++) {
+      const a = cur.anchors[i]
+      const hv = hov[i]
+      const scl = 1 + 0.50 * hv
+      const bob = bobOf(i, t)
+      const tier = TIERS[i]
+      if (!tier) continue
+
+      const labelLH = HEADER_TIER_LABEL_SIZE * 1.2
+      const nameGap = HEADER_PACKAGE_NAME_SIZE * HEADER_NAME_GAP_EM
+      const nameLH = HEADER_PACKAGE_NAME_SIZE * 1.2
+      const headerH = labelLH + nameGap + nameLH
+      const headerBottomY = -8
+      const labelY = headerBottomY - nameLH - nameGap - labelLH * 0.25
+      const nameY = headerBottomY - nameLH * 0.25
+
+      ctx.save()
+      ctx.translate(a.cx, a.wl + bob)
+      ctx.scale(scl, scl)
+      ctx.textAlign = 'center'
+      ctx.shadowColor = 'rgba(0,0,0,0.95)'
+      ctx.shadowBlur = 16
+
+      ctx.font = '400 ' + HEADER_TIER_LABEL_SIZE + 'px ' + _fontFamily
+      ctx.fillStyle = 'rgba(180,245,235,1)'
+      ctx.save()
+      ctx.letterSpacing = '4px'
+      ctx.fillText(tier.lbl, 0, labelY)
+      ctx.restore()
+
+      ctx.font = '300 ' + HEADER_PACKAGE_NAME_SIZE + 'px ' + _fontFamily
+      ctx.fillStyle = 'rgba(255,255,255,0.97)'
+      ctx.fillText(tier.name, 0, nameY)
+
+      ctx.restore()
+    }
+  }
+
   function draw(t: number) {
     const w = canvas.width / _dpr, h = canvas.height / _dpr
     if (!L || L.w !== w || L.h !== h) resize(w, h)
@@ -536,6 +581,7 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       ctx.drawImage(s.spC, -s.ax, -s.ay, s.bw, s.bh)
       ctx.restore()
     }
+    drawHeaderText(cur, t)
     ctx.drawImage(cur.fgC, 0, 0, w, h)
   }
 
@@ -545,9 +591,10 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
     return { key: L.key, stack: L.stack, wantH, items: L.anchors }
   }
   function setDpr(d: number) { _dpr = d }
+  function setFont(family: string) { _fontFamily = family }
   function pointer(x: number, y: number) { px = x; py = y }
   function hoverVal(i: number) { return hov[i] }
-  return { draw, resize, layout, bob: bobOf, pointer, hoverVal, setDpr }
+  return { draw, resize, layout, bob: bobOf, pointer, hoverVal, setDpr, setFont }
 }
 
 // ---------- tier content ----------
@@ -583,7 +630,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const tierRefs = useRef<(HTMLDivElement | null)[]>([])
-  const headerRefs = useRef<(HTMLDivElement | null)[]>([])
   const featsRefs = useRef<(HTMLDivElement | null)[]>([])
   const { lang } = useLang()
   const [isMobile, setIsMobile] = useState(false)
@@ -647,6 +693,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     const canvas = canvasRef.current
     if (!canvas) return
     const depth = createDepth(canvas, !isMobile)
+    const fontFamily = getComputedStyle(document.documentElement)
+      .getPropertyValue('--font-geist-sans').trim() || 'sans-serif'
+    depth.setFont(fontFamily)
 
     let lastFitW = 0, lastFitH = 0
     function fit() {
@@ -696,21 +745,11 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           const topOff = Math.max(16, b.depth * 0.06)
           const avail = b.depth * (window.innerWidth < 768 ? 0.80 : 0.56) - topOff
           const fs = Math.max(9, Math.min(15, wdt / 16, avail / TOTAL_EM[i]))
-          const headerEl = headerRefs.current[i]
           const featsEl = featsRefs.current[i]
-          const headerH = headerEl ? headerEl.offsetHeight : 0
-          const headerTop = b.wl - headerH - 8
           const featsTopOff = Math.max(10, b.depth * 0.05)
           const featsAvail = b.depth * 0.78 - featsTopOff
           const featsNatural = featsEl ? featsEl.scrollHeight : 1
           const featsFs = Math.max(9, Math.min(FONT_FEATURE_ITEM, featsAvail / (featsNatural / FONT_FEATURE_ITEM)))
-          if (headerEl) {
-            headerEl.style.left = (b.cx - wdt / 2) + 'px'
-            headerEl.style.top = headerTop + 'px'
-            headerEl.style.width = wdt + 'px'
-            headerEl.style.transformOrigin = '50% ' + (b.wl - headerTop) + 'px'
-            headerEl.style.visibility = 'visible'
-          }
           if (featsEl) {
             featsEl.style.left = (b.cx - wdt / 2) + 'px'
             featsEl.style.top = (b.wl + featsTopOff) + 'px'
@@ -726,12 +765,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         const hv = depth.hoverVal(i)
         const sc = 1 + 0.50 * hv
         const bob = depth.bob(i, t)
-        const headerEl = headerRefs.current[i]
         const featsEl = featsRefs.current[i]
-        if (headerEl) {
-          headerEl.style.transform = 'translateY(' + bob.toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')'
-          headerEl.style.zIndex = hv > 0.02 ? '3' : '1'
-        }
         if (featsEl) {
           featsEl.style.transform = 'translateY(' + bob.toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')'
           featsEl.style.zIndex = hv > 0.02 ? '3' : '1'
@@ -913,21 +947,6 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             ref={(el) => { tierRefs.current[i] = el }}
             style={{ position: 'absolute', visibility: 'hidden', pointerEvents: 'none' }}
           />
-          <div
-            ref={(el) => { headerRefs.current[i] = el }}
-            style={{
-              position: 'absolute', zIndex: 1, visibility: 'hidden', pointerEvents: 'none',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
-              textShadow: '0 1px 16px rgba(0,0,0,1), 0 0 28px rgba(0,0,0,0.95)',
-            }}
-          >
-            <span style={{ fontFamily: PRIMARY_FONT, fontSize: (FONT_TIER_LABEL + 2) + 'px', letterSpacing: '0.3em', color: 'rgba(180,245,235,1)' }}>
-              {tier.lbl}
-            </span>
-            <span style={{ fontSize: FONT_PACKAGE_NAME + 'px', fontWeight: 300, letterSpacing: '0.01em', color: 'rgba(255,255,255,0.97)', marginTop: '0.35em', whiteSpace: 'nowrap', fontFamily: PRIMARY_FONT }}>
-              {tier.name}
-            </span>
-          </div>
           <div
             ref={(el) => { featsRefs.current[i] = el }}
             style={{
