@@ -58,8 +58,6 @@ interface Anchor {
   halfW: number
   depth: number
   topH: number
-  bd: BergData
-  k: number
 }
 
 interface Layout {
@@ -172,31 +170,6 @@ const bMaxA = (bd: BergData) => Math.max(...bd.above.map((p) => -p[1]))
 const bMaxB = (bd: BergData) => Math.max(...bd.below.map((p) => p[1]))
 const bHalfW = (bd: BergData) => Math.max(...bd.above.concat(bd.below).map((p) => Math.abs(p[0])))
 const bHalfWBelow = (bd: BergData) => Math.max(...bd.below.map((p) => Math.abs(p[0])))
-
-// Measures the keel's actual half-width at a given local y (unscaled units) by finding
-// where a horizontal scanline at that y crosses the keel polygon, then returning the
-// distance from x=0 to the nearest boundary on each side (the safe, symmetric usable width).
-function polyHalfWidthAtY(poly: Point[], y: number): number {
-  const n = poly.length
-  const xs: number[] = []
-  for (let i = 0; i < n; i++) {
-    const p1 = poly[i], p2 = poly[(i + 1) % n]
-    const y1 = p1[1], y2 = p2[1]
-    if (y1 === y2) continue
-    if ((y1 <= y && y2 >= y) || (y2 <= y && y1 >= y)) {
-      const tt = (y - y1) / (y2 - y1)
-      xs.push(p1[0] + (p2[0] - p1[0]) * tt)
-    }
-  }
-  if (xs.length < 2) return 0
-  xs.sort((a, b) => a - b)
-  let left = -Infinity, right = Infinity
-  for (let i = 0; i < xs.length - 1; i++) {
-    if (xs[i] <= 0 && xs[i + 1] >= 0) { left = xs[i]; right = xs[i + 1]; break }
-  }
-  if (!isFinite(left) || !isFinite(right)) { left = xs[0]; right = xs[xs.length - 1] }
-  return Math.min(-left, right)
-}
 
 // ---------- static depth scene data ----------
 
@@ -511,8 +484,6 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
       halfW: bHalfWBelow(it.bd) * it.k,
       depth: bMaxB(it.bd) * it.k,
       topH: bMaxA(it.bd) * it.k,
-      bd: it.bd,
-      k: it.k,
     }))
     L = { bgC, fgC, sprites, scenes: P.scenes, stack: P.stack, anchors, w, h, key: w + 'x' + h + (P.stack ? 's' : 'r') }
   }
@@ -567,28 +538,20 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
   const FEATURE_TOP_GAP_FACTOR = 0.05
   const FEATURE_TOP_GAP_MIN = 10
   const FEATURE_AVAIL_FACTOR = 0.82
-  const FEATURE_WIDTH_SAFETY = 0.86
+  const FEATURE_WIDTH_SAFETY = 0.84
   const FEATURE_MEASURE_REF_SIZE = 100
 
-  // Fits font size using BOTH available depth AND the real keel width measured at each
-  // individual line's y-position (via polyHalfWidthAtY on the actual keel polygon).
-  // No assumed constants for width — every line is checked against the geometry it sits at.
-  function fitFeatureLayout(bd: BergData, k: number, feats: string[], topOff: number, availDepthHeight: number): { fontSize: number; lineH: number } {
+  function fitFeatureLayout(feats: string[], availWidth: number, availDepthHeight: number): { fontSize: number; lineH: number } {
     const n = feats.length
     const depthFitFontSize = availDepthHeight / (n * FEATURE_LINE_HEIGHT_EM)
-    const lineH0 = depthFitFontSize * FEATURE_LINE_HEIGHT_EM
 
     ctx.font = '300 ' + FEATURE_MEASURE_REF_SIZE + 'px ' + _fontFamily
-    let widthFitFontSize = Infinity
-    for (let li = 0; li < n; li++) {
-      const yOffset = topOff + lineH0 * 0.5 + li * lineH0
-      const yLocal = yOffset / k
-      const halfWLocal = polyHalfWidthAtY(bd.below, yLocal)
-      const availWidthAtLine = halfWLocal * 2 * k * FEATURE_WIDTH_SAFETY
-      const textRefWidth = ctx.measureText(feats[li]).width
-      const lineWidthFit = (availWidthAtLine * FEATURE_MEASURE_REF_SIZE) / textRefWidth
-      if (lineWidthFit < widthFitFontSize) widthFitFontSize = lineWidthFit
+    let maxRefWidth = 1
+    for (const line of feats) {
+      const w = ctx.measureText(line).width
+      if (w > maxRefWidth) maxRefWidth = w
     }
+    const widthFitFontSize = (availWidth * FEATURE_MEASURE_REF_SIZE) / maxRefWidth
 
     const fontSize = Math.max(FEATURE_MIN_SIZE, Math.min(FONT_FEATURE_ITEM, depthFitFontSize, widthFitFontSize))
     const lineH = fontSize * FEATURE_LINE_HEIGHT_EM
@@ -606,7 +569,8 @@ function createDepth(canvas: HTMLCanvasElement, allowHover = true): DepthPainter
 
       const topOff = Math.max(FEATURE_TOP_GAP_MIN, a.depth * FEATURE_TOP_GAP_FACTOR)
       const availDepthHeight = a.depth * FEATURE_AVAIL_FACTOR - topOff
-      const { fontSize, lineH } = fitFeatureLayout(a.bd, a.k, feats, topOff, availDepthHeight)
+      const availWidth = a.halfW * 2 * FEATURE_WIDTH_SAFETY
+      const { fontSize, lineH } = fitFeatureLayout(feats, availWidth, availDepthHeight)
 
       ctx.save()
       ctx.translate(a.cx, a.wl + bob)
