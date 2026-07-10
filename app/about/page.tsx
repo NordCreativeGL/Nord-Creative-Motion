@@ -10,7 +10,7 @@ export default function About() {
   const { openModal } = useContactModal()
   const [isMedium, setIsMedium] = useState(false)
   useEffect(() => {
-    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1728)
+    const check = () => setIsMedium(window.innerWidth >= 1024 && window.innerWidth < 1710)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
@@ -71,32 +71,34 @@ export default function About() {
       </section>
 
       {/* Story */}
-      <section id="about-text" data-snap="true" className="bg-black min-h-screen flex items-center">
-        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 py-16 grid grid-cols-1 min-[1024px]:grid-cols-2 gap-16 min-[1900px]:gap-24 items-center w-full" style={isMedium ? { maxWidth: 'calc(100vw - 480px)', gap: '40px' } : undefined}>
-          <div className="flex flex-col justify-between h-full">
-            <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">{t[lang].eyebrow}</p>
+      <section id="about-text" data-snap="true" className="bg-black py-24">
+        <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16 w-full" style={isMedium ? { maxWidth: 'calc(100vw - 480px)' } : undefined}>
+          <p className="text-sm tracking-[0.25em] uppercase text-white/50 mb-4">{t[lang].eyebrow}</p>
+          <Image
+            src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
+            alt="Nord Creative"
+            width={612}
+            height={184}
+            className="block h-10 min-[1900px]:h-12 w-auto mb-12 opacity-90"
+          />
+          <div className="relative rounded-2xl overflow-hidden aspect-[3/2] w-full mb-12">
             <Image
-              src="/logos/final/svg/nord-creative-wordmark-needle-white.svg"
-              alt="Nord Creative"
-              width={612}
-              height={184}
-              className="block self-start h-10 min-[1900px]:h-12 w-auto mb-4 opacity-90"
-            />
-            <div className="space-y-6">
-              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p1}</p>
-              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p2}</p>
-              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p3}</p>
-              <p className="text-white/60 leading-relaxed" style={{ fontSize: isMedium ? '0.95rem' : 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p4}</p>
-            </div>
-          </div>
-          <div className="relative rounded-2xl overflow-hidden aspect-[3/4] w-full">
-            <Image
-              src="/IMG_3883.jpg"
+              src="https://cdn.nordcreative.dk/about-oskar-johanna-3400.jpg"
               alt="Oskar & Johanna"
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, (min-width: 1900px) 1700px, 1280px"
               className="object-cover"
             />
+          </div>
+          <div className="grid grid-cols-1 min-[1024px]:grid-cols-2 gap-x-16 min-[1900px]:gap-x-24 gap-y-6">
+            <div className="space-y-6">
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p1}</p>
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p2}</p>
+            </div>
+            <div className="space-y-6">
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p3}</p>
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p4}</p>
+            </div>
           </div>
         </div>
       </section>
