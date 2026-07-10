@@ -25,8 +25,9 @@ export default function About() {
       eyebrow: 'OUR STORY',
       p1: "Before Nord Creative, we had different careers — Oskar as a police officer, Johanna in real estate. Photography, video and web development have always been hobbies for both of us.",
       p2: "That interest gradually became something more. Alongside our previous careers, we took on smaller projects — and at some point, the work became serious enough that we chose to follow it fully.",
-      p3: "That path brought us to Greenland. We now live in Qaqortoq in the south of Greenland, where we work year-round. It's a place that continues to shape both how we live and how we work.",
+      p3: "We now live in Qaqortoq in the south of Greenland, where we work year-round. It's a place that continues to shape both how we live and how we work.",
       p4: "Working in Greenland has shaped how we approach production. The Arctic environment requires awareness, planning, and the ability to adapt — both creatively and in terms of safety. This is something we bring into every project. Today, we work with companies in Greenland — and with others who come here to produce.",
+      pull: 'That path brought us to Greenland.',
       ctaH: 'Planning a project in Greenland?',
       ctaB: "Tell us about your project — we'll figure out the right approach.",
       ctaBtn: 'Work with us',
@@ -39,8 +40,9 @@ export default function About() {
       eyebrow: 'VORES HISTORIE',
       p1: 'Inden Nord Creative havde vi forskellige karrierer — Oskar som politibetjent, Johanna i ejendomsbranchen. Fotografering, video og hjemmesideudvikling er noget vi begge altid har haft som hobby.',
       p2: 'Den interesse voksede gradvist til noget mere. Sideløbende med vores tidligere karrierer tog vi mindre projekter på os — og på et tidspunkt var arbejdet seriøst nok til, at vi valgte at følge det fuldt ud.',
-      p3: 'Den vej bragte os til Grønland. Vi bor nu i Qaqortoq i det sydlige Grønland, hvor vi arbejder året rundt. Det er et sted, der præger både hvordan vi lever og arbejder.',
+      p3: 'Vi bor nu i Qaqortoq i det sydlige Grønland, hvor vi arbejder året rundt. Det er et sted, der præger både hvordan vi lever og arbejder.',
       p4: 'At arbejde i Grønland har formet, hvordan vi griber produktioner an. Det arktiske miljø kræver opmærksomhed, planlægning og evnen til at tilpasse sig — både kreativt og sikkerhedsmæssigt. Det tager vi med ind i hvert projekt. I dag arbejder vi med virksomheder i Grønland — og med andre, der kommer hertil for at producere.',
+      pull: 'Den vej bragte os til Grønland.',
       ctaH: 'Planlægger du et projekt i Grønland?',
       ctaB: 'Fortæl os om dit projekt — vi finder den rigtige tilgang.',
       ctaBtn: 'Arbejd med os',
@@ -90,6 +92,7 @@ export default function About() {
               className="object-cover"
             />
           </div>
+          <p className="font-light text-white/90 max-w-4xl mb-14" style={{ fontSize: 'clamp(24px,2vw,44px)', lineHeight: 1.2 }}>{t[lang].pull}</p>
           <div className="grid grid-cols-1 min-[1024px]:grid-cols-2 gap-x-16 min-[1900px]:gap-x-24 gap-y-6">
             <div className="space-y-6">
               <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p1}</p>
