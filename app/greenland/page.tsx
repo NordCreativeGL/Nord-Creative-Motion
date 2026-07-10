@@ -125,7 +125,7 @@ export default function GreenlandPage() {
             </div>
             <div style={{ display: 'flex', ...(isMedium ? { borderRadius: 14, overflow: 'hidden', clipPath: 'inset(0 round 14px)' } : {}) }}>
               <video
-                src="https://cdn.nordcreative.dk/P18K.mp4"
+                src="https://cdn.nordcreative.dk/greenland-boat-tour.mp4"
                 autoPlay
                 muted
                 loop
