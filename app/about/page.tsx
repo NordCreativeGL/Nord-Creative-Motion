@@ -90,13 +90,13 @@ export default function About() {
               className="object-cover"
             />
           </div>
-          <p className="font-light text-white/85 mb-16" style={{ fontSize: 'clamp(22px,1.7vw,34px)', lineHeight: 1.4, maxWidth: '30em' }}>{t[lang].p1}</p>
           <div className="grid grid-cols-1 min-[1024px]:grid-cols-2 gap-x-16 min-[1900px]:gap-x-24 gap-y-6">
             <div className="space-y-6">
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p1}</p>
               <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p2}</p>
-              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p3}</p>
             </div>
-            <div className="space-y-6 min-[1024px]:mt-24">
+            <div className="space-y-6">
+              <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p3}</p>
               <p className="text-white/60 leading-relaxed" style={{ fontSize: 'clamp(1.125rem,1.15vw,1.5rem)' }}>{t[lang].p4}</p>
             </div>
           </div>
