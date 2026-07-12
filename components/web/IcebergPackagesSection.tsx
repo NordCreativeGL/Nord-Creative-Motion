@@ -268,6 +268,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     let ctaHCache = 0
 
     function computeCutoffs() {
+      if (window.innerWidth < 1024) {
+        cutoffs = []
+        return
+      }
       const cta = document.getElementById('web-cta')
       if (!cta) return
       const ctaRect = cta.getBoundingClientRect()
