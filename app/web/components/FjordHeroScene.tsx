@@ -979,13 +979,13 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
 
   const t = {
     en: {
-      s1h: 'Websites and apps for your\nbusiness, built from scratch.', s1b: 'Custom websites for businesses that want to stand out. Designed and built from scratch — no shortcuts.',
+      s1h: 'Websites and apps for your\nbusiness, built from scratch.', s1b: 'Custom websites for businesses that want to stand out.',
       s2h: 'Everything, from idea to launch', s2b: 'Design · Copywriting · SEO · Photo & video · Development · Maintenance.',
       s3h: 'Three ways to start', s3b: 'Starter · Business · Full Production — three packages, from a simple website to a website with photo/video and animation.',
       dragLabel: 'Drag to rotate the iceberg',
     },
     da: {
-      s1h: 'Hjemmesider og apps til din\nvirksomhed, bygget fra bunden.', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra bunden — uden kompromiser.',
+      s1h: 'Hjemmesider og apps til din\nvirksomhed, bygget fra bunden.', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud.',
       s2h: 'Alt samlet — fra idé til lancering', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse.',
       s3h: 'Tre måder at starte', s3b: 'Starter · Business · Full Production — tre pakker, fra en simpel hjemmeside til en hjemmeside med foto/video og animation.',
       dragLabel: 'Træk for at rotere isbjerget',
