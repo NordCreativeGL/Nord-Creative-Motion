@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useLang } from '@/contexts/LanguageContext'
 
 function rng(seed: number) {
   let s = seed >>> 0
@@ -144,6 +145,24 @@ const FILLS = ['rgb(200,216,222)', 'rgb(215,228,235)', 'rgb(238,248,252)']
 export default function IcebergPackagesSection({ id }: { id?: string }) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { lang } = useLang()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  const sectionPadding = isMobile
+    ? '80px 24px'
+    : 'clamp(100px, 10vw, 160px) clamp(160px, 16vw, 220px)'
+
+  const t = {
+    en: { eyebrow: 'PACKAGES', heading: 'Three ways to work with us' },
+    da: { eyebrow: 'PAKKER', heading: 'Tre måder at arbejde med os' },
+  }
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -274,6 +293,33 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         ref={canvasRef}
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', pointerEvents: 'none' }}
       />
+
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 2,
+        display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        padding: sectionPadding,
+        pointerEvents: 'none',
+        fontFamily: 'var(--font-geist-sans), sans-serif',
+      }}>
+        <p style={{
+          fontSize: 'clamp(11px, 0.7vw, 13px)',
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          color: 'rgba(0,215,200,0.85)',
+          marginBottom: isMobile ? '10px' : '20px',
+        }}>
+          {t[lang].eyebrow}
+        </p>
+        <h2 style={{
+          fontSize: 'clamp(28px, 2.78vw, 68px)',
+          fontWeight: 300,
+          letterSpacing: '-0.02em',
+          color: 'white',
+          marginBottom: isMobile ? '16px' : '40px',
+        }}>
+          {t[lang].heading}
+        </h2>
+      </div>
     </section>
   )
 }
