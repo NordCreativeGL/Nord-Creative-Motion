@@ -19,20 +19,6 @@ function tracePoly(ctx: CanvasRenderingContext2D, pts: number[][], round: number
   ctx.closePath()
 }
 
-// Replicates PackIceCtaSection's vignette(fg, w, h + 380, 0.5) darkening at a
-// given point in CTA's own coordinate frame (y=0 at CTA top). PackIceCtaSection
-// calls vignette with height (h + 380), NOT h — this must match exactly or the
-// darkening amount will be wrong.
-function vignetteAlphaAt(x: number, y: number, w: number, ctaH: number, strength: number): number {
-  const H = ctaH + 380
-  const cx = w / 2, cy = H * 0.55
-  const inner = Math.min(w, H) * 0.35
-  const outer = Math.max(w, H) * 0.78
-  const d = Math.hypot(x - cx, y - cy)
-  const t = Math.min(Math.max((d - inner) / (outer - inner), 0), 1)
-  return t * strength
-}
-
 interface FloeShape {
   pts: number[][]
   round: number
@@ -228,16 +214,23 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             ctx.stroke()
           }
         }
-        const vig = vignetteAlphaAt(f.x, f.y + dy, ctaWCache, ctaHCache, 0.5)
-        if (vig > 0.002) {
-          // Match CTA: vignette darkens the floe's full rendered extent (glow halo +
-          // shadow + ice), not just the ice polygon — CTA applies it as one overlay
-          // over the whole composited canvas, after glow/shadow/fill/cracks.
-          const pad = f.glow ? f.R * 1.0 + 30 : 18
-          ctx.fillStyle = 'rgba(0,0,0,' + vig.toFixed(3) + ')'
-          ctx.fillRect(-(f.R + pad), -(f.R + pad), (f.R + pad) * 2, (f.R + pad) * 2)
-        }
         ctx.restore()
+      }
+      // Single full-canvas vignette, matching PackIceCtaSection's vignette(fg, w, h+380, 0.5)
+      // exactly — same center/radius formula, just recentered into this section's local
+      // coordinate frame (local y = pkgH + cta-space y), so it reads as one continuous
+      // gradient spanning both sections rather than a per-object effect.
+      if (ctaWCache > 0 && ctaHCache > 0) {
+        const H = ctaHCache + 380
+        const vcx = ctaWCache / 2
+        const vcy = pkgH + H * 0.55
+        const inner = Math.min(ctaWCache, H) * 0.35
+        const outer = Math.max(ctaWCache, H) * 0.78
+        const vg = ctx.createRadialGradient(vcx, vcy, inner, vcx, vcy, outer)
+        vg.addColorStop(0, 'rgba(0,0,0,0)')
+        vg.addColorStop(1, 'rgba(0,0,0,0.5)')
+        ctx.fillStyle = vg
+        ctx.fillRect(0, 0, w, h)
       }
       rafId = requestAnimationFrame(draw)
     }
