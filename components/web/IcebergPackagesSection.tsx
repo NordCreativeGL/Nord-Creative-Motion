@@ -386,7 +386,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         position: 'relative', zIndex: 2,
         display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
         padding: sectionPadding,
-        paddingTop: isMobile ? '72px' : '40px',
+        paddingTop: isMobile ? '40px' : '40px',
         fontFamily: 'var(--font-geist-sans), sans-serif',
       }}>
         <p style={{
