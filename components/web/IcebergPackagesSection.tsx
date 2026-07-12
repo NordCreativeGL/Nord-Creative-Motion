@@ -19,7 +19,14 @@ function tracePoly(ctx: CanvasRenderingContext2D, pts: number[][], round: number
   ctx.closePath()
 }
 
-function makeFloe(r: number, rnd: () => number) {
+interface FloeShape {
+  pts: number[][]
+  round: number
+  R: number
+  cracks: number[][][]
+}
+
+function makeFloe(r: number, rnd: () => number): FloeShape {
   const n = 5 + Math.floor(rnd() * 5)
   const pts: number[][] = []
   for (let i = 0; i < n; i++) {
@@ -30,21 +37,95 @@ function makeFloe(r: number, rnd: () => number) {
   const elong = rnd() < 0.3 ? 1.7 + rnd() * 0.9 : 1 + rnd() * 0.35
   for (const p of pts) p[0] *= elong
   const round = rnd() < 0.45 ? 0.06 + rnd() * 0.08 : 0.14 + rnd() * 0.07
-  return { pts, round }
+  let R = 0
+  for (const p of pts) R = Math.max(R, Math.hypot(p[0], p[1]))
+  const cracks: number[][][] = []
+  const nc = 2 + Math.floor(rnd() * 2)
+  for (let c = 0; c < nc; c++) {
+    const a0 = rnd() * Math.PI * 2
+    const seg: number[][] = []
+    let pxx = Math.cos(a0) * r * 0.15, pyy = Math.sin(a0) * r * 0.15
+    let dir = a0 + Math.PI * (0.7 + rnd() * 0.6)
+    const steps = 3 + Math.floor(rnd() * 2)
+    seg.push([pxx, pyy])
+    for (let sgi = 0; sgi < steps; sgi++) {
+      const len = r * (0.16 + rnd() * 0.16)
+      dir += (rnd() - 0.5) * 0.9
+      pxx += Math.cos(dir) * len; pyy += Math.sin(dir) * len
+      seg.push([pxx, pyy])
+    }
+    cracks.push(seg)
+  }
+  return { pts, round, R, cracks }
 }
 
-// Bottom fade-in zone: sparse ice floes appear here, growing denser and more opaque
-// toward the very bottom, so the section visually builds up into the pack-ice CTA below.
-// All values are named constants for easy iteration.
-const FADE_ZONE_FRAC = 0.42   // fraction of section height where floes can appear (from bottom)
-const FLOE_COUNT = 18         // total floes drawn in the fade zone
-const DENSITY_POWER = 2.4     // higher = floes concentrate more toward the very bottom
-const MIN_R_FRAC = 0.006      // floe radius as fraction of min(width, 1500)
-const MAX_R_FRAC = 0.024
-const GLOW_U_THRESHOLD = 0.75 // only floes past this depth (0-1, 1=bottom) can glow
-const GLOW_CHANCE = 0.4
+interface Floe extends FloeShape {
+  x: number; y: number; tier: number; glow: boolean
+  phase: number; phase2: number; rot: number; rotV: number
+  driftR: number; driftS: number; amp: number
+}
+
+// Verbatim port of PackIceCtaSection.tsx's build() — same seed (1207), same call
+// order, same exclusion zones — guaranteed to produce the identical floe list
+// that PackIceCtaSection actually renders for a given (w, h).
+function buildCtaFloes(w: number, h: number): Floe[] {
+  const rnd = rng(1207)
+  const out: Floe[] = []
+  const ex = { x: w / 2, y: h / 2, hw: Math.min(w * 0.40, 330), hh: Math.min(h * 0.34, 240) }
+  const footerTextEx = { x: w / 2, y: h + 148, hw: w < 768 ? w * 0.30 : w * 0.095, hh: 148 }
+  const privacyEx    = { x: w / 2, y: h + 318, hw: w * 0.10,       hh: 30  }
+  const exScale = [1.3, 1.0, 0.7]
+  const place = (R: number, tier: number, yMin: number, yMax: number): { x: number, y: number } | null => {
+    const fx = exScale[tier]
+    for (let i = 0; i < 320; i++) {
+      const x = rnd() * w, y = yMin + rnd() * (yMax - yMin)
+      if (x > ex.x - ex.hw * fx - R && x < ex.x + ex.hw * fx + R &&
+          y > ex.y - ex.hh * fx - R && y < ex.y + ex.hh * fx + R) continue
+      if (x > footerTextEx.x - footerTextEx.hw - R &&
+          x < footerTextEx.x + footerTextEx.hw + R &&
+          y > footerTextEx.y - footerTextEx.hh - R &&
+          y < footerTextEx.y + footerTextEx.hh + R) continue
+      if (x > privacyEx.x - privacyEx.hw - R &&
+          x < privacyEx.x + privacyEx.hw + R &&
+          y > privacyEx.y - privacyEx.hh - R &&
+          y < privacyEx.y + privacyEx.hh + R) continue
+      let ok = true
+      for (const f of out) {
+        const dx = f.x - x, dy = f.y - y
+        const min = (f.R + R) * 1.04 + 24
+        if (dx * dx + dy * dy < min * min) { ok = false; break }
+      }
+      if (ok) return { x, y }
+    }
+    return null
+  }
+  const mk = (rMin: number, rMax: number, tier: number, yMin: number, yMax: number, forceGlow?: boolean) => {
+    const r = rMin + rnd() * (rMax - rMin)
+    const sh = makeFloe(r, rnd)
+    const pos = place(sh.R, tier, yMin, yMax)
+    if (!pos) return
+    const glow = forceGlow !== undefined ? forceGlow : (tier === 0 ? rnd() < 0.75 : tier === 1 ? rnd() < 0.3 : false)
+    out.push({
+      ...pos, ...sh, tier, glow,
+      phase: rnd() * 6.28, phase2: rnd() * 6.28,
+      rot: rnd() * 6.28, rotV: (rnd() - 0.5) * 0.000012,
+      driftR: tier === 0 ? 4 + rnd() * 4 : tier === 1 ? 6 + rnd() * 5 : 8 + rnd() * 7,
+      driftS: 0.000055 + rnd() * 0.00005,
+      amp: 0.7 + rnd() * 1.1,
+    })
+  }
+  const base = Math.min(w, 1500)
+  for (let i = 0; i < 10; i++) mk(base * 0.006, base * 0.022, 2, 10, 140)
+  for (let i = 0; i < 4; i++) mk(base * 0.07, base * 0.105, 0, 0, h)
+  for (let i = 0; i < 14; i++) mk(base * 0.026, base * 0.052, 1, 0, h)
+  for (let i = 0; i < 27; i++) mk(base * 0.005, base * 0.013, 2, 0, h)
+  for (let i = 0; i < 7; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
+  for (let i = 0; i < 7; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
+  for (let i = 0; i < 2; i++) mk(base * 0.038, base * 0.055, 1, h + 10, h + 370, true)
+  return out
+}
+
 const FILLS = ['rgb(200,216,222)', 'rgb(215,228,235)', 'rgb(238,248,252)']
-const SEED = 4417
 
 export default function IcebergPackagesSection({ id }: { id?: string }) {
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -57,60 +138,85 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    function draw() {
-      if (!wrap || !canvas || !ctx) return
-      const w = wrap.clientWidth
-      const sectionH = wrap.clientHeight
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
-      canvas.width = Math.max(2, Math.round(w * dpr))
-      canvas.height = Math.max(2, Math.round(sectionH * dpr))
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      ctx.clearRect(0, 0, w, sectionH)
+    let rafId = 0
+    let dead = false
+    let cutoffs: Floe[] = []
+    let pkgH = 0
+    let dpr = 1
 
-      const zoneH = sectionH * FADE_ZONE_FRAC
-      const zoneTop = sectionH - zoneH
-      const base = Math.min(w, 1500)
-      const rnd = rng(SEED)
-
-      for (let i = 0; i < FLOE_COUNT; i++) {
-        const u = 1 - Math.pow(rnd(), DENSITY_POWER) // 0 near zoneTop (sparse), 1 near bottom (dense)
-        const y = zoneTop + zoneH * u
-        const x = rnd() * w
-        const r = base * (MIN_R_FRAC + rnd() * (MAX_R_FRAC - MIN_R_FRAC))
-        const alpha = Math.min(1, 0.15 + u * 0.85)
-        const glow = u > GLOW_U_THRESHOLD && rnd() < GLOW_CHANCE
-
-        const sh = makeFloe(r, rnd)
-        const rot = rnd() * Math.PI * 2
-
-        ctx.save()
-        ctx.translate(x, y)
-        ctx.rotate(rot)
-        ctx.globalAlpha = alpha
-
-        if (glow) {
-          const g = ctx.createRadialGradient(0, 0, r * 0.3, 0, 0, r * 2.2)
-          g.addColorStop(0, 'rgba(0,215,200,0.30)')
-          g.addColorStop(0.5, 'rgba(0,210,198,0.14)')
-          g.addColorStop(1, 'rgba(0,190,185,0)')
-          ctx.fillStyle = g
-          ctx.beginPath()
-          ctx.arc(0, 0, r * 2.2, 0, Math.PI * 2)
-          ctx.fill()
-        }
-
-        ctx.beginPath()
-        tracePoly(ctx, sh.pts, sh.round)
-        ctx.fillStyle = FILLS[Math.floor(rnd() * FILLS.length)]
-        ctx.fill()
-        ctx.restore()
-      }
+    function computeCutoffs() {
+      const cta = document.getElementById('web-cta')
+      if (!cta) return
+      const ctaRect = cta.getBoundingClientRect()
+      const all = buildCtaFloes(ctaRect.width, ctaRect.height)
+      cutoffs = all.filter((f) => f.y - f.R < 0)
     }
 
-    draw()
-    const ro = new ResizeObserver(draw)
+    function fit() {
+      if (!wrap || !canvas) return
+      const r = wrap.getBoundingClientRect()
+      pkgH = r.height
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+      canvas.width = Math.max(2, Math.round(r.width * dpr))
+      canvas.height = Math.max(2, Math.round(r.height * dpr))
+      computeCutoffs()
+    }
+
+    fit()
+    const ro = new ResizeObserver(fit)
     ro.observe(wrap)
-    return () => ro.disconnect()
+
+    function draw(t: number) {
+      if (dead || !canvas || !ctx) return
+      const w = canvas.width / dpr, h = canvas.height / dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.clearRect(0, 0, w, h)
+      for (const f of cutoffs) {
+        const dx = Math.sin(t * f.driftS + f.phase) * f.driftR + Math.sin(t * 0.00035 + f.phase) * f.amp * 0.5
+        const dy = Math.cos(t * f.driftS * 0.8 + f.phase2) * f.driftR * 0.7 + Math.cos(t * 0.00028 + f.phase2) * f.amp * 0.4
+        const localY = pkgH + f.y + dy
+        const localX = f.x + dx
+        if (localY + f.R < 0) continue
+        ctx.save()
+        ctx.translate(localX, localY)
+        ctx.rotate(f.rot + t * f.rotV)
+        if (f.glow) {
+          const oxp = f.R * 0.08, oyp = f.R * 0.14
+          const gh = ctx.createRadialGradient(oxp, oyp, f.R * 0.30, oxp, oyp, f.R * 2.0)
+          gh.addColorStop(0, 'rgba(0,215,200,0.34)')
+          gh.addColorStop(0.35, 'rgba(0,210,198,0.20)')
+          gh.addColorStop(0.65, 'rgba(0,200,192,0.08)')
+          gh.addColorStop(1, 'rgba(0,190,185,0)')
+          ctx.fillStyle = gh
+          ctx.fillRect(-f.R * 2, -f.R * 2, f.R * 4, f.R * 4)
+        }
+        if (f.tier < 2) {
+          ctx.save(); ctx.translate(2.5, 4)
+          ctx.beginPath(); tracePoly(ctx, f.pts, f.round)
+          ctx.fillStyle = 'rgba(0,3,8,0.5)'; ctx.fill()
+          ctx.restore()
+        }
+        ctx.beginPath(); tracePoly(ctx, f.pts, f.round)
+        ctx.fillStyle = FILLS[f.tier]; ctx.fill()
+        if (f.tier === 0) {
+          ctx.strokeStyle = 'rgba(0,18,50,0.22)'; ctx.lineWidth = 0.9
+          for (const seg of f.cracks) {
+            ctx.beginPath()
+            seg.forEach((p, i) => { if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]) })
+            ctx.stroke()
+          }
+        }
+        ctx.restore()
+      }
+      rafId = requestAnimationFrame(draw)
+    }
+    rafId = requestAnimationFrame(draw)
+
+    return () => {
+      dead = true
+      cancelAnimationFrame(rafId)
+      ro.disconnect()
+    }
   }, [])
 
   return (
