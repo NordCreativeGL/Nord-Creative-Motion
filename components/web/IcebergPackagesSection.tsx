@@ -207,6 +207,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           gh.addColorStop(1, 'rgba(0,190,185,0)')
           ctx.fillStyle = gh
           ctx.fillRect(-f.R * 2, -f.R * 2, f.R * 4, f.R * 4)
+          ctx.save(); ctx.translate(oxp, oyp); ctx.scale(1.55, 1.55)
+          ctx.beginPath(); tracePoly(ctx, f.pts, 0.35)
+          ctx.fillStyle = 'rgba(0,215,200,0.07)'; ctx.fill()
+          ctx.restore()
         }
         if (f.tier < 2) {
           ctx.save(); ctx.translate(2.5, 4)
@@ -226,9 +230,12 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         }
         const vig = vignetteAlphaAt(f.x, f.y + dy, ctaWCache, ctaHCache, 0.5)
         if (vig > 0.002) {
-          ctx.beginPath(); tracePoly(ctx, f.pts, f.round)
+          // Match CTA: vignette darkens the floe's full rendered extent (glow halo +
+          // shadow + ice), not just the ice polygon — CTA applies it as one overlay
+          // over the whole composited canvas, after glow/shadow/fill/cracks.
+          const pad = f.glow ? f.R * 1.0 + 30 : 18
           ctx.fillStyle = 'rgba(0,0,0,' + vig.toFixed(3) + ')'
-          ctx.fill()
+          ctx.fillRect(-(f.R + pad), -(f.R + pad), (f.R + pad) * 2, (f.R + pad) * 2)
         }
         ctx.restore()
       }
