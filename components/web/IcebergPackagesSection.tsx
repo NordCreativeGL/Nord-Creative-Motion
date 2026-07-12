@@ -160,8 +160,85 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     : 'clamp(100px, 10vw, 160px) clamp(160px, 16vw, 220px)'
 
   const t = {
-    en: { eyebrow: 'PACKAGES', heading: 'Three ways to work with us' },
-    da: { eyebrow: 'PAKKER', heading: 'Tre måder at arbejde med os' },
+    en: {
+      eyebrow: 'PACKAGES', heading: 'Three ways to work with us',
+      t1: ['Professional design', 'Up to 3 pages', 'Contact form', 'Mobile optimised', '2 revision rounds'],
+      t2: ['Everything in Starter', 'Up to 7 pages', 'SEO setup', 'Copywriting', 'Multilingual (2 languages)', 'Support', '5 revision rounds'],
+      t3: ['Everything in Business', 'Up to 12 pages', 'Photo & video production', 'Advanced animations', 'Multilingual (3+ languages)', 'Advanced statistics', 'Priority support', '10 revision rounds'],
+    },
+    da: {
+      eyebrow: 'PAKKER', heading: 'Tre måder at arbejde med os',
+      t1: ['Professionelt design', 'Op til 3 sider', 'Kontaktformular', 'Mobiloptimeret', '2 revisionsrunder'],
+      t2: ['Alt i Starter', 'Op til 7 sider', 'SEO-opsætning', 'Tekst & indhold', 'Flersproget (2 sprog)', 'Support', '5 revisionsrunder'],
+      t3: ['Alt i Business', 'Op til 12 sider', 'Foto & videoproduktion', 'Avancerede animationer', 'Flersproget (3+ sprog)', 'Avanceret statistik', 'Prioriteret support', '10 revisionsrunder'],
+    },
+  }
+
+  const TIER_META = [
+    { lbl: 'TIER I', name: 'Starter' },
+    { lbl: 'TIER II', name: 'Business' },
+    { lbl: 'TIER III', name: 'Full Production' },
+  ]
+
+  const featureLists = [t[lang].t1, t[lang].t2, t[lang].t3]
+
+  const cardStyle: React.CSSProperties = {
+    position: 'relative',
+    borderRadius: 14,
+    overflow: 'hidden',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: isMobile ? '20px 20px 24px' : 'clamp(28px, 2.2vw, 40px) clamp(24px, 2vw, 32px) clamp(32px, 2.4vw, 44px)',
+    background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))',
+    border: '1px solid rgba(255,255,255,.1)',
+    boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
+    transition: 'all .45s ease',
+  }
+  const tierLabelStyle: React.CSSProperties = {
+    margin: 0,
+    fontSize: isMobile ? 10 : 'clamp(11px, 0.75vw, 13px)',
+    letterSpacing: '.14em',
+    fontWeight: 300,
+    fontFamily: "var(--font-geist-sans), sans-serif",
+    color: '#eef2f4',
+    textTransform: 'uppercase',
+  }
+  const packageNameStyle: React.CSSProperties = {
+    margin: isMobile ? '8px 0 0' : '10px 0 0',
+    fontSize: 'clamp(22px, 1.8vw, 32px)',
+    fontWeight: 300,
+    fontFamily: "var(--font-geist-sans), sans-serif",
+    color: 'white',
+    letterSpacing: '-0.01em',
+  }
+  const dividerStyle: React.CSSProperties = {
+    width: '100%',
+    height: 1,
+    background: 'rgba(255,255,255,.14)',
+    margin: isMobile ? '16px 0' : '24px 0',
+  }
+  const featureListStyle: React.CSSProperties = {
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: isMobile ? '10px' : '12px',
+  }
+  const featureItemStyle: React.CSSProperties = {
+    fontSize: isMobile ? 11 : 'clamp(12px, 0.81vw, 14px)',
+    lineHeight: 1.45,
+    fontFamily: "var(--font-geist-sans), sans-serif",
+    color: 'rgba(238,242,244,.5)',
+  }
+  const onCardMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(143,227,216,.5)'
+    ;(e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)'
+  }
+  const onCardMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.1)'
+    ;(e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)'
   }
 
   useEffect(() => {
@@ -295,11 +372,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
       />
 
       <div style={{
-        position: 'absolute', inset: 0, zIndex: 2,
+        position: 'relative', zIndex: 2,
         display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
         padding: sectionPadding,
         paddingTop: isMobile ? '72px' : '40px',
-        pointerEvents: 'none',
         fontFamily: 'var(--font-geist-sans), sans-serif',
       }}>
         <p style={{
@@ -320,6 +396,30 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         }}>
           {t[lang].heading}
         </h2>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+          gap: isMobile ? '16px' : 'clamp(18px, 1.5vw, 26px)',
+        }}>
+          {TIER_META.map((tier, i) => (
+            <article
+              key={tier.name}
+              style={cardStyle}
+              onMouseEnter={onCardMouseEnter}
+              onMouseLeave={onCardMouseLeave}
+            >
+              <p style={tierLabelStyle}>{tier.lbl}</p>
+              <h3 style={packageNameStyle}>{tier.name}</h3>
+              <div style={dividerStyle} />
+              <ul style={featureListStyle}>
+                {featureLists[i].map((f) => (
+                  <li key={f} style={featureItemStyle}>{f}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
