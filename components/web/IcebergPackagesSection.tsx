@@ -296,8 +296,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
 
       <div style={{
         position: 'absolute', inset: 0, zIndex: 2,
-        display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        display: 'flex', flexDirection: 'column', justifyContent: 'flex-start',
         padding: sectionPadding,
+        paddingTop: isMobile ? '72px' : '40px',
         pointerEvents: 'none',
         fontFamily: 'var(--font-geist-sans), sans-serif',
       }}>
