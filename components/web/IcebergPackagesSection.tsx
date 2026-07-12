@@ -162,15 +162,17 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   const t = {
     en: {
       eyebrow: 'PACKAGES', heading: 'Three ways to work with us',
-      t1: ['Professional design', 'Up to 3 pages', 'Contact form', 'Mobile optimised', '2 revision rounds'],
-      t2: ['Everything in Starter', 'Up to 7 pages', 'SEO setup', 'Copywriting', 'Multilingual (2 languages)', 'Support', '5 revision rounds'],
-      t3: ['Everything in Business', 'Up to 12 pages', 'Photo & video production', 'Advanced animations', 'Multilingual (3+ languages)', 'Advanced statistics', 'Priority support', '10 revision rounds'],
+      t1: ['Professional design', 'Up to 2 pages', 'Contact form', 'Mobile optimised', '2 revision rounds', 'Copywriting'],
+      t2: ['Everything in Starter', 'Up to 5 pages', 'SEO setup', 'Multilingual (2 languages)', 'Support', '5 revision rounds'],
+      t3: ['Everything in Business', 'Up to 8 pages', 'Advanced animations', 'Effects', 'Multilingual (3+ languages)', 'Advanced statistics', 'Priority support', '10 revision rounds'],
+      p1: 'from 12,000 kr.', p2: 'from 22,000 kr.', p3: 'from 35,000 kr.',
     },
     da: {
       eyebrow: 'PAKKER', heading: 'Tre måder at arbejde med os',
-      t1: ['Professionelt design', 'Op til 3 sider', 'Kontaktformular', 'Mobiloptimeret', '2 revisionsrunder'],
-      t2: ['Alt i Starter', 'Op til 7 sider', 'SEO-opsætning', 'Tekst & indhold', 'Flersproget (2 sprog)', 'Support', '5 revisionsrunder'],
-      t3: ['Alt i Business', 'Op til 12 sider', 'Foto & videoproduktion', 'Avancerede animationer', 'Flersproget (3+ sprog)', 'Avanceret statistik', 'Prioriteret support', '10 revisionsrunder'],
+      t1: ['Professionelt design', 'Op til 2 sider', 'Kontaktformular', 'Mobiloptimeret', '2 revisionsrunder', 'Tekst & indhold'],
+      t2: ['Alt i Starter', 'Op til 5 sider', 'SEO-opsætning', 'Flersproget (2 sprog)', 'Support', '5 revisionsrunder'],
+      t3: ['Alt i Business', 'Op til 8 sider', 'Avancerede animationer', 'Effekter', 'Flersproget (3+ sprog)', 'Avanceret statistik', 'Prioriteret support', '10 revisionsrunder'],
+      p1: 'fra 12.000 kr.', p2: 'fra 22.000 kr.', p3: 'fra 35.000 kr.',
     },
   }
 
@@ -181,6 +183,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   ]
 
   const featureLists = [t[lang].t1, t[lang].t2, t[lang].t3]
+  const prices = [t[lang].p1, t[lang].p2, t[lang].p3]
 
   const cardStyle: React.CSSProperties = {
     position: 'relative',
@@ -231,6 +234,14 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     lineHeight: 1.45,
     fontFamily: "var(--font-geist-sans), sans-serif",
     color: 'rgba(238,242,244,.5)',
+  }
+  const priceStyle: React.CSSProperties = {
+    margin: 0,
+    fontSize: 'clamp(20px, 1.6vw, 26px)',
+    fontWeight: 300,
+    fontFamily: "var(--font-geist-sans), sans-serif",
+    color: 'white',
+    letterSpacing: '-0.01em',
   }
   const onCardMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
     ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(143,227,216,.5)'
@@ -417,7 +428,9 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
                   <li key={f} style={featureItemStyle}>{f}</li>
                 ))}
               </ul>
-              <div style={{ marginTop: 'auto', paddingTop: isMobile ? '24px' : '32px', height: isMobile ? 48 : 64 }} />
+              <div style={{ marginTop: 'auto', paddingTop: isMobile ? '24px' : '32px' }}>
+                <p style={priceStyle}>{prices[i]}</p>
+              </div>
             </article>
           ))}
         </div>
