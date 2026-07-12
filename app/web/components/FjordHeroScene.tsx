@@ -1026,19 +1026,19 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
           <div style={{ width: 'fit-content', maxWidth: '86vw', margin: '0 auto', padding: 'clamp(18px, 2vw, 28px) clamp(22px, 2.4vw, 36px)', borderRadius: 20, background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.08), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.02), rgba(10,32,36,.16))', border: '1px solid rgba(255,255,255,.06)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.08)' }}>
             <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0, whiteSpace: 'pre-line' }}>{t[lang].s1h}</h1>
-            <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
+            <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(0,215,200,0.95)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
           </div>
         </div>
         <div id="fj-sec-1" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
           <div style={{ width: 'fit-content', maxWidth: '86vw', margin: '0 auto', padding: 'clamp(18px, 2vw, 28px) clamp(22px, 2.4vw, 36px)', borderRadius: 20, background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.08), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.02), rgba(10,32,36,.16))', border: '1px solid rgba(255,255,255,.06)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.08)' }}>
             <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s2h}</h2>
-            <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '580px', margin: '18px auto 0' }}>{t[lang].s2b}</p>
+            <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(0,215,200,0.95)', maxWidth: '580px', margin: '18px auto 0' }}>{t[lang].s2b}</p>
           </div>
         </div>
         <div id="fj-sec-2" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 0, willChange: 'opacity, transform' }}>
           <div style={{ width: 'fit-content', maxWidth: '86vw', margin: '0 auto', padding: 'clamp(18px, 2vw, 28px) clamp(22px, 2.4vw, 36px)', borderRadius: 20, background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.08), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.02), rgba(10,32,36,.16))', border: '1px solid rgba(255,255,255,.06)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.08)' }}>
             <h2 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.06, letterSpacing: '-0.01em', color: '#f4fbff', margin: 0 }}>{t[lang].s3h}</h2>
-            <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '560px', margin: '18px auto 0' }}>{t[lang].s3b}</p>
+            <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(0,215,200,0.95)', maxWidth: '560px', margin: '18px auto 0' }}>{t[lang].s3b}</p>
           </div>
         </div>
       </div>
