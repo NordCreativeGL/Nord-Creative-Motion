@@ -230,6 +230,18 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         }
         const vig = vignetteAlphaAt(f.x, f.y + dy, ctaWCache, ctaHCache, 0.5)
         if (vig > 0.002) {
+          if (f.glow) {
+            // Also dim the glow halo, using the exact same center/radii as the glow
+            // gradient itself (oxp, oyp, R*0.3 to R*2.0) so the darkening fades to
+            // zero at precisely the same edge the glow does — it can never extend
+            // past the glow's own footprint.
+            const oxp = f.R * 0.08, oyp = f.R * 0.14
+            const gv = ctx.createRadialGradient(oxp, oyp, f.R * 0.30, oxp, oyp, f.R * 2.0)
+            gv.addColorStop(0, 'rgba(0,0,0,' + vig.toFixed(3) + ')')
+            gv.addColorStop(1, 'rgba(0,0,0,0)')
+            ctx.fillStyle = gv
+            ctx.fillRect(-f.R * 2, -f.R * 2, f.R * 4, f.R * 4)
+          }
           ctx.beginPath(); tracePoly(ctx, f.pts, f.round)
           ctx.fillStyle = 'rgba(0,0,0,' + vig.toFixed(3) + ')'
           ctx.fill()
