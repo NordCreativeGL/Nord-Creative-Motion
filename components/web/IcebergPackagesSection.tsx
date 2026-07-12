@@ -189,7 +189,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    padding: isMobile ? '20px 20px 24px' : 'clamp(28px, 2.2vw, 40px) clamp(24px, 2vw, 32px) clamp(32px, 2.4vw, 44px)',
+    padding: isMobile ? '24px 24px 28px' : 'clamp(36px, 2.8vw, 52px) clamp(30px, 2.4vw, 40px) clamp(40px, 3vw, 56px)',
     background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))',
     border: '1px solid rgba(255,255,255,.1)',
     boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
@@ -197,7 +197,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   }
   const tierLabelStyle: React.CSSProperties = {
     margin: 0,
-    fontSize: isMobile ? 10 : 'clamp(11px, 0.75vw, 13px)',
+    fontSize: isMobile ? 11 : 'clamp(12px, 0.85vw, 14px)',
     letterSpacing: '.14em',
     fontWeight: 300,
     fontFamily: "var(--font-geist-sans), sans-serif",
@@ -206,7 +206,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
   }
   const packageNameStyle: React.CSSProperties = {
     margin: isMobile ? '8px 0 0' : '10px 0 0',
-    fontSize: 'clamp(22px, 1.8vw, 32px)',
+    fontSize: 'clamp(26px, 2.2vw, 38px)',
     fontWeight: 300,
     fontFamily: "var(--font-geist-sans), sans-serif",
     color: 'white',
@@ -216,7 +216,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     width: '100%',
     height: 1,
     background: 'rgba(255,255,255,.14)',
-    margin: isMobile ? '16px 0' : '24px 0',
+    margin: isMobile ? '18px 0' : '28px 0',
   }
   const featureListStyle: React.CSSProperties = {
     listStyle: 'none',
@@ -224,10 +224,10 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     padding: 0,
     display: 'flex',
     flexDirection: 'column',
-    gap: isMobile ? '10px' : '12px',
+    gap: isMobile ? '12px' : '14px',
   }
   const featureItemStyle: React.CSSProperties = {
-    fontSize: isMobile ? 11 : 'clamp(12px, 0.81vw, 14px)',
+    fontSize: isMobile ? 13 : 'clamp(14px, 0.95vw, 16px)',
     lineHeight: 1.45,
     fontFamily: "var(--font-geist-sans), sans-serif",
     color: 'rgba(238,242,244,.5)',
@@ -417,6 +417,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
                   <li key={f} style={featureItemStyle}>{f}</li>
                 ))}
               </ul>
+              <div style={{ marginTop: 'auto', paddingTop: isMobile ? '24px' : '32px', height: isMobile ? 48 : 64 }} />
             </article>
           ))}
         </div>
