@@ -8,7 +8,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
         position: 'relative',
         minHeight: '100dvh',
         overflow: 'hidden',
-        background: 'linear-gradient(180deg, #081826 0%, #031b26 100%)',
+        background: 'linear-gradient(180deg, #06121D 0%, #031720 100%)',
       }}
     />
   )
