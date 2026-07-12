@@ -178,11 +178,6 @@ function createPackIce(canvas: HTMLCanvasElement): PackIcePainter {
     for (let i = 0; i < 7; i++) mk(base * 0.028, base * 0.048, 1, h + 10, h + 370)
     for (let i = 0; i < 7; i++) mk(base * 0.005, base * 0.013, 2, h + 10, h + 370)
     for (let i = 0; i < 2; i++) mk(base * 0.038, base * 0.055, 1, h + 10, h + 370, true)
-    const topMargin = 8
-    for (const f of out) {
-      const minY = f.R + topMargin
-      if (f.y < minY) f.y = minY
-    }
     return out
   }
 
