@@ -979,13 +979,13 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
 
   const t = {
     en: {
-      s1h: 'Websites and applications for your business, built from scratch.', s1b: 'Custom websites for businesses that want to stand out. Designed and built from scratch — no shortcuts.',
+      s1h: 'Websites and applications for your\nbusiness, built from scratch.', s1b: 'Custom websites for businesses that want to stand out. Designed and built from scratch — no shortcuts.',
       s2h: 'Everything, from idea to launch', s2b: 'Design · Copywriting · SEO · Photo & video · Development · Maintenance. Everything in one place — from idea to launch.',
       s3h: 'Three ways to start', s3b: 'Starter · Business · Full Production — from a compact single-page site to website plus photo, drone and video, delivered as one package.',
       dragLabel: 'Drag to rotate the iceberg',
     },
     da: {
-      s1h: 'Hjemmesider og applikationer til din virksomhed, bygget fra bunden.', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra bunden — uden kompromiser.',
+      s1h: 'Hjemmesider og applikationer til\ndin virksomhed, bygget fra bunden.', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud. Designet og bygget fra bunden — uden kompromiser.',
       s2h: 'Alt samlet — fra idé til lancering', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse. Alt samlet ét sted — fra idé til lancering.',
       s3h: 'Tre måder at starte', s3b: 'Starter · Business · Full Production — fra et kompakt single-page site til hjemmeside plus foto, drone og video, leveret som ét samlet projekt.',
       dragLabel: 'Træk for at rotere isbjerget',
@@ -1025,7 +1025,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       <div id="fj-copy" style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.6s ease' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
           <div style={{ width: 'fit-content', maxWidth: '86vw', margin: '0 auto', padding: 'clamp(18px, 2vw, 28px) clamp(22px, 2.4vw, 36px)', borderRadius: 20, background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.08), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.02), rgba(10,32,36,.16))', border: '1px solid rgba(255,255,255,.06)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.08)' }}>
-            <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0, maxWidth: '34ch', textWrap: 'balance' }}>{t[lang].s1h}</h1>
+            <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(28px,3.5vw,80px)', lineHeight: 1.05, letterSpacing: '-0.012em', color: '#f4fbff', margin: 0, whiteSpace: 'pre-line' }}>{t[lang].s1h}</h1>
             <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(198,224,231,0.82)', maxWidth: '540px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
           </div>
         </div>
