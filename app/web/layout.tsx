@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Hjemmesider folk husker | Nord Creative',
   description: 'Professionelle hjemmesider til grønlandske virksomheder. Design, udvikling, SEO og copywriting — leveret fra Qaqortoq.',
   alternates: {
-    canonical: 'https://nordcreative.dk/web',
+    canonical: 'https://nordcreative.gl/web',
   },
 }
 
