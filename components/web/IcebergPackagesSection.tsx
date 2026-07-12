@@ -19,6 +19,20 @@ function tracePoly(ctx: CanvasRenderingContext2D, pts: number[][], round: number
   ctx.closePath()
 }
 
+// Replicates PackIceCtaSection's vignette(fg, w, h + 380, 0.5) darkening at a
+// given point in CTA's own coordinate frame (y=0 at CTA top). PackIceCtaSection
+// calls vignette with height (h + 380), NOT h — this must match exactly or the
+// darkening amount will be wrong.
+function vignetteAlphaAt(x: number, y: number, w: number, ctaH: number, strength: number): number {
+  const H = ctaH + 380
+  const cx = w / 2, cy = H * 0.55
+  const inner = Math.min(w, H) * 0.35
+  const outer = Math.max(w, H) * 0.78
+  const d = Math.hypot(x - cx, y - cy)
+  const t = Math.min(Math.max((d - inner) / (outer - inner), 0), 1)
+  return t * strength
+}
+
 interface FloeShape {
   pts: number[][]
   round: number
@@ -143,11 +157,15 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
     let cutoffs: Floe[] = []
     let pkgH = 0
     let dpr = 1
+    let ctaWCache = 0
+    let ctaHCache = 0
 
     function computeCutoffs() {
       const cta = document.getElementById('web-cta')
       if (!cta) return
       const ctaRect = cta.getBoundingClientRect()
+      ctaWCache = ctaRect.width
+      ctaHCache = ctaRect.height
       const all = buildCtaFloes(ctaRect.width, ctaRect.height)
       cutoffs = all.filter((f) => f.y - f.R < 0)
     }
@@ -205,6 +223,12 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
             seg.forEach((p, i) => { if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]) })
             ctx.stroke()
           }
+        }
+        const vig = vignetteAlphaAt(f.x, f.y + dy, ctaWCache, ctaHCache, 0.5)
+        if (vig > 0.002) {
+          ctx.beginPath(); tracePoly(ctx, f.pts, f.round)
+          ctx.fillStyle = 'rgba(0,0,0,' + vig.toFixed(3) + ')'
+          ctx.fill()
         }
         ctx.restore()
       }
