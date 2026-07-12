@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     "Nord Creative er et mediebureau i Qaqortoq, Sydgrønland. Videoproduktion, fotografi, droneoptagelser og webudvikling for virksomheder i Grønland.",
 
   alternates: {
-    canonical: "https://nordcreative.dk",
+    canonical: "https://nordcreative.gl",
   },
 };
 
@@ -42,7 +42,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               "name": "Nord Creative",
               "description": "Mediebureau i Qaqortoq, Sydgrønland. Videoproduktion, fotografi, droneoptagelser og webudvikling.",
-              "url": "https://nordcreative.dk",
+              "url": "https://nordcreative.gl",
               "telephone": "+299245441",
               "email": "contact@nordcreative.dk",
               "address": {
@@ -52,7 +52,7 @@ export default function RootLayout({
                 "addressCountry": "GL"
               },
               "areaServed": "GL",
-              "image": "https://nordcreative.dk/logo-icon.png"
+              "image": "https://nordcreative.gl/logo-icon.png"
             })
           }}
         />

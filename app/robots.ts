@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://nordcreative.dk/sitemap.xml',
+    sitemap: 'https://nordcreative.gl/sitemap.xml',
   }
 }
