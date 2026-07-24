@@ -123,15 +123,6 @@ export default function PricingModal() {
     fontFamily: 'var(--font-geist-sans), sans-serif',
     color: 'rgba(238,242,244,.5)',
   }
-  const compactNameStyle: React.CSSProperties = {
-    margin: 0,
-    fontSize: tierNameStyle.fontSize,
-    fontWeight: tierNameStyle.fontWeight,
-    fontFamily: tierNameStyle.fontFamily,
-    color: 'white',
-    letterSpacing: '-0.01em',
-    textTransform: 'uppercase',
-  }
   const compactPriceStyle: React.CSSProperties = {
     margin: 0,
     fontSize: '14px',
@@ -263,7 +254,7 @@ export default function PricingModal() {
                   gap: '16px',
                   padding: isMobile ? '10px 0' : '14px 0',
                 }}>
-                  <h3 style={compactNameStyle}>{tier.name}</h3>
+                  <h3 style={tierLabelStyle}>{tier.name}</h3>
                 </div>
                 <div style={{
                   display: 'grid',
