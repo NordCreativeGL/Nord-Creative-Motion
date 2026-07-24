@@ -225,13 +225,66 @@ export default function PricingModal() {
           {t[lang].subtitle}
         </p>
 
-        <div style={{ display: 'flex', gap: isMobile ? '10px' : '12px', marginBottom: isMobile ? '24px' : '36px' }}>
-          <button style={pillButtonStyle(activeTab === 'photoVideo')} onClick={() => setActiveTab('photoVideo')}>
-            {t[lang].tabs.photoVideo}
-          </button>
-          <button style={pillButtonStyle(activeTab === 'web')} onClick={() => setActiveTab('web')}>
-            {t[lang].tabs.web}
-          </button>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: isMobile ? '24px' : '36px' }}>
+          <div style={{
+            position: 'relative',
+            display: 'flex',
+            width: '100%',
+            maxWidth: 460,
+            height: 56,
+            border: '1px solid rgba(255,255,255,.9)',
+            borderRadius: 8,
+            padding: 4,
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: 4,
+              left: 4,
+              width: 'calc(50% - 4px)',
+              height: 'calc(100% - 8px)',
+              background: '#ffffff',
+              borderRadius: 6,
+              transition: 'transform 0.35s cubic-bezier(0.25, 0.1, 0.15, 1)',
+              transform: activeTab === 'photoVideo' ? 'translateX(0%)' : 'translateX(100%)',
+            }} />
+            <button
+              onClick={() => setActiveTab('photoVideo')}
+              style={{
+                flex: 1,
+                position: 'relative',
+                zIndex: 2,
+                background: 'transparent',
+                border: 'none',
+                fontSize: isMobile ? '13px' : 'clamp(13px, 0.85vw, 15px)',
+                fontWeight: 300,
+                letterSpacing: '0.02em',
+                cursor: 'pointer',
+                transition: 'color 0.3s ease',
+                color: activeTab === 'photoVideo' ? '#000' : '#fff',
+              }}
+            >
+              {t[lang].tabs.photoVideo}
+            </button>
+            <button
+              onClick={() => setActiveTab('web')}
+              style={{
+                flex: 1,
+                position: 'relative',
+                zIndex: 2,
+                background: 'transparent',
+                border: 'none',
+                fontSize: isMobile ? '13px' : 'clamp(13px, 0.85vw, 15px)',
+                fontWeight: 300,
+                letterSpacing: '0.02em',
+                cursor: 'pointer',
+                transition: 'color 0.3s ease',
+                color: activeTab === 'web' ? '#000' : '#fff',
+              }}
+            >
+              {t[lang].tabs.web}
+            </button>
+          </div>
         </div>
 
         {activeTab === 'photoVideo' ? (
