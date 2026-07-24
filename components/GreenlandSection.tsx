@@ -188,17 +188,21 @@ export default function GreenlandSection() {
               alignSelf: isMobile ? undefined : 'flex-start',
               width: '100%',
               padding: '14px 36px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.18)',
-              background: btnHover ? 'rgba(255,255,255,0.2)' : 'transparent',
+              borderRadius: 8,
+              border: '1px solid rgba(255,255,255,.9)',
+              background: 'transparent',
               color: 'rgba(255,255,255,0.85)',
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-              fontWeight: 400,
+              fontWeight: 300,
+              fontFamily: 'var(--font-geist-sans), sans-serif',
               letterSpacing: '0.01em',
               textDecoration: 'none',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              transition: 'background 0.25s ease, color 0.25s ease',
+              boxShadow: btnHover
+                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
+                : 'inset 0 1px 0 rgba(255,255,255,.14)',
+              transition: 'box-shadow 0.25s ease, color 0.25s ease',
             }}
           >
             {t[lang].btnWork}
@@ -215,17 +219,21 @@ export default function GreenlandSection() {
               alignSelf: isMobile ? undefined : 'flex-start',
               width: '100%',
               padding: '14px 36px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.18)',
-              background: btnHover2 ? 'rgba(255,255,255,0.2)' : 'transparent',
+              borderRadius: 8,
+              border: '1px solid rgba(255,255,255,.9)',
+              background: 'transparent',
               color: 'rgba(255,255,255,0.85)',
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
-              fontWeight: 400,
+              fontWeight: 300,
+              fontFamily: 'var(--font-geist-sans), sans-serif',
               letterSpacing: '0.01em',
               textDecoration: 'none',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              transition: 'background 0.25s ease, color 0.25s ease',
+              boxShadow: btnHover2
+                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
+                : 'inset 0 1px 0 rgba(255,255,255,.14)',
+              transition: 'box-shadow 0.25s ease, color 0.25s ease',
             }}
           >
             {t[lang].btnWeb}
