@@ -106,7 +106,7 @@ export default function Header() {
                 fontFamily: 'var(--font-geist-sans), sans-serif',
                 color: 'white',
                 background: 'transparent',
-                border: '1px solid rgba(255,255,255,.1)',
+                border: '1px solid rgba(255,255,255,.9)',
                 boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
                 cursor: 'pointer',
                 transition: 'all .45s ease',
@@ -260,7 +260,7 @@ export default function Header() {
             borderRadius: 8,
             padding: '6px 16px',
             background: 'transparent',
-            border: '1px solid rgba(255,255,255,.1)',
+            border: '1px solid rgba(255,255,255,.9)',
             boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
             cursor: 'pointer',
           }}
