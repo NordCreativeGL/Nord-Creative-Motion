@@ -66,7 +66,7 @@ export default function About() {
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pb-20">
           <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-4">{t[lang].heroEyebrow}</p>
-          <h1 className="text-5xl md:text-6xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white uppercase tracking-[0.04em]">{t[lang].heroH1}</h1>
+          <h1 className="text-[clamp(28px,7.5vw,34px)] md:text-6xl min-[1900px]:text-[clamp(28px,2.78vw,68px)] font-light text-white uppercase tracking-[0.04em]">{t[lang].heroH1}</h1>
         </div>
       </section>
 
