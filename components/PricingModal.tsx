@@ -264,7 +264,20 @@ export default function PricingModal() {
                 }}>
                   <h3 style={compactNameStyle}>{tier.name}</h3>
                 </div>
-                <p style={descStyle}>{tier.features.join(' · ')}</p>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                  columnGap: '16px',
+                  rowGap: '4px',
+                  margin: isMobile ? '6px 0 0' : '8px 0 0',
+                }}>
+                  {tier.features.map(f => (
+                    <div key={f} style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                      <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'rgba(238,242,244,.5)', flexShrink: 0 }} />
+                      <span style={{ ...descStyle, margin: 0 }}>{f}</span>
+                    </div>
+                  ))}
+                </div>
                 <p style={{ ...compactPriceStyle, color: '#ffffff', textAlign: 'right', marginTop: isMobile ? '10px' : '14px' }}>{tier.price}</p>
               </div>
             ))}
