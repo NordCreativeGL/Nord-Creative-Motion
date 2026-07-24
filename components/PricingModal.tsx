@@ -245,7 +245,7 @@ export default function PricingModal() {
               <div key={tier.name}>
                 <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
                 <p style={descStyle}>{tier.desc}</p>
-                <p style={descStyle}>{tier.price}</p>
+                <p style={{ ...descStyle, color: '#ffffff' }}>{tier.price}</p>
               </div>
             ))}
 
@@ -256,7 +256,7 @@ export default function PricingModal() {
               <div key={tier.name}>
                 <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
                 <p style={descStyle}>{tier.desc}</p>
-                <p style={descStyle}>{tier.price}</p>
+                <p style={{ ...descStyle, color: '#ffffff' }}>{tier.price}</p>
               </div>
             ))}
 
