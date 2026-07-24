@@ -117,10 +117,12 @@ export default function Header() {
                 (e.currentTarget as HTMLElement).style.boxShadow = isWeb
                   ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)'
                   : 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)';
+                (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.5)';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.9)';
                 (e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)';
+                (e.currentTarget as HTMLElement).style.background = 'transparent';
               }}
             >
               {t[lang].cta}
