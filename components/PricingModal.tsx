@@ -34,7 +34,6 @@ export default function PricingModal() {
           { name: 'Brand', desc: 'Full shoot day · Main film plus short clips, audio and color grading', price: 'from 15,000 DKK' },
           { name: 'Signature', desc: '2-4 shoot days · Cinematic film, interviews, advanced color and sound design', price: 'from 38,000 DKK' },
         ],
-        note: 'Drone photo and video are included when relevant to the project.',
       },
       web: {
         tiers: [
@@ -61,7 +60,6 @@ export default function PricingModal() {
           { name: 'Brand', desc: 'Hel optagelsesdag · Hovedfilm og korte klip, lyd og farvekorrektion', price: 'fra 15.000 kr.' },
           { name: 'Signature', desc: '2-4 optagelsesdage · Cinematisk film, interviews, avanceret farve/lyddesign', price: 'fra 38.000 kr.' },
         ],
-        note: 'Dronefoto og -video er inkluderet, når det er relevant for opgaven.',
       },
       web: {
         tiers: [
@@ -124,14 +122,6 @@ export default function PricingModal() {
     fontWeight: 300,
     fontFamily: 'var(--font-geist-sans), sans-serif',
     color: 'rgba(238,242,244,.5)',
-  }
-  const noteStyle: React.CSSProperties = {
-    margin: 0,
-    fontSize: isMobile ? 12 : 'clamp(12px, 0.8vw, 13px)',
-    lineHeight: 1.5,
-    fontWeight: 300,
-    fontFamily: 'var(--font-geist-sans), sans-serif',
-    color: 'rgba(255,255,255,0.35)',
   }
   const compactNameStyle: React.CSSProperties = {
     margin: 0,
@@ -259,10 +249,6 @@ export default function PricingModal() {
                 <p style={{ ...descStyle, color: '#ffffff' }}>{tier.price}</p>
               </div>
             ))}
-
-            <div style={dividerStyle} />
-
-            <p style={noteStyle}>{t[lang].photoVideo.note}</p>
           </div>
         ) : (
           <div>
