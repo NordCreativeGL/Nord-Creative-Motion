@@ -97,7 +97,28 @@ export default function Header() {
             </div>
             <button
               onClick={openModal}
-              className="hidden rounded-full border border-white/20 px-5 py-2 text-sm text-white transition hover:bg-white/20 lg:block"
+              className="hidden lg:block"
+              style={{
+                borderRadius: 14,
+                padding: '10px 24px',
+                fontSize: '14px',
+                fontWeight: 300,
+                fontFamily: 'var(--font-geist-sans), sans-serif',
+                color: 'white',
+                background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))',
+                border: '1px solid rgba(255,255,255,.1)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
+                cursor: 'pointer',
+                transition: 'all .45s ease',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(143,227,216,.5)';
+                (e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.1)';
+                (e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)';
+              }}
             >
               {t[lang].cta}
             </button>
@@ -226,16 +247,18 @@ export default function Header() {
             openModal();
           }}
           style={{
-            textDecoration: 'none',
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: '13px',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
+            color: 'white',
+            fontSize: '14px',
+            fontWeight: 300,
+            fontFamily: 'var(--font-geist-sans), sans-serif',
+            letterSpacing: 'normal',
+            textTransform: 'none',
             marginTop: '4px',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '999px',
+            borderRadius: 14,
             padding: '10px 24px',
-            background: 'none',
+            background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))',
+            border: '1px solid rgba(255,255,255,.1)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
             cursor: 'pointer',
           }}
         >
