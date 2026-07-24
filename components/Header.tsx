@@ -100,7 +100,7 @@ export default function Header() {
               className="hidden lg:block"
               style={{
                 borderRadius: 8,
-                padding: '10px 24px',
+                padding: '6px 16px',
                 fontSize: '14px',
                 fontWeight: 300,
                 fontFamily: 'var(--font-geist-sans), sans-serif',
@@ -258,7 +258,7 @@ export default function Header() {
             textTransform: 'none',
             marginTop: '4px',
             borderRadius: 8,
-            padding: '10px 24px',
+            padding: '6px 16px',
             background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))',
             border: '1px solid rgba(255,255,255,.1)',
             boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
