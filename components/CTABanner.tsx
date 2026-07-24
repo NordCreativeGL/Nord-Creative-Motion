@@ -149,13 +149,18 @@ export default function CTABanner() {
               width: '100%',
               justifyContent: 'center',
               padding: '16px 40px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255,255,255,0.22)',
-              background: btnHover ? 'rgba(255,255,255,0.2)' : 'transparent',
+              borderRadius: 8,
+              border: '1px solid rgba(255,255,255,.9)',
+              background: 'transparent',
               color: 'rgba(255,255,255,0.88)',
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
+              fontFamily: 'var(--font-geist-sans), sans-serif',
+              fontWeight: 300,
+              boxShadow: btnHover
+                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
+                : 'inset 0 1px 0 rgba(255,255,255,.14)',
               filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
-              transition: 'background 0.25s ease, color 0.25s ease',
+              transition: 'box-shadow 0.25s ease, color 0.25s ease',
             }}
           >
             {t[lang].btn}
