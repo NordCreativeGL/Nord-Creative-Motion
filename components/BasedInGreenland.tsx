@@ -380,7 +380,7 @@ export default function BasedInGreenland() {
             transition: 'box-shadow 0.3s ease, color 0.3s ease',
           }}
           onMouseEnter={e => {
-            (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)';
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)';
           }}
           onMouseLeave={e => {
             (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)';

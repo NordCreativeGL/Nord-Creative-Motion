@@ -200,7 +200,7 @@ export default function GreenlandSection() {
               cursor: 'pointer',
               whiteSpace: 'nowrap',
               boxShadow: btnHover
-                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
+                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)'
                 : 'inset 0 1px 0 rgba(255,255,255,.14)',
               transition: 'box-shadow 0.25s ease, color 0.25s ease',
             }}
@@ -231,7 +231,7 @@ export default function GreenlandSection() {
               cursor: 'pointer',
               whiteSpace: 'nowrap',
               boxShadow: btnHover2
-                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
+                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)'
                 : 'inset 0 1px 0 rgba(255,255,255,.14)',
               transition: 'box-shadow 0.25s ease, color 0.25s ease',
             }}

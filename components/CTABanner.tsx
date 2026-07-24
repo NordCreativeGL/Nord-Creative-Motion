@@ -157,7 +157,7 @@ export default function CTABanner() {
               fontFamily: 'var(--font-geist-sans), sans-serif',
               fontWeight: 300,
               boxShadow: btnHover
-                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
+                ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)'
                 : 'inset 0 1px 0 rgba(255,255,255,.14)',
               filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.8))',
               transition: 'box-shadow 0.25s ease, color 0.25s ease',
