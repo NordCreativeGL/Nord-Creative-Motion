@@ -241,9 +241,8 @@ export default function PricingModal() {
         {activeTab === 'photoVideo' ? (
           <div>
             <p style={tierLabelStyle}>{t[lang].photoVideo.photoLabel}</p>
-            {t[lang].photoVideo.photoTiers.map((tier, i) => (
+            {t[lang].photoVideo.photoTiers.map((tier) => (
               <div key={tier.name}>
-                {i > 0 && <div style={dividerStyle} />}
                 <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
                 <p style={descStyle}>{tier.desc}</p>
                 <p style={descStyle}>{tier.price}</p>
@@ -253,9 +252,8 @@ export default function PricingModal() {
             <div style={dividerStyle} />
 
             <p style={tierLabelStyle}>{t[lang].photoVideo.videoLabel}</p>
-            {t[lang].photoVideo.videoTiers.map((tier, i) => (
+            {t[lang].photoVideo.videoTiers.map((tier) => (
               <div key={tier.name}>
-                {i > 0 && <div style={dividerStyle} />}
                 <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
                 <p style={descStyle}>{tier.desc}</p>
                 <p style={descStyle}>{tier.price}</p>
