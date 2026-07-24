@@ -149,13 +149,6 @@ export default function PricingModal() {
     color: 'rgba(238,242,244,.7)',
     letterSpacing: '-0.01em',
   }
-  const boxedLabelStyle: React.CSSProperties = {
-    ...tierLabelStyle,
-    display: 'inline-block',
-    border: '1px solid rgba(255,255,255,.14)',
-    padding: '4px 10px',
-    borderRadius: '4px',
-  }
   const pillButtonStyle = (active: boolean): React.CSSProperties => ({
     borderRadius: '999px',
     border: '1px solid rgba(255,255,255,0.3)',
@@ -247,7 +240,7 @@ export default function PricingModal() {
 
         {activeTab === 'photoVideo' ? (
           <div>
-            <p style={boxedLabelStyle}>{t[lang].photoVideo.photoLabel}</p>
+            <p style={tierLabelStyle}>{t[lang].photoVideo.photoLabel}</p>
             {t[lang].photoVideo.photoTiers.map((tier, i) => (
               <div key={tier.name}>
                 {i > 0 && <div style={dividerStyle} />}
@@ -259,7 +252,7 @@ export default function PricingModal() {
 
             <div style={dividerStyle} />
 
-            <p style={boxedLabelStyle}>{t[lang].photoVideo.videoLabel}</p>
+            <p style={tierLabelStyle}>{t[lang].photoVideo.videoLabel}</p>
             {t[lang].photoVideo.videoTiers.map((tier, i) => (
               <div key={tier.name}>
                 {i > 0 && <div style={dividerStyle} />}
