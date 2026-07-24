@@ -125,9 +125,9 @@ export default function PricingModal() {
   }
   const compactNameStyle: React.CSSProperties = {
     margin: 0,
-    fontSize: 'clamp(18px, 1.4vw, 24px)',
-    fontWeight: 300,
-    fontFamily: 'var(--font-geist-sans), sans-serif',
+    fontSize: tierNameStyle.fontSize,
+    fontWeight: tierNameStyle.fontWeight,
+    fontFamily: tierNameStyle.fontFamily,
     color: 'white',
     letterSpacing: '-0.01em',
   }
