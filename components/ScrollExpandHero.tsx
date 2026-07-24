@@ -52,10 +52,14 @@ export default function ScrollExpandHero() {
       <div
         style={{
           position: 'absolute',
-          bottom: '20%',
-          left: 0,
-          right: 0,
+          inset: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
           opacity: 1,
+          padding: '0 24px',
         }}
       >
         <div className="max-w-7xl min-[1900px]:max-w-[1700px] mx-auto px-6 min-[1900px]:px-16">
