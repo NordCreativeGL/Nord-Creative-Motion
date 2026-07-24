@@ -99,7 +99,7 @@ export default function Header() {
               onClick={openModal}
               className="hidden lg:block"
               style={{
-                borderRadius: 14,
+                borderRadius: 8,
                 padding: '10px 24px',
                 fontSize: '14px',
                 fontWeight: 300,
@@ -112,8 +112,11 @@ export default function Header() {
                 transition: 'all .45s ease',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(143,227,216,.5)';
-                (e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)';
+                const isWeb = pathname === '/web';
+                (e.currentTarget as HTMLElement).style.borderColor = isWeb ? 'rgba(143,227,216,.5)' : 'rgba(255,255,255,.5)';
+                (e.currentTarget as HTMLElement).style.boxShadow = isWeb
+                  ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)'
+                  : 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.1)';
@@ -254,7 +257,7 @@ export default function Header() {
             letterSpacing: 'normal',
             textTransform: 'none',
             marginTop: '4px',
-            borderRadius: 14,
+            borderRadius: 8,
             padding: '10px 24px',
             background: 'radial-gradient(130% 90% at 18% -10%, rgba(186,238,230,.16), transparent 52%), linear-gradient(180deg, rgba(255,255,255,.045), rgba(10,32,36,.35))',
             border: '1px solid rgba(255,255,255,.1)',
