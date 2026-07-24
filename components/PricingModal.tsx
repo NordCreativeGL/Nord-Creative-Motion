@@ -19,7 +19,8 @@ export default function PricingModal() {
   const t = {
     en: {
       eyebrow: 'PRICING',
-      title: 'What it costs',
+      title: 'Pricing',
+      subtitle: 'Indicative pricing — the final quote depends on your project.',
       close: 'Close',
       tabs: { photoVideo: 'Photo & Video', web: 'Website & App' },
       photoVideo: {
@@ -45,7 +46,8 @@ export default function PricingModal() {
     },
     da: {
       eyebrow: 'PRISER',
-      title: 'Hvad det koster',
+      title: 'Priser',
+      subtitle: 'Vejledende priser — det endelige tilbud afhænger af opgaven.',
       close: 'Luk',
       tabs: { photoVideo: 'Foto & Video', web: 'Website & App' },
       photoVideo: {
@@ -205,11 +207,23 @@ export default function PricingModal() {
           fontWeight: 300,
           letterSpacing: '-0.02em',
           color: 'white',
-          marginBottom: isMobile ? '16px' : '32px',
+          marginBottom: isMobile ? '8px' : '10px',
           fontFamily: 'var(--font-geist-sans), sans-serif',
         }}>
           {t[lang].title}
         </h2>
+
+        <p style={{
+          margin: 0,
+          marginBottom: isMobile ? '24px' : '36px',
+          fontSize: '15px',
+          lineHeight: 1.45,
+          fontWeight: 300,
+          fontFamily: 'var(--font-geist-sans), sans-serif',
+          color: 'rgba(238,242,244,.5)',
+        }}>
+          {t[lang].subtitle}
+        </p>
 
         <div style={{ display: 'flex', gap: isMobile ? '10px' : '12px', marginBottom: isMobile ? '24px' : '36px' }}>
           <button style={pillButtonStyle(activeTab === 'photoVideo')} onClick={() => setActiveTab('photoVideo')}>
