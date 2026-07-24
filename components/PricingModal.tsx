@@ -130,6 +130,7 @@ export default function PricingModal() {
     fontFamily: tierNameStyle.fontFamily,
     color: 'white',
     letterSpacing: '-0.01em',
+    textTransform: 'uppercase',
   }
   const compactPriceStyle: React.CSSProperties = {
     margin: 0,
