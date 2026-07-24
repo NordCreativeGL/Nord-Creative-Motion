@@ -302,7 +302,7 @@ export default function ContactModal() {
                   style={{
                     width: '100%',
                     padding: isMobile ? '11px 24px' : '14px 24px',
-                    borderRadius: '999px',
+                    borderRadius: 8,
                     border: '1px solid rgba(255,255,255,0.9)',
                     background: 'transparent',
                     color: '#ffffff',
@@ -311,18 +311,16 @@ export default function ContactModal() {
                     fontWeight: 300,
                     cursor: isDisabled ? 'not-allowed' : 'pointer',
                     opacity: isDisabled ? 0.4 : 1,
-                    transition: 'background 0.2s ease, color 0.2s ease, opacity 0.2s ease',
-                    letterSpacing: '0.05em',
+                    transition: 'box-shadow 0.2s ease, opacity 0.2s ease',
+                    boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
                   }}
                   onMouseEnter={e => {
                     if (!isDisabled) {
-                      e.currentTarget.style.background = '#ffffff'
-                      e.currentTarget.style.color = '#000000'
+                      e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)'
                     }
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.color = '#ffffff'
+                    e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)'
                   }}
                 >
                   {status === 'sending' ? t[lang].sending : t[lang].send}
