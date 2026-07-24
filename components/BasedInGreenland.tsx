@@ -369,19 +369,21 @@ export default function BasedInGreenland() {
             textAlign: 'center',
             marginTop: '2rem',
             padding: '14px 36px',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '999px',
+            border: '1px solid rgba(255,255,255,.9)',
+            borderRadius: 8,
             color: 'white',
             fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
             fontWeight: 300,
+            fontFamily: 'var(--font-geist-sans), sans-serif',
             textDecoration: 'none',
-            transition: 'background 0.3s ease, color 0.3s ease',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
+            transition: 'box-shadow 0.3s ease, color 0.3s ease',
           }}
           onMouseEnter={e => {
-            (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.2)';
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)';
           }}
           onMouseLeave={e => {
-            (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+            (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)';
           }}
         >
           {t[lang].readMore}
@@ -426,13 +428,15 @@ export default function BasedInGreenland() {
               display: 'block',
               textAlign: 'center',
               padding: '14px 32px',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '999px',
+              border: '1px solid rgba(255,255,255,.9)',
+              borderRadius: 8,
               color: 'white',
               fontSize: 'clamp(1.125rem, 1.15vw, 1.5rem)',
               fontWeight: 300,
+              fontFamily: 'var(--font-geist-sans), sans-serif',
               textDecoration: 'none',
-              transition: 'background 0.3s ease, color 0.3s ease',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,.14)',
+              transition: 'box-shadow 0.3s ease, color 0.3s ease',
             }}
           >
             {t[lang].readMore}
