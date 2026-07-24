@@ -119,7 +119,7 @@ export default function Header() {
                   : 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.1)';
+                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.9)';
                 (e.currentTarget as HTMLElement).style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,.14)';
               }}
             >
