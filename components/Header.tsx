@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLang } from "@/contexts/LanguageContext";
 import { useContactModal } from "@/contexts/ContactModalContext";
+import { usePricingModal } from "@/contexts/PricingModalContext";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,10 +16,11 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, setLang } = useLang();
   const t = {
-    en: { home: 'Home', greenland: 'Greenland', web: 'Website Production', about: 'About', cta: 'Work with us' },
-    da: { home: 'Hjem', greenland: 'Grønland', web: 'Website Produktion', about: 'Om os', cta: 'Arbejd med os' },
+    en: { home: 'Home', greenland: 'Greenland', web: 'Website Production', about: 'About', pricing: 'Pricing', cta: 'Work with us' },
+    da: { home: 'Hjem', greenland: 'Grønland', web: 'Website Produktion', about: 'Om os', pricing: 'Priser', cta: 'Arbejd med os' },
   }
   const { openModal } = useContactModal();
+  const { openPricingModal } = usePricingModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -85,6 +87,7 @@ export default function Header() {
             <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>{t[lang].web}</Link>
             {/* <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link> */}
             <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>{t[lang].about}</Link>
+            <button onClick={openPricingModal} className="transition hover:text-white" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', color: 'inherit' }}>{t[lang].pricing}</button>
           </nav>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -187,6 +190,36 @@ export default function Header() {
             {label}
           </a>
         ))}
+        <button
+          onClick={() => {
+            setMenuOpen(false);
+            openPricingModal();
+          }}
+          style={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            alignItems: 'center',
+            gap: '12px',
+            textDecoration: 'none',
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '13px',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            padding: 0,
+          }}
+        >
+          <span style={{
+            display: 'block',
+            width: '28px',
+            height: '0.5px',
+            background: 'white',
+            flexShrink: 0,
+          }} />
+          {t[lang].pricing}
+        </button>
         <button
           onClick={() => {
             setMenuOpen(false);

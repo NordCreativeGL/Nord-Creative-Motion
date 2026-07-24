@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import BackToTop from "@/components/BackToTop";
 import { Providers } from "@/components/Providers";
 import ContactModal from "@/components/ContactModal";
+import PricingModal from "@/components/PricingModal";
 import { Analytics } from '@vercel/analytics/react';
 
 const geist = Geist({
@@ -57,7 +58,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-black text-white"><Providers><Header />{children}<BackToTop /><ContactModal /></Providers></body>
+      <body className="bg-black text-white"><Providers><Header />{children}<BackToTop /><ContactModal /><PricingModal /></Providers></body>
       <Analytics />
     </html>
   );
