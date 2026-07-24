@@ -38,9 +38,9 @@ export default function PricingModal() {
       },
       web: {
         tiers: [
-          { name: 'Starter', price: 'from 12,000 DKK' },
-          { name: 'Business', price: 'from 22,000 DKK' },
-          { name: 'Full Production', price: 'from 35,000 DKK' },
+          { name: 'Starter', price: 'from 12,000 DKK', features: ['Professional design', 'Up to 2 pages', 'Contact form', 'Mobile-optimized', '2 rounds of revisions', 'Text & content'] },
+          { name: 'Business', price: 'from 22,000 DKK', features: ['Everything in Starter', 'Up to 5 pages', 'SEO setup', 'Bilingual (2 languages)', 'Support', '5 rounds of revisions'] },
+          { name: 'Full Production', price: 'from 35,000 DKK', features: ['Everything in Business', 'Up to 8 pages', 'Advanced animations', 'Effects', 'Multilingual (3+ languages)', 'Advanced analytics', 'Priority support', '10 rounds of revisions'] },
         ],
       },
     },
@@ -65,9 +65,9 @@ export default function PricingModal() {
       },
       web: {
         tiers: [
-          { name: 'Starter', price: 'fra 12.000 kr.' },
-          { name: 'Business', price: 'fra 22.000 kr.' },
-          { name: 'Full Production', price: 'fra 35.000 kr.' },
+          { name: 'Starter', price: 'fra 12.000 kr.', features: ['Professionelt design', 'Op til 2 sider', 'Kontaktformular', 'Mobiloptimeret', '2 revisionsrunder', 'Tekst & indhold'] },
+          { name: 'Business', price: 'fra 22.000 kr.', features: ['Alt i Starter', 'Op til 5 sider', 'SEO-opsætning', 'Flersproget (2 sprog)', 'Support', '5 revisionsrunder'] },
+          { name: 'Full Production', price: 'fra 35.000 kr.', features: ['Alt i Business', 'Op til 8 sider', 'Avancerede animationer', 'Effekter', 'Flersproget (3+ sprog)', 'Avanceret statistik', 'Prioriteret support', '10 revisionsrunder'] },
         ],
       },
     },
@@ -96,7 +96,7 @@ export default function PricingModal() {
 
   const tierLabelStyle: React.CSSProperties = {
     margin: 0,
-    fontSize: isMobile ? 11 : 'clamp(12px, 0.85vw, 14px)',
+    fontSize: '20px',
     letterSpacing: '.14em',
     fontWeight: 300,
     fontFamily: 'var(--font-geist-sans), sans-serif',
@@ -105,7 +105,7 @@ export default function PricingModal() {
   }
   const tierNameStyle: React.CSSProperties = {
     margin: isMobile ? '8px 0 0' : '10px 0 0',
-    fontSize: 'clamp(22px, 1.8vw, 32px)',
+    fontSize: '17px',
     fontWeight: 300,
     fontFamily: 'var(--font-geist-sans), sans-serif',
     color: 'white',
@@ -119,20 +119,11 @@ export default function PricingModal() {
   }
   const descStyle: React.CSSProperties = {
     margin: isMobile ? '6px 0 0' : '8px 0 0',
-    fontSize: isMobile ? 13 : 'clamp(13px, 0.9vw, 15px)',
+    fontSize: '14px',
     lineHeight: 1.45,
     fontWeight: 300,
     fontFamily: 'var(--font-geist-sans), sans-serif',
     color: 'rgba(238,242,244,.5)',
-  }
-  const priceStyle: React.CSSProperties = {
-    margin: 0,
-    marginTop: isMobile ? '16px' : '20px',
-    fontSize: 'clamp(20px, 1.6vw, 26px)',
-    fontWeight: 300,
-    fontFamily: 'var(--font-geist-sans), sans-serif',
-    color: 'white',
-    letterSpacing: '-0.01em',
   }
   const noteStyle: React.CSSProperties = {
     margin: 0,
@@ -152,7 +143,7 @@ export default function PricingModal() {
   }
   const compactPriceStyle: React.CSSProperties = {
     margin: 0,
-    fontSize: isMobile ? 14 : 'clamp(15px, 1vw, 18px)',
+    fontSize: '14px',
     fontWeight: 300,
     fontFamily: 'var(--font-geist-sans), sans-serif',
     color: 'rgba(238,242,244,.7)',
@@ -227,16 +218,6 @@ export default function PricingModal() {
           ✕
         </button>
 
-        <p style={{
-          fontSize: 'clamp(11px, 0.7vw, 13px)',
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: 'rgba(0,215,200,0.85)',
-          marginBottom: isMobile ? '10px' : '20px',
-          fontFamily: 'var(--font-geist-sans), sans-serif',
-        }}>
-          {t[lang].eyebrow}
-        </p>
         <h2 style={{
           fontSize: isMobile ? '22px' : 'clamp(28px, 2.78vw, 68px)',
           fontWeight: 300,
@@ -265,7 +246,7 @@ export default function PricingModal() {
                 {i > 0 && <div style={dividerStyle} />}
                 <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
                 <p style={descStyle}>{tier.desc}</p>
-                <p style={priceStyle}>{tier.price}</p>
+                <p style={descStyle}>{tier.price}</p>
               </div>
             ))}
 
@@ -277,7 +258,7 @@ export default function PricingModal() {
                 {i > 0 && <div style={dividerStyle} />}
                 <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
                 <p style={descStyle}>{tier.desc}</p>
-                <p style={priceStyle}>{tier.price}</p>
+                <p style={descStyle}>{tier.price}</p>
               </div>
             ))}
 
@@ -300,6 +281,24 @@ export default function PricingModal() {
                   <h3 style={compactNameStyle}>{tier.name}</h3>
                   <p style={compactPriceStyle}>{tier.price}</p>
                 </div>
+                <ul style={{
+                  listStyle: 'none',
+                  margin: 0,
+                  padding: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: isMobile ? '8px' : '10px',
+                }}>
+                  {tier.features.map(f => (
+                    <li key={f} style={{
+                      fontSize: '14px',
+                      lineHeight: 1.45,
+                      fontWeight: 300,
+                      fontFamily: 'var(--font-geist-sans), sans-serif',
+                      color: 'rgba(238,242,244,.5)',
+                    }}>{f}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
