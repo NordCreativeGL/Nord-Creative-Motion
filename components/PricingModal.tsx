@@ -8,6 +8,7 @@ export default function PricingModal() {
   const { lang } = useLang()
   const overlayRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [activeTab, setActiveTab] = useState<'photoVideo' | 'web'>('photoVideo')
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
     check()
@@ -17,42 +18,58 @@ export default function PricingModal() {
 
   const t = {
     en: {
-      eyebrow: 'PACKAGES',
-      title: 'Three ways to work with us',
+      eyebrow: 'PRICING',
+      title: 'What it costs',
       close: 'Close',
-      tiers: [
-        {
-          tierLabel: 'TIER I', name: 'Starter', price: 'from 12,000 DKK',
-          features: ['Professional design', 'Up to 2 pages', 'Contact form', 'Mobile-optimized', '2 rounds of revisions', 'Text & content'],
-        },
-        {
-          tierLabel: 'TIER II', name: 'Business', price: 'from 22,000 DKK',
-          features: ['Everything in Starter', 'Up to 5 pages', 'SEO setup', 'Bilingual (2 languages)', 'Support', '5 rounds of revisions'],
-        },
-        {
-          tierLabel: 'TIER III', name: 'Full Production', price: 'from 35,000 DKK',
-          features: ['Everything in Business', 'Up to 8 pages', 'Advanced animations', 'Effects', 'Multilingual (3+ languages)', 'Advanced analytics', 'Priority support', '10 rounds of revisions'],
-        },
-      ],
+      tabs: { photoVideo: 'Photo & Video', web: 'Website & App' },
+      photoVideo: {
+        photoLabel: 'PHOTOGRAPHY',
+        photoTiers: [
+          { name: 'Half day', desc: 'Up to 4 hours · 10-40 edited photos', price: 'from 3,500 DKK' },
+          { name: 'Full day', desc: 'Up to 8 hours · 50-60 edited photos', price: 'from 6,500 DKK' },
+        ],
+        videoLabel: 'VIDEO',
+        videoTiers: [
+          { name: 'Social', desc: 'Half shoot day · 3-5 short clips for social media', price: 'from 8,000 DKK' },
+          { name: 'Brand', desc: 'Full shoot day · Main film plus short clips, audio and color grading', price: 'from 15,000 DKK' },
+          { name: 'Signature', desc: '2-4 shoot days · Cinematic film, interviews, advanced color and sound design', price: 'from 38,000 DKK' },
+        ],
+        note: 'Drone photo and video are included when relevant to the project.',
+      },
+      web: {
+        tiers: [
+          { name: 'Starter', price: 'from 12,000 DKK' },
+          { name: 'Business', price: 'from 22,000 DKK' },
+          { name: 'Full Production', price: 'from 35,000 DKK' },
+        ],
+      },
     },
     da: {
-      eyebrow: 'PAKKER',
-      title: 'Tre måder at arbejde med os',
+      eyebrow: 'PRISER',
+      title: 'Hvad det koster',
       close: 'Luk',
-      tiers: [
-        {
-          tierLabel: 'TIER I', name: 'Starter', price: 'fra 12.000 kr.',
-          features: ['Professionelt design', 'Op til 2 sider', 'Kontaktformular', 'Mobiloptimeret', '2 revisionsrunder', 'Tekst & indhold'],
-        },
-        {
-          tierLabel: 'TIER II', name: 'Business', price: 'fra 22.000 kr.',
-          features: ['Alt i Starter', 'Op til 5 sider', 'SEO-opsætning', 'Flersproget (2 sprog)', 'Support', '5 revisionsrunder'],
-        },
-        {
-          tierLabel: 'TIER III', name: 'Full Production', price: 'fra 35.000 kr.',
-          features: ['Alt i Business', 'Op til 8 sider', 'Avancerede animationer', 'Effekter', 'Flersproget (3+ sprog)', 'Avanceret statistik', 'Prioriteret support', '10 revisionsrunder'],
-        },
-      ],
+      tabs: { photoVideo: 'Foto & Video', web: 'Website & App' },
+      photoVideo: {
+        photoLabel: 'FOTOGRAFERING',
+        photoTiers: [
+          { name: 'Halvdag', desc: 'Op til 4 timer · 10-40 redigerede billeder', price: 'fra 3.500 kr.' },
+          { name: 'Heldag', desc: 'Op til 8 timer · 50-60 redigerede billeder', price: 'fra 6.500 kr.' },
+        ],
+        videoLabel: 'VIDEO',
+        videoTiers: [
+          { name: 'Social', desc: 'Halv optagelsesdag · 3-5 korte klip til SoMe', price: 'fra 8.000 kr.' },
+          { name: 'Brand', desc: 'Hel optagelsesdag · Hovedfilm og korte klip, lyd og farvekorrektion', price: 'fra 15.000 kr.' },
+          { name: 'Signature', desc: '2-4 optagelsesdage · Cinematisk film, interviews, avanceret farve/lyddesign', price: 'fra 38.000 kr.' },
+        ],
+        note: 'Dronefoto og -video er inkluderet, når det er relevant for opgaven.',
+      },
+      web: {
+        tiers: [
+          { name: 'Starter', price: 'fra 12.000 kr.' },
+          { name: 'Business', price: 'fra 22.000 kr.' },
+          { name: 'Full Production', price: 'fra 35.000 kr.' },
+        ],
+      },
     },
   }
 
@@ -100,17 +117,11 @@ export default function PricingModal() {
     background: 'rgba(255,255,255,.14)',
     margin: isMobile ? '18px 0' : '28px 0',
   }
-  const featureListStyle: React.CSSProperties = {
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: isMobile ? '10px' : '12px',
-  }
-  const featureItemStyle: React.CSSProperties = {
-    fontSize: isMobile ? 13 : 'clamp(14px, 0.95vw, 16px)',
+  const descStyle: React.CSSProperties = {
+    margin: isMobile ? '6px 0 0' : '8px 0 0',
+    fontSize: isMobile ? 13 : 'clamp(13px, 0.9vw, 15px)',
     lineHeight: 1.45,
+    fontWeight: 300,
     fontFamily: 'var(--font-geist-sans), sans-serif',
     color: 'rgba(238,242,244,.5)',
   }
@@ -123,6 +134,42 @@ export default function PricingModal() {
     color: 'white',
     letterSpacing: '-0.01em',
   }
+  const noteStyle: React.CSSProperties = {
+    margin: 0,
+    fontSize: isMobile ? 12 : 'clamp(12px, 0.8vw, 13px)',
+    lineHeight: 1.5,
+    fontWeight: 300,
+    fontFamily: 'var(--font-geist-sans), sans-serif',
+    color: 'rgba(255,255,255,0.35)',
+  }
+  const compactNameStyle: React.CSSProperties = {
+    margin: 0,
+    fontSize: 'clamp(18px, 1.4vw, 24px)',
+    fontWeight: 300,
+    fontFamily: 'var(--font-geist-sans), sans-serif',
+    color: 'white',
+    letterSpacing: '-0.01em',
+  }
+  const compactPriceStyle: React.CSSProperties = {
+    margin: 0,
+    fontSize: isMobile ? 14 : 'clamp(15px, 1vw, 18px)',
+    fontWeight: 300,
+    fontFamily: 'var(--font-geist-sans), sans-serif',
+    color: 'rgba(238,242,244,.7)',
+    letterSpacing: '-0.01em',
+  }
+  const pillButtonStyle = (active: boolean): React.CSSProperties => ({
+    borderRadius: '999px',
+    border: '1px solid rgba(255,255,255,0.3)',
+    background: active ? '#ffffff' : 'transparent',
+    color: active ? '#000000' : '#ffffff',
+    fontFamily: 'var(--font-geist-sans), sans-serif',
+    fontSize: isMobile ? '13px' : 'clamp(13px, 0.85vw, 15px)',
+    fontWeight: 300,
+    padding: isMobile ? '8px 16px' : '10px 20px',
+    cursor: 'pointer',
+    transition: 'background 0.2s ease, color 0.2s ease',
+  })
 
   return (
     <div
@@ -201,19 +248,62 @@ export default function PricingModal() {
           {t[lang].title}
         </h2>
 
-        {t[lang].tiers.map((tier, i) => (
-          <div key={tier.name}>
-            {i > 0 && <div style={dividerStyle} />}
-            <p style={tierLabelStyle}>{tier.tierLabel}</p>
-            <h3 style={tierNameStyle}>{tier.name}</h3>
-            <ul style={{ ...featureListStyle, marginTop: isMobile ? '14px' : '18px' }}>
-              {tier.features.map(f => (
-                <li key={f} style={featureItemStyle}>{f}</li>
-              ))}
-            </ul>
-            <p style={priceStyle}>{tier.price}</p>
+        <div style={{ display: 'flex', gap: isMobile ? '10px' : '12px', marginBottom: isMobile ? '24px' : '36px' }}>
+          <button style={pillButtonStyle(activeTab === 'photoVideo')} onClick={() => setActiveTab('photoVideo')}>
+            {t[lang].tabs.photoVideo}
+          </button>
+          <button style={pillButtonStyle(activeTab === 'web')} onClick={() => setActiveTab('web')}>
+            {t[lang].tabs.web}
+          </button>
+        </div>
+
+        {activeTab === 'photoVideo' ? (
+          <div>
+            <p style={tierLabelStyle}>{t[lang].photoVideo.photoLabel}</p>
+            {t[lang].photoVideo.photoTiers.map((tier, i) => (
+              <div key={tier.name}>
+                {i > 0 && <div style={dividerStyle} />}
+                <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
+                <p style={descStyle}>{tier.desc}</p>
+                <p style={priceStyle}>{tier.price}</p>
+              </div>
+            ))}
+
+            <div style={dividerStyle} />
+
+            <p style={tierLabelStyle}>{t[lang].photoVideo.videoLabel}</p>
+            {t[lang].photoVideo.videoTiers.map((tier, i) => (
+              <div key={tier.name}>
+                {i > 0 && <div style={dividerStyle} />}
+                <h3 style={{ ...tierNameStyle, marginTop: isMobile ? '14px' : '18px' }}>{tier.name}</h3>
+                <p style={descStyle}>{tier.desc}</p>
+                <p style={priceStyle}>{tier.price}</p>
+              </div>
+            ))}
+
+            <div style={dividerStyle} />
+
+            <p style={noteStyle}>{t[lang].photoVideo.note}</p>
           </div>
-        ))}
+        ) : (
+          <div>
+            {t[lang].web.tiers.map((tier, i) => (
+              <div key={tier.name}>
+                {i > 0 && <div style={dividerStyle} />}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
+                  gap: '16px',
+                  padding: isMobile ? '10px 0' : '14px 0',
+                }}>
+                  <h3 style={compactNameStyle}>{tier.name}</h3>
+                  <p style={compactPriceStyle}>{tier.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
