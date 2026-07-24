@@ -113,7 +113,7 @@ export default function Header() {
               }}
               onMouseEnter={(e) => {
                 const isWeb = pathname === '/web';
-                (e.currentTarget as HTMLElement).style.borderColor = isWeb ? 'rgba(143,227,216,.5)' : 'rgba(255,255,255,.5)';
+                (e.currentTarget as HTMLElement).style.borderColor = isWeb ? 'rgba(143,227,216,.5)' : 'rgba(255,255,255,.9)';
                 (e.currentTarget as HTMLElement).style.boxShadow = isWeb
                   ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)'
                   : 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(255,255,255,.16)';
