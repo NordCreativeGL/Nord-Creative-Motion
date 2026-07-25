@@ -100,7 +100,7 @@ export default function Header() {
               className="hidden lg:block uppercase"
               style={{
                 borderRadius: 8,
-                padding: '6px 16px',
+                padding: '5px 12px',
                 fontSize: '14px',
                 fontWeight: 300,
                 fontFamily: 'var(--font-geist-sans), sans-serif',
