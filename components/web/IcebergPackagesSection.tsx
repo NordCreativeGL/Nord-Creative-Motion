@@ -397,7 +397,7 @@ export default function IcebergPackagesSection({ id }: { id?: string }) {
           fontSize: 'clamp(11px, 0.7vw, 13px)',
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
-          color: 'rgba(0,215,200,0.85)',
+          color: 'rgba(255,255,255,0.4)',
           marginBottom: isMobile ? '10px' : '20px',
         }}>
           {t[lang].eyebrow}
