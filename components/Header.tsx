@@ -81,7 +81,7 @@ export default function Header() {
               priority
             />
           </Link>
-          <nav className="hidden items-center gap-8 text-sm text-zinc-300 lg:flex absolute left-1/2 -translate-x-1/2">
+          <nav className="hidden items-center gap-8 text-sm text-zinc-300 uppercase lg:flex absolute left-1/2 -translate-x-1/2" style={{ fontFamily: 'var(--font-geist-sans), sans-serif', letterSpacing: '0.08em' }}>
             <Link href="/" className="transition hover:text-white" onClick={(e) => { if (pathname === '/') { e.preventDefault(); window.location.href = '/'; } }}>{t[lang].home}</Link>
             <Link href="/greenland" className="transition hover:text-white" onClick={(e) => { if (pathname === '/greenland') { e.preventDefault(); window.location.href = '/greenland'; } }}>{t[lang].greenland}</Link>
             <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>{t[lang].web}</Link>
