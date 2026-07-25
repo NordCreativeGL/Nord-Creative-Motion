@@ -356,14 +356,15 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
           onMouseLeave={() => setBtnHover(false)}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 12, marginTop: 12,
-            background: btnHover ? 'rgba(255,255,255,0.2)' : 'transparent',
+            background: 'transparent',
             color: '#ffffff',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: 999,
+            border: '1px solid rgba(255,255,255,.9)',
+            borderRadius: 8,
+            boxShadow: btnHover ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 44px rgba(143,227,216,.16)' : 'inset 0 1px 0 rgba(255,255,255,.14)',
             padding: '20px 48px', fontSize: 18, fontWeight: 400,
             cursor: 'pointer',
             fontFamily: 'var(--font-geist-sans), sans-serif',
-            transition: 'background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: 'box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           {t[lang].btn}
