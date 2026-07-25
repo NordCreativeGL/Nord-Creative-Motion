@@ -335,7 +335,7 @@ export default function PackIceCtaSection({ id }: { id?: string }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         textAlign: 'center', padding: '0 24px', gap: 22,
       }}>
-        <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(0,215,200,0.85)' }}>
+        <div style={{ fontFamily: PRIMARY_FONT, fontSize: 11, letterSpacing: '0.38em', color: 'rgba(255,255,255,0.4)' }}>
           {t[lang].eyebrow}
         </div>
         <h2 style={{
