@@ -979,12 +979,14 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
 
   const t = {
     en: {
+      eyebrow: 'WEBSITE PRODUCTION',
       s1h: 'Websites & apps\nfor your business', s1hMobile: 'Websites and apps\nfor your business', s1b: 'Custom websites for businesses that want to stand out.',
       s2h: 'Everything, from idea to launch', s2b: 'Design · Copywriting · SEO · Photo & video · Development · Maintenance.',
       s3h: 'Three ways to start', s3b: 'Starter · Business · Full Production — three packages, from a simple website to a website with photo/video and animation.',
       dragLabel: 'Drag to rotate the iceberg',
     },
     da: {
+      eyebrow: 'WEBSITE PRODUKTION',
       s1h: 'Hjemmesider & apps\ntil din virksomhed', s1hMobile: 'Hjemmesider og apps\ntil din virksomhed', s1b: 'Skræddersyede hjemmesider til virksomheder der vil skille sig ud.',
       s2h: 'Alt samlet — fra idé til lancering', s2b: 'Design · Copywriting · SEO · Foto & video · Udvikling · Vedligeholdelse.',
       s3h: 'Tre måder at starte', s3b: 'Starter · Business · Full Production — tre pakker, fra en simpel hjemmeside til en hjemmeside med foto/video og animation.',
@@ -1025,6 +1027,7 @@ export default function FjordHeroScene({ children }: { children?: React.ReactNod
       <div id="fj-copy" style={{ position: 'absolute', left: 0, right: 0, top: '14%', zIndex: 4, pointerEvents: 'none', opacity: 0, transition: 'opacity 0.6s ease' }}>
         <div id="fj-sec-0" style={{ position: 'absolute', left: 0, right: 0, top: 0, textAlign: 'center', padding: '0 6%', opacity: 1, willChange: 'opacity, transform' }}>
           <div style={{ width: 'fit-content', maxWidth: '86vw', margin: '0 auto', padding: 'clamp(18px, 2vw, 28px) clamp(22px, 2.4vw, 36px)' }}>
+            <p style={{ fontSize: '13px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '8px', textAlign: 'center' }}>{t[lang].eyebrow}</p>
             <h1 style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: isMobile ? 'clamp(20px, 6vw, 26px)' : 'clamp(36px,3.5vw,80px)', lineHeight: 1.05, letterSpacing: '.04em', textTransform: 'uppercase', color: '#f4fbff', margin: 0, whiteSpace: 'pre-line' }}>{isMobile ? t[lang].s1hMobile : t[lang].s1h}</h1>
             <p style={{ fontFamily: "var(--font-geist-sans), sans-serif", fontWeight: 300, fontSize: 'clamp(1.125rem,1.15vw,1.5rem)', lineHeight: 1.6, color: 'rgba(230,236,240,0.85)', maxWidth: '900px', margin: '18px auto 0' }}>{t[lang].s1b}</p>
           </div>
