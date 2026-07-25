@@ -87,7 +87,7 @@ export default function Header() {
             <Link href="/web" className="transition hover:text-white" onClick={(e) => { if (pathname === '/web') { e.preventDefault(); window.location.href = '/web'; } }}>{t[lang].web}</Link>
             {/* <Link href="/beyond-the-arctic" className="transition hover:text-white" onClick={(e) => { if (pathname === '/beyond-the-arctic') { e.preventDefault(); window.location.href = '/beyond-the-arctic'; } }}>Beyond the Arctic</Link> */}
             <Link href="/about" className="transition hover:text-white" onClick={(e) => { if (pathname === '/about') { e.preventDefault(); window.location.href = '/about'; } }}>{t[lang].about}</Link>
-            <button onClick={openPricingModal} className="transition hover:text-white" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit' }}>{t[lang].pricing}</button>
+            <button onClick={openPricingModal} className="transition hover:text-white uppercase" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', letterSpacing: '0.08em' }}>{t[lang].pricing}</button>
           </nav>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
