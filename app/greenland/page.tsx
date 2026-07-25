@@ -39,6 +39,9 @@ export default function GreenlandPage() {
   const { lang } = useLang()
   const { openModal } = useContactModal()
 
+  const [cta1Hover, setCta1Hover] = useState(false)
+  const [cta2Hover, setCta2Hover] = useState(false)
+
   const t = {
     en: {
       working: "Distances are long. Weather changes fast. Getting to a location can take more planning than the shoot itself. We've worked in these conditions long enough that they're part of how we plan — not something we work around.",
@@ -308,12 +311,15 @@ export default function GreenlandPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <button
                     onClick={openModal}
-                    className="text-white bg-transparent hover:bg-white/20 transition-colors duration-200"
+                    onMouseEnter={() => setCta1Hover(true)}
+                    onMouseLeave={() => setCta1Hover(false)}
+                    className="text-white bg-transparent transition-colors duration-200"
                     style={{
                       display: 'block',
-                      border: '1px solid rgba(255,255,255,0.2)',
+                      border: '1px solid rgba(255,255,255,.9)',
                       padding: isMedium ? '14px 20px' : '14px 32px',
-                      borderRadius: '999px',
+                      borderRadius: 8,
+                      boxShadow: cta1Hover ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)' : 'inset 0 1px 0 rgba(255,255,255,.14)',
                       fontSize: isMedium ? '15px' : 'clamp(17px, 1.1vw, 20px)',
                       fontWeight: 300,
                       width: '100%',
@@ -326,12 +332,15 @@ export default function GreenlandPage() {
                   </button>
                   <a
                     href="/web"
-                    className="text-white bg-transparent hover:bg-white/20 transition-colors duration-200"
+                    onMouseEnter={() => setCta2Hover(true)}
+                    onMouseLeave={() => setCta2Hover(false)}
+                    className="text-white bg-transparent transition-colors duration-200"
                     style={{
                       display: 'block',
-                      border: '1px dashed rgba(255,255,255,0.2)',
+                      border: '1px solid rgba(255,255,255,.9)',
                       padding: isMedium ? '14px 20px' : '14px 32px',
-                      borderRadius: '999px',
+                      borderRadius: 8,
+                      boxShadow: cta2Hover ? 'inset 0 1px 0 rgba(255,255,255,.2), 0 0 70px rgba(255,255,255,.32)' : 'inset 0 1px 0 rgba(255,255,255,.14)',
                       fontSize: isMedium ? '15px' : 'clamp(17px, 1.1vw, 20px)',
                       fontWeight: 300,
                       textDecoration: 'none',
