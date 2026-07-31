@@ -26,14 +26,14 @@ export default function PricingModal() {
       photoVideo: {
         photoLabel: 'PHOTOGRAPHY',
         photoTiers: [
-          { name: 'Half day', desc: 'Up to 4 hours · 10-40 edited photos', price: 'from 3,500 DKK' },
-          { name: 'Full day', desc: 'Up to 8 hours · 50-60 edited photos', price: 'from 6,500 DKK' },
+          { name: 'Essential', desc: '10-40 edited photos', price: 'from 3,500 DKK' },
+          { name: 'Extended', desc: '50-60 edited photos', price: 'from 6,500 DKK' },
         ],
         videoLabel: 'VIDEO',
         videoTiers: [
-          { name: 'Social', desc: 'Half shoot day · 3-5 short clips for social media', price: 'from 8,000 DKK' },
-          { name: 'Brand', desc: 'Full shoot day · Main film plus short clips, audio and color grading', price: 'from 15,000 DKK' },
-          { name: 'Signature', desc: '2-4 shoot days · Cinematic film, interviews, advanced color and sound design', price: 'from 38,000 DKK' },
+          { name: 'Social', desc: '3-5 short clips for social media', price: 'from 8,000 DKK' },
+          { name: 'Brand', desc: 'Main film plus short clips, audio and color grading', price: 'from 15,000 DKK' },
+          { name: 'Signature', desc: 'Cinematic film, interviews, advanced color and sound design', price: 'from 38,000 DKK' },
         ],
       },
       web: {
