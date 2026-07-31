@@ -53,14 +53,14 @@ export default function PricingModal() {
       photoVideo: {
         photoLabel: 'FOTOGRAFERING',
         photoTiers: [
-          { name: 'Halvdag', desc: 'Op til 4 timer · 10-40 redigerede billeder', price: 'fra 3.500 kr.' },
-          { name: 'Heldag', desc: 'Op til 8 timer · 50-60 redigerede billeder', price: 'fra 6.500 kr.' },
+          { name: 'Basis', desc: '10-40 redigerede billeder', price: 'fra 3.500 kr.' },
+          { name: 'Udvidet', desc: '50-60 redigerede billeder', price: 'fra 6.500 kr.' },
         ],
         videoLabel: 'VIDEO',
         videoTiers: [
-          { name: 'Social', desc: 'Halv optagelsesdag · 3-5 korte klip til SoMe', price: 'fra 8.000 kr.' },
-          { name: 'Brand', desc: 'Hel optagelsesdag · Hovedfilm og korte klip, lyd og farvekorrektion', price: 'fra 15.000 kr.' },
-          { name: 'Signature', desc: '2-4 optagelsesdage · Cinematisk film, interviews, avanceret farve/lyddesign', price: 'fra 38.000 kr.' },
+          { name: 'Social', desc: '3-5 korte klip til SoMe', price: 'fra 8.000 kr.' },
+          { name: 'Brand', desc: 'Hovedfilm og korte klip, lyd og farvekorrektion', price: 'fra 15.000 kr.' },
+          { name: 'Signature', desc: 'Cinematisk film, interviews, avanceret farve/lyddesign', price: 'fra 38.000 kr.' },
         ],
       },
       web: {
